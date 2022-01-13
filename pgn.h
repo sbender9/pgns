@@ -2,22 +2,21 @@
 
 Analyzes NMEA 2000 PGNs.
 
-(C) 2009-2015, Kees Verruijt, Harlingen, The Netherlands.
+(C) 2009-2021, Kees Verruijt, Harlingen, The Netherlands.
 
 This file is part of CANboat.
 
-CANboat is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-CANboat is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-You should have received a copy of the GNU General Public License
-along with CANboat.  If not, see <http://www.gnu.org/licenses/>.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 */
 
@@ -52,14 +51,15 @@ typedef struct
 #define RES_STRING (-12.0)
 #define RES_FLOAT (-13.0)
 #define RES_PRESSURE (-14.0)
-#define RES_STRINGLZ (-15.0)  /* ASCII string starting with length byte and terminated by zero byte */
+#define RES_STRINGLZ (-15.0) /* ASCII string starting with length byte and terminated by zero byte */
 #define RES_STRINGLAU (-16.0) /* ASCII or UNICODE string starting with length byte and ASCII/Unicode byte */
 #define RES_DECIMAL (-17.0)
 #define RES_BITFIELD (-18.0)
 #define RES_TEMPERATURE_HIGH (-19.0)
 #define RES_TEMPERATURE_HIRES (-20.0)
 #define RES_PRESSURE_HIRES (-21.0)
-#define MAX_RESOLUTION_LOOKUP 21
+#define RES_VARIABLE (-22.0)
+#define MAX_RESOLUTION_LOOKUP 22
 
   bool  hasSign; /* Is the value signed, e.g. has both positive and negative values? */
   char *units;   /* String containing the 'Dimension' (e.g. s, h, m/s, etc.) unless it starts with , in which
@@ -157,7 +157,7 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
 
 #define LOOKUP_ATON_TYPE                                 \
   (",0=Default: Type of AtoN not specified"              \
-   ",1=Referece point"                                   \
+   ",1=Reference point"                                   \
    ",2=RACON"                                            \
    ",3=Fixed structure off-shore"                        \
    ",4=Reserved for future use"                          \
@@ -193,7 +193,7 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
   (",0=Not available"                   \
    ",1=Not engaged in special maneuver" \
    ",2=Engaged in special maneuver"     \
-   ",3=Reserverd")
+   ",3=Reserved")
 
 #define LOOKUP_POSITION_FIX_DEVICE   \
   (",0=Default: undefined"           \
@@ -257,16 +257,23 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
 
 #define LOOKUP_WATER_REFERENCE (",0=Paddle wheel,1=Pitot tube,2=Doppler,3=Correlation (ultra sound),4=Electro Magnetic")
 
-#define LOOKUP_YES_NO (",0=No,1=Yes,10=Error,11=Unavailable")
+#define LOOKUP_YES_NO \
+  (",0=No" \
+   ",1=Yes") /* Note that Error and Unknown are automatically decoded */
 #define LOOKUP_OK_WARNING (",0=OK,1=Warning")
+#define LOOKUP_OFF_ON \
+  (",0=Off"           \
+   ",1=On") /* Note that Error and Unknown are automatically decoded */
 
 #define LOOKUP_DIRECTION_REFERENCE (",0=True,1=Magnetic,2=Error,3=Null")
+
+#define LOOKUP_DIRECTION_RUDDER (",0=No Order,1=Move to starboard,2=Move to port")
 
 #define LOOKUP_NAV_STATUS                    \
   (",0=Under way using engine"               \
    ",1=At anchor"                            \
    ",2=Not under command"                    \
-   ",3=Restricted manoeuverability"          \
+   ",3=Restricted maneuverability"           \
    ",4=Constrained by her draught"           \
    ",5=Moored"                               \
    ",6=Aground"                              \
@@ -286,7 +293,7 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
    ",4=Main Cabin Temperature"              \
    ",5=Live Well Temperature"               \
    ",6=Bait Well Temperature"               \
-   ",7=Refridgeration Temperature"          \
+   ",7=Refrigeration Temperature"           \
    ",8=Heating System Temperature"          \
    ",9=Dew Point Temperature"               \
    ",10=Apparent Wind Chill Temperature"    \
@@ -304,8 +311,11 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
    ",1=Water"                  \
    ",2=Steam"                  \
    ",3=Compressed Air"         \
-   ",4=Hydraulic")
-
+   ",4=Hydraulic"              \
+   ",5=Filter"                 \
+   ",6=AltimeterSetting"       \
+   ",7=Oil"                    \
+   ",8=Fuel")
 #define LOOKUP_DSC_FORMAT     \
   (",102=Geographical area"   \
    ",112=Distress"            \
@@ -710,7 +720,7 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
    ",16=Portuguese"              \
    ",17=Russian"                 \
    ",18=Spanish"                 \
-   ",19=Sweedish")
+   ",19=Swedish")
 
 #define LOOKUP_ALERT_RESPONSE_COMMAND \
   (",0=Acknowledge"                   \
@@ -730,6 +740,37 @@ static const Resolution types[MAX_RESOLUTION_LOOKUP] = {{"ASCII text", 0},
    ",8=Pass thru"              \
    ",9=Inverting"              \
    ",10=Assisting")
+
+#define LOOKUP_THRUSTER_DIRECTION_CONTROL \
+  (",0=Off"                               \
+   ",1=Ready"                             \
+   ",2=To Port"                           \
+   ",3=To Starboard")
+
+#define LOOKUP_THRUSTER_RETRACT_CONTROL \
+  (",0=Off"                             \
+   ",1=Extend"                          \
+   ",2=Retract"                         \
+   ",3=Reserved")
+
+#define LOOKUP_THRUSTER_CONTROL_EVENTS       \
+  (",0=Another device controlling thruster"  \
+   ",1=Boat speed too fast to safely use thruster")
+
+#define LOOKUP_THRUSTER_MOTOR_TYPE \
+  (",0=12VDC"                      \
+   ",1=24VDC"                      \
+   ",2=48VDC"                      \
+   ",3=24VAC"                      \
+   ",4=Hydraulic")
+
+#define LOOKUP_THRUSTER_MOTOR_EVENTS       \
+  (",0=Motor over temperature cutout"  \
+   ",1=Motor over current cutout"  \
+   ",2=Low oil level warning"  \
+   ",3=Oil over temperature warning"  \
+   ",4=Controller under voltage cutout"  \
+   ",5=Manufacturer defined")
 
 typedef enum PacketComplete
 {
@@ -768,7 +809,7 @@ typedef struct
 // Returns the first pgn that matches the given id, or 0 if not found.
 Pgn *searchForPgn(int pgn);
 
-// Returns a pointer (potentially invalid) to the first png that does not match "first".
+// Returns a pointer (potentially invalid) to the first pgn that does not match "first".
 Pgn *endPgn(Pgn *first);
 
 Pgn *getMatchingPgn(int pgnId, uint8_t *dataStart, int length);
@@ -1341,7 +1382,7 @@ Pgn pgnList[] = {
      PACKET_SINGLE,
      8,
      0,
-     {{"Real Power", BYTES(2), 1, false, "W", "", -2000000000}, {"Apparent Power", BYTES(2), 1, false, "VA", "", -2000000000}, {0}}}
+     {{"Real Power", BYTES(4), 1, false, "W", "", -2000000000}, {"Apparent Power", BYTES(4), 1, false, "VA", "", -2000000000}, {0}}}
 
     ,
     {"Generator Average Basic AC Quantities",
@@ -1379,6 +1420,20 @@ Pgn pgnList[] = {
       {0}}}
 
     /* proprietary PDU2 (non addressed) single-frame range 0xFF00 to 0xFFFF (65280 - 65535) */
+
+    ,
+    {"Furuno: Heave",
+     65280,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     0x08,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=1855", "Furuno"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
+      {"Heave", BYTES(4), 0.001, true, "m", ""},
+      {"Reserved", BYTES(2), RES_NOTUSED, false, 0, ""},
+      {0}}}
 
     ,
     {"Manufacturer Proprietary single-frame non-addressed",
@@ -1821,7 +1876,7 @@ Pgn pgnList[] = {
       {"Transmission interval offset", BYTES(2), 0.01, false, "s", ""},
       {"# of Parameters", BYTES(1), 1, false, 0, "How many parameter pairs will follow"},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, "Parameter index"},
-      {"Value", LEN_VARIABLE, RES_INTEGER, false, 0, "Parameter value, variable length"},
+      {"Value", LEN_VARIABLE, RES_VARIABLE, false, 0, "Parameter value, variable length"},
       {0}}}
 
     ,
@@ -1833,11 +1888,11 @@ Pgn pgnList[] = {
      2,
      {{"Function Code", BYTES(1), RES_INTEGER, false, "=1", "Command"},
       {"PGN", BYTES(3), RES_INTEGER, false, 0, "Commanded PGN"},
-      {"Priority", 4, 1, false, 0, ",8=Leave priority unchanged,9=Reset to default"},
+      {"Priority", 4, RES_LOOKUP, 0, ",8=Leave priority unchanged,9=Reset to default"},
       {"Reserved", 4, RES_BINARY, false, 0, ""},
       {"# of Parameters", BYTES(1), 1, false, 0, "How many parameter pairs will follow"},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, "Parameter index"},
-      {"Value", LEN_VARIABLE, RES_INTEGER, false, 0, "Parameter value, variable length"},
+      {"Value", LEN_VARIABLE, RES_VARIABLE, false, 0, "Parameter value, variable length"},
       {0}}}
 
     ,
@@ -1891,7 +1946,7 @@ Pgn pgnList[] = {
       {"# of Selection Pairs", 8, 1, false, 0, ""},
       {"# of Parameters", 8, 1, false, 0, ""},
       {"Selection Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Selection Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Selection Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
       {0}}}
 
@@ -1925,9 +1980,9 @@ Pgn pgnList[] = {
       {"# of Selection Pairs", 8, 1, false, 0, ""},
       {"# of Parameters", 8, 1, false, 0, ""},
       {"Selection Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Selection Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Selection Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {0}}}
 
     /* The following won't work when analyzing non-proprietary PGNs */
@@ -1960,9 +2015,9 @@ Pgn pgnList[] = {
       {"# of Selection Pairs", 8, 1, false, 0, ""},
       {"# of Parameters", 8, 1, false, 0, ""},
       {"Selection Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Selection Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Selection Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {0}}}
 
     /* The following won't work when analyzing non-proprietary PGNs */
@@ -1995,9 +2050,9 @@ Pgn pgnList[] = {
       {"# of Selection Pairs", 8, 1, false, 0, ""},
       {"# of Parameters", 8, 1, false, 0, ""},
       {"Selection Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Selection Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Selection Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {"Parameter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Value", LEN_VARIABLE, RES_INTEGER, false, 0, ""},
+      {"Value", LEN_VARIABLE, RES_VARIABLE, false, 0, ""},
       {0}}}
 
     /************ RESPONSE TO REQUEST PGNS **************/
@@ -2277,7 +2332,7 @@ Pgn pgnList[] = {
       {"Reserved", 2, RES_NOTUSED, false, 0, ""},
       {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
       {"Proprietary ID", BYTES(1), RES_INTEGER, false, "=34", "True Wind Options"},
-      {"COG substition for HDG",
+      {"COG substitution for HDG",
        2,
        RES_LOOKUP,
        false,
@@ -2318,7 +2373,7 @@ Pgn pgnList[] = {
       {"Reserved", 2, RES_NOTUSED, false, 0, ""},
       {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
       {"Proprietary ID", BYTES(1), RES_INTEGER, false, "=35", "Simulate Mode"},
-      {"Simulate Mode", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
+      {"Simulate Mode", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
       {"Reserved", 22, RES_BINARY, false, 0, "Reserved"},
       {0}}}
 
@@ -2588,7 +2643,8 @@ Pgn pgnList[] = {
       {"Time", BYTES(4), RES_TIME, false, "s", "Seconds since midnight"},
       {0}}}
 
-    /* http://www.nmea.org/Assets/20130905%20nmea%202000%20heartbeat%20amendment%20final.pdf */
+    /* http://www.nmea.org/Assets/20140102%20nmea-2000-126993%20heartbeat%20pgn%20corrigendum.pdf */
+    /* http://www.nmea.org/Assets/20190624%20NMEA%20Heartbeat%20Information%20Amendment%20AT%2020190623HB.pdf */
     ,
     {"Heartbeat",
      126993,
@@ -2598,12 +2654,15 @@ Pgn pgnList[] = {
      0,
      {{"Data transmit offset",
        BYTES(2),
-       0.01,
+       0.001,
        false,
        "s",
        "Offset in transmit time from time of request command: 0x0 = transmit immediately, 0xFFFF = Do not change offset."},
       {"Sequence Counter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Reserved", BYTES(3), RES_BINARY, false, 0, "Reserved"},
+      {"Controller 1 State", 2, RES_LOOKUP, false, ",0=Error Active,1=Error Passive,2=Bus Off,3=Not Available", ""},
+      {"Controller 2 State", 2, RES_LOOKUP, false, ",0=Error Active,1=Error Passive,2=Bus Off,3=Not Available", ""},
+      {"Equipment Status", 2, RES_LOOKUP, false, ",0=Operational,1=Fault,2=Reserved,3=Not Available", ""},
+      {"Reserved", 34, RES_BINARY, false, 0, "Reserved"},
       {0}}}
 
     ,
@@ -2632,7 +2691,6 @@ Pgn pgnList[] = {
      0,
      {{"Installation Description #1", BYTES(2), RES_STRINGLAU, false, 0, ""},
       {"Installation Description #2", BYTES(2), RES_STRINGLAU, false, 0, ""},
-      {"Installation Description #3", BYTES(2), RES_STRINGLAU, false, 0, ""},
       {"Manufacturer Information", BYTES(2), RES_STRINGLAU, false, 0, ""},
       {0}}}
 
@@ -2696,7 +2754,7 @@ Pgn pgnList[] = {
       {"Turn Mode", 3, RES_LOOKUP, false, ",0=Rudder Limit controlled,1=turn rate controlled,10=radius controlled", ""},
       {"Heading Reference", 2, RES_LOOKUP, false, LOOKUP_DIRECTION_REFERENCE, ""},
       {"Reserved", 5, RES_BINARY, false, 0, ""},
-      {"Commanded Rudder Direction", 3, RES_LOOKUP, false, ",0=No Order,1=Move to starboard,10=Move to port", ""},
+      {"Commanded Rudder Direction", 3, RES_LOOKUP, false, LOOKUP_DIRECTION_RUDDER, ""},
       {"Commanded Rudder Angle", BYTES(2), RES_RADIANS, true, "rad", ""},
       {"Heading-To-Steer (Course)", BYTES(2), RES_RADIANS, false, "rad", ""},
       {"Track", BYTES(2), RES_RADIANS, false, "rad", ""},
@@ -2709,7 +2767,6 @@ Pgn pgnList[] = {
       {0}}}
 
     /* http://www.maretron.com/support/manuals/RAA100UM_1.0.pdf */
-    /* Haven't actually seen this value yet, lengths are guesses */
     ,
     {"Rudder",
      127245,
@@ -2718,10 +2775,11 @@ Pgn pgnList[] = {
      8,
      0,
      {{"Instance", BYTES(1), 1, false, 0, ""},
-      {"Direction Order", 2, 1, false, 0, ""},
-      {"Reserved", 6, RES_BINARY, false, 0, "Reserved"},
+      {"Direction Order", 3, RES_LOOKUP, false, LOOKUP_DIRECTION_RUDDER, ""},
+      {"Reserved", 5, RES_BINARY, false, 0, "Reserved"},
       {"Angle Order", BYTES(2), RES_RADIANS, true, "rad", ""},
       {"Position", BYTES(2), RES_RADIANS, true, "rad", ""},
+      {"Reserved", BYTES(2), RES_BINARY, false, 0, "Reserved"},
       {0}}}
 
     /* NMEA + Simrad AT10 */
@@ -2752,6 +2810,18 @@ Pgn pgnList[] = {
      5,
      0,
      {{"SID", BYTES(1), 1, false, 0, ""}, {"Rate", BYTES(4), RES_HIRES_ROTATION, true, "rad/s", ""}, {0}}}
+
+    ,
+    {"Heave",
+     127252,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     0x08,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Heave", BYTES(2), 0.01, true, "m", ""},
+      {"Reserved", BYTES(5), RES_NOTUSED, false, 0, ""},
+      {0}}}
 
     ,
     {"Attitude",
@@ -2905,34 +2975,34 @@ Pgn pgnList[] = {
      8,
      0,
      {{"Instance", BYTES(1), 1, false, 0, ""},
-      {"Indicator1", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator2", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator3", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator4", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator5", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator6", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator7", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator8", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator9", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator10", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator11", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator12", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator13", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator14", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator15", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator16", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator17", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator18", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator19", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator20", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator21", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator22", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator23", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator24", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator25", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator26", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator27", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
-      {"Indicator28", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
+      {"Indicator1", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator2", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator3", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator4", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator5", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator6", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator7", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator8", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator9", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator10", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator11", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator12", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator13", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator14", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator15", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator16", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator17", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator18", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator19", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator20", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator21", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator22", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator23", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator24", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator25", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator26", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator27", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Indicator28", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
       {0}}},
     {"Switch Bank Control",
      127502,
@@ -2940,21 +3010,21 @@ Pgn pgnList[] = {
      PACKET_SINGLE,
      8,
      0,
-     {{"Switch Bank Instance", BYTES(1), 1, false, 0, ""},   {"Switch1", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch2", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},  {"Switch3", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch4", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},  {"Switch5", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch6", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},  {"Switch7", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch8", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},  {"Switch9", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch10", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch11", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch12", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch13", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch14", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch15", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch16", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch17", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch18", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch19", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch20", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch21", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch22", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch23", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch24", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch25", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch26", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {"Switch27", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Switch28", 2, RES_LOOKUP, false, ",0=Off,1=On", ""}, {0}}}
+     {{"Instance", BYTES(1), 1, false, 0, ""},   {"Switch1", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch2", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},  {"Switch3", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch4", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},  {"Switch5", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch6", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},  {"Switch7", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch8", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},  {"Switch9", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch10", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch11", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch12", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch13", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch14", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch15", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch16", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch17", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch18", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch19", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch20", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch21", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch22", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch23", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch24", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch25", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch26", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {"Switch27", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Switch28", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""}, {0}}}
 
     /* http://www.nmea.org/Assets/nmea-2000-corrigendum-1-2010-1.pdf */
     ,
@@ -3024,8 +3094,8 @@ Pgn pgnList[] = {
     {"DC Detailed Status",
      127506,
      PACKET_COMPLETE,
-     PACKET_SINGLE,
-     9,
+     PACKET_FAST,
+     11,
      0,
      {{"SID", BYTES(1), 1, false, 0, ""},
       {"Instance", BYTES(1), 1, false, 0, ""},
@@ -3034,6 +3104,7 @@ Pgn pgnList[] = {
       {"State of Health", BYTES(1), 1, false, 0, ""},
       {"Time Remaining", BYTES(2), 1, false, 0, ""},
       {"Ripple Voltage", BYTES(2), 0.01, false, "V", ""},
+      {"Amp Hours", BYTES(2), 3600, false, "C", ""},
       {0}}}
 
     // http://www.osukl.com/wp-content/uploads/2015/04/3155-UM.pdf
@@ -3041,8 +3112,8 @@ Pgn pgnList[] = {
     {"Charger Status",
      127507,
      PACKET_COMPLETE,
-     PACKET_SINGLE,
-     8,
+     PACKET_FAST,
+     6,
      0,
      {{"Instance", BYTES(1), 1, false, 0, ""},
       {"Battery Instance", BYTES(1), 1, false, 0, ""},
@@ -3052,9 +3123,9 @@ Pgn pgnList[] = {
        false,
        ",0=Not charging,1=Bulk,2=Absorption,3=Overcharge,4=Equalise,5=Float,6=No Float,7=Constant VI,8=Disabled,9=Fault",
        ""},
-      {"Charge Mode", 4, RES_LOOKUP, false, ",0=Standalone mode,1=Primary mode,2=Secondary mode,3=Echo mode", ""},
-      {"Operating State", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
-      {"Equalization Pending", 2, RES_LOOKUP, false, ",0=Off,1=On", ""},
+      {"Charge Mode", 4, RES_LOOKUP, false, ",0=Standalone,1=Primary,2=Secondary,3=Echo", ""},
+      {"Enabled", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Equalization Pending", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
       {"Reserved", 4, RES_BINARY, false, 0, ""},
       {"Equalization Time Remaining", BYTES(2), 1, false, 0, ""},
       {0}}}
@@ -3073,6 +3144,7 @@ Pgn pgnList[] = {
       {"SID", BYTES(1), 1, false, 0, ""},
       {0}}}
 
+    /* https://www.nmea.org/Assets/20140102%20nmea-2000-127509%20pgn%20corrigendum.pdf */
     ,
     {"Inverter Status",
      127509,
@@ -3083,8 +3155,9 @@ Pgn pgnList[] = {
      {{"Instance", BYTES(1), 1, false, 0, ""},
       {"AC Instance", BYTES(1), 1, false, 0, ""},
       {"DC Instance", BYTES(1), 1, false, 0, ""},
-      {"Operating State", 4, RES_LOOKUP, false, ",0=Standby,1=On", ""},
-      {"Inverter", 2, RES_LOOKUP, false, ",0=Standby,1=On", ""},
+      {"Operating State", 4, RES_LOOKUP, false, ",0=Invert,1=AC Passthru,2=Load Sense,3=Fault,4=Disabled,14=Error,15=Data Not Available", ""},
+      {"Inverter Enable/Disable", 2, RES_LOOKUP, false, "0=Disabled,1=Enabled,2=Error,3=Unknown", ""},
+      {"Reserved", 2, RES_BINARY, false, 0, "Reserved"},
       {0}}}
 
     ,
@@ -3260,10 +3333,58 @@ Pgn pgnList[] = {
      8,
      0,
      {{"SID", BYTES(1), 1, false, 0, ""},
-      {"Leeway Angle", BYTES(2), RES_RADIANS, false, "rad", ""},
+      {"Leeway Angle", BYTES(2), RES_RADIANS, true, "rad", ""},
       {"Reserved", BYTES(5), RES_BINARY, false, 0, ""},
       {0}}}
 
+    ,
+    {"Thruster Control Status",
+     128006,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     8,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Identifier", BYTES(1), 1, false, 0, ""},
+      {"Direction Control", 4, RES_LOOKUP, false, LOOKUP_THRUSTER_DIRECTION_CONTROL, ""},
+      {"Power Enabled", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Retract Control", 2, RES_LOOKUP, false, LOOKUP_THRUSTER_RETRACT_CONTROL, ""},
+      {"Speed Control", BYTES(1), RES_PERCENTAGE, false, "%", ""},
+      {"Control Events", BYTES(1), RES_BITFIELD, false, LOOKUP_THRUSTER_CONTROL_EVENTS, ""},
+      {"Command Timeout", BYTES(1), 1e-3, false, 0, ""},
+      {"Azimuth Control", BYTES(2), RES_RADIANS, false, "rad", ""},
+      {0}}}
+
+    ,
+    {"Thruster Information",
+     128007,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     8,
+     0,
+     {{"Identifier", BYTES(1), 1, false, 0, ""},
+      {"Motor Type", 4, RES_LOOKUP, false, LOOKUP_THRUSTER_MOTOR_TYPE, ""},
+      {"Reserved", 4, RES_BINARY, false, 0, ""},
+      {"Power Rating", BYTES(2), 1, false, "W", ""},
+      {"Maximum Temperature Rating", BYTES(2), RES_TEMPERATURE, false, "K", ""},
+      {"Maximum Rotational Speed", BYTES(2), 0.25, false, "rpm", ""},
+      {0}}}
+
+    ,
+    {"Thruster Motor Status",
+     128008,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     8,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Identifier", BYTES(1), 1, false, 0, ""},
+      {"Motor Events", BYTES(1), RES_BITFIELD, false, LOOKUP_THRUSTER_MOTOR_EVENTS, ""},
+      {"Current", BYTES(1), 1, false, "A", ""},
+      {"Temperature", BYTES(2), RES_TEMPERATURE, false, "K", ""},
+      {"Operating Time", BYTES(2), 1, false, "minutes", ""},
+      {0}}}
+    
     /* http://www.maretron.com/support/manuals/DST100UM_1.2.pdf */
     ,
     {"Speed",
@@ -3333,6 +3454,88 @@ Pgn pgnList[] = {
       {0}}}
 
     ,
+    /* https://www.nmea.org/Assets/20190613%20windlass%20amendment,%20128776,%20128777,%20128778.pdf */
+    {"Windlass Control Status",
+     128776,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     7,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Windlass ID", BYTES(1), 1, false, 0, ""},
+      {"Windlass Direction Control", 2, RES_LOOKUP, false, ",0=Off,1=Down,2=Up", ""},
+      {"Anchor Docking Control", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Speed Control Type", 2, RES_LOOKUP, false, ",0=Single Speed,1=Dual Speed,2=Proportional Speed", ""},
+      {"Reserved", 2, RES_BINARY, false, 0, "Reserved"},
+      {"Speed Control",
+       BYTES(1),
+       RES_BINARY,
+       false,
+       0,
+       "0=Off,Single speed:1-100=On,Dual Speed:1-49=Slow/50-100=Fast,Proportional:10-100"},
+      {"Power Enable", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Mechanical Lock", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Deck and Anchor Wash", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Anchor Light", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
+      {"Command Timeout",
+       BYTES(1),
+       0.005,
+       false,
+       "s",
+       "If timeout elapses the thruster stops operating and reverts to static mode"},
+      {"Windlass Control Events", 4, RES_BITFIELD, false, ",0=Another device controlling windlass", ""},
+      {"Reserved", 4, RES_BINARY, false, 0, "Reserved"},
+      {0}}}
+
+    ,
+    /* https://www.nmea.org/Assets/20190613%20windlass%20amendment,%20128776,%20128777,%20128778.pdf */
+    {"Anchor Windlass Operating Status",
+     128777,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     8,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Windlass ID", BYTES(1), 1, false, 0, ""},
+      {"Windlass Direction Control", 2, RES_LOOKUP, false, ",0=Off,1=Down,2=Up", ""},
+      {"Windlass Motion Status", 2, RES_LOOKUP, false, ",0=Windlass stopped,1=Deployment occurring,2=Retrieval occurring", ""},
+      {"Rode Type Status", 2, RES_LOOKUP, false, ",0=Chain presently detected,1=Rope presently detected,2=Error", ""},
+      {"Reserved", 2, RES_BINARY, false, 0, "Reserved"},
+      {"Rode Counter Value", BYTES(2), 0.1, false, "m", ""},
+      {"Windlass Line Speed", BYTES(2), 0.01, false, "m/s", ""},
+      {"Anchor Docking Status", 2, RES_LOOKUP, false, ",0=Not docked,1=Fully docked,2=Error", ""},
+      {"Windlass Operating Events",
+       6,
+       RES_BITFIELD,
+       false,
+       ",0=System error,1=Sensor error,2=No windlass motion detected,3=Retrieval docking distance reached,4=End or rode reached",
+       ""},
+      {0}}}
+
+    ,
+    /* https://www.nmea.org/Assets/20190613%20windlass%20amendment,%20128776,%20128777,%20128778.pdf */
+    {"Anchor Windlass Monitoring Status",
+     128778,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     8,
+     0,
+     {{"SID", BYTES(1), 1, false, 0, ""},
+      {"Windlass ID", BYTES(1), 1, false, 0, ""},
+      {"Windlass Monitoring Events",
+       8,
+       RES_BITFIELD,
+       false,
+       ",0=Controller under voltage cut-out,1=Controller over current cut-out,2=Controller over temperature cut-out,3=Manufacturer "
+       "defined",
+       ""},
+      {"Controller voltage", BYTES(1), 0.2, false, "V", ""},
+      {"Motor current", BYTES(1), 1, false, "A", ""},
+      {"Total Motor Time", BYTES(2), 60, false, "s", ""},
+      {"Reserved", BYTES(1), RES_BINARY, false, 0, "Reserved"},
+      {0}}}
+
+    ,
     {"Position, Rapid Update",
      129025,
      PACKET_COMPLETE,
@@ -3382,7 +3585,7 @@ Pgn pgnList[] = {
       {"GNSS Quality", 2, 1, false, 0, ""},
       {"Direction", 2, 1, false, 0, ""},
       {"Reserved", 4, RES_BINARY, false, 0, "Reserved"},
-      {"Course Over Ground", BYTES(4), RES_RADIANS, false, "rad", ""},
+      {"COG", BYTES(2), RES_RADIANS, false, "rad", ""},
       {"Altitude Delta", BYTES(2), 1, true, 0, ""},
       {0}}}
 
@@ -3392,7 +3595,7 @@ Pgn pgnList[] = {
      129029,
      PACKET_COMPLETE,
      PACKET_FAST,
-     51,
+     43,
      3,
      {{"SID", BYTES(1), 1, false, 0, ""},
       {"Date", BYTES(2), RES_DATE, false, "days", "Days since January 1, 1970"},
@@ -3406,7 +3609,7 @@ Pgn pgnList[] = {
       {"Reserved", 6, RES_BINARY, false, 0, "Reserved"},
       {"Number of SVs", BYTES(1), 1, false, 0, "Number of satellites used in solution"},
       {"HDOP", BYTES(2), 0.01, true, 0, "Horizontal dilution of precision"},
-      {"PDOP", BYTES(2), 0.01, true, 0, "Probable dilution of precision"},
+      {"PDOP", BYTES(2), 0.01, true, 0, "Positional dilution of precision"},
       {"Geoidal Separation", BYTES(4), 0.01, true, "m", "Geoidal Separation"},
       {"Reference Stations", BYTES(1), 1, false, 0, "Number of reference stations"},
       {"Reference Station Type", 4, RES_LOOKUP, false, LOOKUP_GNS, ""},
@@ -3541,8 +3744,8 @@ Pgn pgnList[] = {
      {{"Message ID", 6, 1, false, 0, ""},
       {"Repeat Indicator", 2, RES_LOOKUP, false, LOOKUP_REPEAT_INDICATOR, ""},
       {"User ID", BYTES(4), RES_INTEGER, false, "MMSI", ""},
-      {"Longitude", BYTES(4), RES_LATITUDE, true, "deg", ""},
-      {"Latitude", BYTES(4), RES_LONGITUDE, true, "deg", ""},
+      {"Longitude", BYTES(4), RES_LONGITUDE, true, "deg", ""},
+      {"Latitude", BYTES(4), RES_LATITUDE, true, "deg", ""},
       {"Position Accuracy", 1, RES_LOOKUP, false, LOOKUP_POSITION_ACCURACY, ""},
       {"AIS RAIM Flag", 1, RES_LOOKUP, false, LOOKUP_RAIM_FLAG, ""},
       {"Time Stamp", 6, RES_LOOKUP, false, LOOKUP_TIME_STAMP, "0-59 = UTC second when the report was generated"},
@@ -3568,7 +3771,7 @@ Pgn pgnList[] = {
      129044,
      PACKET_COMPLETE,
      PACKET_FAST,
-     24,
+     20,
      0,
      {{"Local Datum",
        BYTES(4),
@@ -3806,21 +4009,22 @@ Pgn pgnList[] = {
      129541,
      PACKET_INCOMPLETE,
      PACKET_FAST,
-     8,
+     26,
      0,
-     {{"PRN", BYTES(1), 1, false, 0, ""},
-      {"GPS Week number", BYTES(1), 1, false, 0, ""},
-      {"SV Health Bits", BYTES(1), 1, false, 0, ""},
-      {"Eccentricity", BYTES(1), 1, false, 0, ""},
-      {"Almanac Reference Time", BYTES(1), 1, false, 0, ""},
-      {"Inclination Angle", BYTES(1), 1, false, 0, ""},
-      {"Right of Right Ascension", BYTES(1), 1, false, 0, ""},
-      {"Root of Semi-major Axis", BYTES(1), 1, false, 0, ""},
-      {"Argument of Perigee", BYTES(1), 1, false, 0, ""},
-      {"Longitude of Ascension Node", BYTES(1), 1, false, 0, ""},
-      {"Mean Anomaly", BYTES(1), 1, false, 0, ""},
-      {"Clock Parameter 1", BYTES(1), 1, false, 0, ""},
-      {"Clock Parameter 2", BYTES(1), 1, false, 0, ""},
+     {{"PRN", BYTES(1), RES_INTEGER, false, 0, ""},
+      {"GPS Week number", BYTES(2), RES_INTEGER, false, 0, ""},
+      {"SV Health Bits", BYTES(1), RES_BINARY, false, 0, ""},
+      {"Eccentricity", BYTES(2), 1e-21, false, "m/m", ""},
+      {"Almanac Reference Time", BYTES(1), 1e12, false, "s", ""},
+      {"Inclination Angle", BYTES(2), 1e-19, true, "semi-circle", ""},
+      {"Rate of Right Ascension", BYTES(2), 1e-38, true, "semi-circle/s", ""},
+      {"Root of Semi-major Axis", BYTES(3), 1e-11, false, "sqrt(m)", ""},
+      {"Argument of Perigee", BYTES(3), 1e-23, true, "semi-circle", ""},
+      {"Longitude of Ascension Node", BYTES(3), 1e-23, true, "semi-circle", ""},
+      {"Mean Anomaly", BYTES(3), 1e-23, true, "semi-circle", ""},
+      {"Clock Parameter 1", 11, 1e-20, true, "s", ""},
+      {"Clock Parameter 2", 11, 1e-38, true, "s/s", ""},
+      {"Reserved", 2, RES_BINARY, false, 0, "Reserved"},
       {0}}}
 
     ,
@@ -4748,7 +4952,7 @@ Pgn pgnList[] = {
      {{"SID", BYTES(1), 1, false, 0, ""},
       {"Instance", BYTES(1), 1, false, 0, ""},
       {"Source", BYTES(1), RES_LOOKUP, false, LOOKUP_PRESSURE_SOURCE, ""},
-      {"Pressure", BYTES(4), RES_PRESSURE_HIRES, false, "dPa", ""},
+      {"Pressure", BYTES(4), RES_PRESSURE_HIRES, true, "dPa", ""},
       {0}}}
 
     ,
@@ -4864,8 +5068,8 @@ Pgn pgnList[] = {
       {"Wind Gusts", BYTES(2), 0.01, false, "m/s", ""},
       {"Atmospheric Pressure", BYTES(2), RES_PRESSURE, false, "hPa", ""},
       {"Ambient Temperature", BYTES(2), RES_TEMPERATURE, false, "K", ""},
-      {"Station ID", BYTES(2), RES_STRING, false, 0, ""},
-      {"Station Name", BYTES(2), RES_STRING, false, 0, ""},
+      {"Station ID", BYTES(257), RES_STRING, false, 0, ""},
+      {"Station Name", BYTES(257), RES_STRING, false, 0, ""},
       {0}}}
 
     ,
@@ -6135,6 +6339,23 @@ Pgn pgnList[] = {
       {0}}}
 
     ,
+    {"Maretron: Proprietary Temperature High Range",
+     130823,
+     PACKET_COMPLETE,
+     PACKET_FAST,
+     9,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=137", "Maretron"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
+      {"SID", BYTES(1), 1, false, 0, ""},
+      {"Instance", BYTES(1), 1, false, 0, ""},
+      {"Source", BYTES(1), RES_LOOKUP, false, LOOKUP_TEMPERATURE_SOURCE, ""},
+      {"Actual Temperature", BYTES(2), RES_TEMPERATURE_HIGH, false, "K", ""},
+      {"Set Temperature", BYTES(2), RES_TEMPERATURE_HIGH, false, "K", ""},
+      {0}}}
+
+    ,
     {"B&G: Wind data",
      130824,
      PACKET_INCOMPLETE,
@@ -6279,14 +6500,14 @@ Pgn pgnList[] = {
      {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=137", "Maretron"},
       {"Reserved", 2, RES_NOTUSED, false, 0, ""},
       {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
-      {"Bank Instance", BYTES(1), 1, false, 0, ""},
+      {"Instance", BYTES(1), 1, false, 0, ""},
       {"Indicator Number", BYTES(1), 1, false, 0, ""},
       {"Start Date", BYTES(2), RES_DATE, false, "days", "Timestamp of last reset in Days since January 1, 1970"},
       {"Start Time", BYTES(4), RES_TIME, false, "s", "Timestamp of last reset Seconds since midnight"},
       {"OFF Counter", BYTES(1), RES_INTEGER, false, 0, ""},
       {"ON Counter", BYTES(1), RES_INTEGER, false, 0, ""},
       {"ERROR Counter", BYTES(1), RES_INTEGER, false, 0, ""},
-      {"Switch Status", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
+      {"Switch Status", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
       {"Reserved", BYTES(2), 1, false, 0, ""},
       {0}}}
 
@@ -6312,14 +6533,14 @@ Pgn pgnList[] = {
      {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=137", "Maretron"},
       {"Reserved", 2, RES_NOTUSED, false, 0, ""},
       {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
-      {"Bank Instance", BYTES(1), 1, false, 0, ""},
+      {"Instance", BYTES(1), 1, false, 0, ""},
       {"Indicator Number", BYTES(1), 1, false, 0, ""},
       {"Start Date", BYTES(2), RES_DATE, false, "days", "Timestamp of last reset in Days since January 1, 1970"},
       {"Start Time", BYTES(4), RES_TIME, false, "s", "Timestamp of last reset Seconds since midnight"},
       {"Accumulated OFF Period", BYTES(4), RES_DECIMAL, false, "seconds", ""},
       {"Accumulated ON Period", BYTES(4), RES_DECIMAL, false, "seconds", ""},
       {"Accumulated ERROR Period", BYTES(4), RES_DECIMAL, false, "seconds", ""},
-      {"Switch Status", 2, RES_LOOKUP, false, ",0=Off,1=On,2=Failed", ""},
+      {"Switch Status", 2, RES_LOOKUP, false, LOOKUP_OFF_ON, ""},
       {"Reserved", 6, 1, false, 0, ""},
       {0}}}
 
@@ -6391,6 +6612,27 @@ Pgn pgnList[] = {
       {0}}}
 
     ,
+    {"Furuno: Six Degrees Of Freedom Movement",
+     130842,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     29,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=1855", "Furuno"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
+      {"A", BYTES(4), 1, true, 0, ""},
+      {"B", BYTES(4), 1, true, 0, ""},
+      {"C", BYTES(4), 1, true, 0, ""},
+      {"D", BYTES(1), 1, true, 0, ""},
+      {"E", BYTES(4), 1, true, 0, ""},
+      {"F", BYTES(4), 1, true, 0, ""},
+      {"G", BYTES(2), 1, true, 0, ""},
+      {"H", BYTES(2), 1, true, 0, ""},
+      {"I", BYTES(2), 1, true, 0, ""},
+      {0}}}
+
+    ,
     {"Simnet: AIS Class B static data (msg 24 Part B)",
      130842,
      PACKET_INCOMPLETE,
@@ -6415,6 +6657,23 @@ Pgn pgnList[] = {
       {"Mothership User ID", BYTES(4), RES_INTEGER, false, "MMSI", "Id of mother ship sent by daughter vessels"},
       {"Reserved", 2, RES_BINARY, false, 0, "reserved"},
       {"Spare", 6, RES_INTEGER, false, 0, ",0=unavailable"},
+      {0}}}
+
+    ,
+    {"Furuno: Heel Angle, Roll Information",
+     130843,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     0x08,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=1855", "Furuno"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
+      {"A", BYTES(1), 1, false, 0, ""},
+      {"B", BYTES(1), 1, false, 0, ""},
+      {"Yaw", BYTES(2), RES_RADIANS, true, "rad", ""},
+      {"Pitch", BYTES(2), RES_RADIANS, true, "rad", ""},
+      {"Roll", BYTES(2), RES_RADIANS, true, "rad", ""},
       {0}}}
 
     ,
@@ -6446,6 +6705,18 @@ Pgn pgnList[] = {
       {"A", BYTES(2), RES_NOTUSED, false, 0, ""},
       {"Angle", BYTES(2), RES_RADIANS, true, "rad", ""},
       {"Unused", BYTES(2), RES_NOTUSED, false, 0, ""},
+      {0}}}
+
+    ,
+    {"Furuno: Multi Sats In View Extended",
+     130845,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     0x08,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=1855", "Furuno"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
       {0}}}
 
     ,
@@ -6513,6 +6784,18 @@ Pgn pgnList[] = {
        "9",
        ""},
       {"L", BYTES(2), 1, false, 0, ""},
+      {0}}}
+
+    ,
+    {"Furuno: Motion Sensor Status Extended",
+     130846,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     0x08,
+     0,
+     {{"Manufacturer Code", 11, RES_MANUFACTURER, false, "=1855", "Furuno"},
+      {"Reserved", 2, RES_NOTUSED, false, 0, ""},
+      {"Industry Code", 3, RES_LOOKUP, false, "=4", "Marine Industry"},
       {0}}}
 
     ,
@@ -6808,112 +7091,189 @@ typedef struct
   int   id;
 } Company;
 
-/* http://www.nmea.org/Assets/20140409%20nmea%202000%20registration%20list.pdf */
-static Company companyList[] = {{"Volvo Penta", 174},
-                                {"Actia Corporation", 199},
+#ifdef GLOBAL_COMPANYLIST
+/* https://www.nmea.org/Assets/20190623%20manu%20code%20and%20product%20code.pdf */
+static Company companyList[] = {{"Actia", 199},
                                 {"Actisense", 273},
-                                {"Aetna Engineering/Fireboy-Xintex", 215},
+                                {"Advansea", 578},
+                                {"AEM Power", 735},
+                                {"Aetna Engineering/Fireboy/Xintex", 215},
                                 {"Airmar", 135},
-                                {"Alltek", 459},
-                                {"Amphenol LTW", 274},
-                                {"Attwood", 502},
-                                {"B&G", 381},
-                                {"Beede Electrical", 185},
-                                {"BEP", 295},
+                                {"Alltek Marine Electronics Corp", 459},
+                                {"Amphenol LTW Technology", 274},
+                                {"Aquatic AV", 600},
+                                {"ARKS Enterprises, Inc.", 69},
+                                {"Arlt Tecnologies", 614},
+                                {"ASA Electronics", 905},
+                                {"Attwood Marine", 502},
+                                {"Au Electronics Group", 735},
+                                {"Autonnic", 715},
+                                {"Aventics GmbH", 605},
+                                {"Bavaria Yacts", 637},
+                                {"Beede Instruments", 185},
+                                {"BEP Marine", 116},
+                                {"BEP Marine", 295},
                                 {"Beyond Measure", 396},
+                                {"B & G", 381},
+                                {"BJ Technologies (Beneteau)", 802},
+                                {"Blue Seas", 969},
                                 {"Blue Water Data", 148},
-                                {"Evinrude/Bombardier", 163},
-                                {"CAPI 2", 394},
-                                {"Carling", 176},
-                                {"CPAC", 165},
-                                {"Coelmo", 286},
+                                {"Blue Water Desalination", 811},
+                                {"Böning Automationstechnologie GmbH & Co. KG", 341},
+                                {"Broyda Industries", 795},
+                                {"Camano Light", 384},
+                                {"Canadian Automotive", 796},
+                                {"Capi 2", 394},
+                                {"Carling Technologies Inc. (Moritz Aerospace)", 176},
+                                {"Chetco Digitial Instruments", 481},
+                                {"Clarion US", 773},
+                                {"Coelmo SRL Italy", 286},
+                                {"Comar Systems Limited", 438},
                                 {"ComNav", 404},
+                                {"Cox Powertrain", 968},
+                                {"CPAC Systems AB", 165},
                                 {"Cummins", 440},
+                                {"DaeMyung", 743},
+                                {"Data Panel Corp", 868},
                                 {"Dief", 329},
+                                {"Digital Switching Systems", 211},
                                 {"Digital Yacht", 437},
                                 {"Disenos Y Technologia", 201},
-                                {"DNA Group", 211},
-                                {"Egersund Marine", 426},
+                                {"Diverse Yacht Services", 641},
+                                {"Ecotronix", 930},
+                                {"Egersund Marine Electronics AS", 426},
                                 {"Electronic Design", 373},
-                                {"Em-Trak", 427},
-                                {"EMMI Network", 224},
-                                {"Empirbus", 304},
-                                {"eRide", 243},
+                                {"EMMI NETWORK S.L.", 224},
+                                {"Empir Bus", 304},
+                                {"em-trak Marine Electronics", 427},
+                                {"Eride", 243},
+                                {"Evinrude/BRP", 163},
                                 {"Faria Instruments", 1863},
-                                {"Fischer Panda", 356},
-                                {"Floscan", 192},
+                                {"Fell Marine", 844},
+                                {"Fischer Panda", 311},
+                                {"Fischer Panda DE", 785},
+                                {"Fischer Panda Generators", 356},
+                                {"FLIR", 815},
+                                {"Floscan Instrument Co. Inc.", 192},
                                 {"Furuno", 1855},
-                                {"Fusion", 419},
-                                {"FW Murphy", 78},
+                                {"Fusion Electronics", 419},
+                                {"FW Murphy/Enovation Controls", 78},
                                 {"Garmin", 229},
-                                {"Geonav", 385},
+                                {"Garmin", 645},
+                                {"GeoNav", 385},
+                                {"Gill Sensors", 803},
                                 {"Glendinning", 378},
-                                {"GME / Standard", 475},
+                                {"GME aka Standard Communications Pty LTD", 475},
                                 {"Groco", 272},
                                 {"Hamilton Jet", 283},
-                                {"Hemisphere GPS", 88},
-                                {"Honda", 257},
-                                {"Hummingbird", 467},
+                                {"Hemisphere GPS Inc", 88},
+                                {"HMI Systems", 776},
+                                {"Honda Marine", 175},
+                                {"Honda Marine", 200},
+                                {"Honda Marine", 225},
+                                {"Honda Marine", 250},
+                                {"Honda Motor Company LTD", 140},
+                                {"Honda Motor Company LTD", 257},
+                                {"Humminbird Marine Electronics", 467},
+                                {"Humminbird Marine Electronics", 476},
                                 {"ICOM", 315},
-                                {"JRC", 1853},
-                                {"Kvasar", 1859},
-                                {"Kohler", 85},
-                                {"Korea Maritime University", 345},
-                                {"LCJ Capteurs", 499},
+                                {"Intellian", 606},
+                                {"Japan Radio Co", 1853},
+                                {"JL Audio", 704},
+                                {"Johnson Outdoors Marine Electronics Inc Geonav", 385},
+                                {"Kohler Power Systems", 85},
+                                {"Korean Maritime University", 345},
+                                {"Kvasar", 743},
+                                {"Kvasar AB", 1859},
+                                {"KVH", 579},
+                                {"L3 Technologies", 890},
+                                {"Lcj Capteurs", 499},
                                 {"Litton", 1858},
-                                {"Livorsi", 400},
+                                {"Livorsi Marine", 400},
                                 {"Lowrance", 140},
+                                {"Lumishore", 798},
+                                {"LxNav", 739},
                                 {"Maretron", 137},
-                                {"Marinecraft (SK)", 571},
-                                {"MBW", 307},
+                                {"Marinecraft (South Korea)", 571},
+                                {"Marines Co (South Korea)", 909},
+                                {"Marinesoft Co. LTD", 510},
                                 {"Mastervolt", 355},
-                                {"Mercury", 144},
+                                {"MBW Technologies", 307},
+                                {"McMurdo Group aka Orolia LTD", 573},
+                                {"Mercury Marine", 144},
                                 {"MMP", 1860},
-                                {"Mystic Valley Comms", 198},
-                                {"National Instruments", 529},
-                                {"Nautibus", 147},
+                                {"Moritz Aerospace", 176},
+                                {"Mystic Valley Communications", 198},
+                                {"National Instruments Korea", 529},
+                                {"Nautibus Electronic GmbH", 147},
+                                {"Nautic-on", 911},
                                 {"Navico", 275},
                                 {"Navionics", 1852},
-                                {"Naviop", 503},
-                                {"Nobeltec", 193},
-                                {"Noland", 517},
+                                {"Naviop S.R.L.", 503},
+                                {"Nexfour Solutions", 896},
+                                {"Nobletec", 193},
+                                {"NoLand Engineering", 517},
                                 {"Northern Lights", 374},
-                                {"Northstar", 1854},
-                                {"Novatel", 305},
-                                {"Ocean Sat", 478},
-                                {"Offshore Systems", 161},
-                                {"Orolia (McMurdo)", 573},
+                                {"Northstar Technologies", 1854},
+                                {"NovAtel", 305},
+                                {"Ocean Sat BV", 478},
+                                {"Ocean Signal", 777},
+                                {"Oceanvolt", 847},
+                                {"Offshore Systems (UK) Ltd.", 161},
+                                {"Onwa Marine", 532},
+                                {"Parker Hannifin aka Village Marine Tech", 451},
+                                {"Poly Planar", 781},
+                                {"Prospec", 862},
                                 {"Qwerty", 328},
-                                {"Parker Hannifin", 451},
                                 {"Raymarine", 1851},
-                                {"Rolls Royce", 370},
-                                {"Rose Point", 384},
-                                {"SailorMade/Tetra", 235},
-                                {"San Jose", 580},
-                                {"San Giorgio", 460},
-                                {"Sanshin (Yamaha)", 1862},
-                                {"Sea Cross", 471},
+                                {"REAP Systems", 734},
+                                {"Rhodan Marine Systems", 894},
+                                {"Rockford Corp", 688},
+                                {"Rolls Royce Marine", 370},
+                                {"Rose Point Navigation Systems", 384},
+                                {"Sailormade Marine Telemetry/Tetra Technology LTD", 235},
+                                {"SamwonIT", 612},
+                                {"SAN GIORGIO S.E.I.N", 460},
+                                {"San Jose Technology", 580},
+                                {"Sea Cross Marine AB", 471},
                                 {"Sea Recovery", 285},
+                                {"Seekeeper", 778},
+                                {"Shenzhen Jiuzhou Himunication", 658},
+                                {"Ship Module aka Customware", 595},
                                 {"Simrad", 1857},
-                                {"Sitex", 470},
-                                {"Sleipner", 306},
-                                {"Teleflex", 1850},
+                                {"SI-TEX Marine Electronics", 470},
+                                {"Sleipner Motor AS", 306},
+                                {"Standard Horizon", 421},
+                                {"Still Water Designs and Audio", 799},
+                                {"Suzuki Motor Corporation", 586},
+                                {"TeamSurv", 838},
+                                {"Teleflex Marine (SeaStar Solutions)", 1850},
                                 {"Thrane and Thrane", 351},
-                                {"Tohatsu", 431},
-                                {"Transas", 518},
+                                {"Tides Marine", 797},
+                                {"Timbolier Industries", 962},
+                                {"Tohatsu Co, JP", 431},
+                                {"Transas USA", 518},
                                 {"Trimble", 1856},
-                                {"True Heading", 422},
+                                {"True Heading AB", 422},
                                 {"Twin Disc", 80},
+                                {"Undheim Systems", 824},
                                 {"US Coast Guard", 591},
+                                {"VDO (aka Continental-Corporation)", 443},
                                 {"Vector Cantech", 1861},
-                                {"Veethree", 466},
-                                {"Vertex", 421},
-                                {"Vesper", 504},
-                                {"Victron", 358},
+                                {"Veethree Electronics & Marine", 466},
+                                {"Vesper Marine Ltd", 504},
+                                {"Victron Energy", 358},
+                                {"Volvo Penta", 174},
                                 {"Watcheye", 493},
+                                {"Wema U.S.A dba KUS", 644},
                                 {"Westerbeke", 154},
-                                {"Xantrex", 168},
-                                {"Yachtcontrol", 583},
+                                {"Woosung", 744},
+                                {"Xantrex Technology Inc.", 168},
+                                {"Xintex/Atena", 215},
+                                {"Yacht Control", 583},
+                                {"Yacht Devices", 717},
                                 {"Yacht Monitoring Solutions", 233},
-                                {"Yanmar", 172},
+                                {"Yamaha Marine", 1862},
+                                {"Yanmar Marine", 172},
                                 {"ZF", 228}};
+#endif
