@@ -37,22 +37,25 @@ limitations under the License.
 #define RES_ROTATION (1e-3 / 32.0)
 #define RES_HIRES_ROTATION (1e-6 / 32.0)
 
-typedef struct FieldType FieldType;
-typedef struct Pgn       Pgn;
+typedef struct FieldType  FieldType;
+typedef struct Pgn        Pgn;
+typedef struct LookupInfo LookupInfo;
 
 typedef void (*EnumPairCallback)(size_t value, const char *name);
 typedef void (*BitPairCallback)(size_t value, const char *name);
 typedef void (*EnumTripletCallback)(size_t value1, size_t value2, const char *name);
+typedef void (*EnumFieldtypeCallback)(size_t value, const char *name, const char *ft, const LookupInfo *lookup);
 
 typedef enum LookupType
 {
   LOOKUP_TYPE_NONE,
   LOOKUP_TYPE_PAIR,
   LOOKUP_TYPE_TRIPLET,
-  LOOKUP_TYPE_BIT
+  LOOKUP_TYPE_BIT,
+  LOOKUP_TYPE_FIELDTYPE
 } LookupType;
 
-typedef struct
+struct LookupInfo
 {
   const char *name;
   LookupType  type;
@@ -63,20 +66,22 @@ typedef struct
     void (*pairEnumerator)(EnumPairCallback);
     void (*bitEnumerator)(BitPairCallback);
     void (*tripletEnumerator)(EnumTripletCallback);
+    void (*fieldtypeEnumerator)(EnumFieldtypeCallback);
   } function;
-  uint8_t val1Order;
-  size_t  size;
-  size_t  max;
-} LookupInfo;
+  uint8_t val1Order; // Which field is the first field in a tripletEnumerator
+  size_t  size;      // Used in analyzer only
+};
 
 #ifdef EXPLAIN
 #define LOOKUP_PAIR_MEMBER .lookup.function.pairEnumerator
 #define LOOKUP_BIT_MEMBER .lookup.function.bitEnumerator
 #define LOOKUP_TRIPLET_MEMBER .lookup.function.tripletEnumerator
+#define LOOKUP_FIELDTYPE_MEMBER .lookup.function.fieldtypeEnumerator
 #else
 #define LOOKUP_PAIR_MEMBER .lookup.function.pair
 #define LOOKUP_BIT_MEMBER .lookup.function.pair
 #define LOOKUP_TRIPLET_MEMBER .lookup.function.triplet
+#define LOOKUP_FIELDTYPE_MEMBER .lookup.function.pair
 #endif
 
 typedef struct
@@ -120,6 +125,12 @@ typedef struct
   {                                                                                               \
     .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR, \
     LOOKUP_PAIR_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP"             \
+  }
+
+#define LOOKUP_FIELDTYPE_FIELD(nam, len, typ)                                                          \
+  {                                                                                                    \
+    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_FIELDTYPE, \
+    LOOKUP_FIELDTYPE_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP"             \
   }
 
 #define LOOKUP_TRIPLET_FIELD(nam, len, typ, desc, order)                                                                      \
@@ -638,9 +649,9 @@ typedef struct
     .description = desc                                                                                             \
   }
 
-#define TIME_FIX16_MIN_FIELD(nam)                                                                                \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(2), .resolution = 60, .unit = "s", .hasSign = true, .fieldType = "TIME_FIX16_MIN" \
+#define TIME_FIX16_MIN_FIELD(nam)                                                                                 \
+  {                                                                                                               \
+    .name = nam, .size = BYTES(2), .resolution = 60., .unit = "s", .hasSign = true, .fieldType = "TIME_FIX16_MIN" \
   }
 
 #define TIME_UFIX24_MS_FIELD(nam, desc)                                                                               \
@@ -675,6 +686,11 @@ typedef struct
 #define VARIABLE_FIELD(nam, desc)                                                   \
   {                                                                                 \
     .name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "VARIABLE" \
+  }
+
+#define KEY_VALUE_FIELD(nam, desc)                                                   \
+  {                                                                                  \
+    .name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "KEY_VALUE" \
   }
 
 #define ENERGY_UINT32_FIELD(nam)                                                                \
@@ -737,9 +753,9 @@ typedef struct
     .name = nam, .size = BYTES(1), .resolution = 1, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_INT8" \
   }
 
-#define PERCENTAGE_U16_FIELD(nam)                                                                              \
-  {                                                                                                            \
-    .name = nam, .size = BYTES(2), .resolution = RES_PERCENTAGE, .unit = "%", .fieldType = "PERCENTAGE_UFIX16" \
+#define PERCENTAGE_I16_FIELD(nam)                                                                                              \
+  {                                                                                                                            \
+    .name = nam, .size = BYTES(2), .resolution = RES_PERCENTAGE, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_FIX16" \
   }
 
 #define ROTATION_FIX16_FIELD(nam)                                                                                               \
@@ -812,23 +828,26 @@ typedef struct
 #define LOOKUP_TYPE(type, length) extern void lookup##type(EnumPairCallback cb);
 #define LOOKUP_TYPE_TRIPLET(type, length) extern void lookup##type(EnumTripletCallback cb);
 #define LOOKUP_TYPE_BITFIELD(type, length) extern void lookup##type(BitPairCallback cb);
+#define LOOKUP_TYPE_FIELDTYPE(type, length) extern void lookup##type(EnumFieldtypeCallback cb);
 #else
 #define LOOKUP_TYPE(type, length) extern const char *lookup##type(size_t val);
 #define LOOKUP_TYPE_TRIPLET(type, length) extern const char *lookup##type(size_t val1, size_t val2);
 #define LOOKUP_TYPE_BITFIELD(type, length) extern const char *lookup##type(size_t val);
+#define LOOKUP_TYPE_FIELDTYPE(type, length) extern const char *lookup##type(size_t val);
 #endif
 
 #include "lookup.h"
 
 typedef enum PacketComplete
 {
-  PACKET_COMPLETE              = 0,
-  PACKET_FIELDS_UNKNOWN        = 1,
-  PACKET_FIELD_LENGTHS_UNKNOWN = 2,
-  PACKET_RESOLUTION_UNKNOWN    = 4,
-  PACKET_LOOKUPS_UNKNOWN       = 8,
-  PACKET_NOT_SEEN              = 16,
-  PACKET_INTERVAL_UNKNOWN      = 32
+  PACKET_COMPLETE               = 0,
+  PACKET_FIELDS_UNKNOWN         = 1,
+  PACKET_FIELD_LENGTHS_UNKNOWN  = 2,
+  PACKET_RESOLUTION_UNKNOWN     = 4,
+  PACKET_LOOKUPS_UNKNOWN        = 8,
+  PACKET_NOT_SEEN               = 16,
+  PACKET_INTERVAL_UNKNOWN       = 32,
+  PACKET_MISSING_COMPANY_FIELDS = 64
 } PacketComplete;
 
 #define PACKET_INCOMPLETE (PACKET_FIELDS_UNKNOWN | PACKET_FIELD_LENGTHS_UNKNOWN | PACKET_RESOLUTION_UNKNOWN)
@@ -882,27 +901,28 @@ typedef struct PgnRange
 } PgnRange;
 
 // Returns the first pgn that matches the given id, or NULL if not found.
-Pgn *searchForPgn(int pgn);
+const Pgn *searchForPgn(int pgn);
 
 // Returns the catch-all PGN that matches the given id.
-Pgn *searchForUnknownPgn(int pgnId);
+const Pgn *searchForUnknownPgn(int pgnId);
 
 // Returns a pointer (potentially invalid) to the first pgn that does not match "first".
-Pgn *endPgn(Pgn *first);
+const Pgn *endPgn(const Pgn *first);
 
-Pgn *getMatchingPgn(int pgnId, uint8_t *dataStart, int length);
+const Pgn *getMatchingPgn(int pgnId, const uint8_t *dataStart, int length);
 
-bool printPgn(RawMessage *msg, uint8_t *dataStart, int length, bool showData, bool showJson);
+bool printPgn(const RawMessage *msg, const uint8_t *dataStart, int length, bool showData, bool showJson);
 void checkPgnList(void);
 
-Field *getField(uint32_t pgn, uint32_t field);
-bool   extractNumber(const Field *field,
-                     uint8_t     *data,
-                     size_t       dataLen,
-                     size_t       startBit,
-                     size_t       bits,
-                     int64_t     *value,
-                     int64_t     *maxValue);
+const Field *getField(uint32_t pgn, uint32_t field);
+bool         extractNumber(const Field   *field,
+                           const uint8_t *data,
+                           size_t         dataLen,
+                           size_t         startBit,
+                           size_t         bits,
+                           int64_t       *value,
+                           int64_t       *maxValue);
+bool         extractNumberByOrder(const Pgn *pgn, size_t order, const uint8_t *data, size_t dataLen, int64_t *value);
 
 void camelCase(bool upperCamelCase);
 
@@ -952,7 +972,7 @@ Pgn pgnList[] = {
       END_OF_FIELDS},
      .interval    = UINT16_MAX,
      .explanation = "This message is provided by ISO 11783 for a handshake mechanism between transmitting and receiving devices. "
-                    "This message is the possible response to acknowledge the reception of a “normal broadcast” message or the "
+                    "This message is the possible response to acknowledge the reception of a 'normal broadcast' message or the "
                     "response to a specific command to indicate compliance or failure."}
 
     ,
@@ -1009,7 +1029,7 @@ Pgn pgnList[] = {
      .interval    = UINT16_MAX,
      .url         = "https://embeddedflakes.com/j1939-transport-protocol/",
      .explanation = "ISO 11783 defines this group function PGN as part of the Transport Protocol method used for transmitting "
-                    "messages that have 9 or more data bytes. This PGN’s role in the transport process is to prepare the receiver "
+                    "messages that have 9 or more data bytes. This PGN's role in the transport process is to prepare the receiver "
                     "for the fact that this sender wants to transmit a long message. The receiver will respond with CTS."}
 
     ,
@@ -1026,7 +1046,7 @@ Pgn pgnList[] = {
      .interval    = UINT16_MAX,
      .url         = "https://embeddedflakes.com/j1939-transport-protocol/",
      .explanation = "ISO 11783 defines this group function PGN as part of the Transport Protocol method used for transmitting "
-                    "messages that have 9 or more data bytes. This PGN’s role in the transport process is to signal to the sender "
+                    "messages that have 9 or more data bytes. This PGN's role in the transport process is to signal to the sender "
                     "that the receive is ready to receive a number of frames."}
 
     ,
@@ -1044,7 +1064,7 @@ Pgn pgnList[] = {
      .url      = "https://embeddedflakes.com/j1939-transport-protocol/",
      .explanation
      = "ISO 11783 defines this group function PGN as part of the Transport Protocol method used for transmitting messages that "
-       "have 9 or more data bytes. This PGN’s role in the transport process is to mark the end of the message."}
+       "have 9 or more data bytes. This PGN's role in the transport process is to mark the end of the message."}
 
     ,
     {"ISO Transport Protocol, Connection Management - Broadcast Announce",
@@ -1060,7 +1080,7 @@ Pgn pgnList[] = {
      .interval    = UINT16_MAX,
      .url         = "https://embeddedflakes.com/j1939-transport-protocol/",
      .explanation = "ISO 11783 defines this group function PGN as part of the Transport Protocol method used for transmitting "
-                    "messages that have 9 or more data bytes. This PGN’s role in the transport process is to announce a broadcast "
+                    "messages that have 9 or more data bytes. This PGN's role in the transport process is to announce a broadcast "
                     "of a long message spanning multiple frames."}
 
     ,
@@ -1076,7 +1096,7 @@ Pgn pgnList[] = {
      .interval    = UINT16_MAX,
      .url         = "https://embeddedflakes.com/j1939-transport-protocol/",
      .explanation = "ISO 11783 defines this group function PGN as part of the Transport Protocol method used for transmitting "
-                    "messages that have 9 or more data bytes. This PGN’s role in the transport process is to announce an abort "
+                    "messages that have 9 or more data bytes. This PGN's role in the transport process is to announce an abort "
                     "of a long message spanning multiple frames."}
 
     ,
@@ -1611,6 +1631,92 @@ Pgn pgnList[] = {
      {COMPANY(1857), RESERVED_FIELD(BYTES(6)), END_OF_FIELDS}}
 
     ,
+    {"Simnet: AP Unknown 1",
+     65302,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      UINT8_FIELD("A"),
+      UINT8_FIELD("B"),
+      UINT16_FIELD("C"),
+      UINT8_FIELD("D"),
+      RESERVED_FIELD(BYTES(1)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "Seen as sent by AC-42 only so far."}
+
+    ,
+    {"Simnet: Device Status",
+     65305,
+     PACKET_LOOKUPS_UNKNOWN,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      LOOKUP_FIELD("Model", BYTES(1), SIMNET_DEVICE_MODEL),
+      MATCH_LOOKUP_FIELD("Report", BYTES(1), 2, SIMNET_DEVICE_REPORT),
+      LOOKUP_FIELD("Status", BYTES(1), SIMNET_AP_STATUS),
+      SPARE_FIELD(BYTES(3)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "This PGN is reported by an Autopilot Computer (AC/NAC)"}
+
+    ,
+    {"Simnet: Device Status Request",
+     65305,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      LOOKUP_FIELD("Model", BYTES(1), SIMNET_DEVICE_MODEL),
+      MATCH_LOOKUP_FIELD("Report", BYTES(1), 3, SIMNET_DEVICE_REPORT),
+      SPARE_FIELD(BYTES(4)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "This PGN is sent by an active AutoPilot head controller (AP, MFD, Triton2)."
+                    " It is used by the AC (AutoPilot Controller) to verify that there is an active controller."
+                    " If this PGN is not sent regularly the AC may report an error and go to standby."}
+
+    ,
+    {"Simnet: Pilot Mode",
+     65305,
+     PACKET_LOOKUPS_UNKNOWN,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      LOOKUP_FIELD("Model", BYTES(1), SIMNET_DEVICE_MODEL),
+      MATCH_LOOKUP_FIELD("Report", BYTES(1), 10, SIMNET_DEVICE_REPORT),
+      BITLOOKUP_FIELD("Mode", BYTES(2), SIMNET_AP_MODE_BITFIELD),
+      SPARE_FIELD(BYTES(2)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "This PGN is reported by an Autopilot Computer (AC/NAC)"}
+
+    ,
+    {"Simnet: Device Mode Request",
+     65305,
+     PACKET_COMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      LOOKUP_FIELD("Model", BYTES(1), SIMNET_DEVICE_MODEL),
+      MATCH_LOOKUP_FIELD("Report", BYTES(1), 11, SIMNET_DEVICE_REPORT),
+      SPARE_FIELD(BYTES(4)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "This PGN is sent by an active AutoPilot head controller (AP, MFD, Triton2)."
+                    " It is used by the AC (AutoPilot Controller) to verify that there is an active controller."
+                    " If this PGN is not sent regularly the AC may report an error and go to standby."}
+
+    ,
+    {"Simnet: Sailing Processor Status",
+     65305,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      LOOKUP_FIELD("Model", BYTES(1), SIMNET_DEVICE_MODEL),
+      MATCH_LOOKUP_FIELD("Report", BYTES(1), 23, SIMNET_DEVICE_REPORT),
+      BINARY_FIELD("Data", BYTES(4), ""),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "This PGN has been seen to be reported by a Sailing Processor."}
+
+    ,
     {"Navico: Wireless Battery Status",
      65309,
      PACKET_INCOMPLETE,
@@ -1630,6 +1736,34 @@ Pgn pgnList[] = {
      {COMPANY(275), UINT8_FIELD("Unknown"), PERCENTAGE_U8_FIELD("Signal Strength"), RESERVED_FIELD(BYTES(4)), END_OF_FIELDS}}
 
     ,
+    {"Simnet: AP Unknown 2",
+     65340,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      UINT8_FIELD("A"),
+      UINT8_FIELD("B"),
+      UINT8_FIELD("C"),
+      UINT8_FIELD("D"),
+      UINT8_FIELD("E"),
+      RESERVED_FIELD(BYTES(1)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "Seen as sent by AC-42 only so far."}
+
+    ,
+    {"Simnet: Autopilot Angle",
+     65341,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      RESERVED_FIELD(BYTES(2)),
+      LOOKUP_FIELD("Mode", BYTES(1), SIMNET_AP_MODE),
+      RESERVED_FIELD(BYTES(1)),
+      ANGLE_U16_FIELD("Angle", NULL),
+      END_OF_FIELDS}}
+
+    ,
     {"Seatalk: Pilot Wind Datum",
      65345,
      PACKET_INCOMPLETE,
@@ -1638,6 +1772,17 @@ Pgn pgnList[] = {
       ANGLE_U16_FIELD("Wind Datum", NULL),
       ANGLE_U16_FIELD("Rolling Average Wind Angle", NULL),
       RESERVED_FIELD(BYTES(2)),
+      END_OF_FIELDS}},
+
+    {"Simnet: Magnetic Field",
+     65350,
+     PACKET_INCOMPLETE | PACKET_MISSING_COMPANY_FIELDS,
+     PACKET_SINGLE,
+     {ANGLE_I16_FIELD("A", NULL),
+      PERCENTAGE_U8_FIELD("B"),
+      ANGLE_I16_FIELD("C", NULL),
+      ANGLE_I16_FIELD("D", NULL),
+      RESERVED_FIELD(BYTES(1)),
       END_OF_FIELDS}},
 
     {"Seatalk: Pilot Heading",
@@ -1751,6 +1896,22 @@ Pgn pgnList[] = {
       END_OF_FIELDS},
      .interval = UINT16_MAX,
      .url      = "http://www.airmartechnology.com/uploads/installguide/DST200UserlManual.pdf"}
+
+    ,
+    {"Simnet: AP Unknown 3",
+     65420,
+     PACKET_INCOMPLETE,
+     PACKET_SINGLE,
+     {COMPANY(1857),
+      UINT8_FIELD("A"),
+      UINT8_FIELD("B"),
+      UINT8_FIELD("C"),
+      UINT8_FIELD("D"),
+      UINT8_FIELD("E"),
+      RESERVED_FIELD(BYTES(1)),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "Seen as sent by AC-42 only so far."}
 
     ,
     {"Simnet: Autopilot Mode", 65480, PACKET_INCOMPLETE, PACKET_SINGLE, {COMPANY(1857), RESERVED_FIELD(BYTES(6)), END_OF_FIELDS}}
@@ -2472,13 +2633,15 @@ Pgn pgnList[] = {
      .explanation
      = "Reception of this PGN confirms that a device is still present on the network.  Reception of this PGN may also be used to "
        "maintain an address to NAME association table within the receiving device.  The transmission interval may be used by the "
-       "receiving unit to determine the time-out value for the connection supervision.  The value contained in Field 1 of this PGN "
-       "reflects the PGN’s current Transmission Interval. Changes to this PGN’s Transmission Interval shall be reflected in Field "
+       "receiving unit to determine the time-out value for the connection supervision.  The value contained in Field 1 of this "
+       "PGN "
+       "reflects the PGN's current Transmission Interval. Changes to this PGN's Transmission Interval shall be reflected in Field "
        "1.  The transmission interval can only be changed by using the Request Group Function PGN 126208 with no pairs of request "
        "parameters provided. Field 3 of the Request Group Function PGN 126208 may contain values between 1,000ms and 60,000ms.  "
-       "This PGN cannot be requested by the ISO Request PGN 059904 or Request Group Function PGN 126208. In Request Group Function "
-       "PGN 126208, setting Field 3 to a value of 0xFFFF FFFF and Field 4 to a value of 0xFFFF: “Transmit now without changing "
-       "timing variables.” is prohibited.  The Command Group Function PGN 126208 shall not be used with this PGN.  Fields 3 and 4 "
+       "This PGN cannot be requested by the ISO Request PGN 059904 or Request Group Function PGN 126208. In Request Group "
+       "Function "
+       "PGN 126208, setting Field 3 to a value of 0xFFFF FFFF and Field 4 to a value of 0xFFFF: 'Transmit now without changing "
+       "timing variables.' is prohibited.  The Command Group Function PGN 126208 shall not be used with this PGN.  Fields 3 and 4 "
        "of this PGN provide information which can be used to distinguish short duration disturbances from permanent failures. See "
        "ISO 11898 -1 Sections 6.12, 6.13, 6.14, 13.1.1, 13.1.4, 13.1.4.3 and Figure 16 ( node status transition diagram) for "
        "additional context.",
@@ -2551,18 +2714,21 @@ Pgn pgnList[] = {
        "that of the vessel or the MOB device itself as identified in field “X”, position source. Additional information may "
        "include the current state of the MOB device, time of activation, and MOB device battery status.\n"
        "This PGN may be used to set a MOB waypoint, or to initiate an alert process.\n"
-       "This PGN may be used to command or register a MOB device emitter Ids or other applicable fields in the message with an MOB "
+       "This PGN may be used to command or register a MOB device emitter Ids or other applicable fields in the message with an "
+       "MOB "
        "System or other equipment. If the fields in this PGN are configured over the network, the Command Group Function (PGN "
        "126208) shall be used.\n"
        "Queries for this PGN shall be requested using either the ISO Request (PGN 059904) or the NMEA Request Group Function (PGN "
        "126208).\n"
-       "A device receiving an ISO (PGN 059904) for this PGN (127233), shall respond by providing as many of these PGNs (127233) as "
+       "A device receiving an ISO (PGN 059904) for this PGN (127233), shall respond by providing as many of these PGNs (127233) "
+       "as "
        "necessary for every MOB Emitter ID that has associated data fields.\n"
        "If a Request Group Function (PGN 126208) requesting this PGN (127233) is received, the receiving device shall respond in "
        "the following manner:\n"
        "•If no requested fields have been included with the Request Group Function then the response is to return one or more "
        "PGNs, just like responding to the ISO Request (PGN 055904) described above.\n"
-       "•If the Request Group Function (PGN 126208) includes the MOB Emitter ID field or MOB Status field, then the response shall "
+       "•If the Request Group Function (PGN 126208) includes the MOB Emitter ID field or MOB Status field, then the response "
+       "shall "
        "be filtered by these fields contained within this request resulting in one or more PGN (127233) responses.\n"
        "If the MOB Emitter ID requested is not considered a valid MOB Emitter ID by the receiving device, then the appropriate "
        "response would be the Acknowledge Group Function (PGN 126208), containing the error state for PGN error code (Field 3) of "
@@ -2993,7 +3159,7 @@ Pgn pgnList[] = {
      PACKET_SINGLE,
      {SIMPLE_FIELD("Instance", 4),
       LOOKUP_FIELD("Type", 4, TANK_TYPE),
-      PERCENTAGE_U16_FIELD("Level"),
+      PERCENTAGE_I16_FIELD("Level"),
       VOLUME_UFIX32_DL_FIELD("Capacity"),
       RESERVED_FIELD(BYTES(1)),
       END_OF_FIELDS},
@@ -3515,9 +3681,11 @@ Pgn pgnList[] = {
       END_OF_FIELDS},
      .explanation
      = "Actuator is a broad description of any device that embodies moving an object between two fixed limits, such as raising or "
-       "lowering an outboard engine assembly. In the context of this PGN, the word \"Device\" refers to the object being moved. In "
+       "lowering an outboard engine assembly. In the context of this PGN, the word \"Device\" refers to the object being moved. "
+       "In "
        "the case of multiple Actuators per controller, the Actuator Identifier field specifies which Actuator the PGN message is "
-       "intended for, and all following data fields refer only to that Actuator. This PGN supports manufacturer calibrated systems "
+       "intended for, and all following data fields refer only to that Actuator. This PGN supports manufacturer calibrated "
+       "systems "
        "and retrofit systems where it is impractical for the installer to enter the Maximum Travel distance of the device."}
 
     ,
@@ -4960,7 +5128,7 @@ Pgn pgnList[] = {
       LOOKUP_FIELD("Temperature Source", 6, TEMPERATURE_SOURCE),
       LOOKUP_FIELD("Humidity Source", 2, HUMIDITY_SOURCE),
       TEMPERATURE_FIELD("Temperature"),
-      PERCENTAGE_U16_FIELD("Humidity"),
+      PERCENTAGE_I16_FIELD("Humidity"),
       PRESSURE_UFIX16_HPA_FIELD("Atmospheric Pressure"),
       END_OF_FIELDS},
      .explanation = "This PGN was introduced as a better version of PGN 130310, but it should no longer be generated and separate "
@@ -4989,8 +5157,8 @@ Pgn pgnList[] = {
      {UINT8_FIELD("SID"),
       INSTANCE_FIELD,
       LOOKUP_FIELD("Source", BYTES(1), HUMIDITY_SOURCE),
-      PERCENTAGE_U16_FIELD("Actual Humidity"),
-      PERCENTAGE_U16_FIELD("Set Humidity"),
+      PERCENTAGE_I16_FIELD("Actual Humidity"),
+      PERCENTAGE_I16_FIELD("Set Humidity"),
       RESERVED_FIELD(BYTES(1)),
       END_OF_FIELDS},
      .interval = 2000}
@@ -5293,8 +5461,8 @@ Pgn pgnList[] = {
       SIMPLE_FIELD("Program Capabilities", 4),
       RESERVED_FIELD(4),
       END_OF_FIELDS},
-     .explanation
-     = "This PGN describes an available program on the controller. Can be a built in required NMEA one or a custom vendor program."}
+     .explanation = "This PGN describes an available program on the controller. Can be a built in required NMEA one or a custom "
+                    "vendor program."}
 
     /* http://www.nmea.org/Assets/20130905%20amendment%20at%202000%20201309051%20watermaker%20input%20setting%20and%20status%20pgn%20130567.pdf
 
@@ -5888,7 +6056,7 @@ Pgn pgnList[] = {
      PACKET_FAST,
      {COMPANY(1857),
       RESERVED_FIELD(BYTES(1)),
-      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 50, SIMRAD_COMMAND),
+      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 50, SIMNET_COMMAND),
       UINT8_FIELD("A"),
       UINT8_FIELD("B"),
       UINT8_FIELD("C"),
@@ -6263,6 +6431,15 @@ Pgn pgnList[] = {
       STRINGLZ_FIELD("Genre", BYTES(12)),
       END_OF_FIELDS}}
 
+    // NAC-3 sends this once a second, with (decoded) data like this:
+    // \r\n1720.0,3,0.0,0.1,0.0,1.8,0.00,358.0,0.00,359.9,0.36,0.09,4.1,4.0,0,1.71,0.0,0.50,0.90,51.00,17.10,4.00,-7.43,231.28,4.06,1.8,0.00,0.0,0.0,0.0,0.0,
+    ,
+    {"Navico: ASCII Data",
+     130821,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(275), SIMPLE_FIELD("A", BYTES(1)), STRING_FIX_FIELD("Message", BYTES(256)), END_OF_FIELDS}}
+
     /* M/V Dirona */
     ,
     {"Furuno: Unknown 130821",
@@ -6283,6 +6460,13 @@ Pgn pgnList[] = {
       END_OF_FIELDS}}
 
     ,
+    {"Navico: Unknown 1",
+     130822,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(275), BINARY_FIELD("Data", BYTES(231), NULL), END_OF_FIELDS}}
+
+    ,
     {"Maretron: Proprietary Temperature High Range",
      130823,
      PACKET_COMPLETE,
@@ -6296,15 +6480,20 @@ Pgn pgnList[] = {
       END_OF_FIELDS}}
 
     ,
-    {"B&G: Wind data",
+    {"B&G: key-value data",
      130824,
-     PACKET_INCOMPLETE,
+     PACKET_LOOKUPS_UNKNOWN,
      PACKET_FAST,
      {COMPANY(381),
-      UINT8_FIELD("Field 4"),
-      UINT8_FIELD("Field 5"),
-      SIMPLE_DESC_FIELD("Timestamp", BYTES(4), "Increasing field, what else can it be?"),
-      END_OF_FIELDS}}
+      LOOKUP_FIELDTYPE_FIELD("Key", 12, BANDG_KEY_VALUE),
+      SIMPLE_DESC_FIELD("Length", 4, "Length of field 7"),
+      KEY_VALUE_FIELD("Value", "Data value"),
+      END_OF_FIELDS},
+     .repeatingField1 = UINT8_MAX,
+     .repeatingCount1 = 3,
+     .repeatingStart1 = 4,
+     .interval        = 1000,
+     .explanation     = "Contains any number of key/value pairs, sent by various B&G devices such as MFDs and Sailing Processors."}
 
     /* M/V Dirona */
     ,
@@ -6319,6 +6508,13 @@ Pgn pgnList[] = {
       UINT8_FIELD("Field 7"),
       UINT16_FIELD("Field 8"),
       END_OF_FIELDS}}
+
+    ,
+    {"Navico: Unknown 2",
+     130825,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(275), BINARY_FIELD("Data", BYTES(10), ""), END_OF_FIELDS}}
 
     /* Uwe Lovas has seen this from EP-70R */
     ,
@@ -6351,6 +6547,20 @@ Pgn pgnList[] = {
      PACKET_INCOMPLETE | PACKET_NOT_SEEN,
      PACKET_FAST,
      {COMPANY(1857), END_OF_FIELDS}}
+
+    ,
+    {"B&G: User and Remote rename",
+     130833,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(381),
+      LOOKUP_FIELDTYPE_FIELD("Data Type", 12, BANDG_KEY_VALUE),
+      SIMPLE_DESC_FIELD("Length", 4, "Length of field 8"),
+      RESERVED_FIELD(BYTES(1)),
+      LOOKUP_FIELD("Decimals", 8, BANDG_DECIMALS),
+      STRING_FIX_FIELD("Short name", BYTES(8)),
+      STRING_FIX_FIELD("Long name", BYTES(16)),
+      END_OF_FIELDS}}
 
     ,
     {"Simnet: Engine and Tank Configuration",
@@ -6519,71 +6729,41 @@ Pgn pgnList[] = {
      {COMPANY(1857), END_OF_FIELDS}}
 
     ,
-    {"Simnet: Compass Heading Offset",
+    {"Furuno: Multi Sats In View Extended", 130845, PACKET_INCOMPLETE, PACKET_FAST, {COMPANY(1855), END_OF_FIELDS}}
+
+    ,
+    {"Simnet: Key Value",
      130845,
      PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
-      SIMPLE_FIELD("Message ID", 6),
-      LOOKUP_FIELD("Repeat Indicator", 2, REPEAT_INDICATOR),
-      SIMPLE_FIELD("Unused", BYTES(3)),
-      MATCH_LOOKUP_FIELD("Type", BYTES(2), 0, SIMRAD_TYPE),
-      UINT16_FIELD("Unused B"),
-      ANGLE_I16_FIELD("Angle", NULL),
-      UINT16_FIELD("Unused C"),
-      END_OF_FIELDS}}
+      UINT8_DESC_FIELD("Address", "NMEA 2000 address of commanded device"),
+      LOOKUP_FIELD("Repeat Indicator", BYTES(1), REPEAT_INDICATOR),
+      LOOKUP_FIELD("Display Group", BYTES(1), SIMNET_DISPLAY_GROUP),
+      RESERVED_FIELD(BYTES(1)),
+      LOOKUP_FIELDTYPE_FIELD("Key", BYTES(2), SIMNET_KEY_VALUE),
+      SPARE_FIELD(BYTES(1)),
+      SIMPLE_DESC_FIELD("MinLength", BYTES(1), "Length of data field"),
+      KEY_VALUE_FIELD("Value", "Data value"),
+      END_OF_FIELDS},
+     .interval = UINT16_MAX}
 
     ,
-    {"Furuno: Multi Sats In View Extended", 130845, PACKET_INCOMPLETE, PACKET_FAST, {COMPANY(1855), END_OF_FIELDS}}
-
-    ,
-    {"Simnet: Compass Local Field",
-     130845,
-     PACKET_INCOMPLETE | PACKET_NOT_SEEN,
+    {"Simnet: Parameter Set",
+     130846,
+     PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
-      SIMPLE_FIELD("Message ID", 6),
-      LOOKUP_FIELD("Repeat Indicator", 2, REPEAT_INDICATOR),
-      SIMPLE_FIELD("Unused", BYTES(3)),
-      MATCH_LOOKUP_FIELD("Type", BYTES(2), 768, SIMRAD_TYPE),
-      UINT16_FIELD("Unused B"),
-      PERCENTAGE_U16_FIELD("Local field"),
-      UINT16_FIELD("Unused C"),
-      END_OF_FIELDS}}
-
-    ,
-    {"Simnet: Compass Field Angle",
-     130845,
-     PACKET_INCOMPLETE | PACKET_NOT_SEEN,
-     PACKET_FAST,
-     {COMPANY(1857),
-      SIMPLE_FIELD("Message ID", 6),
-      LOOKUP_FIELD("Repeat Indicator", 2, REPEAT_INDICATOR),
-      SIMPLE_FIELD("Unused", BYTES(3)),
-      MATCH_LOOKUP_FIELD("Type", BYTES(2), 1024, SIMRAD_TYPE),
-      UINT16_FIELD("Unused B"),
-      ANGLE_I16_FIELD("Field angle", NULL),
-      UINT16_FIELD("Unused C"),
-      END_OF_FIELDS}}
-
-    ,
-    {"Simnet: Parameter Handle",
-     130845,
-     PACKET_INCOMPLETE | PACKET_NOT_SEEN,
-     PACKET_FAST,
-     {COMPANY(1857),
-      SIMPLE_FIELD("Message ID", 6),
-      LOOKUP_FIELD("Repeat Indicator", 2, REPEAT_INDICATOR),
-      UINT8_FIELD("D"),
-      UINT8_FIELD("Group"),
-      UINT8_FIELD("F"),
-      UINT8_FIELD("G"),
-      UINT8_FIELD("H"),
-      UINT8_FIELD("I"),
-      UINT8_FIELD("J"),
-      LOOKUP_FIELD("Backlight", BYTES(1), SIMNET_BACKLIGHT_LEVEL),
-      UINT16_FIELD("L"),
-      END_OF_FIELDS}}
+      UINT8_DESC_FIELD("Address", "NMEA 2000 address of commanded device"),
+      UINT8_DESC_FIELD("B", "00, 01 or FF observed"),
+      LOOKUP_FIELD("Display Group", BYTES(1), SIMNET_DISPLAY_GROUP),
+      UINT16_DESC_FIELD("D", "Various values observed"),
+      LOOKUP_FIELDTYPE_FIELD("Key", BYTES(2), SIMNET_KEY_VALUE),
+      SPARE_FIELD(BYTES(1)),
+      SIMPLE_DESC_FIELD("Length", BYTES(1), "Length of data field"),
+      KEY_VALUE_FIELD("Value", "Data value"),
+      END_OF_FIELDS},
+     .interval = UINT16_MAX}
 
     ,
     {"Furuno: Motion Sensor Status Extended", 130846, PACKET_INCOMPLETE, PACKET_FAST, {COMPANY(1855), END_OF_FIELDS}}
@@ -6602,12 +6782,28 @@ Pgn pgnList[] = {
       END_OF_FIELDS}}
 
     ,
+    {"Simnet: AP Command",
+     130850,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(1857),
+      UINT8_DESC_FIELD("Address", "NMEA 2000 address of commanded device"),
+      RESERVED_FIELD(BYTES(1)),
+      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 255, SIMNET_EVENT_COMMAND),
+      LOOKUP_FIELD("AP status", BYTES(1), SIMNET_AP_STATUS),
+      LOOKUP_FIELD("AP Command", BYTES(1), SIMNET_AP_EVENTS),
+      SPARE_FIELD(BYTES(1)),
+      LOOKUP_FIELD("Direction", BYTES(1), SIMNET_DIRECTION),
+      ANGLE_U16_FIELD("Angle", "Commanded angle change"),
+      END_OF_FIELDS}}
+
+    ,
     {"Simnet: Event Command: AP command",
      130850,
      PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
-      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 2, SIMRAD_EVENT_COMMAND),
+      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 2, SIMNET_EVENT_COMMAND),
       UINT16_FIELD("Unused A"),
       UINT8_FIELD("Controlling Device"),
       LOOKUP_FIELD("Event", BYTES(1), SIMNET_AP_EVENTS),
@@ -6618,19 +6814,22 @@ Pgn pgnList[] = {
       END_OF_FIELDS}}
 
     ,
-    {"Simnet: Event Command: Alarm?",
+    {"Simnet: Alarm",
      130850,
      PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
-      UINT16_FIELD("A"),
-      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 1, SIMRAD_EVENT_COMMAND),
-      UINT8_FIELD("C"),
-      UINT16_FIELD("Alarm"),
+      UINT8_DESC_FIELD("Address", "NMEA 2000 address of commanded device"),
+      RESERVED_FIELD(BYTES(1)),
+      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 1, SIMNET_EVENT_COMMAND),
+      RESERVED_FIELD(BYTES(1)),
+      LOOKUP_FIELD("Alarm", BYTES(2), SIMNET_ALARM),
       UINT16_FIELD("Message ID"),
       UINT8_FIELD("F"),
       UINT8_FIELD("G"),
-      END_OF_FIELDS}}
+      END_OF_FIELDS},
+     .interval    = UINT16_MAX,
+     .explanation = "There may follow a PGN 130856 'Simnet: Alarm Text' message with a textual explanation of the alarm"}
 
     ,
     {"Simnet: Event Reply: AP command",
@@ -6638,9 +6837,9 @@ Pgn pgnList[] = {
      PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
-      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 2, SIMRAD_EVENT_COMMAND),
+      MATCH_LOOKUP_FIELD("Proprietary ID", BYTES(1), 2, SIMNET_EVENT_COMMAND),
       UINT16_FIELD("B"),
-      UINT8_FIELD("Controlling Device"),
+      UINT8_DESC_FIELD("Address", "NMEA 2000 address of controlling device"),
       LOOKUP_FIELD("Event", BYTES(1), SIMNET_AP_EVENTS),
       UINT8_FIELD("C"),
       LOOKUP_FIELD("Direction", BYTES(1), SIMNET_DIRECTION),
@@ -6651,14 +6850,32 @@ Pgn pgnList[] = {
     ,
     {"Simnet: Alarm Message",
      130856,
-     PACKET_INCOMPLETE | PACKET_NOT_SEEN,
+     PACKET_INCOMPLETE,
      PACKET_FAST,
      {COMPANY(1857),
       UINT16_FIELD("Message ID"),
       UINT8_FIELD("B"),
       UINT8_FIELD("C"),
       STRING_FIX_FIELD("Text", BYTES(FASTPACKET_MAX_SIZE)),
-      END_OF_FIELDS}}
+      END_OF_FIELDS},
+     .interval    = UINT16_MAX,
+     .explanation = "Usually accompanied by a PGN 130850 'Simnet: Alarm' message with the same information in binary form."}
+
+    ,
+    {"Simnet: AP Unknown 4",
+     130860,
+     PACKET_INCOMPLETE,
+     PACKET_FAST,
+     {COMPANY(1857),
+      UINT8_FIELD("A"),
+      SIMPLE_SIGNED_FIELD("B", BYTES(4)),
+      SIMPLE_SIGNED_FIELD("C", BYTES(4)),
+      UINT32_FIELD("D"),
+      SIMPLE_SIGNED_FIELD("E", BYTES(4)),
+      UINT32_FIELD("F"),
+      END_OF_FIELDS},
+     .interval    = 1000,
+     .explanation = "Seen as sent by AC-42 and H5000 AP only so far."}
 
     ,
     {"Airmar: Additional Weather Data",
