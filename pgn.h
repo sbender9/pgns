@@ -63,10 +63,10 @@ struct LookupInfo
   {
     const char *(*pair)(size_t val);
     const char *(*triplet)(size_t val1, size_t val2);
-    void        (*pairEnumerator)(EnumPairCallback);
-    void        (*bitEnumerator)(BitPairCallback);
-    void        (*tripletEnumerator)(EnumTripletCallback);
-    void        (*fieldtypeEnumerator)(EnumFieldtypeCallback);
+    void (*pairEnumerator)(EnumPairCallback);
+    void (*bitEnumerator)(BitPairCallback);
+    void (*tripletEnumerator)(EnumTripletCallback);
+    void (*fieldtypeEnumerator)(EnumFieldtypeCallback);
   } function;
   uint8_t val1Order; // Which field is the first field in a tripletEnumerator
   size_t  size;      // Used in analyzer only
@@ -116,355 +116,316 @@ typedef struct
 
 #include "fieldtype.h"
 
-#define END_OF_FIELDS \
-  {                   \
-    0                 \
-  }
+#define END_OF_FIELDS {0}
 
-#define LOOKUP_FIELD(nam, len, typ)                                                               \
-  {                                                                                               \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR, \
-    LOOKUP_PAIR_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP"             \
-  }
+#define LOOKUP_FIELD(nam, len, typ)       \
+  {.name              = nam,              \
+   .size              = len,              \
+   .resolution        = 1,                \
+   .hasSign           = false,            \
+   .lookup.type       = LOOKUP_TYPE_PAIR, \
+   LOOKUP_PAIR_MEMBER = lookup##typ,      \
+   .lookup.name       = xstr(typ),        \
+   .fieldType         = "LOOKUP"}
 
-#define LOOKUP_FIELDTYPE_FIELD(nam, len, typ)                                                          \
-  {                                                                                                    \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_FIELDTYPE, \
-    LOOKUP_FIELDTYPE_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "FIELDTYPE_LOOKUP"   \
-  }
+#define LOOKUP_FIELDTYPE_FIELD(nam, len, typ)       \
+  {.name                   = nam,                   \
+   .size                   = len,                   \
+   .resolution             = 1,                     \
+   .hasSign                = false,                 \
+   .lookup.type            = LOOKUP_TYPE_FIELDTYPE, \
+   LOOKUP_FIELDTYPE_MEMBER = lookup##typ,           \
+   .lookup.name            = xstr(typ),             \
+   .fieldType              = "FIELDTYPE_LOOKUP"}
 
-#define LOOKUP_TRIPLET_FIELD(nam, len, typ, desc, order)                                                                      \
-  {                                                                                                                           \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_TRIPLET,                          \
-    LOOKUP_TRIPLET_MEMBER = lookup##typ, .lookup.name = xstr(typ), .lookup.val1Order = order, .fieldType = "INDIRECT_LOOKUP", \
-    .description = desc                                                                                                       \
-  }
+#define LOOKUP_TRIPLET_FIELD(nam, len, typ, desc, order) \
+  {.name                 = nam,                          \
+   .size                 = len,                          \
+   .resolution           = 1,                            \
+   .hasSign              = false,                        \
+   .lookup.type          = LOOKUP_TYPE_TRIPLET,          \
+   LOOKUP_TRIPLET_MEMBER = lookup##typ,                  \
+   .lookup.name          = xstr(typ),                    \
+   .lookup.val1Order     = order,                        \
+   .fieldType            = "INDIRECT_LOOKUP",            \
+   .description          = desc}
 
-#define LOOKUP_FIELD_DESC(nam, len, typ, desc)                                                             \
-  {                                                                                                        \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR,          \
-    LOOKUP_PAIR_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP", .description = desc \
-  }
+#define LOOKUP_FIELD_DESC(nam, len, typ, desc) \
+  {.name              = nam,                   \
+   .size              = len,                   \
+   .resolution        = 1,                     \
+   .hasSign           = false,                 \
+   .lookup.type       = LOOKUP_TYPE_PAIR,      \
+   LOOKUP_PAIR_MEMBER = lookup##typ,           \
+   .lookup.name       = xstr(typ),             \
+   .fieldType         = "LOOKUP",              \
+   .description       = desc}
 
-#define BITLOOKUP_FIELD(nam, len, typ)                                                                                            \
-  {                                                                                                                               \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_BIT, LOOKUP_BIT_MEMBER = lookup##typ, \
-    .lookup.name = xstr(typ), .fieldType = "BITLOOKUP"                                                                            \
-  }
+#define BITLOOKUP_FIELD(nam, len, typ)  \
+  {.name             = nam,             \
+   .size             = len,             \
+   .resolution       = 1,               \
+   .hasSign          = false,           \
+   .lookup.type      = LOOKUP_TYPE_BIT, \
+   LOOKUP_BIT_MEMBER = lookup##typ,     \
+   .lookup.name      = xstr(typ),       \
+   .fieldType        = "BITLOOKUP"}
 
-#define FIELDTYPE_LOOKUP(nam, len, typ)                                                                   \
-  {                                                                                                       \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_FIELDTYPE,    \
-    LOOKUP_FIELDTYPE_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP_TYPE_FIELDTYPE" \
-  }
+#define FIELDTYPE_LOOKUP(nam, len, typ)             \
+  {.name                   = nam,                   \
+   .size                   = len,                   \
+   .resolution             = 1,                     \
+   .hasSign                = false,                 \
+   .lookup.type            = LOOKUP_TYPE_FIELDTYPE, \
+   LOOKUP_FIELDTYPE_MEMBER = lookup##typ,           \
+   .lookup.name            = xstr(typ),             \
+   .fieldType              = "LOOKUP_TYPE_FIELDTYPE"}
 
-#define UNKNOWN_LOOKUP_FIELD(nam, len)                                                                                  \
-  {                                                                                                                     \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR, .fieldType = "LOOKUP" \
-  }
+#define UNKNOWN_LOOKUP_FIELD(nam, len) \
+  {.name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR, .fieldType = "LOOKUP"}
 
-#define SPARE_NAMED_FIELD(nam, len)                                   \
-  {                                                                   \
-    .name = nam, .size = (len), .resolution = 1, .fieldType = "SPARE" \
-  }
+#define SPARE_NAMED_FIELD(nam, len) {.name = nam, .size = (len), .resolution = 1, .fieldType = "SPARE"}
 
 #define SPARE_FIELD(len) SPARE_NAMED_FIELD("Spare", len)
 
-#define RESERVED_FIELD(len)                                                     \
-  {                                                                             \
-    .name = "Reserved", .size = (len), .resolution = 1, .fieldType = "RESERVED" \
-  }
+#define RESERVED_FIELD(len) {.name = "Reserved", .size = (len), .resolution = 1, .fieldType = "RESERVED"}
 
-#define RESERVED_PROP_FIELD(len, desc)                                                                                    \
-  {                                                                                                                       \
-    .name = "Reserved", .size = (len), .resolution = 1, .description = desc, .fieldType = "RESERVED", .proprietary = true \
-  }
+#define RESERVED_PROP_FIELD(len, desc) \
+  {.name = "Reserved", .size = (len), .resolution = 1, .description = desc, .fieldType = "RESERVED", .proprietary = true}
 
-#define BINARY_FIELD(nam, len, desc)                                                        \
-  {                                                                                         \
-    .name = nam, .size = (len), .resolution = 1, .description = desc, .fieldType = "BINARY" \
-  }
+#define BINARY_FIELD(nam, len, desc) {.name = nam, .size = (len), .resolution = 1, .description = desc, .fieldType = "BINARY"}
 
-#define BINARY_UNIT_FIELD(nam, len, unt, desc, prop)                                                                          \
-  {                                                                                                                           \
-    .name = nam, .size = (len), .resolution = 1, .unit = unt, .description = desc, .proprietary = prop, .fieldType = "BINARY" \
-  }
+#define BINARY_UNIT_FIELD(nam, len, unt, desc, prop) \
+  {.name = nam, .size = (len), .resolution = 1, .unit = unt, .description = desc, .proprietary = prop, .fieldType = "BINARY"}
 
-#define LATITUDE_I32_FIELD(nam)                                                                                 \
-  {                                                                                                             \
-    .name = nam, .size = BYTES(4), .resolution = 1e-7, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX32" \
-  }
+#define LATITUDE_I32_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = 1e-7, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX32"}
 
-#define LATITUDE_I64_FIELD(nam)                                                                                  \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(8), .resolution = 1e-16, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX64" \
-  }
+#define LATITUDE_I64_FIELD(nam) \
+  {.name = nam, .size = BYTES(8), .resolution = 1e-16, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX64"}
 
-#define LONGITUDE_I32_FIELD(nam)                                                                                \
-  {                                                                                                             \
-    .name = nam, .size = BYTES(4), .resolution = 1e-7, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX32" \
-  }
+#define LONGITUDE_I32_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = 1e-7, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX32"}
 
-#define LONGITUDE_I64_FIELD(nam)                                                                                 \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(8), .resolution = 1e-16, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX64" \
-  }
+#define LONGITUDE_I64_FIELD(nam) \
+  {.name = nam, .size = BYTES(8), .resolution = 1e-16, .hasSign = true, .unit = "deg", .fieldType = "GEO_FIX64"}
 
-#define ANGLE_U16_FIELD(nam, desc)                                                                                  \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = RES_RADIANS, .hasSign = false, .unit = "rad", .description = desc, \
-    .fieldType = "ANGLE_UFIX16"                                                                                     \
-  }
+#define ANGLE_U16_FIELD(nam, desc) \
+  {.name        = nam,             \
+   .size        = BYTES(2),        \
+   .resolution  = RES_RADIANS,     \
+   .hasSign     = false,           \
+   .unit        = "rad",           \
+   .description = desc,            \
+   .fieldType   = "ANGLE_UFIX16"}
 
-#define ANGLE_I16_FIELD(nam, desc)                                                                                 \
-  {                                                                                                                \
-    .name = nam, .size = BYTES(2), .resolution = RES_RADIANS, .hasSign = true, .unit = "rad", .description = desc, \
-    .fieldType = "ANGLE_FIX16"                                                                                     \
-  }
+#define ANGLE_I16_FIELD(nam, desc) \
+  {.name        = nam,             \
+   .size        = BYTES(2),        \
+   .resolution  = RES_RADIANS,     \
+   .hasSign     = true,            \
+   .unit        = "rad",           \
+   .description = desc,            \
+   .fieldType   = "ANGLE_FIX16"}
 
-#define INT32_FIELD(nam, desc)                                                                                 \
-  {                                                                                                            \
-    .name = nam, .size = BYTES(4), .resolution = 1, .hasSign = true, .fieldType = "INT32", .description = desc \
-  }
+#define INT32_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(4), .resolution = 1, .hasSign = true, .fieldType = "INT32", .description = desc}
 
 // A whole bunch of different NUMBER fields, with variing resolutions
 
-#define UNSIGNED_ALMANAC_PARAMETER_FIELD(nam, len, res, unt, desc)                                   \
-  {                                                                                                  \
-    .name = nam, .size = len, .resolution = res, .hasSign = false, .unit = unt, .description = desc, \
-    .fieldType = "UNSIGNED_ALMANAC_PARAMETER"                                                        \
-  }
+#define UNSIGNED_ALMANAC_PARAMETER_FIELD(nam, len, res, unt, desc) \
+  {.name        = nam,                                             \
+   .size        = len,                                             \
+   .resolution  = res,                                             \
+   .hasSign     = false,                                           \
+   .unit        = unt,                                             \
+   .description = desc,                                            \
+   .fieldType   = "UNSIGNED_ALMANAC_PARAMETER"}
 
-#define SIGNED_ALMANAC_PARAMETER_FIELD(nam, len, res, unt, desc)                                    \
-  {                                                                                                 \
-    .name = nam, .size = len, .resolution = res, .hasSign = true, .unit = unt, .description = desc, \
-    .fieldType = "SIGNED_ALMANAC_PARAMETER"                                                         \
-  }
+#define SIGNED_ALMANAC_PARAMETER_FIELD(nam, len, res, unt, desc) \
+  {.name        = nam,                                           \
+   .size        = len,                                           \
+   .resolution  = res,                                           \
+   .hasSign     = true,                                          \
+   .unit        = unt,                                           \
+   .description = desc,                                          \
+   .fieldType   = "SIGNED_ALMANAC_PARAMETER"}
 
-#define DILUTION_OF_PRECISION_UFIX16_FIELD(nam, desc)                                                                   \
-  {                                                                                                                     \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .fieldType = "DILUTION_OF_PRECISION_UFIX16", .description = desc \
-  }
+#define DILUTION_OF_PRECISION_UFIX16_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .fieldType = "DILUTION_OF_PRECISION_UFIX16", .description = desc}
 
-#define DILUTION_OF_PRECISION_FIX16_FIELD(nam, desc)                                                                \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .fieldType = "DILUTION_OF_PRECISION_FIX16", \
-    .description = desc                                                                                             \
-  }
+#define DILUTION_OF_PRECISION_FIX16_FIELD(nam, desc) \
+  {.name        = nam,                               \
+   .size        = BYTES(2),                          \
+   .resolution  = 0.01,                              \
+   .hasSign     = true,                              \
+   .fieldType   = "DILUTION_OF_PRECISION_FIX16",     \
+   .description = desc}
 
-#define SIGNALTONOISERATIO_UFIX16_FIELD(nam, desc)                                                                   \
-  {                                                                                                                  \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .fieldType = "SIGNALTONOISERATIO_UFIX16", .description = desc \
-  }
+#define SIGNALTONOISERATIO_UFIX16_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .fieldType = "SIGNALTONOISERATIO_UFIX16", .description = desc}
 
-#define SIGNALTONOISERATIO_FIX16_FIELD(nam, desc)                                                                \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .fieldType = "SIGNALTONOISERATIO_FIX16", \
-    .description = desc                                                                                          \
-  }
+#define SIGNALTONOISERATIO_FIX16_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .fieldType = "SIGNALTONOISERATIO_FIX16", .description = desc}
 
-#define VERSION_FIELD(nam)                                                     \
-  {                                                                            \
-    .name = nam, .size = BYTES(2), .resolution = 0.001, .fieldType = "VERSION" \
-  }
+#define VERSION_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 0.001, .fieldType = "VERSION"}
 
-#define VOLTAGE_U16_V_FIELD(nam)                                                                   \
-  {                                                                                                \
-    .name = nam, .size = BYTES(2), .resolution = 1.0, .unit = "V", .fieldType = "VOLTAGE_UFIX16_V" \
-  }
+#define VOLTAGE_U16_V_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1.0, .unit = "V", .fieldType = "VOLTAGE_UFIX16_V"}
 
-#define VOLTAGE_U16_10MV_FIELD(nam)                                                                    \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "V", .fieldType = "VOLTAGE_UFIX16_10MV" \
-  }
+#define VOLTAGE_U16_10MV_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "V", .fieldType = "VOLTAGE_UFIX16_10MV"}
 
-#define VOLTAGE_U16_50MV_FIELD(nam)                                                                    \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 0.05, .unit = "V", .fieldType = "VOLTAGE_UFIX16_50MV" \
-  }
+#define VOLTAGE_U16_50MV_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.05, .unit = "V", .fieldType = "VOLTAGE_UFIX16_50MV"}
 
-#define VOLTAGE_U16_100MV_FIELD(nam)                                                                   \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "V", .fieldType = "VOLTAGE_UFIX16_100MV" \
-  }
+#define VOLTAGE_U16_100MV_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "V", .fieldType = "VOLTAGE_UFIX16_100MV"}
 
-#define VOLTAGE_UFIX8_200MV_FIELD(nam)                                                                \
-  {                                                                                                   \
-    .name = nam, .size = BYTES(1), .resolution = 0.2, .unit = "V", .fieldType = "VOLTAGE_UFIX8_200MV" \
-  }
+#define VOLTAGE_UFIX8_200MV_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .resolution = 0.2, .unit = "V", .fieldType = "VOLTAGE_UFIX8_200MV"}
 
-#define VOLTAGE_I16_10MV_FIELD(nam)                                                                                    \
-  {                                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "V", .hasSign = true, .fieldType = "VOLTAGE_FIX16_10MV" \
-  }
+#define VOLTAGE_I16_10MV_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "V", .hasSign = true, .fieldType = "VOLTAGE_FIX16_10MV"}
 
-#define RADIO_FREQUENCY_FIELD(nam, res)                                                                   \
-  {                                                                                                       \
-    .name = nam, .size = BYTES(4), .resolution = res, .unit = "Hz", .fieldType = "RADIO_FREQUENCY_UFIX32" \
-  }
+#define RADIO_FREQUENCY_FIELD(nam, res) \
+  {.name = nam, .size = BYTES(4), .resolution = res, .unit = "Hz", .fieldType = "RADIO_FREQUENCY_UFIX32"}
 
-#define FREQUENCY_FIELD(nam, res)                                                                   \
-  {                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = res, .unit = "Hz", .fieldType = "FREQUENCY_UFIX16" \
-  }
+#define FREQUENCY_FIELD(nam, res) {.name = nam, .size = BYTES(2), .resolution = res, .unit = "Hz", .fieldType = "FREQUENCY_UFIX16"}
 
-#define SPEED_I16_MM_FIELD(nam)                                                                                       \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(2), .resolution = 0.001, .unit = "m/s", .hasSign = true, .fieldType = "SPEED_FIX16_MM" \
-  }
+#define SPEED_I16_MM_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.001, .unit = "m/s", .hasSign = true, .fieldType = "SPEED_FIX16_MM"}
 
-#define SPEED_I16_CM_FIELD(nam)                                                                                      \
-  {                                                                                                                  \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "m/s", .hasSign = true, .fieldType = "SPEED_FIX16_CM" \
-  }
+#define SPEED_I16_CM_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "m/s", .hasSign = true, .fieldType = "SPEED_FIX16_CM"}
 
-#define SPEED_U16_CM_FIELD(nam)                                                                      \
-  {                                                                                                  \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "m/s", .fieldType = "SPEED_UFIX16_CM" \
-  }
+#define SPEED_U16_CM_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "m/s", .fieldType = "SPEED_UFIX16_CM"}
 
-#define SPEED_U16_DM_FIELD(nam, desc)                                                                                    \
-  {                                                                                                                      \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "m/s", .fieldType = "SPEED_UFIX16_DM", .description = desc \
-  }
+#define SPEED_U16_DM_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "m/s", .fieldType = "SPEED_UFIX16_DM", .description = desc}
 
-#define DISTANCE_FIX16_M_FIELD(nam, desc)                                                              \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 1, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX16_M"                                                                    \
-  }
+#define DISTANCE_FIX16_M_FIELD(nam, desc) \
+  {.name        = nam,                    \
+   .size        = BYTES(2),               \
+   .resolution  = 1,                      \
+   .hasSign     = true,                   \
+   .unit        = "m",                    \
+   .description = desc,                   \
+   .fieldType   = "DISTANCE_FIX16_M"}
 
-#define DISTANCE_FIX16_CM_FIELD(nam, desc)                                                                \
-  {                                                                                                       \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX16_CM"                                                                      \
-  }
+#define DISTANCE_FIX16_CM_FIELD(nam, desc) \
+  {.name        = nam,                     \
+   .size        = BYTES(2),                \
+   .resolution  = 0.01,                    \
+   .hasSign     = true,                    \
+   .unit        = "m",                     \
+   .description = desc,                    \
+   .fieldType   = "DISTANCE_FIX16_CM"}
 
-#define DISTANCE_FIX16_MM_FIELD(nam, desc)                                                                 \
-  {                                                                                                        \
-    .name = nam, .size = BYTES(2), .resolution = 0.001, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX16_MM"                                                                       \
-  }
+#define DISTANCE_FIX16_MM_FIELD(nam, desc) \
+  {.name        = nam,                     \
+   .size        = BYTES(2),                \
+   .resolution  = 0.001,                   \
+   .hasSign     = true,                    \
+   .unit        = "m",                     \
+   .description = desc,                    \
+   .fieldType   = "DISTANCE_FIX16_MM"}
 
-#define DISTANCE_FIX32_MM_FIELD(nam, desc)                                                                 \
-  {                                                                                                        \
-    .name = nam, .size = BYTES(4), .resolution = 0.001, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX32_MM"                                                                       \
-  }
+#define DISTANCE_FIX32_MM_FIELD(nam, desc) \
+  {.name        = nam,                     \
+   .size        = BYTES(4),                \
+   .resolution  = 0.001,                   \
+   .hasSign     = true,                    \
+   .unit        = "m",                     \
+   .description = desc,                    \
+   .fieldType   = "DISTANCE_FIX32_MM"}
 
-#define DISTANCE_FIX32_CM_FIELD(nam, desc)                                                                \
-  {                                                                                                       \
-    .name = nam, .size = BYTES(4), .resolution = 0.01, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX32_CM"                                                                      \
-  }
+#define DISTANCE_FIX32_CM_FIELD(nam, desc) \
+  {.name        = nam,                     \
+   .size        = BYTES(4),                \
+   .resolution  = 0.01,                    \
+   .hasSign     = true,                    \
+   .unit        = "m",                     \
+   .description = desc,                    \
+   .fieldType   = "DISTANCE_FIX32_CM"}
 
-#define DISTANCE_FIX64_FIELD(nam, desc)                                                                   \
-  {                                                                                                       \
-    .name = nam, .size = BYTES(8), .resolution = 1e-6, .hasSign = true, .unit = "m", .description = desc, \
-    .fieldType = "DISTANCE_FIX64"                                                                         \
-  }
+#define DISTANCE_FIX64_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(8),             \
+   .resolution  = 1e-6,                 \
+   .hasSign     = true,                 \
+   .unit        = "m",                  \
+   .description = desc,                 \
+   .fieldType   = "DISTANCE_FIX64"}
 
-#define LENGTH_UFIX8_DAM_FIELD(nam, desc)                                                                       \
-  {                                                                                                             \
-    .name = nam, .size = 8, .resolution = 10, .unit = "m", .fieldType = "LENGTH_UFIX8_DAM", .description = desc \
-  }
+#define LENGTH_UFIX8_DAM_FIELD(nam, desc) \
+  {.name = nam, .size = 8, .resolution = 10, .unit = "m", .fieldType = "LENGTH_UFIX8_DAM", .description = desc}
 
-#define LENGTH_UFIX16_CM_FIELD(nam)                                                           \
-  {                                                                                           \
-    .name = nam, .size = 16, .resolution = 0.01, .unit = "m", .fieldType = "LENGTH_UFIX16_CM" \
-  }
+#define LENGTH_UFIX16_CM_FIELD(nam) {.name = nam, .size = 16, .resolution = 0.01, .unit = "m", .fieldType = "LENGTH_UFIX16_CM"}
 
-#define LENGTH_UFIX16_DM_FIELD(nam)                                                          \
-  {                                                                                          \
-    .name = nam, .size = 16, .resolution = 0.1, .unit = "m", .fieldType = "LENGTH_UFIX16_DM" \
-  }
+#define LENGTH_UFIX16_DM_FIELD(nam) {.name = nam, .size = 16, .resolution = 0.1, .unit = "m", .fieldType = "LENGTH_UFIX16_DM"}
 
-#define LENGTH_UFIX32_M_FIELD(nam, desc)                                                                       \
-  {                                                                                                            \
-    .name = nam, .size = 32, .resolution = 1, .unit = "m", .fieldType = "LENGTH_UFIX32_M", .description = desc \
-  }
+#define LENGTH_UFIX32_M_FIELD(nam, desc) \
+  {.name = nam, .size = 32, .resolution = 1, .unit = "m", .fieldType = "LENGTH_UFIX32_M", .description = desc}
 
-#define LENGTH_UFIX32_CM_FIELD(nam, desc)                                                                          \
-  {                                                                                                                \
-    .name = nam, .size = 32, .resolution = 0.01, .unit = "m", .fieldType = "LENGTH_UFIX32_CM", .description = desc \
-  }
+#define LENGTH_UFIX32_CM_FIELD(nam, desc) \
+  {.name = nam, .size = 32, .resolution = 0.01, .unit = "m", .fieldType = "LENGTH_UFIX32_CM", .description = desc}
 
-#define LENGTH_UFIX32_MM_FIELD(nam)                                                            \
-  {                                                                                            \
-    .name = nam, .size = 32, .resolution = 0.001, .unit = "m", .fieldType = "LENGTH_UFIX32_MM" \
-  }
+#define LENGTH_UFIX32_MM_FIELD(nam) {.name = nam, .size = 32, .resolution = 0.001, .unit = "m", .fieldType = "LENGTH_UFIX32_MM"}
 
-#define CURRENT_UFIX8_A_FIELD(nam)                                                              \
-  {                                                                                             \
-    .name = nam, .size = BYTES(1), .resolution = 1, .unit = "A", .fieldType = "CURRENT_UFIX8_A" \
-  }
+#define CURRENT_UFIX8_A_FIELD(nam) {.name = nam, .size = BYTES(1), .resolution = 1, .unit = "A", .fieldType = "CURRENT_UFIX8_A"}
 
-#define CURRENT_UFIX16_A_FIELD(nam)                                                              \
-  {                                                                                              \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "A", .fieldType = "CURRENT_UFIX16_A" \
-  }
+#define CURRENT_UFIX16_A_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "A", .fieldType = "CURRENT_UFIX16_A"}
 
-#define CURRENT_UFIX16_DA_FIELD(nam)                                                                \
-  {                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "A", .fieldType = "CURRENT_UFIX16_DA" \
-  }
+#define CURRENT_UFIX16_DA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "A", .fieldType = "CURRENT_UFIX16_DA"}
 
-#define CURRENT_FIX16_DA_FIELD(nam)                                                                                 \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .hasSign = true, .unit = "A", .fieldType = "CURRENT_FIX16_DA" \
-  }
+#define CURRENT_FIX16_DA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .hasSign = true, .unit = "A", .fieldType = "CURRENT_FIX16_DA"}
 
-#define CURRENT_FIX24_CA_FIELD(nam)                                                                                  \
-  {                                                                                                                  \
-    .name = nam, .size = BYTES(3), .resolution = 0.01, .hasSign = true, .unit = "A", .fieldType = "CURRENT_FIX24_CA" \
-  }
+#define CURRENT_FIX24_CA_FIELD(nam) \
+  {.name = nam, .size = BYTES(3), .resolution = 0.01, .hasSign = true, .unit = "A", .fieldType = "CURRENT_FIX24_CA"}
 
-#define ELECTRIC_CHARGE_UFIX16_AH(nam)                    \
-  {                                                       \
-    .name = nam, .fieldType = "ELECTRIC_CHARGE_UFIX16_AH" \
-  }
+#define ELECTRIC_CHARGE_UFIX16_AH(nam) {.name = nam, .fieldType = "ELECTRIC_CHARGE_UFIX16_AH"}
 
-#define PEUKERT_FIELD(nam)                       \
-  {                                              \
-    .name = nam, .fieldType = "PEUKERT_EXPONENT" \
-  }
+#define PEUKERT_FIELD(nam) {.name = nam, .fieldType = "PEUKERT_EXPONENT"}
 
 // Fully defined NUMBER fields
 
-#define PGN_FIELD(nam, desc)                                                                \
-  {                                                                                         \
-    .name = nam, .size = BYTES(3), .resolution = 1, .fieldType = "PGN", .description = desc \
-  }
+#define PGN_FIELD(nam, desc) {.name = nam, .size = BYTES(3), .resolution = 1, .fieldType = "PGN", .description = desc}
 
-#define INSTANCE_FIELD                                                                               \
-  {                                                                                                  \
-    .name = "Instance", .size = BYTES(1), .resolution = 1, .description = NULL, .fieldType = "UINT8" \
-  }
+#define INSTANCE_FIELD {.name = "Instance", .size = BYTES(1), .resolution = 1, .description = NULL, .fieldType = "UINT8"}
 
-#define POWER_FACTOR_U16_FIELD                                                                                   \
-  {                                                                                                              \
-    .name = "Power factor", .size = BYTES(2), .resolution = 1 / 16384., .unit = "Cos Phi", .fieldType = "UFIX16" \
-  }
+#define POWER_FACTOR_U16_FIELD \
+  {.name = "Power factor", .size = BYTES(2), .resolution = 1 / 16384., .unit = "Cos Phi", .fieldType = "UFIX16"}
 
-#define POWER_FACTOR_U8_FIELD                                                                             \
-  {                                                                                                       \
-    .name = "Power factor", .size = BYTES(1), .resolution = 0.01, .unit = "Cos Phi", .fieldType = "UFIX8" \
-  }
+#define POWER_FACTOR_U8_FIELD \
+  {.name = "Power factor", .size = BYTES(1), .resolution = 0.01, .unit = "Cos Phi", .fieldType = "UFIX8"}
 
 // End of NUMBER fields
 
-#define MANUFACTURER_FIELD(unt, desc, prop)                                                                                      \
-  {                                                                                                                              \
-    .name = "Manufacturer Code", .size = 11, .resolution = 1, .description = desc, .unit = unt, .lookup.type = LOOKUP_TYPE_PAIR, \
-    LOOKUP_PAIR_MEMBER = lookupMANUFACTURER_CODE, .lookup.name = "MANUFACTURER_CODE", .proprietary = prop,                       \
-    .fieldType = "MANUFACTURER"                                                                                                  \
-  }
+#define MANUFACTURER_FIELD(unt, desc, prop)      \
+  {.name              = "Manufacturer Code",     \
+   .size              = 11,                      \
+   .resolution        = 1,                       \
+   .description       = desc,                    \
+   .unit              = unt,                     \
+   .lookup.type       = LOOKUP_TYPE_PAIR,        \
+   LOOKUP_PAIR_MEMBER = lookupMANUFACTURER_CODE, \
+   .lookup.name       = "MANUFACTURER_CODE",     \
+   .proprietary       = prop,                    \
+   .fieldType         = "MANUFACTURER"}
 
-#define INDUSTRY_FIELD(unt, desc, prop)                                                                                     \
-  {                                                                                                                         \
-    .name = "Industry Code", .size = 3, .resolution = 1, .unit = unt, .description = desc, .lookup.type = LOOKUP_TYPE_PAIR, \
-    LOOKUP_PAIR_MEMBER = lookupINDUSTRY_CODE, .lookup.name = "INDUSTRY_CODE", .proprietary = prop, .fieldType = "INDUSTRY"  \
-  }
+#define INDUSTRY_FIELD(unt, desc, prop)      \
+  {.name              = "Industry Code",     \
+   .size              = 3,                   \
+   .resolution        = 1,                   \
+   .unit              = unt,                 \
+   .description       = desc,                \
+   .lookup.type       = LOOKUP_TYPE_PAIR,    \
+   LOOKUP_PAIR_MEMBER = lookupINDUSTRY_CODE, \
+   .lookup.name       = "INDUSTRY_CODE",     \
+   .proprietary       = prop,                \
+   .fieldType         = "INDUSTRY"}
 
 #define MARINE_INDUSTRY_FIELD INDUSTRY_FIELD("=4", "Marine Industry", false)
 
@@ -477,399 +438,284 @@ typedef struct
       RESERVED_PROP_FIELD(2, "Only in PGN when Commanded PGN is proprietary"),     \
       INDUSTRY_FIELD(NULL, "Only in PGN when Commanded PGN is proprietary", true)
 
-#define INTEGER_DESC_FIELD(nam, len, desc)                         \
-  {                                                                \
-    .name = nam, .size = len, .resolution = 1, .description = desc \
-  }
+#define INTEGER_DESC_FIELD(nam, len, desc) {.name = nam, .size = len, .resolution = 1, .description = desc}
 
-#define INTEGER_UNIT_FIELD(nam, len, unt)                  \
-  {                                                        \
-    .name = nam, .size = len, .resolution = 1, .unit = unt \
-  }
+#define INTEGER_UNIT_FIELD(nam, len, unt) {.name = nam, .size = len, .resolution = 1, .unit = unt}
 
-#define SIGNED_INTEGER_UNIT_FIELD(nam, len, unt)                            \
-  {                                                                         \
-    .name = nam, .size = len, .resolution = 1, .unit = unt, .hasSign = true \
-  }
+#define SIGNED_INTEGER_UNIT_FIELD(nam, len, unt) {.name = nam, .size = len, .resolution = 1, .unit = unt, .hasSign = true}
 
 #define INTEGER_FIELD(nam, len) INTEGER_DESC_FIELD(nam, len, "")
 
-#define UINT8_DESC_FIELD(nam, desc)                                                           \
-  {                                                                                           \
-    .name = nam, .size = BYTES(1), .resolution = 1, .fieldType = "UINT8", .description = desc \
-  }
+#define UINT8_DESC_FIELD(nam, desc) {.name = nam, .size = BYTES(1), .resolution = 1, .fieldType = "UINT8", .description = desc}
 
-#define FIELD_INDEX(nam, desc)                                                                      \
-  {                                                                                                 \
-    .name = nam, .size = BYTES(1), .resolution = 1, .fieldType = "FIELD_INDEX", .description = desc \
-  }
+#define FIELD_INDEX(nam, desc) {.name = nam, .size = BYTES(1), .resolution = 1, .fieldType = "FIELD_INDEX", .description = desc}
 
 #define UINT8_FIELD(nam) UINT8_DESC_FIELD(nam, NULL)
 
-#define UINT16_DESC_FIELD(nam, desc)                                                           \
-  {                                                                                            \
-    .name = nam, .size = BYTES(2), .resolution = 1, .fieldType = "UINT16", .description = desc \
-  }
+#define UINT16_DESC_FIELD(nam, desc) {.name = nam, .size = BYTES(2), .resolution = 1, .fieldType = "UINT16", .description = desc}
 
 #define UINT16_FIELD(nam) UINT16_DESC_FIELD(nam, NULL)
 
-#define UINT32_DESC_FIELD(nam, desc)                                                           \
-  {                                                                                            \
-    .name = nam, .size = BYTES(4), .resolution = 1, .fieldType = "UINT32", .description = desc \
-  }
+#define UINT32_DESC_FIELD(nam, desc) {.name = nam, .size = BYTES(4), .resolution = 1, .fieldType = "UINT32", .description = desc}
 
 #define UINT32_FIELD(nam) UINT32_DESC_FIELD(nam, NULL)
 
-#define MATCH_LOOKUP_FIELD(nam, len, id, typ)                                                                \
-  {                                                                                                          \
-    .name = nam, .size = len, .resolution = 1, .hasSign = false, .lookup.type = LOOKUP_TYPE_PAIR,            \
-    LOOKUP_PAIR_MEMBER = lookup##typ, .lookup.name = xstr(typ), .fieldType = "LOOKUP", .unit = "=" xstr(id), \
+#define MATCH_LOOKUP_FIELD(nam, len, id, typ) \
+  {                                           \
+      .name              = nam,               \
+      .size              = len,               \
+      .resolution        = 1,                 \
+      .hasSign           = false,             \
+      .lookup.type       = LOOKUP_TYPE_PAIR,  \
+      LOOKUP_PAIR_MEMBER = lookup##typ,       \
+      .lookup.name       = xstr(typ),         \
+      .fieldType         = "LOOKUP",          \
+      .unit              = "=" xstr(id),      \
   }
 
-#define MATCH_FIELD(nam, len, id, desc)                                                                                   \
-  {                                                                                                                       \
-    .name = nam, .size = len, .resolution = 1, .unit = "=" xstr(id), .description = desc, .fieldType = "UNSIGNED_INTEGER" \
-  }
+#define MATCH_FIELD(nam, len, id, desc) \
+  {.name = nam, .size = len, .resolution = 1, .unit = "=" xstr(id), .description = desc, .fieldType = "UNSIGNED_INTEGER"}
 
-#define SIMPLE_DESC_FIELD(nam, len, desc)                                                           \
-  {                                                                                                 \
-    .name = nam, .size = len, .resolution = 1, .description = desc, .fieldType = "UNSIGNED_INTEGER" \
-  }
+#define SIMPLE_DESC_FIELD(nam, len, desc) \
+  {.name = nam, .size = len, .resolution = 1, .description = desc, .fieldType = "UNSIGNED_INTEGER"}
 
-#define SIMPLE_FIELD(nam, len)                                                 \
-  {                                                                            \
-    .name = nam, .size = len, .resolution = 1, .fieldType = "UNSIGNED_INTEGER" \
-  }
+#define SIMPLE_FIELD(nam, len) {.name = nam, .size = len, .resolution = 1, .fieldType = "UNSIGNED_INTEGER"}
 
-#define SIMPLE_SIGNED_FIELD(nam, len)                                                  \
-  {                                                                                    \
-    .name = nam, .size = len, .resolution = 1, .hasSign = true, .fieldType = "INTEGER" \
-  }
+#define SIMPLE_SIGNED_FIELD(nam, len) {.name = nam, .size = len, .resolution = 1, .hasSign = true, .fieldType = "INTEGER"}
 
-#define MMSI_FIELD(nam)                                                                                           \
-  {                                                                                                               \
-    .name = nam, .size = BYTES(4), .resolution = 1, .hasSign = false, .rangeMin = 2000000, .rangeMax = 999999999, \
-    .fieldType = "MMSI"                                                                                           \
-  }
+#define MMSI_FIELD(nam)     \
+  {.name       = nam,       \
+   .size       = BYTES(4),  \
+   .resolution = 1,         \
+   .hasSign    = false,     \
+   .rangeMin   = 2000000,   \
+   .rangeMax   = 999999999, \
+   .fieldType  = "MMSI"}
 
-#define DECIMAL_FIELD(nam, len, desc)                                                      \
-  {                                                                                        \
-    .name = nam, .size = len, .resolution = 1, .description = desc, .fieldType = "DECIMAL" \
-  }
+#define DECIMAL_FIELD(nam, len, desc) \
+  {.name = nam, .size = len * 4, .resolution = 1, .description = desc, .fieldType = "DECIMAL", .rangeMax = (POW10I(len) - 1)}
 
-#define DECIMAL_UNIT_FIELD(nam, len, unt)                                          \
-  {                                                                                \
-    .name = nam, .size = len, .resolution = 1, .unit = unt, .fieldType = "DECIMAL" \
-  }
+#define STRINGLZ_FIELD(nam, len) {.name = nam, .size = len, .resolution = 0, .fieldType = "STRING_LZ"}
 
-#define STRINGLZ_FIELD(nam, len)                                        \
-  {                                                                     \
-    .name = nam, .size = len, .resolution = 0, .fieldType = "STRING_LZ" \
-  }
+#define STRING_FIX_DESC_FIELD(nam, len, desc) \
+  {.name = nam, .size = len, .resolution = 0, .description = desc, .fieldType = "STRING_FIX"}
 
-#define STRING_FIX_DESC_FIELD(nam, len, desc)                                                 \
-  {                                                                                           \
-    .name = nam, .size = len, .resolution = 0, .description = desc, .fieldType = "STRING_FIX" \
-  }
+#define STRINGVAR_FIELD(nam) {.name = nam, .size = LEN_VARIABLE, .resolution = 0, .fieldType = "STRING_LZ"}
 
-#define STRINGVAR_FIELD(nam)                                                     \
-  {                                                                              \
-    .name = nam, .size = LEN_VARIABLE, .resolution = 0, .fieldType = "STRING_LZ" \
-  }
-
-#define STRINGLAU_FIELD(nam)                                                      \
-  {                                                                               \
-    .name = nam, .size = LEN_VARIABLE, .resolution = 0, .fieldType = "STRING_LAU" \
-  }
+#define STRINGLAU_FIELD(nam) {.name = nam, .size = LEN_VARIABLE, .resolution = 0, .fieldType = "STRING_LAU"}
 
 #define STRING_FIX_FIELD(nam, len) STRING_FIX_DESC_FIELD(nam, len, NULL)
 
-#define TEMPERATURE_HIGH_FIELD(nam)                                                                \
-  {                                                                                                \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "K", .fieldType = "TEMPERATURE_HIGH" \
-  }
+#define TEMPERATURE_HIGH_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "K", .fieldType = "TEMPERATURE_HIGH"}
 
-#define TEMPERATURE_FIELD(nam)                                                                 \
-  {                                                                                            \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "K", .fieldType = "TEMPERATURE" \
-  }
+#define TEMPERATURE_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "K", .fieldType = "TEMPERATURE"}
 
-#define TEMPERATURE_UINT8_OFFSET_FIELD(nam)                                                                             \
-  {                                                                                                                     \
-    .name = nam, .size = BYTES(1), .offset = 233, .resolution = 1, .unit = "K", .fieldType = "TEMPERATURE_UINT8_OFFSET" \
-  }
+#define TEMPERATURE_UINT8_OFFSET_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .offset = 233, .resolution = 1, .unit = "K", .fieldType = "TEMPERATURE_UINT8_OFFSET"}
 
-#define TEMPERATURE_U24_FIELD(nam)                                                                     \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(3), .resolution = 0.001, .unit = "K", .fieldType = "TEMPERATURE_UFIX24" \
-  }
+#define TEMPERATURE_U24_FIELD(nam) \
+  {.name = nam, .size = BYTES(3), .resolution = 0.001, .unit = "K", .fieldType = "TEMPERATURE_UFIX24"}
 
-#define TEMPERATURE_DELTA_FIX16_FIELD(nam, desc)                                                                                \
-  {                                                                                                                             \
-    .name = nam, .size = BYTES(2), .resolution = 0.001, .unit = "K", .hasSign = true, .fieldType = "FIX16", .description = desc \
-  }
+#define TEMPERATURE_DELTA_FIX16_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.001, .unit = "K", .hasSign = true, .fieldType = "FIX16", .description = desc}
 
-#define VOLUMETRIC_FLOW_FIELD(nam)                                                                                   \
-  {                                                                                                                  \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "L/h", .hasSign = true, .fieldType = "VOLUMETRIC_FLOW" \
-  }
+#define VOLUMETRIC_FLOW_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .unit = "L/h", .hasSign = true, .fieldType = "VOLUMETRIC_FLOW"}
 
-#define CONCENTRATION_UINT16_FIELD(nam)                                                                    \
-  {                                                                                                        \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "ppm", .fieldType = "CONCENTRATION_UINT16_PPM" \
-  }
+#define CONCENTRATION_UINT16_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "ppm", .fieldType = "CONCENTRATION_UINT16_PPM"}
 
-#define VOLUME_UFIX16_L_FIELD(nam)                                                              \
-  {                                                                                             \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "L", .fieldType = "VOLUME_UFIX16_L" \
-  }
+#define VOLUME_UFIX16_L_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "L", .fieldType = "VOLUME_UFIX16_L"}
 
-#define VOLUME_UFIX32_DL_FIELD(nam)                                                                \
-  {                                                                                                \
-    .name = nam, .size = BYTES(4), .resolution = 0.1, .unit = "L", .fieldType = "VOLUME_UFIX32_DL" \
-  }
+#define VOLUME_UFIX32_DL_FIELD(nam) {.name = nam, .size = BYTES(4), .resolution = 0.1, .unit = "L", .fieldType = "VOLUME_UFIX32_DL"}
 
-#define TIME_UFIX16_S_FIELD(nam)                                                              \
-  {                                                                                           \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "s", .fieldType = "TIME_UFIX16_S" \
-  }
+#define TIME_UFIX16_S_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "s", .fieldType = "TIME_UFIX16_S"}
 
-#define TIME_FIX32_MS_FIELD(nam, desc)                                                                              \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(4), .resolution = 0.001, .unit = "s", .hasSign = true, .fieldType = "TIME_FIX32_MS", \
-    .description = desc                                                                                             \
-  }
+#define TIME_FIX32_MS_FIELD(nam, desc) \
+  {.name        = nam,                 \
+   .size        = BYTES(4),            \
+   .resolution  = 0.001,               \
+   .unit        = "s",                 \
+   .hasSign     = true,                \
+   .fieldType   = "TIME_FIX32_MS",     \
+   .description = desc}
 
-#define TIME_UFIX8_5MS_FIELD(nam, desc)                                                                               \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(1), .resolution = 0.005, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX8_5MS", \
-    .description = desc                                                                                               \
-  }
+#define TIME_UFIX8_5MS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(1),             \
+   .resolution  = 0.005,                \
+   .unit        = "s",                  \
+   .hasSign     = false,                \
+   .fieldType   = "TIME_UFIX8_5MS",     \
+   .description = desc}
 
-#define TIME_UFIX16_MIN_FIELD(nam, desc)                                                                            \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = 60, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX16_MIN", \
-    .description = desc                                                                                             \
-  }
+#define TIME_UFIX16_MIN_FIELD(nam, desc) \
+  {.name        = nam,                   \
+   .size        = BYTES(2),              \
+   .resolution  = 60,                    \
+   .unit        = "s",                   \
+   .hasSign     = false,                 \
+   .fieldType   = "TIME_UFIX16_MIN",     \
+   .description = desc}
 
-#define TIME_UFIX16_MS_FIELD(nam, desc)                                                                               \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(2), .resolution = 0.001, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX16_MS", \
-    .description = desc                                                                                               \
-  }
+#define TIME_UFIX16_MS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(2),             \
+   .resolution  = 0.001,                \
+   .unit        = "s",                  \
+   .hasSign     = false,                \
+   .fieldType   = "TIME_UFIX16_MS",     \
+   .description = desc}
 
-#define TIME_UFIX16_CS_FIELD(nam, desc)                                                                              \
-  {                                                                                                                  \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX16_CS", \
-    .description = desc                                                                                              \
-  }
+#define TIME_UFIX16_CS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(2),             \
+   .resolution  = 0.01,                 \
+   .unit        = "s",                  \
+   .hasSign     = false,                \
+   .fieldType   = "TIME_UFIX16_CS",     \
+   .description = desc}
 
-#define TIME_FIX16_5CS_FIELD(nam, desc)                                                                             \
-  {                                                                                                                 \
-    .name = nam, .size = BYTES(2), .resolution = 0.05, .unit = "s", .hasSign = true, .fieldType = "TIME_FIX16_5CS", \
-    .description = desc                                                                                             \
-  }
+#define TIME_FIX16_5CS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(2),             \
+   .resolution  = 0.05,                 \
+   .unit        = "s",                  \
+   .hasSign     = true,                 \
+   .fieldType   = "TIME_FIX16_5CS",     \
+   .description = desc}
 
-#define TIME_FIX16_MIN_FIELD(nam)                                                                                 \
-  {                                                                                                               \
-    .name = nam, .size = BYTES(2), .resolution = 60., .unit = "s", .hasSign = true, .fieldType = "TIME_FIX16_MIN" \
-  }
+#define TIME_FIX16_MIN_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 60., .unit = "s", .hasSign = true, .fieldType = "TIME_FIX16_MIN"}
 
-#define TIME_UFIX24_MS_FIELD(nam, desc)                                                                               \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(3), .resolution = 0.001, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX24_MS", \
-    .description = desc                                                                                               \
-  }
+#define TIME_UFIX24_MS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(3),             \
+   .resolution  = 0.001,                \
+   .unit        = "s",                  \
+   .hasSign     = false,                \
+   .fieldType   = "TIME_UFIX24_MS",     \
+   .description = desc}
 
-#define TIME_UFIX32_S_FIELD(nam, desc)                                                                           \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(4), .resolution = 1, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX32_S", \
-    .description = desc                                                                                          \
-  }
+#define TIME_UFIX32_S_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(4), .resolution = 1, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX32_S", .description = desc}
 
-#define TIME_UFIX32_MS_FIELD(nam, desc)                                                                               \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(4), .resolution = 0.001, .unit = "s", .hasSign = false, .fieldType = "TIME_UFIX32_MS", \
-    .description = desc                                                                                               \
-  }
+#define TIME_UFIX32_MS_FIELD(nam, desc) \
+  {.name        = nam,                  \
+   .size        = BYTES(4),             \
+   .resolution  = 0.001,                \
+   .unit        = "s",                  \
+   .hasSign     = false,                \
+   .fieldType   = "TIME_UFIX32_MS",     \
+   .description = desc}
 
-#define TIME_FIELD(nam)                                                                                      \
-  {                                                                                                          \
-    .name = nam, .size = BYTES(4), .resolution = 0.0001, .unit = "s", .hasSign = false, .fieldType = "TIME", \
-    .description = "Seconds since midnight", .rangeMin = 0, .rangeMax = 86402                                \
-  }
+#define TIME_FIELD(nam)                     \
+  {.name        = nam,                      \
+   .size        = BYTES(4),                 \
+   .resolution  = 0.0001,                   \
+   .unit        = "s",                      \
+   .hasSign     = false,                    \
+   .fieldType   = "TIME",                   \
+   .description = "Seconds since midnight", \
+   .rangeMin    = 0,                        \
+   .rangeMax    = 86402}
 
-#define DATE_FIELD(nam)                                                                                \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "d", .hasSign = false, .fieldType = "DATE" \
-  }
+#define DATE_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "d", .hasSign = false, .fieldType = "DATE"}
 
-#define VARIABLE_FIELD(nam, desc)                                                   \
-  {                                                                                 \
-    .name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "VARIABLE" \
-  }
+#define VARIABLE_FIELD(nam, desc) {.name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "VARIABLE"}
 
-#define KEY_VALUE_FIELD(nam, desc)                                                   \
-  {                                                                                  \
-    .name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "KEY_VALUE" \
-  }
+#define KEY_VALUE_FIELD(nam, desc) {.name = nam, .size = LEN_VARIABLE, .description = desc, .fieldType = "KEY_VALUE"}
 
-#define ENERGY_UINT32_FIELD(nam)                                                                \
-  {                                                                                             \
-    .name = nam, .size = BYTES(4), .resolution = 1, .unit = "kWh", .fieldType = "ENERGY_UINT32" \
-  }
+#define ENERGY_UINT32_FIELD(nam) {.name = nam, .size = BYTES(4), .resolution = 1, .unit = "kWh", .fieldType = "ENERGY_UINT32"}
 
-#define POWER_I32_OFFSET_FIELD(nam)                                 \
-  {                                                                 \
-    .name = nam, .hasSign = true, .fieldType = "POWER_FIX32_OFFSET" \
-  }
+#define POWER_I32_OFFSET_FIELD(nam) {.name = nam, .hasSign = true, .fieldType = "POWER_FIX32_OFFSET"}
 
-#define POWER_I32_VA_OFFSET_FIELD(nam)                                 \
-  {                                                                    \
-    .name = nam, .hasSign = true, .fieldType = "POWER_FIX32_VA_OFFSET" \
-  }
+#define POWER_I32_VA_OFFSET_FIELD(nam) {.name = nam, .hasSign = true, .fieldType = "POWER_FIX32_VA_OFFSET"}
 
-#define POWER_I32_VAR_OFFSET_FIELD(nam)                                 \
-  {                                                                     \
-    .name = nam, .hasSign = true, .fieldType = "POWER_FIX32_VAR_OFFSET" \
-  }
+#define POWER_I32_VAR_OFFSET_FIELD(nam) {.name = nam, .hasSign = true, .fieldType = "POWER_FIX32_VAR_OFFSET"}
 
-#define POWER_U8_FIELD(nam)                                                                 \
-  {                                                                                         \
-    .name = nam, .size = BYTES(1), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT8" \
-  }
+#define POWER_U8_FIELD(nam) {.name = nam, .size = BYTES(1), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT8"}
 
-#define POWER_U16_FIELD(nam)                                                                 \
-  {                                                                                          \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT16" \
-  }
+#define POWER_U16_FIELD(nam) {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT16"}
 
-#define POWER_U16_VAR_FIELD(nam, desc)                                                                                  \
-  {                                                                                                                     \
-    .name = nam, .size = BYTES(2), .resolution = 1, .unit = "VAR", .description = desc, .fieldType = "POWER_UINT16_VAR" \
-  }
+#define POWER_U16_VAR_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 1, .unit = "VAR", .description = desc, .fieldType = "POWER_UINT16_VAR"}
 
-#define POWER_I32_FIELD(nam)                                                                                 \
-  {                                                                                                          \
-    .name = nam, .size = BYTES(4), .resolution = 1, .hasSign = true, .unit = "W", .fieldType = "POWER_INT32" \
-  }
+#define POWER_I32_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = 1, .hasSign = true, .unit = "W", .fieldType = "POWER_INT32"}
 
-#define POWER_U32_FIELD(nam)                                                                 \
-  {                                                                                          \
-    .name = nam, .size = BYTES(4), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT32" \
-  }
+#define POWER_U32_FIELD(nam) {.name = nam, .size = BYTES(4), .resolution = 1, .unit = "W", .fieldType = "POWER_UINT32"}
 
-#define POWER_U32_VA_FIELD(nam)                                                                  \
-  {                                                                                              \
-    .name = nam, .size = BYTES(4), .resolution = 1, .unit = "VA", .fieldType = "POWER_UINT32_VA" \
-  }
+#define POWER_U32_VA_FIELD(nam) {.name = nam, .size = BYTES(4), .resolution = 1, .unit = "VA", .fieldType = "POWER_UINT32_VA"}
 
-#define POWER_U32_VAR_FIELD(nam)                                                                   \
-  {                                                                                                \
-    .name = nam, .size = BYTES(4), .resolution = 1, .unit = "VAR", .fieldType = "POWER_UINT32_VAR" \
-  }
+#define POWER_U32_VAR_FIELD(nam) {.name = nam, .size = BYTES(4), .resolution = 1, .unit = "VAR", .fieldType = "POWER_UINT32_VAR"}
 
-#define PERCENTAGE_U8_FIELD(nam)                                                                 \
-  {                                                                                              \
-    .name = nam, .size = BYTES(1), .resolution = 1, .unit = "%", .fieldType = "PERCENTAGE_UINT8" \
-  }
+#define PERCENTAGE_U8_FIELD(nam) {.name = nam, .size = BYTES(1), .resolution = 1, .unit = "%", .fieldType = "PERCENTAGE_UINT8"}
 
-#define PERCENTAGE_U8_HIGHRES_FIELD(nam)                                                                  \
-  {                                                                                                       \
-    .name = nam, .size = BYTES(1), .resolution = .4, .unit = "%", .fieldType = "PERCENTAGE_UINT8_HIGHRES" \
-  }
+#define PERCENTAGE_U8_HIGHRES_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .resolution = .4, .unit = "%", .fieldType = "PERCENTAGE_UINT8_HIGHRES"}
 
-#define PERCENTAGE_I8_FIELD(nam)                                                                                 \
-  {                                                                                                              \
-    .name = nam, .size = BYTES(1), .resolution = 1, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_INT8" \
-  }
+#define PERCENTAGE_I8_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .resolution = 1, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_INT8"}
 
-#define PERCENTAGE_I16_FIELD(nam)                                                                                              \
-  {                                                                                                                            \
-    .name = nam, .size = BYTES(2), .resolution = RES_PERCENTAGE, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_FIX16" \
-  }
+#define PERCENTAGE_I16_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = RES_PERCENTAGE, .hasSign = true, .unit = "%", .fieldType = "PERCENTAGE_FIX16"}
 
-#define ROTATION_FIX16_FIELD(nam)                                                                                               \
-  {                                                                                                                             \
-    .name = nam, .size = BYTES(2), .resolution = (1e-3 / 32.0), .hasSign = true, .unit = "rad/s", .fieldType = "ROTATION_FIX16" \
-  }
+#define ROTATION_FIX16_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = (1e-3 / 32.0), .hasSign = true, .unit = "rad/s", .fieldType = "ROTATION_FIX16"}
 
-#define ROTATION_UFIX16_RPM_FIELD(nam, desc)                                                                               \
-  {                                                                                                                        \
-    .name = nam, .size = BYTES(2), .resolution = 0.25, .hasSign = false, .unit = "rpm", .fieldType = "ROTATION_UFIX16_RPM" \
-  }
+#define ROTATION_UFIX16_RPM_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.25, .hasSign = false, .unit = "rpm", .fieldType = "ROTATION_UFIX16_RPM"}
 
-#define ROTATION_UFIX16_RPM_HIGHRES_FIELD(nam, desc)                                     \
-  {                                                                                      \
-    .name = nam, .size = BYTES(2), .resolution = 0.125, .hasSign = false, .unit = "rpm", \
-    .fieldType = "ROTATION_UFIX16_RPM_HIGHRES"                                           \
-  }
+#define ROTATION_UFIX16_RPM_HIGHRES_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.125, .hasSign = false, .unit = "rpm", .fieldType = "ROTATION_UFIX16_RPM_HIGHRES"}
 
-#define ROTATION_FIX32_FIELD(nam)                                                                                               \
-  {                                                                                                                             \
-    .name = nam, .size = BYTES(4), .resolution = (1e-6 / 32.0), .hasSign = true, .unit = "rad/s", .fieldType = "ROTATION_FIX32" \
-  }
+#define ROTATION_FIX32_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = (1e-6 / 32.0), .hasSign = true, .unit = "rad/s", .fieldType = "ROTATION_FIX32"}
 
-#define PRESSURE_UFIX16_HPA_FIELD(nam)                                                                 \
-  {                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 100, .unit = "Pa", .fieldType = "PRESSURE_UFIX16_HPA" \
-  }
+#define PRESSURE_UFIX16_HPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 100, .unit = "Pa", .fieldType = "PRESSURE_UFIX16_HPA"}
 
-#define PRESSURE_UINT8_KPA_FIELD(nam)                                                                 \
-  {                                                                                                   \
-    .name = nam, .size = BYTES(1), .resolution = 500, .unit = "Pa", .fieldType = "PRESSURE_UINT8_KPA" \
-  }
+#define PRESSURE_UINT8_KPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .resolution = 500, .unit = "Pa", .fieldType = "PRESSURE_UINT8_KPA"}
 
-#define PRESSURE_UINT8_2KPA_FIELD(nam)                                                                  \
-  {                                                                                                     \
-    .name = nam, .size = BYTES(1), .resolution = 2000, .unit = "Pa", .fieldType = "PRESSURE_UINT8_2KPA" \
-  }
+#define PRESSURE_UINT8_2KPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(1), .resolution = 2000, .unit = "Pa", .fieldType = "PRESSURE_UINT8_2KPA"}
 
-#define PRESSURE_UFIX16_KPA_FIELD(nam)                                                                                    \
-  {                                                                                                                       \
-    .name = nam, .size = BYTES(2), .resolution = 1000, .hasSign = false, .unit = "Pa", .fieldType = "PRESSURE_UFIX16_KPA" \
-  }
+#define PRESSURE_UFIX16_KPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 1000, .hasSign = false, .unit = "Pa", .fieldType = "PRESSURE_UFIX16_KPA"}
 
-#define PRESSURE_RATE_FIX16_PA_FIELD(nam)                                                                                   \
-  {                                                                                                                         \
-    .name = nam, .size = BYTES(2), .resolution = 1, .hasSign = true, .unit = "Pa/hr", .fieldType = "PRESSURE_RATE_FIX16_PA" \
-  }
+#define PRESSURE_RATE_FIX16_PA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 1, .hasSign = true, .unit = "Pa/hr", .fieldType = "PRESSURE_RATE_FIX16_PA"}
 
-#define PRESSURE_FIX16_KPA_FIELD(nam)                                                                                   \
-  {                                                                                                                     \
-    .name = nam, .size = BYTES(2), .resolution = 1000, .hasSign = true, .unit = "Pa", .fieldType = "PRESSURE_FIX16_KPA" \
-  }
+#define PRESSURE_FIX16_KPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(2), .resolution = 1000, .hasSign = true, .unit = "Pa", .fieldType = "PRESSURE_FIX16_KPA"}
 
-#define PRESSURE_FIX32_DPA_FIELD(nam)                                                                                  \
-  {                                                                                                                    \
-    .name = nam, .size = BYTES(4), .resolution = 0.1, .hasSign = true, .unit = "Pa", .fieldType = "PRESSURE_FIX32_DPA" \
-  }
+#define PRESSURE_FIX32_DPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = 0.1, .hasSign = true, .unit = "Pa", .fieldType = "PRESSURE_FIX32_DPA"}
 
-#define PRESSURE_UFIX32_DPA_FIELD(nam)                                                                                   \
-  {                                                                                                                      \
-    .name = nam, .size = BYTES(4), .resolution = 0.1, .hasSign = false, .unit = "Pa", .fieldType = "PRESSURE_UFIX32_DPA" \
-  }
+#define PRESSURE_UFIX32_DPA_FIELD(nam) \
+  {.name = nam, .size = BYTES(4), .resolution = 0.1, .hasSign = false, .unit = "Pa", .fieldType = "PRESSURE_UFIX32_DPA"}
 
-#define GAIN_FIELD(nam, desc)                                                                                          \
-  {                                                                                                                    \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .fieldType = "GAIN_FIX16", .description = desc \
-  }
+#define GAIN_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .fieldType = "GAIN_FIX16", .description = desc}
 
-#define MAGNETIC_FIX16_FIELD(nam, desc)                                                                                  \
-  {                                                                                                                      \
-    .name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .unit = "T", .fieldType = "MAGNETIC_FIELD_FIX16" \
-  }
+#define MAGNETIC_FIX16_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.01, .hasSign = true, .unit = "T", .fieldType = "MAGNETIC_FIELD_FIX16"}
 
-#define ANGLE_FIX16_DDEG_FIELD(nam, desc)                                                                             \
-  {                                                                                                                   \
-    .name = nam, .size = BYTES(2), .resolution = 0.1, .hasSign = true, .unit = "deg", .fieldType = "ANGLE_FIX16_DDEG" \
-  }
+#define ANGLE_FIX16_DDEG_FIELD(nam, desc) \
+  {.name = nam, .size = BYTES(2), .resolution = 0.1, .hasSign = true, .unit = "deg", .fieldType = "ANGLE_FIX16_DDEG"}
 
-#define FLOAT_FIELD(nam, unt, desc)                                                                                          \
-  {                                                                                                                          \
-    .name = nam, .size = BYTES(4), .hasSign = true, .unit = unt, .fieldType = "FLOAT", .description = desc, .resolution = 1, \
-    .rangeMin = -1 * FLT_MAX, .rangeMax = FLT_MAX                                                                            \
-  }
+#define FLOAT_FIELD(nam, unt, desc) \
+  {.name        = nam,              \
+   .size        = BYTES(4),         \
+   .hasSign     = true,             \
+   .unit        = unt,              \
+   .fieldType   = "FLOAT",          \
+   .description = desc,             \
+   .resolution  = 1,                \
+   .rangeMin    = -1 * FLT_MAX,     \
+   .rangeMax    = FLT_MAX}
 
 #ifdef EXPLAIN
 #define LOOKUP_TYPE(type, length) extern void lookup##type(EnumPairCallback cb);
@@ -2896,7 +2742,7 @@ Pgn pgnList[] = {
       END_OF_FIELDS},
      .explanation
      = "The MOB PGN is intended to provide notification from a MOB monitoring system. The included position information may be "
-       "that of the vessel or the MOB device itself as identified in field “X”, position source. Additional information may "
+       "that of the vessel or the MOB device itself as identified in field 'X', position source. Additional information may "
        "include the current state of the MOB device, time of activation, and MOB device battery status.\n"
        "This PGN may be used to set a MOB waypoint, or to initiate an alert process.\n"
        "This PGN may be used to command or register a MOB device emitter Ids or other applicable fields in the message with an "
@@ -2910,15 +2756,15 @@ Pgn pgnList[] = {
        "necessary for every MOB Emitter ID that has associated data fields.\n"
        "If a Request Group Function (PGN 126208) requesting this PGN (127233) is received, the receiving device shall respond in "
        "the following manner:\n"
-       "•If no requested fields have been included with the Request Group Function then the response is to return one or more "
+       "* If no requested fields have been included with the Request Group Function then the response is to return one or more "
        "PGNs, just like responding to the ISO Request (PGN 055904) described above.\n"
-       "•If the Request Group Function (PGN 126208) includes the MOB Emitter ID field or MOB Status field, then the response "
+       "* If the Request Group Function (PGN 126208) includes the MOB Emitter ID field or MOB Status field, then the response "
        "shall "
        "be filtered by these fields contained within this request resulting in one or more PGN (127233) responses.\n"
        "If the MOB Emitter ID requested is not considered a valid MOB Emitter ID by the receiving device, then the appropriate "
        "response would be the Acknowledge Group Function (PGN 126208), containing the error state for PGN error code (Field 3) of "
-       "“0x3 = Access denied.” And the requested MOB Emitter ID field parameter error code (Field 6) of “0x3 = Requested or "
-       "command parameter out-of- range;”.\n"
+       "'0x3 = Access denied.' And the requested MOB Emitter ID field parameter error code (Field 6) of '0x3 = Requested or "
+       "command parameter out-of- range;'.\n"
        "The Default update rate of this PGN is autonomous, as it is dependant upon notification rates of MOB devices."}
 
     ,
@@ -3404,7 +3250,7 @@ Pgn pgnList[] = {
      PACKET_COMPLETE,
      PACKET_SINGLE,
      {INSTANCE_FIELD,
-      VOLTAGE_U16_10MV_FIELD("Voltage"),
+      VOLTAGE_I16_10MV_FIELD("Voltage"),
       CURRENT_FIX16_DA_FIELD("Current"),
       TEMPERATURE_FIELD("Temperature"),
       UINT8_FIELD("SID"),
@@ -3747,7 +3593,7 @@ Pgn pgnList[] = {
       LENGTH_UFIX32_CM_FIELD("CPA", NULL),
       TIME_FIX32_MS_FIELD("TCPA", "negative = time elapsed since event, positive = time to go"),
       TIME_FIELD("UTC of Fix"),
-      STRING_FIX_FIELD("Name", BYTES(FASTPACKET_MAX_SIZE)),
+      STRING_FIX_FIELD("Name", BYTES(208)),
       END_OF_FIELDS},
      .interval = 1000}
 
@@ -4302,15 +4148,15 @@ Pgn pgnList[] = {
      129538,
      PACKET_INCOMPLETE | PACKET_NOT_SEEN,
      PACKET_FAST,
-     {SIMPLE_DESC_FIELD("SV Elevation Mask", BYTES(2), "Will not use SV below this elevation"),
-      DILUTION_OF_PRECISION_UFIX16_FIELD("PDOP Mask", "Will not report position above this PDOP"),
-      DILUTION_OF_PRECISION_UFIX16_FIELD("PDOP Switch", "Will report 2D position above this PDOP"),
-      SIGNALTONOISERATIO_UFIX16_FIELD("SNR Mask", "Will not use SV below this SNR"),
+     {ANGLE_I16_FIELD("SV Elevation Mask", "Will not use SV below this elevation"),
+      DILUTION_OF_PRECISION_FIX16_FIELD("PDOP Mask", "Will not report position above this PDOP"),
+      DILUTION_OF_PRECISION_FIX16_FIELD("PDOP Switch", "Will report 2D position above this PDOP"),
+      SIGNALTONOISERATIO_FIX16_FIELD("SNR Mask", "Will not use SV below this SNR"),
       LOOKUP_FIELD("GNSS Mode (desired)", 3, GNSS_MODE),
       LOOKUP_FIELD("DGNSS Mode (desired)", 3, DGNSS_MODE),
       SIMPLE_FIELD("Position/Velocity Filter", 2),
       SIMPLE_FIELD("Max Correction Age", BYTES(2)),
-      LENGTH_UFIX16_CM_FIELD("Antenna Altitude for 2D Mode"),
+      DISTANCE_FIX16_CM_FIELD("Antenna Altitude for 2D Mode", ""),
       LOOKUP_FIELD("Use Antenna Altitude for 2D Mode", 2, YES_NO),
       RESERVED_FIELD(6),
       END_OF_FIELDS},
@@ -4365,37 +4211,38 @@ Pgn pgnList[] = {
       UINT16_FIELD("GPS Week number"),
       BINARY_FIELD("SV Health Bits", BYTES(1), NULL),
       UNSIGNED_ALMANAC_PARAMETER_FIELD("Eccentricity", BYTES(2), POW2NEG(21), "m/m", "'e' in table 20-VI in ICD-GPS-200"),
-      UNSIGNED_ALMANAC_PARAMETER_FIELD("Almanac Reference Time", BYTES(1), POW2(12), "s", "'t~oa~' in table 20-VI in ICD-GPS-200"),
+      UNSIGNED_ALMANAC_PARAMETER_FIELD("Almanac Reference Time", BYTES(1), POW2(12), "s", "'t oa' in table 20-VI in ICD-GPS-200"),
       SIGNED_ALMANAC_PARAMETER_FIELD("Inclination Angle",
                                      BYTES(2),
                                      POW2NEG(19),
                                      "semi-circle",
-                                     "'\u03b4~i~' in table 20-VI in ICD-GPS-200"),
+                                     "'delta i' in table 20-VI in ICD-GPS-200"),
       SIGNED_ALMANAC_PARAMETER_FIELD("Rate of Right Ascension",
                                      BYTES(2),
                                      POW2NEG(38),
                                      "semi-circle/s",
-                                     "'\u0307\u2126' in table 20-VI in ICD-GPS-200"),
+                                     "'OMEGADOT' in table 20-VI in ICD-GPS-200"),
       UNSIGNED_ALMANAC_PARAMETER_FIELD("Root of Semi-major Axis",
                                        BYTES(3),
                                        POW2NEG(11),
                                        "sqrt(m)",
-                                       "'\u221a a' in table 20-VI in ICD-GPS-200"),
+                                       "'(A)^0.5' in table 20-VI in ICD-GPS-200"),
       SIGNED_ALMANAC_PARAMETER_FIELD("Argument of Perigee",
                                      BYTES(3),
                                      POW2NEG(23),
                                      "semi-circle",
-                                     "'\u2126~0~' in table 20-VI in ICD-GPS-200"),
+                                     "'(OMEGA)0' in table 20-VI in ICD-GPS-200"),
       SIGNED_ALMANAC_PARAMETER_FIELD("Longitude of Ascension Node",
                                      BYTES(3),
                                      POW2NEG(23),
                                      "semi-circle",
-                                     "'\u03c9' in table 20-VI in ICD-GPS-200"),
-      SIGNED_ALMANAC_PARAMETER_FIELD("Mean Anomaly", BYTES(3), POW2NEG(23), "semi-circle", "'M~0~' in table 20-VI in ICD-GPS-200"),
-      SIGNED_ALMANAC_PARAMETER_FIELD("Clock Parameter 1", 11, POW2NEG(20), "s", "'a~f0~' in table 20-VI in ICD-GPS-200"),
-      SIGNED_ALMANAC_PARAMETER_FIELD("Clock Parameter 2", 11, POW2NEG(38), "s/s", "'a~f1~' in table 20-VI in ICD-GPS-200"),
+                                     "'small-omega' in table 20-VI in ICD-GPS-200"),
+      SIGNED_ALMANAC_PARAMETER_FIELD("Mean Anomaly", BYTES(3), POW2NEG(23), "semi-circle", "'M 0' in table 20-VI in ICD-GPS-200"),
+      SIGNED_ALMANAC_PARAMETER_FIELD("Clock Parameter 1", 11, POW2NEG(20), "s", "'a f0' in table 20-VI in ICD-GPS-200"),
+      SIGNED_ALMANAC_PARAMETER_FIELD("Clock Parameter 2", 11, POW2NEG(38), "s/s", "'a f1' in table 20-VI in ICD-GPS-200"),
       RESERVED_FIELD(2),
       END_OF_FIELDS},
+     .url      = "https://www.gps.gov/technical/icwg/ICD-GPS-200C.pdf",
      .interval = UINT16_MAX}
 
     ,
@@ -4916,7 +4763,7 @@ Pgn pgnList[] = {
      PACKET_FAST,
      {LOOKUP_FIELD("DSC Format", BYTES(1), DSC_FORMAT),
       MATCH_FIELD("DSC Category", BYTES(1), 112, "Distress"),
-      DECIMAL_FIELD("DSC Message Address", BYTES(5), "MMSI, Geographic Area or blank"),
+      DECIMAL_FIELD("DSC Message Address", 10, "MMSI, Geographic Area or blank"),
       LOOKUP_FIELD("Nature of Distress", BYTES(1), DSC_NATURE),
       LOOKUP_FIELD("Subsequent Communication Mode or 2nd Telecommand", BYTES(1), DSC_SECOND_TELECOMMAND),
       STRING_FIX_FIELD("Proposed Rx Frequency/Channel", BYTES(6)),
@@ -4925,7 +4772,7 @@ Pgn pgnList[] = {
       LATITUDE_I32_FIELD("Latitude of Vessel Reported"),
       LONGITUDE_I32_FIELD("Longitude of Vessel Reported"),
       TIME_FIELD("Time of Position"),
-      DECIMAL_FIELD("MMSI of Ship In Distress", BYTES(5), NULL),
+      DECIMAL_FIELD("MMSI of Ship In Distress", 10, NULL),
       UINT8_FIELD("DSC EOS Symbol"),
       LOOKUP_FIELD("Expansion Enabled", 2, YES_NO),
       RESERVED_FIELD(6),
@@ -4950,7 +4797,7 @@ Pgn pgnList[] = {
      PACKET_FAST,
      {LOOKUP_FIELD("DSC Format Symbol", BYTES(1), DSC_FORMAT),
       LOOKUP_FIELD("DSC Category Symbol", BYTES(1), DSC_CATEGORY),
-      DECIMAL_FIELD("DSC Message Address", BYTES(5), "MMSI, Geographic Area or blank"),
+      DECIMAL_FIELD("DSC Message Address", 10, "MMSI, Geographic Area or blank"),
       LOOKUP_FIELD("1st Telecommand", BYTES(1), DSC_FIRST_TELECOMMAND),
       LOOKUP_FIELD("Subsequent Communication Mode or 2nd Telecommand", BYTES(1), DSC_SECOND_TELECOMMAND),
       STRING_FIX_FIELD("Proposed Rx Frequency/Channel", BYTES(6)),
@@ -4959,7 +4806,7 @@ Pgn pgnList[] = {
       LATITUDE_I32_FIELD("Latitude of Vessel Reported"),
       LONGITUDE_I32_FIELD("Longitude of Vessel Reported"),
       TIME_FIELD("Time of Position"),
-      DECIMAL_FIELD("MMSI of Ship In Distress", BYTES(5), NULL),
+      DECIMAL_FIELD("MMSI of Ship In Distress", 10, NULL),
       UINT8_FIELD("DSC EOS Symbol"),
       LOOKUP_FIELD("Expansion Enabled", 2, YES_NO),
       RESERVED_FIELD(6),
@@ -5011,7 +4858,8 @@ Pgn pgnList[] = {
       LENGTH_UFIX16_DM_FIELD("Position reference from Bow"),
       MMSI_FIELD("Mothership User ID"),
       RESERVED_FIELD(2),
-      SPARE_FIELD(6),
+      SPARE_FIELD(2),
+      LOOKUP_FIELD("GNSS type", 4, POSITION_FIX_DEVICE),
       LOOKUP_FIELD("AIS Transceiver information", 5, AIS_TRANSCEIVER),
       RESERVED_FIELD(3),
       UINT8_FIELD("Sequence ID"),
@@ -5693,7 +5541,7 @@ Pgn pgnList[] = {
      .repeatingCount1 = 5,
      .repeatingStart1 = 3,
      .repeatingField1 = 2,
-     .explanation     = "Sequences could be 1 to (PGN Lighting – System Configuration) Max Color Sequence Color Count colors."}
+     .explanation     = "Sequences could be 1 to (PGN Lighting - System Configuration) Max Color Sequence Color Count colors."}
 
     ,
     {"Lighting Program",
@@ -6731,7 +6579,7 @@ Pgn pgnList[] = {
      130821,
      PACKET_INCOMPLETE,
      PACKET_FAST,
-     {COMPANY(275), SIMPLE_FIELD("A", BYTES(1)), STRING_FIX_FIELD("Message", BYTES(256)), END_OF_FIELDS},
+     {COMPANY(275), SIMPLE_FIELD("A", BYTES(1)), STRING_FIX_FIELD("Message", BYTES(230)), END_OF_FIELDS},
      .priority = 7}
 
     /* M/V Dirona */
@@ -6903,9 +6751,9 @@ Pgn pgnList[] = {
       UINT8_FIELD("Indicator Number"),
       DATE_FIELD("Start Date"),
       TIME_FIELD("Start Time"),
-      UINT8_FIELD("OFF Counter"),
-      UINT8_FIELD("ON Counter"),
-      UINT8_FIELD("ERROR Counter"),
+      UINT32_FIELD("OFF Counter"),
+      UINT32_FIELD("ON Counter"),
+      UINT32_FIELD("ERROR Counter"),
       LOOKUP_FIELD("Switch Status", 2, OFF_ON),
       RESERVED_FIELD(6),
       END_OF_FIELDS},
