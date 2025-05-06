@@ -2,7 +2,7 @@
   "name": "@canboat/pgns",
   "version": "5.1.3",
   "description": "Json description of canboat supported pgns",
-  "main": "canboat.json",
+  "main": "index.js",
   "scripts": {
     "test": "mocha --exit",
     "changelog": "github-changes -o canboat -r pgns -a --only-pulls --use-commit-body --data=pulls  --tag-name=v$npm_package_version",
