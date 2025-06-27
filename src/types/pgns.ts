@@ -2358,6 +2358,286 @@ export enum ZoneSize {
   _6Nm = '6 nm',
 }
 
+export enum DeviceFunction {
+  Diagnostic = 'Diagnostic',
+  BusTrafficLogger = 'Bus Traffic Logger',
+  AlarmEnunciator = 'Alarm Enunciator',
+  EmergencyPositionIndicatingRadioBeaconepirb = 'Emergency Position Indicating Radio Beacon (EPIRB)',
+  ManOverboard = 'Man Overboard',
+  VoyageDataRecorder = 'Voyage Data Recorder',
+  Camera = 'Camera',
+  PcGateway = 'PC Gateway',
+  Nmea2000ToAnalogGateway = 'NMEA 2000 to Analog Gateway',
+  AnalogToNmea2000Gateway = 'Analog to NMEA 2000 Gateway',
+  Nmea2000ToSerialGateway = 'NMEA 2000 to Serial Gateway',
+  Nmea0183Gateway = 'NMEA 0183 Gateway',
+  NmeaNetworkGateway = 'NMEA Network Gateway',
+  Nmea2000WirelessGateway = 'NMEA 2000 Wireless Gateway',
+  Router = 'Router',
+  Bridge = 'Bridge',
+  Repeater = 'Repeater',
+  BinaryEventMonitor = 'Binary Event Monitor',
+  LoadController = 'Load Controller',
+  AcdcInput = 'AC/DC Input',
+  FunctionController = 'Function Controller',
+  Engine = 'Engine',
+  DcGeneratoralternator = 'DC Generator/Alternator',
+  SolarPanelsolarArray = 'Solar Panel (Solar Array)',
+  WindGeneratordc = 'Wind Generator (DC)',
+  FuelCell = 'Fuel Cell',
+  NetworkPowerSupply = 'Network Power Supply',
+  AcGenerator = 'AC Generator',
+  AcBus = 'AC Bus',
+  AcMainsutilityshore = 'AC Mains (Utility/Shore)',
+  AcOutput = 'AC Output',
+  PowerConverterBatteryCharger = 'Power Converter - Battery Charger',
+  PowerConverterBatteryChargerPlusinverter = 'Power Converter - Battery Charger+Inverter',
+  PowerConverterInverter = 'Power Converter - Inverter',
+  PowerConverterDc = 'Power Converter - DC',
+  Battery = 'Battery',
+  EngineGateway = 'Engine Gateway',
+  FollowUpController = 'Follow-up Controller',
+  ModeController = 'Mode Controller',
+  Autopilot = 'Autopilot',
+  Rudder = 'Rudder',
+  HeadingSensors = 'Heading Sensors',
+  Trimtabsinterceptors = 'Trim (Tabs)/Interceptors',
+  AttitudepitchRollYawControl = 'Attitude (Pitch, Roll, Yaw) Control',
+  EngineroomMonitoring = 'Engineroom Monitoring',
+  EngineController = 'Engine Controller',
+  Motor = 'Motor',
+  Transmission = 'Transmission',
+  ThrottleshiftControl = 'Throttle/Shift Control',
+  Actuator = 'Actuator',
+  GaugeInterface = 'Gauge Interface',
+  GaugeLarge = 'Gauge Large',
+  GaugeSmall = 'Gauge Small',
+  BottomDepth = 'Bottom Depth',
+  BottomDepthspeed = 'Bottom Depth/Speed',
+  BottomDepthspeedtemperature = 'Bottom Depth/Speed/Temperature',
+  OwnshipAttitude = 'Ownship Attitude',
+  OwnshipPositiongnss = 'Ownship Position (GNSS)',
+  OwnshipPositionloranC = 'Ownship Position (Loran C)',
+  Speed = 'Speed',
+  TurnRateIndicator = 'Turn Rate Indicator',
+  IntegratedNavigation = 'Integrated Navigation',
+  IntegratedNavigationSystem = 'Integrated Navigation System',
+  NavigationManagement = 'Navigation Management',
+  AutomaticIdentificationSystemais = 'Automatic Identification System (AIS)',
+  Radar = 'Radar',
+  InfraredImaging = 'Infrared Imaging',
+  Ecdis = 'ECDIS',
+  Ecs = 'ECS',
+  DirectionFinder = 'Direction Finder',
+  VoyageStatus = 'Voyage Status',
+  Epirb = 'EPIRB',
+  Ais = 'AIS',
+  Dsc = 'DSC',
+  DataReceivertransceiver = 'Data Receiver/Transceiver',
+  Satellite = 'Satellite',
+  RadioTelephonemfhf = 'Radio-telephone (MF/HF)',
+  Radiotelephone = 'Radiotelephone',
+  Temperature = 'Temperature',
+  Pressure = 'Pressure',
+  FluidLevel = 'Fluid Level',
+  Flow = 'Flow',
+  Humidity = 'Humidity',
+  TimedateSystems = 'Time/Date Systems',
+  Vdr = 'VDR',
+  IntegratedInstrumentation = 'Integrated Instrumentation',
+  GeneralPurposeDisplays = 'General Purpose Displays',
+  GeneralSensorBox = 'General Sensor Box',
+  WeatherInstruments = 'Weather Instruments',
+  Transducergeneral = 'Transducer/General',
+  Nmea0183Converter = 'NMEA 0183 Converter',
+  Atmospheric = 'Atmospheric',
+  Aquatic = 'Aquatic',
+  Hvac = 'HVAC',
+  Scalecatch = 'Scale (Catch)',
+  ButtonInterface = 'Button Interface',
+  SwitchInterface = 'Switch Interface',
+  AnalogInterface = 'Analog Interface',
+  Display = 'Display',
+  MultimediaPlayer = 'Multimedia Player',
+  MultimediaController = 'Multimedia Controller',
+}
+
+export enum StationStatus {
+  StationInUse = 'Station in use',
+  LowSnr = 'Low SNR',
+  CycleError = 'Cycle Error',
+  Blink = 'Blink',
+}
+
+export enum EngineStatus1 {
+  CheckEngine = 'Check Engine',
+  OverTemperature = 'Over Temperature',
+  LowOilPressure = 'Low Oil Pressure',
+  LowOilLevel = 'Low Oil Level',
+  LowFuelPressure = 'Low Fuel Pressure',
+  LowSystemVoltage = 'Low System Voltage',
+  LowCoolantLevel = 'Low Coolant Level',
+  WaterFlow = 'Water Flow',
+  WaterInFuel = 'Water In Fuel',
+  ChargeIndicator = 'Charge Indicator',
+  PreheatIndicator = 'Preheat Indicator',
+  HighBoostPressure = 'High Boost Pressure',
+  RevLimitExceeded = 'Rev Limit Exceeded',
+  EgrSystem = 'EGR System',
+  ThrottlePositionSensor = 'Throttle Position Sensor',
+  EmergencyStop = 'Emergency Stop',
+}
+
+export enum EngineStatus2 {
+  WarningLevel1 = 'Warning Level 1',
+  WarningLevel2 = 'Warning Level 2',
+  PowerReduction = 'Power Reduction',
+  MaintenanceNeeded = 'Maintenance Needed',
+  EngineCommError = 'Engine Comm Error',
+  SubOrSecondaryThrottle = 'Sub or Secondary Throttle',
+  NeutralStartProtect = 'Neutral Start Protect',
+  EngineShuttingDown = 'Engine Shutting Down',
+}
+
+export enum EntertainmentPlayStatusBitfield {
+  Play = 'Play',
+  Pause = 'Pause',
+  Stop = 'Stop',
+  Ff1X = 'FF 1x',
+  Ff2X = 'FF 2x',
+  Ff3X = 'FF 3x',
+  Ff4X = 'FF 4x',
+  Rw1X = 'RW 1x',
+  Rw2X = 'RW 2x',
+  Rw3X = 'RW 3x',
+  Rw4X = 'RW 4x',
+  SkipAhead = 'Skip ahead',
+  SkipBack = 'Skip back',
+  JogAhead = 'Jog ahead',
+  JogBack = 'Jog back',
+  SeekUp = 'Seek up',
+  SeekDown = 'Seek down',
+  ScanUp = 'Scan up',
+  ScanDown = 'Scan down',
+  TuneUp = 'Tune up',
+  TuneDown = 'Tune down',
+  SlowMotion75X = 'Slow motion .75x',
+  SlowMotion5X = 'Slow motion .5x',
+  SlowMotion25X = 'Slow motion .25x',
+  SlowMotion125X = 'Slow motion .125x',
+  SourceRenaming = 'Source renaming',
+}
+
+export enum EntertainmentGroupBitfield {
+  File = 'File',
+  PlaylistName = 'Playlist Name',
+  GenreName = 'Genre Name',
+  AlbumName = 'Album Name',
+  ArtistName = 'Artist Name',
+  TrackName = 'Track Name',
+  StationName = 'Station Name',
+  StationNumber = 'Station Number',
+  FavouriteNumber = 'Favourite Number',
+  PlayQueue = 'Play Queue',
+  ContentInfo = 'Content Info',
+}
+
+export enum ThrusterControlEvents {
+  AnotherDeviceControllingThruster = 'Another device controlling thruster',
+  BoatSpeedTooFastToSafelyUseThruster = 'Boat speed too fast to safely use thruster',
+}
+
+export enum ThrusterMotorEvents {
+  MotorOverTemperatureCutout = 'Motor over temperature cutout',
+  MotorOverCurrentCutout = 'Motor over current cutout',
+  LowOilLevelWarning = 'Low oil level warning',
+  OilOverTemperatureWarning = 'Oil over temperature warning',
+  ControllerUnderVoltageCutout = 'Controller under voltage cutout',
+  ManufacturerDefined = 'Manufacturer defined',
+}
+
+export enum WindlassControl {
+  AnotherDeviceControllingWindlass = 'Another device controlling windlass',
+}
+
+export enum WindlassOperation {
+  SystemError = 'System error',
+  SensorError = 'Sensor error',
+  NoWindlassMotionDetected = 'No windlass motion detected',
+  RetrievalDockingDistanceReached = 'Retrieval docking distance reached',
+  EndOfRodeReached = 'End of rode reached',
+}
+
+export enum WindlassMonitoring {
+  ControllerUnderVoltageCutOut = 'Controller under voltage cut-out',
+  ControllerOverCurrentCutOut = 'Controller over current cut-out',
+  ControllerOverTemperatureCutOut = 'Controller over temperature cut-out',
+  ManufacturerDefined = 'Manufacturer defined',
+}
+
+export enum SimnetApModeBitfield {
+  Standby = 'Standby',
+  Heading = 'Heading',
+  Nav = 'Nav',
+  NoDrift = 'No Drift',
+  Wind = 'Wind',
+}
+
+export enum SimnetAlertBitfield {
+  NoGpsFix = 'No GPS fix',
+  NoActiveAutopilotControlUnit = 'No active autopilot control unit',
+  NoAutopilotComputer = 'No autopilot computer',
+  ApClutchOverload = 'AP clutch overload',
+  ApClutchDisengaged = 'AP clutch disengaged',
+  RudderControllerFault = 'Rudder controller fault',
+  NoRudderResponse = 'No rudder response',
+  RudderDriveOverload = 'Rudder drive overload',
+  HighDriveSupply = 'High drive supply',
+  LowDriveSupply = 'Low drive supply',
+  MemoryFail = 'Memory fail',
+  ApPositionDataMissing = 'AP position data missing',
+  ApSpeedDataMissing = 'AP speed data missing',
+  ApDepthDataMissing = 'AP depth data missing',
+  ApHeadingDataMissing = 'AP heading data missing',
+  ApNavDataMissing = 'AP nav data missing',
+  ApRudderDataMissing = 'AP rudder data missing',
+  ApWindDataMissing = 'AP wind data missing',
+  ApOffCourse = 'AP off course',
+  HighDriveTemperature = 'High drive temperature',
+  DriveInhibit = 'Drive inhibit',
+  RudderLimit = 'Rudder limit',
+  DriveComputerMissing = 'Drive computer missing',
+  DriveReadyMissing = 'Drive ready missing',
+  EvcComError = 'EVC com error',
+  EvcOverride = 'EVC override',
+  LowCanBusVoltage = 'Low CAN bus voltage',
+  CanBusSupplyOverload = 'CAN bus supply overload',
+  WindSensorBatteryLow = 'Wind sensor battery low',
+}
+
+export enum EntertainmentRepeatBitfield {
+  Song = 'Song',
+  PlayQueue = 'Play queue',
+}
+
+export enum EntertainmentShuffleBitfield {
+  PlayQueue = 'Play queue',
+  All = 'All',
+}
+
+export enum WpChange {
+  ChangeInMainDatapositionName = 'Change in main data (Position, Name)',
+  ChangeInSupplementaryParametersorNewAdded = 'Change in supplementary parameters (or new added)',
+  ChangedNumberOfWPsInRoutewpListAndorNameChangedadded = 'Changed number of WPs in Route/WP-List, and/or name changed/added',
+  RouteChangeSupplementaryParametersorNewAdded = 'Route: Change supplementary parameters (or new added)',
+  OtherNotSpecifiedChanged = 'Other not specified changed',
+}
+
+export enum WpCriticalParameters {
+  NavigationMethod = 'Navigation Method',
+  XteLimit = 'XTE Limit',
+}
+
 export interface PGN {
 }
 /*
@@ -2470,7 +2750,7 @@ export interface PGN_60928 extends PGN {
   manufacturerCode: ManufacturerCode
   deviceInstanceLower: number
   deviceInstanceUpper: number
-  deviceFunction: string
+  deviceFunction: DeviceFunction
   spare: string
   deviceClass: DeviceClass
   systemInstance: number
@@ -2846,7 +3126,7 @@ export interface PGN_65240 extends PGN {
   manufacturerCode: ManufacturerCode
   deviceInstanceLower: number
   deviceInstanceUpper: number
-  deviceFunction: string
+  deviceFunction: DeviceFunction
   reserved: number
   deviceClass: DeviceClass
   systemInstance: number
@@ -3111,7 +3391,7 @@ export interface PGN_65305_Simrad_Mode extends PGN {
   industryCode: IndustryCode
   model: SimnetDeviceModel
   report: SimnetDeviceReport
-  mode: string
+  mode: SimnetApModeBitfield[]
   spare7: string
 }
 
@@ -4397,8 +4677,8 @@ export interface PGN_127489 extends PGN {
   coolantPressure: number
   fuelPressure: number
   reserved: number
-  discreteStatus1: string
-  discreteStatus2: string
+  discreteStatus1: EngineStatus1[]
+  discreteStatus2: EngineStatus2[]
   engineLoad: number
   engineTorque: number
 }
@@ -4958,7 +5238,7 @@ export interface PGN_128006 extends PGN {
   powerEnabled: OffOn
   retractControl: ThrusterRetractControl
   speedControl: number
-  controlEvents: string
+  controlEvents: ThrusterControlEvents[]
   commandTimeout: string
   azimuthControl: number
 }
@@ -4983,7 +5263,7 @@ export interface PGN_128007 extends PGN {
 export interface PGN_128008 extends PGN {
   sid: number
   identifier: number
-  motorEvents: string
+  motorEvents: ThrusterMotorEvents[]
   current: number
   temperature: number
   operatingTime: string
@@ -5031,7 +5311,7 @@ export interface PGN_128275 extends PGN {
 export interface PGN_128520 extends PGN {
   sid: number
   targetId: number
-  trackStatus: string
+  trackStatus: Tracking[]
   reportedTarget: boolean
   targetAcquisition: TargetAcquisition
   bearingReference: DirectionReference
@@ -5133,7 +5413,7 @@ export interface PGN_128776 extends PGN {
   deckAndAnchorWash: OffOn
   anchorLight: OffOn
   commandTimeout: string
-  windlassControlEvents: string
+  windlassControlEvents: WindlassControl[]
   reserved14: number
 }
 
@@ -5151,7 +5431,7 @@ export interface PGN_128777 extends PGN {
   rodeCounterValue: number
   windlassLineSpeed: number
   anchorDockingStatus: DockingStatus
-  windlassOperatingEvents: string
+  windlassOperatingEvents: WindlassOperation[]
 }
 
 /*
@@ -5161,7 +5441,7 @@ export interface PGN_128777 extends PGN {
 export interface PGN_128778 extends PGN {
   sid: number
   windlassId: number
-  windlassMonitoringEvents: string
+  windlassMonitoringEvents: WindlassMonitoring[]
   controllerVoltage: number
   motorCurrent: number
   totalMotorTime: string
@@ -6150,12 +6430,12 @@ export interface PGN_130052 extends PGN {
   xSecondaryTd: string
   ySecondaryTd: string
   zSecondaryTd: string
-  stationStatusMaster: string
-  stationStatusV: string
-  stationStatusW: string
-  stationStatusX: string
-  stationStatusY: string
-  stationStatusZ: string
+  stationStatusMaster: StationStatus[]
+  stationStatusV: StationStatus[]
+  stationStatusW: StationStatus[]
+  stationStatusX: StationStatus[]
+  stationStatusY: StationStatus[]
+  stationStatusZ: StationStatus[]
   mode: ResidualMode
   reserved: number
 }
@@ -6172,12 +6452,12 @@ export interface PGN_130053 extends PGN {
   xSecondaryRange: string
   ySecondaryRange: string
   zSecondaryRange: string
-  stationStatusMaster: string
-  stationStatusV: string
-  stationStatusW: string
-  stationStatusX: string
-  stationStatusY: string
-  stationStatusZ: string
+  stationStatusMaster: StationStatus[]
+  stationStatusV: StationStatus[]
+  stationStatusW: StationStatus[]
+  stationStatusX: StationStatus[]
+  stationStatusY: StationStatus[]
+  stationStatusZ: StationStatus[]
   mode: ResidualMode
   reserved: number
 }
@@ -6272,9 +6552,9 @@ export interface PGN_130066 extends PGN {
   routeWpListName: string
   routeWpListTimestamp: string
   routeWpListDatestamp: string
-  changeAtLastTimestamp: string
+  changeAtLastTimestamp: WpChange[]
   numberOfWpsInTheRouteWpList: number
-  criticalSupplementaryParameters: string
+  criticalSupplementaryParameters: WpCriticalParameters[]
   navigationMethod: WpNavigationMethod
   wpIdentificationMethod: WpIdentificationMethod
   routeStatus: WpRouteStatus
@@ -6867,12 +7147,12 @@ export interface PGN_130573 extends PGN {
   source: EntertainmentSource
   number: number
   name: string
-  playSupport: string
-  browseSupport: string
+  playSupport: EntertainmentPlayStatusBitfield[]
+  browseSupport: EntertainmentGroupBitfield[]
   thumbsSupport: boolean
   connected: boolean
-  repeatSupport: string
-  shuffleSupport: string
+  repeatSupport: EntertainmentRepeatBitfield[]
+  shuffleSupport: EntertainmentShuffleBitfield[]
 }
 
 /*

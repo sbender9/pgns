@@ -8,23 +8,20 @@ function enumName(name: string) {
   return fixIdentifier(camelCase(name, {pascalCase:true}), "_")
 }
 
-function getMultiples() {
-  const multiples: number[] = []
-  const found: number[] = []
+const organized: { [key: number]: any[] } = {}
+const pgnNumbers: number[] = []
 
+function organizePGNs() {
   filtered.forEach(pgn => {
-    const num = pgn.PGN
-    if ( found.indexOf(pgn.PGN) !== -1 ) {
-      multiples.push(pgn.PGN)
-    } else {
-      found.push(pgn.PGN)
+    if ( !organized[pgn.PGN] ) {
+      organized[pgn.PGN] = []
+      pgnNumbers.push(pgn.PGN)
     }
+    organized[pgn.PGN].push(pgn)
   })
-
-  return multiples
 }
 
-const multiples = getMultiples()
+organizePGNs()
 
 pgns.LookupEnumerations.forEach(en => {
   if ( en.Name !== 'YES_NO' ) {
@@ -33,14 +30,6 @@ pgns.LookupEnumerations.forEach(en => {
     en.EnumValues.forEach(v => {
       let name = enumName(v.Name)
       let found = done[name]
-      /*
-      if ( found ) {
-        let num = found + 1
-        done[name] = num
-        name = name + num
-      } else {
-        done[name] = 1
-        }*/
       if ( !found ) {
         done[name] = 1
         console.log(`  ${name} = '${v.Name}',`)
@@ -50,17 +39,92 @@ pgns.LookupEnumerations.forEach(en => {
   }
 })
 
+pgns.LookupIndirectEnumerations.forEach(en => {
+  const done: { [key: string]: number } = {}
+  console.log(`export enum ${enumName(en.Name)} {`)
+  en.EnumValues.forEach(v => {
+    let name = enumName(v.Name)
+    let found = done[name]
+    if ( !found ) {
+      done[name] = 1
+      console.log(`  ${name} = '${v.Name}',`)
+    }
+  })
+  console.log('}\n')
+})
+
+pgns.LookupBitEnumerations.forEach(en => {
+  const done: { [key: string]: number } = {}
+  console.log(`export enum ${enumName(en.Name)} {`)
+  en.EnumBitValues.forEach(v => {
+    let name = enumName(v.Name)
+    let found = done[name]
+    if ( !found ) {
+      done[name] = 1
+      console.log(`  ${name} = '${v.Name}',`)
+    }
+  })
+  console.log('}\n')
+})
+
 console.log('export interface PGN {')
 console.log('}')
 
-filtered.forEach(pgn => {
+function getMatchFields(pgn: any) : any[] {
+  return pgn.Fields.filter((field:any) => field.Match !== undefined)
+}
+
+function getPGNsWithMatchs(pgns: any[], count: number) : any[] {
+  const res : any[] = []
+  pgns.forEach(pgn => {
+    const matches = getMatchFields(pgn)
+    if ( matches.length == count ) {
+      res.push(pgn)
+    }
+  })
+  return res
+}
+
+function getMaxMatchs(pgns: any[]) : number {
+  let res = 0
+  pgns.forEach(pgn => {
+    const matches = getMatchFields(pgn)
+    if ( matches.length > res ) {
+      res = matches.length
+    }
+  })
+  return res
+}
+
+pgnNumbers.forEach((pgnNumber:number) => {
+  const pgns = organized[pgnNumber]
+  pgns.forEach((pgn: any) => {
+    outputPGN(pgn, pgns.length > 1)
+  })
+  /*
+  const pgns = organized[pgnNumber]
+  if ( pgns.length === 1 ) {
+    outputPGN(pgns[0], false)
+  } else {
+    const matchesByCount = []
+    for ( let i = 0; i < getMaxMatchs(pgns); i++ ) {
+      const withCount = getPGNsWithMatchs(pgns, i)
+      withCount.forEach(pgn => {
+        outputPGN(pgn, true, i)
+      })
+    }
+    }
+    */
+})
+
+function outputPGN(pgn: any, isMulti: boolean) {
   console.log('/*')
   console.log(`  PGN: ${pgn.PGN}`)
   console.log(`  Description: ${pgn.Description}`)
   if ( pgn.Explanation ) {
     console.log(`  Explanation: ${pgn.Explanation}`)
   }
-  if ( multiples.indexOf(pgn.PGN) !== -1 ) {
+  if ( isMulti ) {
     pgn.Fields.forEach((field:any) => {
       if ( field.Match ) {
         console.log(`  Match: ${field.Name} == ${field.Description || field.Match}`)
@@ -71,7 +135,7 @@ filtered.forEach(pgn => {
 
   let typeName = `PGN_${pgn.PGN}`
 
-  if ( multiples.indexOf(pgn.PGN) !== -1 ) {
+  if ( isMulti ) {
     pgn.Fields.forEach((field:any) => {
       if ( field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
         const desc = field.Description ? enumName(field.Description) : field.Match
@@ -81,8 +145,8 @@ filtered.forEach(pgn => {
   }
   
   console.log(`export interface ${typeName} extends PGN {`)
+  let matchCount = 0
   pgn.Fields.forEach((field:any) => {
-
     let type = 'string'
     switch (field.FieldType) {
     case 'NUMBER':
@@ -98,12 +162,20 @@ filtered.forEach(pgn => {
         type = enumName(field.LookupEnumeration)
       }
       break
+
+    case 'INDIRECT_LOOKUP':
+      type = enumName(field.LookupIndirectEnumeration)
+      break
+
+    case 'BITLOOKUP':
+      type = enumName(field.LookupBitEnumeration) + '[]'
+      break
     }
     
     console.log(`  ${fixIdentifier(field.Id, '_')}: ${type}`)
   })
   console.log('}\n')
-})
+}
 
 
 function fixIdentifier(str:string, prefix:string) {
