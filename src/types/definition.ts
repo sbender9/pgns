@@ -70,7 +70,7 @@ export type Field = {
   BitStart: number,
   Condition?: string,
   Match?: number,
-  Unit: string,
+  Unit?: string,
   Resolution?: number,
   Signed?: boolean,
   Offset?: number,
@@ -82,7 +82,7 @@ export type Field = {
   PartOfPrimaryKey?: boolean,
   LookupEnumeration?: string,
   LookupIndirectEnumeration?: string,
-  LookupIndirectEnumerationFieldOrder: number,
+  LookupIndirectEnumerationFieldOrder?: number,
   LookupBitEnumeration?: string
 }
 
@@ -100,7 +100,7 @@ export type Definition = {
   Missing?: string[],
   Type: Type,
   Priority: number,
-  Fallback: boolean,
+  Fallback?: boolean,
   FieldCount?: number,
   RepeatingFieldSet1Size?: number,
   RepeatingFieldSet1StartField?: number,

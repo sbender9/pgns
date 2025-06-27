@@ -1,14 +1,15 @@
 import camelCase from 'camelcase'
+import { pgns, getPGNs} from '../index'
 
-import { pgns, getPGNs} from '../index.js'
-const filtered = getPGNs()
+import { Definition, Field, FieldType } from './types/definition'
 
+const filtered : Definition[] = getPGNs() as Definition[]
 
 function enumName(name: string) {
   return fixIdentifier(camelCase(name, {pascalCase:true}), "_")
 }
 
-const organized: { [key: number]: any[] } = {}
+const organized: { [key: number]: Definition[] } = {}
 const pgnNumbers: number[] = []
 
 function organizePGNs() {
@@ -70,12 +71,12 @@ pgns.LookupBitEnumerations.forEach(en => {
 console.log('export interface PGN {')
 console.log('}')
 
-function getMatchFields(pgn: any) : any[] {
-  return pgn.Fields.filter((field:any) => field.Match !== undefined)
+function getMatchFields(pgn: Definition) : Field[] {
+  return pgn.Fields.filter(field => field.Match !== undefined)
 }
 
-function getPGNsWithMatchs(pgns: any[], count: number) : any[] {
-  const res : any[] = []
+function getPGNsWithMatchs(pgns: Definition[], count: number) : Definition[] {
+  const res : Definition[] = []
   pgns.forEach(pgn => {
     const matches = getMatchFields(pgn)
     if ( matches.length == count ) {
@@ -85,7 +86,7 @@ function getPGNsWithMatchs(pgns: any[], count: number) : any[] {
   return res
 }
 
-function getMaxMatchs(pgns: any[]) : number {
+function getMaxMatchs(pgns: Definition[]) : number {
   let res = 0
   pgns.forEach(pgn => {
     const matches = getMatchFields(pgn)
@@ -96,7 +97,7 @@ function getMaxMatchs(pgns: any[]) : number {
   return res
 }
 
-pgnNumbers.forEach((pgnNumber:number) => {
+pgnNumbers.forEach(pgnNumber => {
   const pgns = organized[pgnNumber]
   pgns.forEach((pgn: any) => {
     outputPGN(pgn, pgns.length > 1)
@@ -117,7 +118,7 @@ pgnNumbers.forEach((pgnNumber:number) => {
     */
 })
 
-function outputPGN(pgn: any, isMulti: boolean) {
+function outputPGN(pgn: Definition, isMulti: boolean) {
   console.log('/*')
   console.log(`  PGN: ${pgn.PGN}`)
   console.log(`  Description: ${pgn.Description}`)
@@ -125,7 +126,7 @@ function outputPGN(pgn: any, isMulti: boolean) {
     console.log(`  Explanation: ${pgn.Explanation}`)
   }
   if ( isMulti ) {
-    pgn.Fields.forEach((field:any) => {
+    pgn.Fields.forEach(field => {
       if ( field.Match ) {
         console.log(`  Match: ${field.Name} == ${field.Description || field.Match}`)
       }
@@ -136,7 +137,7 @@ function outputPGN(pgn: any, isMulti: boolean) {
   let typeName = `PGN_${pgn.PGN}`
 
   if ( isMulti ) {
-    pgn.Fields.forEach((field:any) => {
+    pgn.Fields.forEach(field => {
       if ( field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
         const desc = field.Description ? enumName(field.Description) : field.Match
         typeName = typeName + `_${desc}`
@@ -146,7 +147,7 @@ function outputPGN(pgn: any, isMulti: boolean) {
   
   console.log(`export interface ${typeName} extends PGN {`)
   let matchCount = 0
-  pgn.Fields.forEach((field:any) => {
+  pgn.Fields.forEach(field => {
     let type = 'string'
     switch (field.FieldType) {
     case 'NUMBER':
@@ -158,17 +159,21 @@ function outputPGN(pgn: any, isMulti: boolean) {
     case 'LOOKUP':
       if ( field.LookupEnumeration === 'YES_NO' ) {
         type = 'boolean'
-      } else {
+      } else if ( field.LookupEnumeration ) {
         type = enumName(field.LookupEnumeration)
       }
       break
 
     case 'INDIRECT_LOOKUP':
-      type = enumName(field.LookupIndirectEnumeration)
+      if ( field.LookupIndirectEnumeration ) {
+        type = enumName(field.LookupIndirectEnumeration)
+      }
       break
 
     case 'BITLOOKUP':
-      type = enumName(field.LookupBitEnumeration) + '[]'
+      if ( field.LookupBitEnumeration ) {
+        type = enumName(field.LookupBitEnumeration) + '[]'
+      }
       break
     }
     
