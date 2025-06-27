@@ -4,9 +4,16 @@
   "description": "Json description of canboat supported pgns",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit",
+    "test": "mocha 'test/**/*.[jt]s'",
     "changelog": "github-changes -o canboat -r pgns -a --only-pulls --use-commit-body --data=pulls  --tag-name=v$npm_package_version",
-    "release": "git tag -d v$npm_package_version; npm run changelog && git add CHANGELOG.md && git commit -m 'chore: update changelog' && git tag v$npm_package_version && git push --tags && git push"
+    "release": "git tag -d v$npm_package_version; npm run changelog && git add CHANGELOG.md && git commit -m 'chore: update changelog' && git tag v$npm_package_version && git push --tags && git push",
+    "build": "tsc -b",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "prettier": "prettier --write .",
+    "lint": "eslint --fix",
+    "format": "npm run prettier && npm run lint",
+    "generate": "node dist/generator.js > src/types/pgns.ts"
   },
   "author": "Scott Bender <scott@scottbender.net>",
   "contributors": [
@@ -27,5 +34,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/canboat/canboat.git"
+  },
+  "dependencies": {
+    "camelcase": "^8.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.6",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.0.4",
+    "mocha": "^11.7.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
