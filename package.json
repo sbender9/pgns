@@ -2,7 +2,8 @@
   "name": "@canboat/pgns",
   "version": "6.0.2",
   "description": "Json description of canboat supported pgns",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha 'test/**/*.[jt]s'",
     "changelog": "github-changes -o canboat -r pgns -a --only-pulls --use-commit-body --data=pulls  --tag-name=v$npm_package_version",
@@ -11,9 +12,10 @@
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "prettier": "prettier --write .",
-    "lint": "eslint --fix",
+    "lint-fix": "eslint --fix",
+    "lint": "eslint",
     "format": "npm run prettier && npm run lint",
-    "generate": "node dist/generator.js > src/types/pgns.ts"
+    "generate": "node dist/generator.js > src/pgns.ts"
   },
   "author": "Scott Bender <scott@scottbender.net>",
   "contributors": [
@@ -24,10 +26,6 @@
     {
       "name": "Teppo Kurki",
       "email": "teppo.kurki@iki.fi"
-    },
-    {
-      "name": "Jouni Hartikainen",
-      "email": "jouni.hartikainen@iki.fi"
     }
   ],
   "license": "Apache-2.0",
@@ -42,8 +40,12 @@
     "@tsconfig/node20": "^20.1.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.0.4",
+    "eslint": "^9.30.0",
+    "eslint-config-prettier": "^10.1.5",
     "mocha": "^11.7.1",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.0"
   }
 }

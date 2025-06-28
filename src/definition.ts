@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export type PGNMap = {
+  [key: number]: Definition[]
+}
 
 export enum Type {
   Single = "Single",

@@ -1,7 +1,23 @@
-import camelCase from 'camelcase'
-import { pgns, getPGNs} from '../index'
+/*
+ * Copyright 2021 Scott Bender <scott@scottbender.net>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
 
-import { Definition, Field, FieldType } from './types/definition'
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+import camelCase from 'camelcase'
+import { pgns, getPGNs} from './index'
+
+import { Definition, Field } from './definition'
 
 const filtered : Definition[] = getPGNs() as Definition[]
 
@@ -24,11 +40,11 @@ function organizePGNs() {
 
 organizePGNs()
 
-pgns.LookupEnumerations.forEach(en => {
+pgns.LookupEnumerations.forEach((en:any) => {
   if ( en.Name !== 'YES_NO' ) {
     const done: { [key: string]: number } = {}
     console.log(`export enum ${enumName(en.Name)} {`)
-    en.EnumValues.forEach(v => {
+    en.EnumValues.forEach((v:any) => {
       let name = enumName(v.Name)
       let found = done[name]
       if ( !found ) {
@@ -40,10 +56,10 @@ pgns.LookupEnumerations.forEach(en => {
   }
 })
 
-pgns.LookupIndirectEnumerations.forEach(en => {
+pgns.LookupIndirectEnumerations.forEach((en:any) => {
   const done: { [key: string]: number } = {}
   console.log(`export enum ${enumName(en.Name)} {`)
-  en.EnumValues.forEach(v => {
+  en.EnumValues.forEach((v:any) => {
     let name = enumName(v.Name)
     let found = done[name]
     if ( !found ) {
@@ -54,10 +70,10 @@ pgns.LookupIndirectEnumerations.forEach(en => {
   console.log('}\n')
 })
 
-pgns.LookupBitEnumerations.forEach(en => {
+pgns.LookupBitEnumerations.forEach((en:any) => {
   const done: { [key: string]: number } = {}
   console.log(`export enum ${enumName(en.Name)} {`)
-  en.EnumBitValues.forEach(v => {
+  en.EnumBitValues.forEach((v:any) => {
     let name = enumName(v.Name)
     let found = done[name]
     if ( !found ) {

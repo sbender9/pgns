@@ -1,5 +1,5 @@
 
-import { PGN_65305_Simrad_SendMode, IndustryCode, ManufacturerCode } from './types/pgns'
+import { PGN_65305_Simrad_SendMode, IndustryCode, ManufacturerCode } from './pgns'
 
 
 
