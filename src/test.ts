@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { PGN_65305_Simrad_SendMode, ManufacturerCode } from './pgns'
+//import { Definition } from './definition'
+import { getPGN } from './index'
 
 const obj: any = {
   manufacturerCode: 'BEP Marine',
@@ -17,3 +19,5 @@ function tryIt(pgn: PGN_65305_Simrad_SendMode) {
     console.log(pgn.manufacturerCode)
   }
 }
+
+console.log(getPGN(60928))

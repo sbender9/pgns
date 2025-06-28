@@ -42,7 +42,7 @@ export const getAllPGNs = (): Definition[] => {
 let pgnMap: PGNMap
 
 export const getPGNMap = (): PGNMap => {
-  if (pgnMap !== undefined) {
+  if (pgnMap === undefined) {
     const res: { [key: number]: Definition[] } = {}
 
     getAllPGNs().forEach((pgn) => {
@@ -50,6 +50,13 @@ export const getPGNMap = (): PGNMap => {
         res[pgn.PGN] = []
       }
       res[pgn.PGN].push(pgn)
+
+      let reservedCount = 1
+      pgn.Fields.forEach((field) => {
+        if (field.Name === 'Reserved') {
+          field.Name = `Reserved${reservedCount++}`
+        }
+      })
     })
     pgnMap = res
   }
