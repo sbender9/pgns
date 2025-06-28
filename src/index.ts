@@ -25,27 +25,28 @@ import canboat from '../canboat.json'
 
 //for backwards compatibility
 export const pgns = canboat
-export const getPGNs = () : Definition[] => {
-  const all : Definition[] = canboat.PGNs as Definition[]
-  return all.filter((pgn:any) => pgn.Fallback === undefined || pgn.Fallback === false)
-}
-
-
-export const getAllPGNs = () : Definition[] => {
-  const all : Definition[] = canboat.PGNs as Definition[]
-  return all.filter((pgn:any) => 
-    pgn.Fallback === undefined || pgn.Fallback === false
+export const getPGNs = (): Definition[] => {
+  const all: Definition[] = canboat.PGNs as Definition[]
+  return all.filter(
+    (pgn: any) => pgn.Fallback === undefined || pgn.Fallback === false
   )
 }
 
-let pgnMap : PGNMap
+export const getAllPGNs = (): Definition[] => {
+  const all: Definition[] = canboat.PGNs as Definition[]
+  return all.filter(
+    (pgn: any) => pgn.Fallback === undefined || pgn.Fallback === false
+  )
+}
 
-export const getPGNMap = () : PGNMap => {
-  if ( pgnMap !== undefined ) {
+let pgnMap: PGNMap
+
+export const getPGNMap = (): PGNMap => {
+  if (pgnMap !== undefined) {
     const res: { [key: number]: Definition[] } = {}
-    
-    getAllPGNs().forEach(pgn => {
-      if ( !res[pgn.PGN] ) {
+
+    getAllPGNs().forEach((pgn) => {
+      if (!res[pgn.PGN]) {
         res[pgn.PGN] = []
       }
       res[pgn.PGN].push(pgn)
@@ -56,6 +57,6 @@ export const getPGNMap = () : PGNMap => {
   return pgnMap
 }
 
-export const getPGN = (num: number) : Definition[] | undefined => {
+export const getPGN = (num: number): Definition[] | undefined => {
   return getPGNMap()[num]
 }

@@ -2,9 +2,7 @@
 
 import { PGN_65305_Simrad_SendMode, ManufacturerCode } from './pgns'
 
-
-
-const obj : any = {
+const obj: any = {
   manufacturerCode: 'BEP Marine',
   industryCode: 'Marine',
   model: 'AC',
@@ -12,11 +10,10 @@ const obj : any = {
   spare6: 'dfksdsd'
 }
 
-
 tryIt(obj)
 
 function tryIt(pgn: PGN_65305_Simrad_SendMode) {
-  if ( pgn.manufacturerCode === ManufacturerCode.BepMarine ) {
+  if (pgn.manufacturerCode === ManufacturerCode.BepMarine) {
     console.log(pgn.manufacturerCode)
   }
 }

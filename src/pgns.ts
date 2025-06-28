@@ -2638,8 +2638,8 @@ export enum WpCriticalParameters {
   XteLimit = 'XTE Limit',
 }
 
-export interface PGN {
-}
+export interface PGN {}
+
 /*
   PGN: 59392
   Description: ISO Acknowledgement
