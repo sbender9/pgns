@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * Copyright 2025 Scott Bender <scott@scottbender.net>
  *
@@ -19,15 +20,20 @@ export * from './definition'
 
 import { Definition, PGNMap } from './definition'
 
-const canboat = require('../canboat.json')
+//const canboat = require('../canboat.json')
+import canboat from '../canboat.json'
 
 //for backwards compatibility
 export const pgns = canboat
-export const getPGNs = () : Definition[] => canboat.PGNs.filter((pgn:any) => pgn.Fallback === undefined || pgn.Fallback === false)
+export const getPGNs = () : Definition[] => {
+  const all : Definition[] = canboat.PGNs as Definition[]
+  return all.filter((pgn:any) => pgn.Fallback === undefined || pgn.Fallback === false)
+}
 
 
 export const getAllPGNs = () : Definition[] => {
-  return canboat.PGNs.filter((pgn:any) => 
+  const all : Definition[] = canboat.PGNs as Definition[]
+  return all.filter((pgn:any) => 
     pgn.Fallback === undefined || pgn.Fallback === false
   )
 }

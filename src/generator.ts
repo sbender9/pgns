@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * Copyright 2021 Scott Bender <scott@scottbender.net>
  *
@@ -45,8 +46,8 @@ pgns.LookupEnumerations.forEach((en:any) => {
     const done: { [key: string]: number } = {}
     console.log(`export enum ${enumName(en.Name)} {`)
     en.EnumValues.forEach((v:any) => {
-      let name = enumName(v.Name)
-      let found = done[name]
+      const name = enumName(v.Name)
+      const found = done[name]
       if ( !found ) {
         done[name] = 1
         console.log(`  ${name} = '${v.Name}',`)
@@ -60,8 +61,8 @@ pgns.LookupIndirectEnumerations.forEach((en:any) => {
   const done: { [key: string]: number } = {}
   console.log(`export enum ${enumName(en.Name)} {`)
   en.EnumValues.forEach((v:any) => {
-    let name = enumName(v.Name)
-    let found = done[name]
+    const name = enumName(v.Name)
+    const found = done[name]
     if ( !found ) {
       done[name] = 1
       console.log(`  ${name} = '${v.Name}',`)
@@ -74,8 +75,8 @@ pgns.LookupBitEnumerations.forEach((en:any) => {
   const done: { [key: string]: number } = {}
   console.log(`export enum ${enumName(en.Name)} {`)
   en.EnumBitValues.forEach((v:any) => {
-    let name = enumName(v.Name)
-    let found = done[name]
+    const name = enumName(v.Name)
+    const found = done[name]
     if ( !found ) {
       done[name] = 1
       console.log(`  ${name} = '${v.Name}',`)
@@ -87,6 +88,7 @@ pgns.LookupBitEnumerations.forEach((en:any) => {
 console.log('export interface PGN {')
 console.log('}')
 
+/*
 function getMatchFields(pgn: Definition) : Field[] {
   return pgn.Fields.filter(field => field.Match !== undefined)
 }
@@ -112,6 +114,7 @@ function getMaxMatchs(pgns: Definition[]) : number {
   })
   return res
 }
+*/
 
 pgnNumbers.forEach(pgnNumber => {
   const pgns = organized[pgnNumber]
@@ -142,7 +145,7 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
     console.log(`  Explanation: ${pgn.Explanation}`)
   }
   if ( isMulti ) {
-    pgn.Fields.forEach(field => {
+    pgn.Fields.forEach((field: Field) => {
       if ( field.Match ) {
         console.log(`  Match: ${field.Name} == ${field.Description || field.Match}`)
       }
@@ -153,7 +156,7 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
   let typeName = `PGN_${pgn.PGN}`
 
   if ( isMulti ) {
-    pgn.Fields.forEach(field => {
+    pgn.Fields.forEach((field: Field) => {
       if ( field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
         const desc = field.Description ? enumName(field.Description) : field.Match
         typeName = typeName + `_${desc}`
@@ -162,8 +165,7 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
   }
   
   console.log(`export interface ${typeName} extends PGN {`)
-  let matchCount = 0
-  pgn.Fields.forEach(field => {
+  pgn.Fields.forEach((field: Field) => {
     let type = 'string'
     switch (field.FieldType) {
     case 'NUMBER':

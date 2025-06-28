@@ -14,6 +14,9 @@ module.exports = defineConfig([
     languageOptions: {
       parser: tseslint.parser,
       globals: globals.node
+    },
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off"
     }
   },
 

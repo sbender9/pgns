@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { PGN_65305_Simrad_SendMode, IndustryCode, ManufacturerCode } from './pgns'
+import { PGN_65305_Simrad_SendMode, ManufacturerCode } from './pgns'
 
 
 
-let obj : any = {
+const obj : any = {
   manufacturerCode: 'BEP Marine',
   industryCode: 'Marine',
   model: 'AC',
