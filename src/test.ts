@@ -20,4 +20,14 @@ function tryIt(pgn: PGN_65305_Simrad_SendMode) {
   }
 }
 
-console.log(getPGN(60928))
+let pgn = getPGN(60928)
+
+console.log(pgn)
+if ( pgn !== undefined ) {
+  console.log(pgn[0].TransmissionInterval)
+  let inter:number|undefined = pgn[0].TransmissionInterval
+  
+  console.log("NULL")
+}
+
+

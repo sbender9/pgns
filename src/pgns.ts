@@ -2638,7 +2638,13 @@ export enum WpCriticalParameters {
   XteLimit = 'XTE Limit',
 }
 
-export interface PGN {}
+export interface PGN {
+  pgn: string
+  prio: number
+  src: number
+  dst: number
+  timestamp: string
+}
 
 /*
   PGN: 59392

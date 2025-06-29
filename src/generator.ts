@@ -85,7 +85,13 @@ pgns.LookupBitEnumerations.forEach((en: any) => {
   console.log('}\n')
 })
 
-console.log('export interface PGN {}\n')
+console.log('export interface PGN {')
+console.log('  pgn: string')
+console.log('  prio: number')
+console.log('  src: number')
+console.log('  dst: number')
+console.log('  timestamp: string')
+console.log('}\n')
 
 /*
 function getMatchFields(pgn: Definition) : Field[] {

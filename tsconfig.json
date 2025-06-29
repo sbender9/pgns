@@ -4,7 +4,7 @@
     "outDir": "${configDir}/dist",
     "rootDir": "${configDir}/src",
     "allowJs": true,
-    "typeRoots": ["${configDir}/src/types", "./node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "resolveJsonModule": true,
     "composite": true,
     "declaration": true,
