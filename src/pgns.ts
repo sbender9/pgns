@@ -2639,11 +2639,14 @@ export enum WpCriticalParameters {
 }
 
 export interface PGN {
-  pgn: string
+  pgn: number
   prio: number
   src: number
   dst: number
   timestamp: string
+  input?: string[]
+  description?: string
+  fields?: any
 }
 
 /*
@@ -2652,10 +2655,12 @@ export interface PGN {
   Explanation: This message is provided by ISO 11783 for a handshake mechanism between transmitting and receiving devices. This message is the possible response to acknowledge the reception of a 'normal broadcast' message or the response to a specific command to indicate compliance or failure.
 */
 export interface PGN_59392 extends PGN {
-  control: IsoControl
-  groupFunction: number
-  reserved: number
-  pgn: string
+  fields: {
+    control: IsoControl
+    groupFunction: number
+    reserved: number
+    pgn: string
+}
 }
 
 /*
@@ -2664,7 +2669,9 @@ export interface PGN_59392 extends PGN {
   Explanation: As defined by ISO, this message has a data length of 3 bytes with no padding added to complete the single frame. The appropriate response to this message is based on the PGN being requested, and whether the receiver supports the requested PGN.
 */
 export interface PGN_59904 extends PGN {
-  pgn: string
+  fields: {
+    pgn: string
+}
 }
 
 /*
@@ -2673,8 +2680,10 @@ export interface PGN_59904 extends PGN {
   Explanation: ISO 11783 defines this PGN as part of the Transport Protocol method used for transmitting messages that have 9 or more data bytes. This PGN represents a single packet of a multipacket message.
 */
 export interface PGN_60160 extends PGN {
-  sid: number
-  data: number
+  fields: {
+    sid: number
+    data: number
+}
 }
 
 /*
@@ -2684,11 +2693,13 @@ export interface PGN_60160 extends PGN {
   Match: Group Function Code == RTS
 */
 export interface PGN_60416_Rts extends PGN {
-  groupFunctionCode: IsoCommand
-  messageSize: number
-  packets: number
-  packetsReply: number
-  pgn: string
+  fields: {
+    groupFunctionCode: IsoCommand
+    messageSize: number
+    packets: number
+    packetsReply: number
+    pgn: string
+}
 }
 
 /*
@@ -2698,11 +2709,13 @@ export interface PGN_60416_Rts extends PGN {
   Match: Group Function Code == CTS
 */
 export interface PGN_60416_Cts extends PGN {
-  groupFunctionCode: IsoCommand
-  maxPackets: number
-  nextSid: number
-  reserved: number
-  pgn: string
+  fields: {
+    groupFunctionCode: IsoCommand
+    maxPackets: number
+    nextSid: number
+    reserved: number
+    pgn: string
+}
 }
 
 /*
@@ -2712,11 +2725,13 @@ export interface PGN_60416_Cts extends PGN {
   Match: Group Function Code == EOM
 */
 export interface PGN_60416_Eom extends PGN {
-  groupFunctionCode: IsoCommand
-  totalMessageSize: number
-  totalNumberOfFramesReceived: number
-  reserved: number
-  pgn: string
+  fields: {
+    groupFunctionCode: IsoCommand
+    totalMessageSize: number
+    totalNumberOfFramesReceived: number
+    reserved: number
+    pgn: string
+}
 }
 
 /*
@@ -2726,11 +2741,13 @@ export interface PGN_60416_Eom extends PGN {
   Match: Group Function Code == BAM
 */
 export interface PGN_60416_Bam extends PGN {
-  groupFunctionCode: IsoCommand
-  messageSize: number
-  packets: number
-  reserved: number
-  pgn: string
+  fields: {
+    groupFunctionCode: IsoCommand
+    messageSize: number
+    packets: number
+    reserved: number
+    pgn: string
+}
 }
 
 /*
@@ -2740,10 +2757,12 @@ export interface PGN_60416_Bam extends PGN {
   Match: Group Function Code == Abort
 */
 export interface PGN_60416_Abort extends PGN {
-  groupFunctionCode: IsoCommand
-  reason: number
-  reserved: number
-  pgn: string
+  fields: {
+    groupFunctionCode: IsoCommand
+    reason: number
+    reserved: number
+    pgn: string
+}
 }
 
 /*
@@ -2752,16 +2771,18 @@ export interface PGN_60416_Abort extends PGN {
   Explanation: This network management message is used to claim network address, reply to devices requesting the claimed address, and to respond with device information (NAME) requested by the ISO Request or Complex Request Group Function. This PGN contains several fields that are requestable, either independently or in any combination. Note that there are several places where this 64-bit data also occurs, these are named ISO_NAME and can be recursively explained.
 */
 export interface PGN_60928 extends PGN {
-  uniqueNumber: number
-  manufacturerCode: ManufacturerCode
-  deviceInstanceLower: number
-  deviceInstanceUpper: number
-  deviceFunction: DeviceFunction
-  spare: string
-  deviceClass: DeviceClass
-  systemInstance: number
-  industryGroup: IndustryCode
-  arbitraryAddressCapable: boolean
+  fields: {
+    uniqueNumber: number
+    manufacturerCode: ManufacturerCode
+    deviceInstanceLower: number
+    deviceInstanceUpper: number
+    deviceFunction: DeviceFunction
+    spare: string
+    deviceClass: DeviceClass
+    systemInstance: number
+    industryGroup: IndustryCode
+    arbitraryAddressCapable: boolean
+}
 }
 
 /*
@@ -2772,14 +2793,16 @@ export interface PGN_60928 extends PGN {
   Match: Proprietary ID == Wireless Keypad Light Control
 */
 export interface PGN_61184_Raymarine_WirelessKeypadLightControl extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  variant: number
-  wirelessSetting: number
-  wiredSetting: number
-  reserved8: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    variant: number
+    wirelessSetting: number
+    wiredSetting: number
+    reserved8: number
+}
 }
 
 /*
@@ -2789,13 +2812,15 @@ export interface PGN_61184_Raymarine_WirelessKeypadLightControl extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_61184_Raymarine extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  PID: number
-  variant: number
-  beepControl: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    PID: number
+    variant: number
+    beepControl: number
+    reserved7: number
+}
 }
 
 /*
@@ -2805,11 +2830,13 @@ export interface PGN_61184_Raymarine extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_61184_VictronEnergy extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  registerId: number
-  payload: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    registerId: number
+    payload: number
+}
 }
 
 /*
@@ -2817,10 +2844,12 @@ export interface PGN_61184_VictronEnergy extends PGN {
   Description: Bus #1 Phase C Basic AC Quantities
 */
 export interface PGN_65001 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  reserved: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    reserved: number
+}
 }
 
 /*
@@ -2828,10 +2857,12 @@ export interface PGN_65001 extends PGN {
   Description: Bus #1 Phase B Basic AC Quantities
 */
 export interface PGN_65002 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  reserved: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    reserved: number
+}
 }
 
 /*
@@ -2839,10 +2870,12 @@ export interface PGN_65002 extends PGN {
   Description: Bus #1 Phase A Basic AC Quantities
 */
 export interface PGN_65003 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  reserved: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    reserved: number
+}
 }
 
 /*
@@ -2850,10 +2883,12 @@ export interface PGN_65003 extends PGN {
   Description: Bus #1 Average Basic AC Quantities
 */
 export interface PGN_65004 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  reserved: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    reserved: number
+}
 }
 
 /*
@@ -2861,8 +2896,10 @@ export interface PGN_65004 extends PGN {
   Description: Utility Total AC Energy
 */
 export interface PGN_65005 extends PGN {
-  totalEnergyExport: number
-  totalEnergyImport: number
+  fields: {
+    totalEnergyExport: number
+    totalEnergyImport: number
+}
 }
 
 /*
@@ -2870,10 +2907,12 @@ export interface PGN_65005 extends PGN {
   Description: Utility Phase C AC Reactive Power
 */
 export interface PGN_65006 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -2881,8 +2920,10 @@ export interface PGN_65006 extends PGN {
   Description: Utility Phase C AC Power
 */
 export interface PGN_65007 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -2890,10 +2931,12 @@ export interface PGN_65007 extends PGN {
   Description: Utility Phase C Basic AC Quantities
 */
 export interface PGN_65008 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -2901,10 +2944,12 @@ export interface PGN_65008 extends PGN {
   Description: Utility Phase B AC Reactive Power
 */
 export interface PGN_65009 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -2912,8 +2957,10 @@ export interface PGN_65009 extends PGN {
   Description: Utility Phase B AC Power
 */
 export interface PGN_65010 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -2921,10 +2968,12 @@ export interface PGN_65010 extends PGN {
   Description: Utility Phase B Basic AC Quantities
 */
 export interface PGN_65011 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -2932,10 +2981,12 @@ export interface PGN_65011 extends PGN {
   Description: Utility Phase A AC Reactive Power
 */
 export interface PGN_65012 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -2943,8 +2994,10 @@ export interface PGN_65012 extends PGN {
   Description: Utility Phase A AC Power
 */
 export interface PGN_65013 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -2952,10 +3005,12 @@ export interface PGN_65013 extends PGN {
   Description: Utility Phase A Basic AC Quantities
 */
 export interface PGN_65014 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -2963,10 +3018,12 @@ export interface PGN_65014 extends PGN {
   Description: Utility Total AC Reactive Power
 */
 export interface PGN_65015 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -2974,8 +3031,10 @@ export interface PGN_65015 extends PGN {
   Description: Utility Total AC Power
 */
 export interface PGN_65016 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -2983,10 +3042,12 @@ export interface PGN_65016 extends PGN {
   Description: Utility Average Basic AC Quantities
 */
 export interface PGN_65017 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -2994,8 +3055,10 @@ export interface PGN_65017 extends PGN {
   Description: Generator Total AC Energy
 */
 export interface PGN_65018 extends PGN {
-  totalEnergyExport: number
-  totalEnergyImport: number
+  fields: {
+    totalEnergyExport: number
+    totalEnergyImport: number
+}
 }
 
 /*
@@ -3003,10 +3066,12 @@ export interface PGN_65018 extends PGN {
   Description: Generator Phase C AC Reactive Power
 */
 export interface PGN_65019 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -3014,8 +3079,10 @@ export interface PGN_65019 extends PGN {
   Description: Generator Phase C AC Power
 */
 export interface PGN_65020 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -3023,10 +3090,12 @@ export interface PGN_65020 extends PGN {
   Description: Generator Phase C Basic AC Quantities
 */
 export interface PGN_65021 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -3034,10 +3103,12 @@ export interface PGN_65021 extends PGN {
   Description: Generator Phase B AC Reactive Power
 */
 export interface PGN_65022 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -3045,8 +3116,10 @@ export interface PGN_65022 extends PGN {
   Description: Generator Phase B AC Power
 */
 export interface PGN_65023 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -3054,10 +3127,12 @@ export interface PGN_65023 extends PGN {
   Description: Generator Phase B Basic AC Quantities
 */
 export interface PGN_65024 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -3065,10 +3140,12 @@ export interface PGN_65024 extends PGN {
   Description: Generator Phase A AC Reactive Power
 */
 export interface PGN_65025 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -3076,8 +3153,10 @@ export interface PGN_65025 extends PGN {
   Description: Generator Phase A AC Power
 */
 export interface PGN_65026 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -3085,10 +3164,12 @@ export interface PGN_65026 extends PGN {
   Description: Generator Phase A Basic AC Quantities
 */
 export interface PGN_65027 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -3096,10 +3177,12 @@ export interface PGN_65027 extends PGN {
   Description: Generator Total AC Reactive Power
 */
 export interface PGN_65028 extends PGN {
-  reactivePower: number
-  powerFactor: number
-  powerFactorLagging: PowerFactor
-  reserved: number
+  fields: {
+    reactivePower: number
+    powerFactor: number
+    powerFactorLagging: PowerFactor
+    reserved: number
+}
 }
 
 /*
@@ -3107,8 +3190,10 @@ export interface PGN_65028 extends PGN {
   Description: Generator Total AC Power
 */
 export interface PGN_65029 extends PGN {
-  realPower: number
-  apparentPower: number
+  fields: {
+    realPower: number
+    apparentPower: number
+}
 }
 
 /*
@@ -3116,10 +3201,12 @@ export interface PGN_65029 extends PGN {
   Description: Generator Average Basic AC Quantities
 */
 export interface PGN_65030 extends PGN {
-  lineLineAcRmsVoltage: number
-  lineNeutralAcRmsVoltage: number
-  acFrequency: number
-  acRmsCurrent: number
+  fields: {
+    lineLineAcRmsVoltage: number
+    lineNeutralAcRmsVoltage: number
+    acFrequency: number
+    acRmsCurrent: number
+}
 }
 
 /*
@@ -3128,17 +3215,19 @@ export interface PGN_65030 extends PGN {
   Explanation: ISO 11783 defined this message to provide a mechanism for assigning a network address to a node. The NAME information in the data portion of the message must match the name information of the node whose network address is to be set. ISO 11783-5 requires that this mesage to be sent using the BAM Transport Protocol method. The appropriate response to this message is defined in section 5.2.3 of 11783-5.
 */
 export interface PGN_65240 extends PGN {
-  uniqueNumber: number
-  manufacturerCode: ManufacturerCode
-  deviceInstanceLower: number
-  deviceInstanceUpper: number
-  deviceFunction: DeviceFunction
-  reserved: number
-  deviceClass: DeviceClass
-  systemInstance: number
-  industryCode: IndustryCode
-  reserved10: number
-  newSourceAddress: number
+  fields: {
+    uniqueNumber: number
+    manufacturerCode: ManufacturerCode
+    deviceInstanceLower: number
+    deviceInstanceUpper: number
+    deviceFunction: DeviceFunction
+    reserved: number
+    deviceClass: DeviceClass
+    systemInstance: number
+    industryCode: IndustryCode
+    reserved10: number
+    newSourceAddress: number
+}
 }
 
 /*
@@ -3146,11 +3235,13 @@ export interface PGN_65240 extends PGN {
   Description: Furuno: Heave
 */
 export interface PGN_65280 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  heave: number
-  reserved5: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    heave: number
+    reserved5: number
+}
 }
 
 /*
@@ -3158,13 +3249,15 @@ export interface PGN_65280 extends PGN {
   Description: Maretron: Proprietary DC Breaker Current
 */
 export interface PGN_65284 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  bankInstance: number
-  indicatorNumber: number
-  breakerCurrent: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    bankInstance: number
+    indicatorNumber: number
+    breakerCurrent: number
+    reserved7: number
+}
 }
 
 /*
@@ -3174,11 +3267,13 @@ export interface PGN_65284 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65285_Airmar extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  bootState: BootState
-  reserved5: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    bootState: BootState
+    reserved5: number
+}
 }
 
 /*
@@ -3188,12 +3283,14 @@ export interface PGN_65285_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65285_Lowrance extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  temperatureSource: TemperatureSource
-  actualTemperature: number
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    temperatureSource: TemperatureSource
+    actualTemperature: number
+    reserved6: number
+}
 }
 
 /*
@@ -3203,15 +3300,17 @@ export interface PGN_65285_Lowrance extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65286_Chetco extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  instance: number
-  dimmer1: number
-  dimmer2: number
-  dimmer3: number
-  dimmer4: number
-  control: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    instance: number
+    dimmer1: number
+    dimmer2: number
+    dimmer3: number
+    dimmer4: number
+    control: number
+}
 }
 
 /*
@@ -3221,10 +3320,12 @@ export interface PGN_65286_Chetco extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65286_Airmar extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3234,13 +3335,15 @@ export interface PGN_65286_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65287_Airmar extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  formatCode: number
-  accessLevel: AccessLevel
-  reserved6: number
-  accessSeedKey: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    formatCode: number
+    accessLevel: AccessLevel
+    reserved6: number
+    accessSeedKey: number
+}
 }
 
 /*
@@ -3250,10 +3353,12 @@ export interface PGN_65287_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65287_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3261,14 +3366,16 @@ export interface PGN_65287_Simrad extends PGN {
   Description: Seatalk: Alarm
 */
 export interface PGN_65288 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  alarmStatus: SeatalkAlarmStatus
-  alarmId: SeatalkAlarmId
-  alarmGroup: SeatalkAlarmGroup
-  alarmPriority: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    alarmStatus: SeatalkAlarmStatus
+    alarmId: SeatalkAlarmId
+    alarmGroup: SeatalkAlarmGroup
+    alarmPriority: number
+}
 }
 
 /*
@@ -3276,10 +3383,12 @@ export interface PGN_65288 extends PGN {
   Description: Simnet: Trim Tab Sensor Calibration
 */
 export interface PGN_65289 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3287,10 +3396,12 @@ export interface PGN_65289 extends PGN {
   Description: Simnet: Paddle Wheel Speed Configuration
 */
 export interface PGN_65290 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3298,10 +3409,12 @@ export interface PGN_65290 extends PGN {
   Description: Simnet: Clear Fluid Level Warnings
 */
 export interface PGN_65292 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3311,10 +3424,12 @@ export interface PGN_65292 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65293_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3324,12 +3439,14 @@ export interface PGN_65293_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65293_DiverseYachtServices extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  instance: number
-  reserved5: number
-  loadCell: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    instance: number
+    reserved5: number
+    loadCell: number
+}
 }
 
 /*
@@ -3338,14 +3455,16 @@ export interface PGN_65293_DiverseYachtServices extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65302 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  reserved8: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    reserved8: number
+}
 }
 
 /*
@@ -3357,13 +3476,15 @@ export interface PGN_65302 extends PGN {
   Match: Report == Status
 */
 export interface PGN_65305_Simrad_Status extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  model: SimnetDeviceModel
-  report: SimnetDeviceReport
-  status: SimnetApStatus
-  spare7: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    model: SimnetDeviceModel
+    report: SimnetDeviceReport
+    status: SimnetApStatus
+    spare7: string
+}
 }
 
 /*
@@ -3375,12 +3496,14 @@ export interface PGN_65305_Simrad_Status extends PGN {
   Match: Report == Send Status
 */
 export interface PGN_65305_Simrad_SendStatus extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  model: SimnetDeviceModel
-  report: SimnetDeviceReport
-  spare6: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    model: SimnetDeviceModel
+    report: SimnetDeviceReport
+    spare6: string
+}
 }
 
 /*
@@ -3392,13 +3515,15 @@ export interface PGN_65305_Simrad_SendStatus extends PGN {
   Match: Report == Mode
 */
 export interface PGN_65305_Simrad_Mode extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  model: SimnetDeviceModel
-  report: SimnetDeviceReport
-  mode: SimnetApModeBitfield[]
-  spare7: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    model: SimnetDeviceModel
+    report: SimnetDeviceReport
+    mode: SimnetApModeBitfield[]
+    spare7: string
+}
 }
 
 /*
@@ -3410,12 +3535,14 @@ export interface PGN_65305_Simrad_Mode extends PGN {
   Match: Report == Send Mode
 */
 export interface PGN_65305_Simrad_SendMode extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  model: SimnetDeviceModel
-  report: SimnetDeviceReport
-  spare6: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    model: SimnetDeviceModel
+    report: SimnetDeviceReport
+    spare6: string
+}
 }
 
 /*
@@ -3427,12 +3554,14 @@ export interface PGN_65305_Simrad_SendMode extends PGN {
   Match: Report == Sailing Processor Status
 */
 export interface PGN_65305_Simrad_SailingProcessorStatus extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  model: SimnetDeviceModel
-  report: SimnetDeviceReport
-  data: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    model: SimnetDeviceModel
+    report: SimnetDeviceReport
+    data: number
+}
 }
 
 /*
@@ -3440,13 +3569,15 @@ export interface PGN_65305_Simrad_SailingProcessorStatus extends PGN {
   Description: Navico: Wireless Battery Status
 */
 export interface PGN_65309 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  status: number
-  batteryStatus: number
-  batteryChargeStatus: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    status: number
+    batteryStatus: number
+    batteryChargeStatus: number
+    reserved7: number
+}
 }
 
 /*
@@ -3454,12 +3585,14 @@ export interface PGN_65309 extends PGN {
   Description: Navico: Wireless Signal Status
 */
 export interface PGN_65312 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  unknown: number
-  signalStrength: number
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    unknown: number
+    signalStrength: number
+    reserved6: number
+}
 }
 
 /*
@@ -3468,15 +3601,17 @@ export interface PGN_65312 extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65340 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  reserved9: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    reserved9: number
+}
 }
 
 /*
@@ -3484,13 +3619,15 @@ export interface PGN_65340 extends PGN {
   Description: Simnet: Autopilot Angle
 */
 export interface PGN_65341 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  mode: SimnetApMode
-  reserved6: number
-  angle: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    mode: SimnetApMode
+    reserved6: number
+    angle: number
+}
 }
 
 /*
@@ -3498,12 +3635,14 @@ export interface PGN_65341 extends PGN {
   Description: Seatalk: Pilot Wind Datum
 */
 export interface PGN_65345 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  windDatum: number
-  rollingAverageWindAngle: number
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    windDatum: number
+    rollingAverageWindAngle: number
+    reserved6: number
+}
 }
 
 /*
@@ -3511,11 +3650,13 @@ export interface PGN_65345 extends PGN {
   Description: Simnet: Magnetic Field
 */
 export interface PGN_65350 extends PGN {
-  a: number
-  b: number
-  c: number
-  d: number
-  reserved: number
+  fields: {
+    a: number
+    b: number
+    c: number
+    d: number
+    reserved: number
+}
 }
 
 /*
@@ -3523,13 +3664,15 @@ export interface PGN_65350 extends PGN {
   Description: Seatalk: Pilot Heading
 */
 export interface PGN_65359 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  headingTrue: number
-  headingMagnetic: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    headingTrue: number
+    headingMagnetic: number
+    reserved7: number
+}
 }
 
 /*
@@ -3537,13 +3680,15 @@ export interface PGN_65359 extends PGN {
   Description: Seatalk: Pilot Locked Heading
 */
 export interface PGN_65360 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  targetHeadingTrue: number
-  targetHeadingMagnetic: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    targetHeadingTrue: number
+    targetHeadingMagnetic: number
+    reserved7: number
+}
 }
 
 /*
@@ -3551,12 +3696,14 @@ export interface PGN_65360 extends PGN {
   Description: Seatalk: Silence Alarm
 */
 export interface PGN_65361 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  alarmId: SeatalkAlarmId
-  alarmGroup: SeatalkAlarmGroup
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    alarmId: SeatalkAlarmId
+    alarmGroup: SeatalkAlarmGroup
+    reserved6: number
+}
 }
 
 /*
@@ -3564,17 +3711,19 @@ export interface PGN_65361 extends PGN {
   Description: Seatalk: Keypad Message
 */
 export interface PGN_65371 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  firstKey: number
-  secondKey: number
-  firstKeyState: number
-  secondKeyState: number
-  reserved9: number
-  encoderPosition: number
-  reserved11: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    firstKey: number
+    secondKey: number
+    firstKeyState: number
+    secondKeyState: number
+    reserved9: number
+    encoderPosition: number
+    reserved11: number
+}
 }
 
 /*
@@ -3582,13 +3731,15 @@ export interface PGN_65371 extends PGN {
   Description: SeaTalk: Keypad Heartbeat
 */
 export interface PGN_65374 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  variant: number
-  status: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    variant: number
+    status: number
+    reserved7: number
+}
 }
 
 /*
@@ -3596,13 +3747,15 @@ export interface PGN_65374 extends PGN {
   Description: Seatalk: Pilot Mode
 */
 export interface PGN_65379 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  pilotMode: SeatalkPilotMode16
-  subMode: number
-  pilotModeData: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    pilotMode: SeatalkPilotMode16
+    subMode: number
+    pilotModeData: number
+    reserved7: number
+}
 }
 
 /*
@@ -3610,12 +3763,14 @@ export interface PGN_65379 extends PGN {
   Description: Airmar: Depth Quality Factor
 */
 export interface PGN_65408 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  depthQualityFactor: AirmarDepthQualityFactor
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    depthQualityFactor: AirmarDepthQualityFactor
+    reserved6: number
+}
 }
 
 /*
@@ -3623,13 +3778,15 @@ export interface PGN_65408 extends PGN {
   Description: Airmar: Speed Pulse Count
 */
 export interface PGN_65409 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  durationOfInterval: string
-  numberOfPulsesReceived: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    durationOfInterval: string
+    numberOfPulsesReceived: number
+    reserved7: number
+}
 }
 
 /*
@@ -3637,13 +3794,15 @@ export interface PGN_65409 extends PGN {
   Description: Airmar: Device Information
 */
 export interface PGN_65410 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  internalDeviceTemperature: number
-  supplyVoltage: number
-  reserved7: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    internalDeviceTemperature: number
+    supplyVoltage: number
+    reserved7: number
+}
 }
 
 /*
@@ -3652,15 +3811,17 @@ export interface PGN_65410 extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65420 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  reserved9: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    reserved9: number
+}
 }
 
 /*
@@ -3668,10 +3829,12 @@ export interface PGN_65420 extends PGN {
   Description: Simnet: Autopilot Mode
 */
 export interface PGN_65480 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+}
 }
 
 /*
@@ -3680,13 +3843,15 @@ export interface PGN_65480 extends PGN {
   Explanation: This is the Request variation of this group function PGN. The receiver shall respond by sending the requested PGN, at the desired transmission interval.
 */
 export interface PGN_126208 extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  transmissionInterval: string
-  transmissionIntervalOffset: string
-  numberOfParameters: number
-  parameter: string
-  value: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    transmissionInterval: string
+    transmissionIntervalOffset: string
+    numberOfParameters: number
+    parameter: string
+    value: string
+}
 }
 
 /*
@@ -3696,13 +3861,15 @@ export interface PGN_126208 extends PGN {
   Match: Function Code == Command
 */
 export interface PGN_126208_Command extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  priority: Priority
-  reserved: number
-  numberOfParameters: number
-  parameter: string
-  value: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    priority: Priority
+    reserved: number
+    numberOfParameters: number
+    parameter: string
+    value: string
+}
 }
 
 /*
@@ -3712,12 +3879,14 @@ export interface PGN_126208_Command extends PGN {
   Match: Function Code == Acknowledge
 */
 export interface PGN_126208_Acknowledge extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  pgnErrorCode: PgnErrorCode
-  transmissionIntervalPriorityErrorCode: TransmissionInterval
-  numberOfParameters: number
-  parameter: ParameterField
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    pgnErrorCode: PgnErrorCode
+    transmissionIntervalPriorityErrorCode: TransmissionInterval
+    numberOfParameters: number
+    parameter: ParameterField
+}
 }
 
 /*
@@ -3727,17 +3896,19 @@ export interface PGN_126208_Acknowledge extends PGN {
   Match: Function Code == Read Fields
 */
 export interface PGN_126208_ReadFields extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  uniqueId: number
-  numberOfSelectionPairs: number
-  numberOfParameters: number
-  selectionParameter: string
-  selectionValue: string
-  parameter: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    uniqueId: number
+    numberOfSelectionPairs: number
+    numberOfParameters: number
+    selectionParameter: string
+    selectionValue: string
+    parameter: string
+}
 }
 
 /*
@@ -3747,18 +3918,20 @@ export interface PGN_126208_ReadFields extends PGN {
   Match: Function Code == Read Fields Reply
 */
 export interface PGN_126208_ReadFieldsReply extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  uniqueId: number
-  numberOfSelectionPairs: number
-  numberOfParameters: number
-  selectionParameter: string
-  selectionValue: string
-  parameter: string
-  value: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    uniqueId: number
+    numberOfSelectionPairs: number
+    numberOfParameters: number
+    selectionParameter: string
+    selectionValue: string
+    parameter: string
+    value: string
+}
 }
 
 /*
@@ -3768,18 +3941,20 @@ export interface PGN_126208_ReadFieldsReply extends PGN {
   Match: Function Code == Write Fields
 */
 export interface PGN_126208_WriteFields extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  uniqueId: number
-  numberOfSelectionPairs: number
-  numberOfParameters: number
-  selectionParameter: string
-  selectionValue: string
-  parameter: string
-  value: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    uniqueId: number
+    numberOfSelectionPairs: number
+    numberOfParameters: number
+    selectionParameter: string
+    selectionValue: string
+    parameter: string
+    value: string
+}
 }
 
 /*
@@ -3789,18 +3964,20 @@ export interface PGN_126208_WriteFields extends PGN {
   Match: Function Code == Write Fields Reply
 */
 export interface PGN_126208_WriteFieldsReply extends PGN {
-  functionCode: GroupFunction
-  pgn: string
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  uniqueId: number
-  numberOfSelectionPairs: number
-  numberOfParameters: number
-  selectionParameter: string
-  selectionValue: string
-  parameter: string
-  value: string
+  fields: {
+    functionCode: GroupFunction
+    pgn: string
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    uniqueId: number
+    numberOfSelectionPairs: number
+    numberOfParameters: number
+    selectionParameter: string
+    selectionValue: string
+    parameter: string
+    value: string
+}
 }
 
 /*
@@ -3808,8 +3985,10 @@ export interface PGN_126208_WriteFieldsReply extends PGN {
   Description: PGN List (Transmit and Receive)
 */
 export interface PGN_126464 extends PGN {
-  functionCode: PgnListFunction
-  pgn: string
+  fields: {
+    functionCode: PgnListFunction
+    pgn: string
+}
 }
 
 /*
@@ -3821,16 +4000,18 @@ export interface PGN_126464 extends PGN {
   Match: command == 0x84
 */
 export interface PGN_126720_Raymarine__0X81F0__0X84 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  command: number
-  unknown1: number
-  pilotMode: SeatalkPilotMode
-  subMode: number
-  pilotModeData: number
-  unknown2: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    command: number
+    unknown1: number
+    pilotMode: SeatalkPilotMode
+    subMode: number
+    pilotModeData: number
+    unknown2: number
+}
 }
 
 /*
@@ -3841,13 +4022,15 @@ export interface PGN_126720_Raymarine__0X81F0__0X84 extends PGN {
   Match: Proprietary ID == Media Control
 */
 export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  unknown: number
-  sourceId: number
-  command: FusionCommand
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    unknown: number
+    sourceId: number
+    command: FusionCommand
+}
 }
 
 /*
@@ -3858,13 +4041,15 @@ export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
   Match: Proprietary ID == Sirius Control
 */
 export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  unknown: number
-  sourceId: number
-  command: FusionSiriusCommand
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    unknown: number
+    sourceId: number
+    command: FusionSiriusCommand
+}
 }
 
 /*
@@ -3875,11 +4060,13 @@ export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
   Match: Proprietary ID == Request Status
 */
 export interface PGN_126720_FusionElectronics_RequestStatus extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: FusionMessageId
-  unknown: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: FusionMessageId
+    unknown: number
+}
 }
 
 /*
@@ -3890,12 +4077,14 @@ export interface PGN_126720_FusionElectronics_RequestStatus extends PGN {
   Match: Proprietary ID == Source
 */
 export interface PGN_126720_FusionElectronics_Source extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: FusionMessageId
-  unknown: number
-  sourceId: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: FusionMessageId
+    unknown: number
+    sourceId: number
+}
 }
 
 /*
@@ -3906,11 +4095,13 @@ export interface PGN_126720_FusionElectronics_Source extends PGN {
   Match: Proprietary ID == 23
 */
 export interface PGN_126720_FusionElectronics_23 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: FusionMessageId
-  command: FusionMuteCommand
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: FusionMessageId
+    command: FusionMuteCommand
+}
 }
 
 /*
@@ -3921,13 +4112,15 @@ export interface PGN_126720_FusionElectronics_23 extends PGN {
   Match: Proprietary ID == Set Zone Volume
 */
 export interface PGN_126720_FusionElectronics_SetZoneVolume extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: FusionMessageId
-  unknown: number
-  zone: number
-  volume: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: FusionMessageId
+    unknown: number
+    zone: number
+    volume: number
+}
 }
 
 /*
@@ -3938,15 +4131,17 @@ export interface PGN_126720_FusionElectronics_SetZoneVolume extends PGN {
   Match: Proprietary ID == Set All Volumes
 */
 export interface PGN_126720_FusionElectronics_SetAllVolumes extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: FusionMessageId
-  unknown: number
-  zone1: number
-  zone2: number
-  zone3: number
-  zone4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: FusionMessageId
+    unknown: number
+    zone1: number
+    zone2: number
+    zone3: number
+    zone4: number
+}
 }
 
 /*
@@ -3958,15 +4153,17 @@ export interface PGN_126720_FusionElectronics_SetAllVolumes extends PGN {
   Match: command == 0x86
 */
 export interface PGN_126720_Raymarine__0X81F0__0X86 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  command: number
-  device: number
-  key: SeatalkKeystroke
-  keyinverted: number
-  unknownData: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    command: number
+    device: number
+    key: SeatalkKeystroke
+    keyinverted: number
+    unknownData: number
+}
 }
 
 /*
@@ -3978,13 +4175,15 @@ export interface PGN_126720_Raymarine__0X81F0__0X86 extends PGN {
   Match: command == 0x90
 */
 export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  command: number
-  reserved6: number
-  device: SeatalkDeviceId
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    command: number
+    reserved6: number
+    device: SeatalkDeviceId
+}
 }
 
 /*
@@ -3995,15 +4194,17 @@ export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
   Match: Proprietary ID == 0x0c8c
 */
 export interface PGN_126720_Raymarine__0X0C8C extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  group: SeatalkNetworkGroup
-  unknown1: number
-  command: number
-  brightness: number
-  unknown2: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    group: SeatalkNetworkGroup
+    unknown1: number
+    command: number
+    brightness: number
+    unknown2: number
+}
 }
 
 /*
@@ -4015,15 +4216,17 @@ export interface PGN_126720_Raymarine__0X0C8C extends PGN {
   Match: Command == Color
 */
 export interface PGN_126720_Raymarine__0X0C8C_Color extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
-  group: SeatalkNetworkGroup
-  unknown1: number
-  command: number
-  color: SeatalkDisplayColor
-  unknown2: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+    group: SeatalkNetworkGroup
+    unknown1: number
+    command: number
+    color: SeatalkDisplayColor
+    unknown2: number
+}
 }
 
 /*
@@ -4034,13 +4237,15 @@ export interface PGN_126720_Raymarine__0X0C8C_Color extends PGN {
   Match: Proprietary ID == Attitude Offsets
 */
 export interface PGN_126720_Airmar_AttitudeOffsets extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  azimuthOffset: number
-  pitchOffset: number
-  rollOffset: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    azimuthOffset: number
+    pitchOffset: number
+    rollOffset: number
+}
 }
 
 /*
@@ -4051,22 +4256,24 @@ export interface PGN_126720_Airmar_AttitudeOffsets extends PGN {
   Match: Proprietary ID == Calibrate Compass
 */
 export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  calibrateFunction: AirmarCalibrateFunction
-  calibrationStatus: AirmarCalibrateStatus
-  verifyScore: number
-  xAxisGainValue: number
-  yAxisGainValue: number
-  zAxisGainValue: number
-  xAxisLinearOffset: number
-  yAxisLinearOffset: number
-  zAxisLinearOffset: number
-  xAxisAngularOffset: number
-  pitchAndRollDamping: string
-  compassRateGyroDamping: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    calibrateFunction: AirmarCalibrateFunction
+    calibrationStatus: AirmarCalibrateStatus
+    verifyScore: number
+    xAxisGainValue: number
+    yAxisGainValue: number
+    zAxisGainValue: number
+    xAxisLinearOffset: number
+    yAxisLinearOffset: number
+    zAxisLinearOffset: number
+    xAxisAngularOffset: number
+    pitchAndRollDamping: string
+    compassRateGyroDamping: string
+}
 }
 
 /*
@@ -4077,12 +4284,14 @@ export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
   Match: Proprietary ID == True Wind Options
 */
 export interface PGN_126720_Airmar_TrueWindOptions extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  cogSubstitutionForHdg: boolean
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    cogSubstitutionForHdg: boolean
+    reserved6: number
+}
 }
 
 /*
@@ -4093,12 +4302,14 @@ export interface PGN_126720_Airmar_TrueWindOptions extends PGN {
   Match: Proprietary ID == Simulate Mode
 */
 export interface PGN_126720_Airmar_SimulateMode extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  simulateMode: OffOn
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    simulateMode: OffOn
+    reserved6: number
+}
 }
 
 /*
@@ -4109,12 +4320,14 @@ export interface PGN_126720_Airmar_SimulateMode extends PGN {
   Match: Proprietary ID == Calibrate Depth
 */
 export interface PGN_126720_Airmar_CalibrateDepth extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  speedOfSoundMode: number
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    speedOfSoundMode: number
+    reserved6: number
+}
 }
 
 /*
@@ -4125,13 +4338,15 @@ export interface PGN_126720_Airmar_CalibrateDepth extends PGN {
   Match: Proprietary ID == Calibrate Speed
 */
 export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  numberOfPairsOfDataPoints: number
-  inputFrequency: number
-  outputSpeed: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    numberOfPairsOfDataPoints: number
+    inputFrequency: number
+    outputSpeed: number
+}
 }
 
 /*
@@ -4142,13 +4357,15 @@ export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
   Match: Proprietary ID == Calibrate Temperature
 */
 export interface PGN_126720_Airmar_CalibrateTemperature extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  temperatureInstance: AirmarTemperatureInstance
-  reserved6: number
-  temperatureOffset: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    temperatureInstance: AirmarTemperatureInstance
+    reserved6: number
+    temperatureOffset: number
+}
 }
 
 /*
@@ -4159,13 +4376,15 @@ export interface PGN_126720_Airmar_CalibrateTemperature extends PGN {
   Match: Proprietary ID == Speed Filter
 */
 export interface PGN_126720_Airmar_SpeedFilter extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  filterType: number
-  reserved6: number
-  sampleInterval: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    filterType: number
+    reserved6: number
+    sampleInterval: string
+}
 }
 
 /*
@@ -4177,14 +4396,16 @@ export interface PGN_126720_Airmar_SpeedFilter extends PGN {
   Match: Filter type == IIR filter
 */
 export interface PGN_126720_Airmar_SpeedFilter_IirFilter extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  filterType: number
-  reserved6: number
-  sampleInterval: string
-  filterDuration: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    filterType: number
+    reserved6: number
+    sampleInterval: string
+    filterDuration: string
+}
 }
 
 /*
@@ -4195,13 +4416,15 @@ export interface PGN_126720_Airmar_SpeedFilter_IirFilter extends PGN {
   Match: Proprietary ID == Temperature Filter
 */
 export interface PGN_126720_Airmar_TemperatureFilter extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  filterType: number
-  reserved6: number
-  sampleInterval: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    filterType: number
+    reserved6: number
+    sampleInterval: string
+}
 }
 
 /*
@@ -4213,14 +4436,16 @@ export interface PGN_126720_Airmar_TemperatureFilter extends PGN {
   Match: Filter type == IIR filter
 */
 export interface PGN_126720_Airmar_TemperatureFilter_IirFilter extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  filterType: number
-  reserved6: number
-  sampleInterval: string
-  filterDuration: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    filterType: number
+    reserved6: number
+    sampleInterval: string
+    filterDuration: string
+}
 }
 
 /*
@@ -4231,12 +4456,14 @@ export interface PGN_126720_Airmar_TemperatureFilter_IirFilter extends PGN {
   Match: Proprietary ID == NMEA 2000 options
 */
 export interface PGN_126720_Airmar_Nmea2000Options extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: AirmarCommand
-  transmissionInterval: AirmarTransmissionInterval
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: AirmarCommand
+    transmissionInterval: AirmarTransmissionInterval
+    reserved6: number
+}
 }
 
 /*
@@ -4246,10 +4473,12 @@ export interface PGN_126720_Airmar_Nmea2000Options extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_126720_Airmar extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: number
+}
 }
 
 /*
@@ -4259,13 +4488,15 @@ export interface PGN_126720_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_126720_Maretron extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  productCode: number
-  softwareCode: number
-  command: number
-  status: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    productCode: number
+    softwareCode: number
+    command: number
+    status: number
+}
 }
 
 /*
@@ -4279,17 +4510,19 @@ export interface PGN_126720_Maretron extends PGN {
   Match: Unknown ID 4 == Always 5
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  unknownId1: number
-  unknownId2: number
-  unknownId3: number
-  unknownId4: number
-  spare8: string
-  mode: GarminColorMode
-  spare10: string
-  backlight: GarminBacklightLevel
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    unknownId1: number
+    unknownId2: number
+    unknownId3: number
+    unknownId4: number
+    spare8: string
+    mode: GarminColorMode
+    spare10: string
+    backlight: GarminBacklightLevel
+}
 }
 
 /*
@@ -4304,17 +4537,19 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN
   Match: Mode == Night
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  unknownId1: number
-  unknownId2: number
-  unknownId3: number
-  unknownId4: number
-  spare8: string
-  mode: GarminColorMode
-  spare10: string
-  backlight: GarminBacklightLevel
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    unknownId1: number
+    unknownId2: number
+    unknownId3: number
+    unknownId4: number
+    spare8: string
+    mode: GarminColorMode
+    spare10: string
+    backlight: GarminBacklightLevel
+}
 }
 
 /*
@@ -4329,17 +4564,19 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night exten
   Match: Mode == Color
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  unknownId1: number
-  unknownId2: number
-  unknownId3: number
-  unknownId4: number
-  spare8: string
-  mode: GarminColorMode
-  spare10: string
-  color: GarminColor
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    unknownId1: number
+    unknownId2: number
+    unknownId3: number
+    unknownId4: number
+    spare8: string
+    mode: GarminColorMode
+    spare10: string
+    color: GarminColor
+}
 }
 
 /*
@@ -4347,27 +4584,29 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color exten
   Description: Alert
 */
 export interface PGN_126983 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  temporarySilenceStatus: boolean
-  acknowledgeStatus: boolean
-  escalationStatus: boolean
-  temporarySilenceSupport: boolean
-  acknowledgeSupport: boolean
-  escalationSupport: boolean
-  reserved: number
-  acknowledgeSourceNetworkIdName: string
-  triggerCondition: AlertTriggerCondition
-  thresholdStatus: AlertThresholdStatus
-  alertPriority: number
-  alertState: AlertState
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    temporarySilenceStatus: boolean
+    acknowledgeStatus: boolean
+    escalationStatus: boolean
+    temporarySilenceSupport: boolean
+    acknowledgeSupport: boolean
+    escalationSupport: boolean
+    reserved: number
+    acknowledgeSourceNetworkIdName: string
+    triggerCondition: AlertTriggerCondition
+    thresholdStatus: AlertThresholdStatus
+    alertPriority: number
+    alertState: AlertState
+}
 }
 
 /*
@@ -4375,18 +4614,20 @@ export interface PGN_126983 extends PGN {
   Description: Alert Response
 */
 export interface PGN_126984 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  acknowledgeSourceNetworkIdName: string
-  responseCommand: AlertResponseCommand
-  reserved: number
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    acknowledgeSourceNetworkIdName: string
+    responseCommand: AlertResponseCommand
+    reserved: number
+}
 }
 
 /*
@@ -4394,18 +4635,20 @@ export interface PGN_126984 extends PGN {
   Description: Alert Text
 */
 export interface PGN_126985 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  languageId: AlertLanguageId
-  alertTextDescription: string
-  alertLocationTextDescription: string
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    languageId: AlertLanguageId
+    alertTextDescription: string
+    alertLocationTextDescription: string
+}
 }
 
 /*
@@ -4413,21 +4656,23 @@ export interface PGN_126985 extends PGN {
   Description: Alert Configuration
 */
 export interface PGN_126986 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  alertControl: number
-  userDefinedAlertAssignment: number
-  reserved: number
-  reactivationPeriod: number
-  temporarySilencePeriod: number
-  escalationPeriod: number
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    alertControl: number
+    userDefinedAlertAssignment: number
+    reserved: number
+    reactivationPeriod: number
+    temporarySilencePeriod: number
+    escalationPeriod: number
+}
 }
 
 /*
@@ -4435,20 +4680,22 @@ export interface PGN_126986 extends PGN {
   Description: Alert Threshold
 */
 export interface PGN_126987 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  numberOfParameters: number
-  parameterNumber: number
-  triggerMethod: number
-  thresholdDataFormat: number
-  thresholdLevel: number
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    numberOfParameters: number
+    parameterNumber: number
+    triggerMethod: number
+    thresholdDataFormat: number
+    thresholdLevel: number
+}
 }
 
 /*
@@ -4456,19 +4703,21 @@ export interface PGN_126987 extends PGN {
   Description: Alert Value
 */
 export interface PGN_126988 extends PGN {
-  alertType: AlertType
-  alertCategory: AlertCategory
-  alertSystem: number
-  alertSubSystem: number
-  alertId: number
-  dataSourceNetworkIdName: string
-  dataSourceInstance: number
-  dataSourceIndexSource: number
-  alertOccurrenceNumber: number
-  numberOfParameters: number
-  valueParameterNumber: number
-  valueDataFormat: number
-  valueData: number
+  fields: {
+    alertType: AlertType
+    alertCategory: AlertCategory
+    alertSystem: number
+    alertSubSystem: number
+    alertId: number
+    dataSourceNetworkIdName: string
+    dataSourceInstance: number
+    dataSourceIndexSource: number
+    alertOccurrenceNumber: number
+    numberOfParameters: number
+    valueParameterNumber: number
+    valueDataFormat: number
+    valueData: number
+}
 }
 
 /*
@@ -4477,11 +4726,13 @@ export interface PGN_126988 extends PGN {
   Explanation: The purpose of this PGN is twofold: To provide a regular transmission of UTC time and date. To provide synchronism for measurement data.
 */
 export interface PGN_126992 extends PGN {
-  sid: number
-  source: SystemTime
-  reserved: number
-  date: string
-  time: string
+  fields: {
+    sid: number
+    source: SystemTime
+    reserved: number
+    date: string
+    time: string
+}
 }
 
 /*
@@ -4490,12 +4741,14 @@ export interface PGN_126992 extends PGN {
   Explanation: Reception of this PGN confirms that a device is still present on the network.  Reception of this PGN may also be used to maintain an address to NAME association table within the receiving device.  The transmission interval may be used by the receiving unit to determine the time-out value for the connection supervision.  The value contained in Field 1 of this PGN reflects the PGN's current Transmission Interval. Changes to this PGN's Transmission Interval shall be reflected in Field 1.  The transmission interval can only be changed by using the Request Group Function PGN 126208 with no pairs of request parameters provided. Field 3 of the Request Group Function PGN 126208 may contain values between 1,000ms and 60,000ms.  This PGN cannot be requested by the ISO Request PGN 059904 or Request Group Function PGN 126208. In Request Group Function PGN 126208, setting Field 3 to a value of 0xFFFF FFFF and Field 4 to a value of 0xFFFF: 'Transmit now without changing timing variables.' is prohibited.  The Command Group Function PGN 126208 shall not be used with this PGN.  Fields 3 and 4 of this PGN provide information which can be used to distinguish short duration disturbances from permanent failures. See ISO 11898 -1 Sections 6.12, 6.13, 6.14, 13.1.1, 13.1.4, 13.1.4.3 and Figure 16 ( node status transition diagram) for additional context.
 */
 export interface PGN_126993 extends PGN {
-  dataTransmitOffset: string
-  sequenceCounter: number
-  controller1State: ControllerState
-  controller2State: ControllerState
-  equipmentStatus: EquipmentStatus
-  reserved: number
+  fields: {
+    dataTransmitOffset: string
+    sequenceCounter: number
+    controller1State: ControllerState
+    controller2State: ControllerState
+    equipmentStatus: EquipmentStatus
+    reserved: number
+}
 }
 
 /*
@@ -4504,14 +4757,16 @@ export interface PGN_126993 extends PGN {
   Explanation: Provides product information onto the network that could be important for determining quality of data coming from this product.
 */
 export interface PGN_126996 extends PGN {
-  nmea2000Version: number
-  productCode: number
-  modelId: string
-  softwareVersionCode: string
-  modelVersion: string
-  modelSerialCode: string
-  certificationLevel: CertificationLevel
-  loadEquivalency: number
+  fields: {
+    nmea2000Version: number
+    productCode: number
+    modelId: string
+    softwareVersionCode: string
+    modelVersion: string
+    modelSerialCode: string
+    certificationLevel: CertificationLevel
+    loadEquivalency: number
+}
 }
 
 /*
@@ -4520,9 +4775,11 @@ export interface PGN_126996 extends PGN {
   Explanation: Free-form alphanumeric fields describing the installation (e.g., starboard engine room location) of the device and installation notes (e.g., calibration data).
 */
 export interface PGN_126998 extends PGN {
-  installationDescription1: string
-  installationDescription2: string
-  manufacturerInformation: string
+  fields: {
+    installationDescription1: string
+    installationDescription2: string
+    manufacturerInformation: string
+}
 }
 
 /*
@@ -4540,24 +4797,26 @@ If the MOB Emitter ID requested is not considered a valid MOB Emitter ID by the 
 The Default update rate of this PGN is autonomous, as it is dependant upon notification rates of MOB devices.
 */
 export interface PGN_127233 extends PGN {
-  sid: number
-  mobEmitterId: number
-  manOverboardStatus: MobStatus
-  reserved: number
-  activationTime: string
-  positionSource: MobPositionSource
-  reserved7: number
-  positionDate: string
-  positionTime: string
-  latitude: number
-  longitude: number
-  cogReference: DirectionReference
-  reserved13: number
-  cog: number
-  sog: number
-  mmsiOfVesselOfOrigin: string
-  mobEmitterBatteryLowStatus: LowBattery
-  reserved18: number
+  fields: {
+    sid: number
+    mobEmitterId: number
+    manOverboardStatus: MobStatus
+    reserved: number
+    activationTime: string
+    positionSource: MobPositionSource
+    reserved7: number
+    positionDate: string
+    positionTime: string
+    latitude: number
+    longitude: number
+    cogReference: DirectionReference
+    reserved13: number
+    cog: number
+    sog: number
+    mmsiOfVesselOfOrigin: string
+    mobEmitterBatteryLowStatus: LowBattery
+    reserved18: number
+}
 }
 
 /*
@@ -4565,24 +4824,26 @@ export interface PGN_127233 extends PGN {
   Description: Heading/Track control
 */
 export interface PGN_127237 extends PGN {
-  rudderLimitExceeded: boolean
-  offHeadingLimitExceeded: boolean
-  offTrackLimitExceeded: boolean
-  override: boolean
-  steeringMode: SteeringMode
-  turnMode: TurnMode
-  headingReference: DirectionReference
-  reserved: number
-  commandedRudderDirection: DirectionRudder
-  commandedRudderAngle: number
-  headingToSteerCourse: number
-  track: number
-  rudderLimit: number
-  offHeadingLimit: number
-  radiusOfTurnOrder: number
-  rateOfTurnOrder: number
-  offTrackLimit: number
-  vesselHeading: number
+  fields: {
+    rudderLimitExceeded: boolean
+    offHeadingLimitExceeded: boolean
+    offTrackLimitExceeded: boolean
+    override: boolean
+    steeringMode: SteeringMode
+    turnMode: TurnMode
+    headingReference: DirectionReference
+    reserved: number
+    commandedRudderDirection: DirectionRudder
+    commandedRudderAngle: number
+    headingToSteerCourse: number
+    track: number
+    rudderLimit: number
+    offHeadingLimit: number
+    radiusOfTurnOrder: number
+    rateOfTurnOrder: number
+    offTrackLimit: number
+    vesselHeading: number
+}
 }
 
 /*
@@ -4590,12 +4851,14 @@ export interface PGN_127237 extends PGN {
   Description: Rudder
 */
 export interface PGN_127245 extends PGN {
-  instance: number
-  directionOrder: DirectionRudder
-  reserved: number
-  angleOrder: number
-  position: number
-  reserved6: number
+  fields: {
+    instance: number
+    directionOrder: DirectionRudder
+    reserved: number
+    angleOrder: number
+    position: number
+    reserved6: number
+}
 }
 
 /*
@@ -4603,12 +4866,14 @@ export interface PGN_127245 extends PGN {
   Description: Vessel Heading
 */
 export interface PGN_127250 extends PGN {
-  sid: number
-  heading: number
-  deviation: number
-  variation: number
-  reference: DirectionReference
-  reserved: number
+  fields: {
+    sid: number
+    heading: number
+    deviation: number
+    variation: number
+    reference: DirectionReference
+    reserved: number
+}
 }
 
 /*
@@ -4616,9 +4881,11 @@ export interface PGN_127250 extends PGN {
   Description: Rate of Turn
 */
 export interface PGN_127251 extends PGN {
-  sid: number
-  rate: number
-  reserved: number
+  fields: {
+    sid: number
+    rate: number
+    reserved: number
+}
 }
 
 /*
@@ -4626,9 +4893,11 @@ export interface PGN_127251 extends PGN {
   Description: Heave
 */
 export interface PGN_127252 extends PGN {
-  sid: number
-  heave: number
-  reserved: number
+  fields: {
+    sid: number
+    heave: number
+    reserved: number
+}
 }
 
 /*
@@ -4636,11 +4905,13 @@ export interface PGN_127252 extends PGN {
   Description: Attitude
 */
 export interface PGN_127257 extends PGN {
-  sid: number
-  yaw: number
-  pitch: number
-  roll: number
-  reserved: number
+  fields: {
+    sid: number
+    yaw: number
+    pitch: number
+    roll: number
+    reserved: number
+}
 }
 
 /*
@@ -4648,12 +4919,14 @@ export interface PGN_127257 extends PGN {
   Description: Magnetic Variation
 */
 export interface PGN_127258 extends PGN {
-  sid: number
-  source: MagneticVariation
-  reserved: number
-  ageOfService: string
-  variation: number
-  reserved6: number
+  fields: {
+    sid: number
+    source: MagneticVariation
+    reserved: number
+    ageOfService: string
+    variation: number
+    reserved6: number
+}
 }
 
 /*
@@ -4661,11 +4934,13 @@ export interface PGN_127258 extends PGN {
   Description: Engine Parameters, Rapid Update
 */
 export interface PGN_127488 extends PGN {
-  instance: EngineInstance
-  speed: number
-  boostPressure: number
-  tiltTrim: number
-  reserved: number
+  fields: {
+    instance: EngineInstance
+    speed: number
+    boostPressure: number
+    tiltTrim: number
+    reserved: number
+}
 }
 
 /*
@@ -4673,20 +4948,22 @@ export interface PGN_127488 extends PGN {
   Description: Engine Parameters, Dynamic
 */
 export interface PGN_127489 extends PGN {
-  instance: EngineInstance
-  oilPressure: number
-  oilTemperature: number
-  temperature: number
-  alternatorPotential: number
-  fuelRate: number
-  totalEngineHours: string
-  coolantPressure: number
-  fuelPressure: number
-  reserved: number
-  discreteStatus1: EngineStatus1[]
-  discreteStatus2: EngineStatus2[]
-  engineLoad: number
-  engineTorque: number
+  fields: {
+    instance: EngineInstance
+    oilPressure: number
+    oilTemperature: number
+    temperature: number
+    alternatorPotential: number
+    fuelRate: number
+    totalEngineHours: string
+    coolantPressure: number
+    fuelPressure: number
+    reserved: number
+    discreteStatus1: EngineStatus1[]
+    discreteStatus2: EngineStatus2[]
+    engineLoad: number
+    engineTorque: number
+}
 }
 
 /*
@@ -4695,14 +4972,16 @@ export interface PGN_127489 extends PGN {
   Explanation: This PGN is used to report status of Electric Drive Status control and can be used with Command Group Function (PGN Electric propulsion motor status) to command equipment. 
 */
 export interface PGN_127490 extends PGN {
-  inverterMotorIdentifier: number
-  operatingMode: number
-  reserved: number
-  motorTemperature: number
-  inverterTemperature: number
-  coolantTemperature: number
-  gearTemperature: number
-  shaftTorque: number
+  fields: {
+    inverterMotorIdentifier: number
+    operatingMode: number
+    reserved: number
+    motorTemperature: number
+    inverterTemperature: number
+    coolantTemperature: number
+    gearTemperature: number
+    shaftTorque: number
+}
 }
 
 /*
@@ -4711,16 +4990,18 @@ export interface PGN_127490 extends PGN {
   Explanation: This PGN is used to provide electric propulsion motor status and relevant data.
 */
 export interface PGN_127491 extends PGN {
-  energyStorageIdentifier: number
-  stateOfCharge: number
-  timeRemaining: string
-  highestCellTemperature: number
-  lowestCellTemperature: number
-  averageCellTemperature: number
-  maxDischargeCurrent: number
-  maxChargeCurrent: number
-  coolingSystemStatus: number
-  heatingSystemStatus: number
+  fields: {
+    energyStorageIdentifier: number
+    stateOfCharge: number
+    timeRemaining: string
+    highestCellTemperature: number
+    lowestCellTemperature: number
+    averageCellTemperature: number
+    maxDischargeCurrent: number
+    maxChargeCurrent: number
+    coolingSystemStatus: number
+    heatingSystemStatus: number
+}
 }
 
 /*
@@ -4728,13 +5009,15 @@ export interface PGN_127491 extends PGN {
   Description: Transmission Parameters, Dynamic
 */
 export interface PGN_127493 extends PGN {
-  instance: EngineInstance
-  transmissionGear: GearStatus
-  reserved: number
-  oilPressure: number
-  oilTemperature: number
-  discreteStatus1: number
-  reserved7: number
+  fields: {
+    instance: EngineInstance
+    transmissionGear: GearStatus
+    reserved: number
+    oilPressure: number
+    oilTemperature: number
+    discreteStatus1: number
+    reserved7: number
+}
 }
 
 /*
@@ -4743,19 +5026,21 @@ export interface PGN_127493 extends PGN {
   Explanation: This PGN is used to provide information about electric motor specifications and ratings.
 */
 export interface PGN_127494 extends PGN {
-  inverterMotorIdentifier: number
-  motorType: number
-  reserved: number
-  motorVoltageRating: number
-  maximumContinuousMotorPower: number
-  maximumBoostMotorPower: number
-  maximumMotorTemperatureRating: number
-  ratedMotorSpeed: number
-  maximumControllerTemperatureRating: number
-  motorShaftTorqueRating: number
-  motorDcVoltageDeratingThreshold: number
-  motorDcVoltageCutOffThreshold: number
-  driveMotorHours: string
+  fields: {
+    inverterMotorIdentifier: number
+    motorType: number
+    reserved: number
+    motorVoltageRating: number
+    maximumContinuousMotorPower: number
+    maximumBoostMotorPower: number
+    maximumMotorTemperatureRating: number
+    ratedMotorSpeed: number
+    maximumControllerTemperatureRating: number
+    motorShaftTorqueRating: number
+    motorDcVoltageDeratingThreshold: number
+    motorDcVoltageCutOffThreshold: number
+    driveMotorHours: string
+}
 }
 
 /*
@@ -4764,22 +5049,24 @@ export interface PGN_127494 extends PGN {
   Explanation: This PGN is used to provide the status on power storage sources such as batteries.This PGN is new in v3.0 and has not been observed yet; field lengths and precisions are guesses.
 */
 export interface PGN_127495 extends PGN {
-  energyStorageIdentifier: number
-  motorType: number
-  reserved: number
-  storageChemistryConversion: number
-  maximumTemperatureDerating: number
-  maximumTemperatureShutOff: number
-  minimumTemperatureDerating: number
-  minimumTemperatureShutOff: number
-  usableBatteryEnergy: number
-  stateOfHealth: number
-  batteryCycleCounter: number
-  batteryFullStatus: number
-  batteryEmptyStatus: number
-  reserved14: number
-  maximumChargeSoc: number
-  minimumChargeSoc: number
+  fields: {
+    energyStorageIdentifier: number
+    motorType: number
+    reserved: number
+    storageChemistryConversion: number
+    maximumTemperatureDerating: number
+    maximumTemperatureShutOff: number
+    minimumTemperatureDerating: number
+    minimumTemperatureShutOff: number
+    usableBatteryEnergy: number
+    stateOfHealth: number
+    batteryCycleCounter: number
+    batteryFullStatus: number
+    batteryEmptyStatus: number
+    reserved14: number
+    maximumChargeSoc: number
+    minimumChargeSoc: number
+}
 }
 
 /*
@@ -4787,10 +5074,12 @@ export interface PGN_127495 extends PGN {
   Description: Trip Parameters, Vessel
 */
 export interface PGN_127496 extends PGN {
-  timeToEmpty: string
-  distanceToEmpty: number
-  estimatedFuelRemaining: number
-  tripRunTime: string
+  fields: {
+    timeToEmpty: string
+    distanceToEmpty: number
+    estimatedFuelRemaining: number
+    tripRunTime: string
+}
 }
 
 /*
@@ -4798,11 +5087,13 @@ export interface PGN_127496 extends PGN {
   Description: Trip Parameters, Engine
 */
 export interface PGN_127497 extends PGN {
-  instance: EngineInstance
-  tripFuelUsed: number
-  fuelRateAverage: number
-  fuelRateEconomy: number
-  instantaneousFuelEconomy: number
+  fields: {
+    instance: EngineInstance
+    tripFuelUsed: number
+    fuelRateAverage: number
+    fuelRateEconomy: number
+    instantaneousFuelEconomy: number
+}
 }
 
 /*
@@ -4810,10 +5101,12 @@ export interface PGN_127497 extends PGN {
   Description: Engine Parameters, Static
 */
 export interface PGN_127498 extends PGN {
-  instance: EngineInstance
-  ratedEngineSpeed: number
-  vin: string
-  softwareId: string
+  fields: {
+    instance: EngineInstance
+    ratedEngineSpeed: number
+    vin: string
+    softwareId: string
+}
 }
 
 /*
@@ -4821,14 +5114,16 @@ export interface PGN_127498 extends PGN {
   Description: Load Controller Connection State/Control
 */
 export interface PGN_127500 extends PGN {
-  sequenceId: number
-  connectionId: number
-  state: number
-  status: number
-  operationalStatusControl: number
-  pwmDutyCycle: number
-  timeon: number
-  timeoff: number
+  fields: {
+    sequenceId: number
+    connectionId: number
+    state: number
+    status: number
+    operationalStatusControl: number
+    pwmDutyCycle: number
+    timeon: number
+    timeoff: number
+}
 }
 
 /*
@@ -4836,35 +5131,37 @@ export interface PGN_127500 extends PGN {
   Description: Binary Switch Bank Status
 */
 export interface PGN_127501 extends PGN {
-  instance: number
-  indicator1: OffOn
-  indicator2: OffOn
-  indicator3: OffOn
-  indicator4: OffOn
-  indicator5: OffOn
-  indicator6: OffOn
-  indicator7: OffOn
-  indicator8: OffOn
-  indicator9: OffOn
-  indicator10: OffOn
-  indicator11: OffOn
-  indicator12: OffOn
-  indicator13: OffOn
-  indicator14: OffOn
-  indicator15: OffOn
-  indicator16: OffOn
-  indicator17: OffOn
-  indicator18: OffOn
-  indicator19: OffOn
-  indicator20: OffOn
-  indicator21: OffOn
-  indicator22: OffOn
-  indicator23: OffOn
-  indicator24: OffOn
-  indicator25: OffOn
-  indicator26: OffOn
-  indicator27: OffOn
-  indicator28: OffOn
+  fields: {
+    instance: number
+    indicator1: OffOn
+    indicator2: OffOn
+    indicator3: OffOn
+    indicator4: OffOn
+    indicator5: OffOn
+    indicator6: OffOn
+    indicator7: OffOn
+    indicator8: OffOn
+    indicator9: OffOn
+    indicator10: OffOn
+    indicator11: OffOn
+    indicator12: OffOn
+    indicator13: OffOn
+    indicator14: OffOn
+    indicator15: OffOn
+    indicator16: OffOn
+    indicator17: OffOn
+    indicator18: OffOn
+    indicator19: OffOn
+    indicator20: OffOn
+    indicator21: OffOn
+    indicator22: OffOn
+    indicator23: OffOn
+    indicator24: OffOn
+    indicator25: OffOn
+    indicator26: OffOn
+    indicator27: OffOn
+    indicator28: OffOn
+}
 }
 
 /*
@@ -4872,35 +5169,37 @@ export interface PGN_127501 extends PGN {
   Description: Switch Bank Control
 */
 export interface PGN_127502 extends PGN {
-  instance: number
-  switch1: OffOnControl
-  switch2: OffOnControl
-  switch3: OffOnControl
-  switch4: OffOnControl
-  switch5: OffOnControl
-  switch6: OffOnControl
-  switch7: OffOnControl
-  switch8: OffOnControl
-  switch9: OffOnControl
-  switch10: OffOnControl
-  switch11: OffOnControl
-  switch12: OffOnControl
-  switch13: OffOnControl
-  switch14: OffOnControl
-  switch15: OffOnControl
-  switch16: OffOnControl
-  switch17: OffOnControl
-  switch18: OffOnControl
-  switch19: OffOnControl
-  switch20: OffOnControl
-  switch21: OffOnControl
-  switch22: OffOnControl
-  switch23: OffOnControl
-  switch24: OffOnControl
-  switch25: OffOnControl
-  switch26: OffOnControl
-  switch27: OffOnControl
-  switch28: OffOnControl
+  fields: {
+    instance: number
+    switch1: OffOnControl
+    switch2: OffOnControl
+    switch3: OffOnControl
+    switch4: OffOnControl
+    switch5: OffOnControl
+    switch6: OffOnControl
+    switch7: OffOnControl
+    switch8: OffOnControl
+    switch9: OffOnControl
+    switch10: OffOnControl
+    switch11: OffOnControl
+    switch12: OffOnControl
+    switch13: OffOnControl
+    switch14: OffOnControl
+    switch15: OffOnControl
+    switch16: OffOnControl
+    switch17: OffOnControl
+    switch18: OffOnControl
+    switch19: OffOnControl
+    switch20: OffOnControl
+    switch21: OffOnControl
+    switch22: OffOnControl
+    switch23: OffOnControl
+    switch24: OffOnControl
+    switch25: OffOnControl
+    switch26: OffOnControl
+    switch27: OffOnControl
+    switch28: OffOnControl
+}
 }
 
 /*
@@ -4908,18 +5207,20 @@ export interface PGN_127502 extends PGN {
   Description: AC Input Status
 */
 export interface PGN_127503 extends PGN {
-  instance: number
-  numberOfLines: number
-  line: AcLine
-  acceptability: Acceptability
-  reserved: number
-  voltage: number
-  current: number
-  frequency: number
-  breakerSize: number
-  realPower: number
-  reactivePower: number
-  powerFactor: number
+  fields: {
+    instance: number
+    numberOfLines: number
+    line: AcLine
+    acceptability: Acceptability
+    reserved: number
+    voltage: number
+    current: number
+    frequency: number
+    breakerSize: number
+    realPower: number
+    reactivePower: number
+    powerFactor: number
+}
 }
 
 /*
@@ -4927,18 +5228,20 @@ export interface PGN_127503 extends PGN {
   Description: AC Output Status
 */
 export interface PGN_127504 extends PGN {
-  instance: number
-  numberOfLines: number
-  line: Line
-  waveform: Waveform
-  reserved: number
-  voltage: number
-  current: number
-  frequency: number
-  breakerSize: number
-  realPower: number
-  reactivePower: number
-  powerFactor: number
+  fields: {
+    instance: number
+    numberOfLines: number
+    line: Line
+    waveform: Waveform
+    reserved: number
+    voltage: number
+    current: number
+    frequency: number
+    breakerSize: number
+    realPower: number
+    reactivePower: number
+    powerFactor: number
+}
 }
 
 /*
@@ -4946,11 +5249,13 @@ export interface PGN_127504 extends PGN {
   Description: Fluid Level
 */
 export interface PGN_127505 extends PGN {
-  instance: number
-  type: TankType
-  level: number
-  capacity: number
-  reserved: number
+  fields: {
+    instance: number
+    type: TankType
+    level: number
+    capacity: number
+    reserved: number
+}
 }
 
 /*
@@ -4958,14 +5263,16 @@ export interface PGN_127505 extends PGN {
   Description: DC Detailed Status
 */
 export interface PGN_127506 extends PGN {
-  sid: number
-  instance: number
-  dcType: DcSource
-  stateOfCharge: number
-  stateOfHealth: number
-  timeRemaining: string
-  rippleVoltage: number
-  remainingCapacity: number
+  fields: {
+    sid: number
+    instance: number
+    dcType: DcSource
+    stateOfCharge: number
+    stateOfHealth: number
+    timeRemaining: string
+    rippleVoltage: number
+    remainingCapacity: number
+}
 }
 
 /*
@@ -4973,14 +5280,16 @@ export interface PGN_127506 extends PGN {
   Description: Charger Status
 */
 export interface PGN_127507 extends PGN {
-  instance: number
-  batteryInstance: number
-  operatingState: ChargerState
-  chargeMode: ChargerMode
-  enabled: OffOn
-  equalizationPending: OffOn
-  reserved: number
-  equalizationTimeRemaining: string
+  fields: {
+    instance: number
+    batteryInstance: number
+    operatingState: ChargerState
+    chargeMode: ChargerMode
+    enabled: OffOn
+    equalizationPending: OffOn
+    reserved: number
+    equalizationTimeRemaining: string
+}
 }
 
 /*
@@ -4988,11 +5297,13 @@ export interface PGN_127507 extends PGN {
   Description: Battery Status
 */
 export interface PGN_127508 extends PGN {
-  instance: number
-  voltage: number
-  current: number
-  temperature: number
-  sid: number
+  fields: {
+    instance: number
+    voltage: number
+    current: number
+    temperature: number
+    sid: number
+}
 }
 
 /*
@@ -5001,12 +5312,14 @@ export interface PGN_127508 extends PGN {
   Explanation: The NMEA wrote in the link in the URL that this PGN is obsolete and superceded by PGN 127751, but that PGN reference is obviously incorrect. They probably meant PGN 127511. The other interesting thing is that this PGN is only four bytes long but still referenced as a Fast PGN, which matches various sources; see github issue #428.
 */
 export interface PGN_127509 extends PGN {
-  instance: number
-  acInstance: number
-  dcInstance: number
-  operatingState: InverterState
-  inverterEnable: OffOn
-  reserved: number
+  fields: {
+    instance: number
+    acInstance: number
+    dcInstance: number
+    operatingState: InverterState
+    inverterEnable: OffOn
+    reserved: number
+}
 }
 
 /*
@@ -5014,17 +5327,19 @@ export interface PGN_127509 extends PGN {
   Description: Charger Configuration Status
 */
 export interface PGN_127510 extends PGN {
-  instance: number
-  batteryInstance: number
-  chargerEnableDisable: OffOn
-  reserved: number
-  chargeCurrentLimit: number
-  chargingAlgorithm: ChargingAlgorithm
-  chargerMode: ChargerMode
-  estimatedTemperature: DeviceTempState
-  equalizeOneTimeEnableDisable: OffOn
-  overChargeEnableDisable: OffOn
-  equalizeTime: string
+  fields: {
+    instance: number
+    batteryInstance: number
+    chargerEnableDisable: OffOn
+    reserved: number
+    chargeCurrentLimit: number
+    chargingAlgorithm: ChargingAlgorithm
+    chargerMode: ChargerMode
+    estimatedTemperature: DeviceTempState
+    equalizeOneTimeEnableDisable: OffOn
+    overChargeEnableDisable: OffOn
+    equalizeTime: string
+}
 }
 
 /*
@@ -5032,14 +5347,16 @@ export interface PGN_127510 extends PGN {
   Description: Inverter Configuration Status
 */
 export interface PGN_127511 extends PGN {
-  instance: number
-  acInstance: number
-  dcInstance: number
-  inverterEnableDisable: OffOn
-  inverterMode: InverterMode
-  loadSenseEnableDisable: OffOn
-  loadSensePowerThreshold: number
-  loadSenseInterval: string
+  fields: {
+    instance: number
+    acInstance: number
+    dcInstance: number
+    inverterEnableDisable: OffOn
+    inverterMode: InverterMode
+    loadSenseEnableDisable: OffOn
+    loadSensePowerThreshold: number
+    loadSenseInterval: string
+}
 }
 
 /*
@@ -5047,10 +5364,12 @@ export interface PGN_127511 extends PGN {
   Description: AGS Configuration Status
 */
 export interface PGN_127512 extends PGN {
-  instance: number
-  generatorInstance: number
-  agsMode: AgsMode
-  reserved: number
+  fields: {
+    instance: number
+    generatorInstance: number
+    agsMode: AgsMode
+    reserved: number
+}
 }
 
 /*
@@ -5058,16 +5377,18 @@ export interface PGN_127512 extends PGN {
   Description: Battery Configuration Status
 */
 export interface PGN_127513 extends PGN {
-  instance: number
-  batteryType: BatteryType
-  supportsEqualization: boolean
-  reserved: number
-  nominalVoltage: BatteryVoltage
-  chemistry: BatteryChemistry
-  capacity: number
-  temperatureCoefficient: number
-  peukertExponent: number
-  chargeEfficiencyFactor: number
+  fields: {
+    instance: number
+    batteryType: BatteryType
+    supportsEqualization: boolean
+    reserved: number
+    nominalVoltage: BatteryVoltage
+    chemistry: BatteryChemistry
+    capacity: number
+    temperatureCoefficient: number
+    peukertExponent: number
+    chargeEfficiencyFactor: number
+}
 }
 
 /*
@@ -5075,12 +5396,14 @@ export interface PGN_127513 extends PGN {
   Description: AGS Status
 */
 export interface PGN_127514 extends PGN {
-  instance: number
-  generatorInstance: number
-  agsOperatingState: AgsOperatingState
-  generatorState: AgsGeneratingState
-  generatorOnReason: AgsOnReason
-  generatorOffReason: AgsOffReason
+  fields: {
+    instance: number
+    generatorInstance: number
+    agsOperatingState: AgsOperatingState
+    generatorState: AgsGeneratingState
+    generatorOnReason: AgsOnReason
+    generatorOffReason: AgsOffReason
+}
 }
 
 /*
@@ -5088,10 +5411,12 @@ export interface PGN_127514 extends PGN {
   Description: AC Power / Current - Phase A
 */
 export interface PGN_127744 extends PGN {
-  sid: number
-  connectionNumber: number
-  acRmsCurrent: number
-  power: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acRmsCurrent: number
+    power: number
+}
 }
 
 /*
@@ -5099,10 +5424,12 @@ export interface PGN_127744 extends PGN {
   Description: AC Power / Current - Phase B
 */
 export interface PGN_127745 extends PGN {
-  sid: number
-  connectionNumber: number
-  acRmsCurrent: number
-  power: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acRmsCurrent: number
+    power: number
+}
 }
 
 /*
@@ -5110,10 +5437,12 @@ export interface PGN_127745 extends PGN {
   Description: AC Power / Current - Phase C
 */
 export interface PGN_127746 extends PGN {
-  sid: number
-  connectionNumber: number
-  acRmsCurrent: number
-  power: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acRmsCurrent: number
+    power: number
+}
 }
 
 /*
@@ -5121,11 +5450,13 @@ export interface PGN_127746 extends PGN {
   Description: AC Voltage / Frequency - Phase A
 */
 export interface PGN_127747 extends PGN {
-  sid: number
-  connectionNumber: number
-  acVoltageLineToNeutral: number
-  acVoltageLineToLine: number
-  frequency: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acVoltageLineToNeutral: number
+    acVoltageLineToLine: number
+    frequency: number
+}
 }
 
 /*
@@ -5133,11 +5464,13 @@ export interface PGN_127747 extends PGN {
   Description: AC Voltage / Frequency - Phase B
 */
 export interface PGN_127748 extends PGN {
-  sid: number
-  connectionNumber: number
-  acVoltageLineToNeutral: number
-  acVoltageLineToLine: number
-  frequency: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acVoltageLineToNeutral: number
+    acVoltageLineToLine: number
+    frequency: number
+}
 }
 
 /*
@@ -5145,11 +5478,13 @@ export interface PGN_127748 extends PGN {
   Description: AC Voltage / Frequency - Phase C
 */
 export interface PGN_127749 extends PGN {
-  sid: number
-  connectionNumber: number
-  acVoltageLineToNeutral: number
-  acVoltageLineToLine: number
-  frequency: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    acVoltageLineToNeutral: number
+    acVoltageLineToLine: number
+    frequency: number
+}
 }
 
 /*
@@ -5157,14 +5492,16 @@ export interface PGN_127749 extends PGN {
   Description: Converter Status
 */
 export interface PGN_127750 extends PGN {
-  sid: number
-  connectionNumber: number
-  operatingState: ConverterState
-  temperatureState: GoodWarningError
-  overloadState: GoodWarningError
-  lowDcVoltageState: GoodWarningError
-  rippleState: GoodWarningError
-  reserved: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    operatingState: ConverterState
+    temperatureState: GoodWarningError
+    overloadState: GoodWarningError
+    lowDcVoltageState: GoodWarningError
+    rippleState: GoodWarningError
+    reserved: number
+}
 }
 
 /*
@@ -5172,11 +5509,13 @@ export interface PGN_127750 extends PGN {
   Description: DC Voltage/Current
 */
 export interface PGN_127751 extends PGN {
-  sid: number
-  connectionNumber: number
-  dcVoltage: number
-  dcCurrent: number
-  reserved: number
+  fields: {
+    sid: number
+    connectionNumber: number
+    dcVoltage: number
+    dcCurrent: number
+    reserved: number
+}
 }
 
 /*
@@ -5185,9 +5524,11 @@ export interface PGN_127751 extends PGN {
   Explanation: This PGN provides the Nautical Leeway Angle. Nautical leeway angle is defined as the angle between the direction a vessel is heading (pointing) and the direction it is actually travelling (tracking thru the water). It is commonly provided by dual-axis speed sensors.
 */
 export interface PGN_128000 extends PGN {
-  sid: number
-  leewayAngle: number
-  reserved: number
+  fields: {
+    sid: number
+    leewayAngle: number
+    reserved: number
+}
 }
 
 /*
@@ -5196,11 +5537,13 @@ export interface PGN_128000 extends PGN {
   Explanation: The Vessel Acceleration PGN transmits the acceleration of the vessel in all three axes, ahead/astern, port/starboard, and up/down.
 */
 export interface PGN_128001 extends PGN {
-  sid: number
-  longitudinalAcceleration: number
-  transverseAcceleration: number
-  verticalAcceleration: number
-  reserved: number
+  fields: {
+    sid: number
+    longitudinalAcceleration: number
+    transverseAcceleration: number
+    verticalAcceleration: number
+    reserved: number
+}
 }
 
 /*
@@ -5209,13 +5552,15 @@ export interface PGN_128001 extends PGN {
   Explanation: This PGN is used to provide the Electric Propulsion Drive System Status.
 */
 export interface PGN_128002 extends PGN {
-  inverterMotorController: number
-  activeMotorMode: number
-  brakeMode: number
-  reserved: number
-  rotationalShaftSpeed: number
-  motorDcVoltage: number
-  motorDcCurrent: number
+  fields: {
+    inverterMotorController: number
+    activeMotorMode: number
+    brakeMode: number
+    reserved: number
+    rotationalShaftSpeed: number
+    motorDcVoltage: number
+    motorDcCurrent: number
+}
 }
 
 /*
@@ -5224,13 +5569,15 @@ export interface PGN_128002 extends PGN {
   Explanation: Electric Energy Storage Status message provides important energy storage information global at a rapid update rate.
 */
 export interface PGN_128003 extends PGN {
-  energyStorageIdentifier: number
-  batteryStatus: number
-  isolationStatus: number
-  batteryError: number
-  batteryVoltage: number
-  batteryCurrent: number
-  reserved: number
+  fields: {
+    energyStorageIdentifier: number
+    batteryStatus: number
+    isolationStatus: number
+    batteryError: number
+    batteryVoltage: number
+    batteryCurrent: number
+    reserved: number
+}
 }
 
 /*
@@ -5238,15 +5585,17 @@ export interface PGN_128003 extends PGN {
   Description: Thruster Control Status
 */
 export interface PGN_128006 extends PGN {
-  sid: number
-  identifier: number
-  directionControl: ThrusterDirectionControl
-  powerEnabled: OffOn
-  retractControl: ThrusterRetractControl
-  speedControl: number
-  controlEvents: ThrusterControlEvents[]
-  commandTimeout: string
-  azimuthControl: number
+  fields: {
+    sid: number
+    identifier: number
+    directionControl: ThrusterDirectionControl
+    powerEnabled: OffOn
+    retractControl: ThrusterRetractControl
+    speedControl: number
+    controlEvents: ThrusterControlEvents[]
+    commandTimeout: string
+    azimuthControl: number
+}
 }
 
 /*
@@ -5254,12 +5603,14 @@ export interface PGN_128006 extends PGN {
   Description: Thruster Information
 */
 export interface PGN_128007 extends PGN {
-  identifier: number
-  motorType: ThrusterMotorType
-  reserved: number
-  powerRating: number
-  maximumTemperatureRating: number
-  maximumRotationalSpeed: number
+  fields: {
+    identifier: number
+    motorType: ThrusterMotorType
+    reserved: number
+    powerRating: number
+    maximumTemperatureRating: number
+    maximumRotationalSpeed: number
+}
 }
 
 /*
@@ -5267,12 +5618,14 @@ export interface PGN_128007 extends PGN {
   Description: Thruster Motor Status
 */
 export interface PGN_128008 extends PGN {
-  sid: number
-  identifier: number
-  motorEvents: ThrusterMotorEvents[]
-  current: number
-  temperature: number
-  operatingTime: string
+  fields: {
+    sid: number
+    identifier: number
+    motorEvents: ThrusterMotorEvents[]
+    current: number
+    temperature: number
+    operatingTime: string
+}
 }
 
 /*
@@ -5280,12 +5633,14 @@ export interface PGN_128008 extends PGN {
   Description: Speed
 */
 export interface PGN_128259 extends PGN {
-  sid: number
-  speedWaterReferenced: number
-  speedGroundReferenced: number
-  speedWaterReferencedType: WaterReference
-  speedDirection: number
-  reserved: number
+  fields: {
+    sid: number
+    speedWaterReferenced: number
+    speedGroundReferenced: number
+    speedWaterReferencedType: WaterReference
+    speedDirection: number
+    reserved: number
+}
 }
 
 /*
@@ -5293,10 +5648,12 @@ export interface PGN_128259 extends PGN {
   Description: Water Depth
 */
 export interface PGN_128267 extends PGN {
-  sid: number
-  depth: number
-  offset: number
-  range: number
+  fields: {
+    sid: number
+    depth: number
+    offset: number
+    range: number
+}
 }
 
 /*
@@ -5304,10 +5661,12 @@ export interface PGN_128267 extends PGN {
   Description: Distance Log
 */
 export interface PGN_128275 extends PGN {
-  date: string
-  time: string
-  log: number
-  tripLog: number
+  fields: {
+    date: string
+    time: string
+    log: number
+    tripLog: number
+}
 }
 
 /*
@@ -5315,23 +5674,25 @@ export interface PGN_128275 extends PGN {
   Description: Tracked Target Data
 */
 export interface PGN_128520 extends PGN {
-  sid: number
-  targetId: number
-  trackStatus: Tracking[]
-  reportedTarget: boolean
-  targetAcquisition: TargetAcquisition
-  bearingReference: DirectionReference
-  reserved: number
-  bearing: number
-  distance: number
-  course: number
-  speed: number
-  cpa: number
-  tcpa: string
-  utcOfFix: string
-  name: string
-  referenceTarget: boolean
-  reserved17: number
+  fields: {
+    sid: number
+    targetId: number
+    trackStatus: Tracking[]
+    reportedTarget: boolean
+    targetAcquisition: TargetAcquisition
+    bearingReference: DirectionReference
+    reserved: number
+    bearing: number
+    distance: number
+    course: number
+    speed: number
+    cpa: number
+    tcpa: string
+    utcOfFix: string
+    name: string
+    referenceTarget: boolean
+    reserved17: number
+}
 }
 
 /*
@@ -5340,38 +5701,40 @@ export interface PGN_128520 extends PGN {
   Explanation: This PGN provides the status information of an elevator car. This includes the elevator car id and type, sensors for load and weight limits, smoke detection, door status, motor status, and brake status. Also provided are weight and speed measurements, current and destination deck location, proximity switch status, inertial measurement unit status and Emergency button and buzzer status.
 */
 export interface PGN_128538 extends PGN {
-  sid: number
-  elevatorCarId: number
-  elevatorCarUsage: number
-  smokeSensorStatus: number
-  limitSwitchSensorStatus: number
-  proximitySwitchSensorStatus: number
-  inertialMeasurementUnitImuSensorStatus: number
-  elevatorLoadLimitStatus: number
-  elevatorLoadBalanceStatus: number
-  elevatorLoadSensor1Status: number
-  elevatorLoadSensor2Status: number
-  elevatorLoadSensor3Status: number
-  elevatorLoadSensor4Status: number
-  reserved: number
-  elevatorCarMotionStatus: number
-  elevatorCarDoorStatus: number
-  elevatorCarEmergencyButtonStatus: number
-  elevatorCarBuzzerStatus: number
-  openDoorButtonStatus: number
-  closeDoorButtonStatus: number
-  reserved21: number
-  currentDeck: number
-  destinationDeck: number
-  totalNumberOfDecks: number
-  weightOfLoadCell1: number
-  weightOfLoadCell2: number
-  weightOfLoadCell3: number
-  weightOfLoadCell4: number
-  speedOfElevatorCar: number
-  elevatorBrakeStatus: number
-  elevatorMotorRotationControlStatus: number
-  reserved32: number
+  fields: {
+    sid: number
+    elevatorCarId: number
+    elevatorCarUsage: number
+    smokeSensorStatus: number
+    limitSwitchSensorStatus: number
+    proximitySwitchSensorStatus: number
+    inertialMeasurementUnitImuSensorStatus: number
+    elevatorLoadLimitStatus: number
+    elevatorLoadBalanceStatus: number
+    elevatorLoadSensor1Status: number
+    elevatorLoadSensor2Status: number
+    elevatorLoadSensor3Status: number
+    elevatorLoadSensor4Status: number
+    reserved: number
+    elevatorCarMotionStatus: number
+    elevatorCarDoorStatus: number
+    elevatorCarEmergencyButtonStatus: number
+    elevatorCarBuzzerStatus: number
+    openDoorButtonStatus: number
+    closeDoorButtonStatus: number
+    reserved21: number
+    currentDeck: number
+    destinationDeck: number
+    totalNumberOfDecks: number
+    weightOfLoadCell1: number
+    weightOfLoadCell2: number
+    weightOfLoadCell3: number
+    weightOfLoadCell4: number
+    speedOfElevatorCar: number
+    elevatorBrakeStatus: number
+    elevatorMotorRotationControlStatus: number
+    reserved32: number
+}
 }
 
 /*
@@ -5380,12 +5743,14 @@ export interface PGN_128538 extends PGN {
   Explanation: This PGN provides the status of an elevator motor controller. Settings of the elevator motor controller may be changed using the NMEA Command Group Function.
 */
 export interface PGN_128768 extends PGN {
-  sid: number
-  elevatorCarId: number
-  elevatorCarUsage: number
-  motorAccelerationDecelerationProfileSelection: number
-  motorRotationalControlStatus: number
-  reserved: number
+  fields: {
+    sid: number
+    elevatorCarId: number
+    elevatorCarUsage: number
+    motorAccelerationDecelerationProfileSelection: number
+    motorRotationalControlStatus: number
+    reserved: number
+}
 }
 
 /*
@@ -5394,12 +5759,14 @@ export interface PGN_128768 extends PGN {
   Explanation: Transmit data of Deck controller to Elevator Main controller.
 */
 export interface PGN_128769 extends PGN {
-  sid: number
-  elevatorCallButtonId: number
-  deckButtonId: number
-  elevatorCarUsage: number
-  elevatorCarButtonSelection: number
-  reserved: number
+  fields: {
+    sid: number
+    elevatorCallButtonId: number
+    deckButtonId: number
+    elevatorCarUsage: number
+    elevatorCarButtonSelection: number
+    reserved: number
+}
 }
 
 /*
@@ -5407,20 +5774,22 @@ export interface PGN_128769 extends PGN {
   Description: Windlass Control Status
 */
 export interface PGN_128776 extends PGN {
-  sid: number
-  windlassId: number
-  windlassDirectionControl: WindlassDirection
-  anchorDockingControl: OffOn
-  speedControlType: SpeedType
-  reserved: number
-  speedControl: number
-  powerEnable: OffOn
-  mechanicalLock: OffOn
-  deckAndAnchorWash: OffOn
-  anchorLight: OffOn
-  commandTimeout: string
-  windlassControlEvents: WindlassControl[]
-  reserved14: number
+  fields: {
+    sid: number
+    windlassId: number
+    windlassDirectionControl: WindlassDirection
+    anchorDockingControl: OffOn
+    speedControlType: SpeedType
+    reserved: number
+    speedControl: number
+    powerEnable: OffOn
+    mechanicalLock: OffOn
+    deckAndAnchorWash: OffOn
+    anchorLight: OffOn
+    commandTimeout: string
+    windlassControlEvents: WindlassControl[]
+    reserved14: number
+}
 }
 
 /*
@@ -5428,16 +5797,18 @@ export interface PGN_128776 extends PGN {
   Description: Anchor Windlass Operating Status
 */
 export interface PGN_128777 extends PGN {
-  sid: number
-  windlassId: number
-  windlassDirectionControl: WindlassDirection
-  windlassMotionStatus: WindlassMotion
-  rodeTypeStatus: RodeType
-  reserved: number
-  rodeCounterValue: number
-  windlassLineSpeed: number
-  anchorDockingStatus: DockingStatus
-  windlassOperatingEvents: WindlassOperation[]
+  fields: {
+    sid: number
+    windlassId: number
+    windlassDirectionControl: WindlassDirection
+    windlassMotionStatus: WindlassMotion
+    rodeTypeStatus: RodeType
+    reserved: number
+    rodeCounterValue: number
+    windlassLineSpeed: number
+    anchorDockingStatus: DockingStatus
+    windlassOperatingEvents: WindlassOperation[]
+}
 }
 
 /*
@@ -5445,13 +5816,15 @@ export interface PGN_128777 extends PGN {
   Description: Anchor Windlass Monitoring Status
 */
 export interface PGN_128778 extends PGN {
-  sid: number
-  windlassId: number
-  windlassMonitoringEvents: WindlassMonitoring[]
-  controllerVoltage: number
-  motorCurrent: number
-  totalMotorTime: string
-  reserved: number
+  fields: {
+    sid: number
+    windlassId: number
+    windlassMonitoringEvents: WindlassMonitoring[]
+    controllerVoltage: number
+    motorCurrent: number
+    totalMotorTime: string
+    reserved: number
+}
 }
 
 /*
@@ -5460,12 +5833,14 @@ export interface PGN_128778 extends PGN {
   Explanation: Actuator is a broad description of any device that embodies moving an object between two fixed limits, such as raising or lowering an outboard engine assembly. In the context of this PGN, the word "Device" refers to the object being moved. In the case of multiple Actuators per controller, the Actuator Identifier field specifies which Actuator the PGN message is intended for, and all following data fields refer only to that Actuator. This PGN supports manufacturer calibrated systems and retrofit systems where it is impractical for the installer to enter the Maximum Travel distance of the device.
 */
 export interface PGN_128780 extends PGN {
-  actuatorIdentifier: number
-  commandedDevicePosition: number
-  devicePosition: number
-  maximumDeviceTravel: number
-  directionOfTravel: number
-  reserved: number
+  fields: {
+    actuatorIdentifier: number
+    commandedDevicePosition: number
+    devicePosition: number
+    maximumDeviceTravel: number
+    directionOfTravel: number
+    reserved: number
+}
 }
 
 /*
@@ -5473,8 +5848,10 @@ export interface PGN_128780 extends PGN {
   Description: Position, Rapid Update
 */
 export interface PGN_129025 extends PGN {
-  latitude: number
-  longitude: number
+  fields: {
+    latitude: number
+    longitude: number
+}
 }
 
 /*
@@ -5482,12 +5859,14 @@ export interface PGN_129025 extends PGN {
   Description: COG & SOG, Rapid Update
 */
 export interface PGN_129026 extends PGN {
-  sid: number
-  cogReference: DirectionReference
-  reserved: number
-  cog: number
-  sog: number
-  reserved6: number
+  fields: {
+    sid: number
+    cogReference: DirectionReference
+    reserved: number
+    cog: number
+    sog: number
+    reserved6: number
+}
 }
 
 /*
@@ -5495,10 +5874,12 @@ export interface PGN_129026 extends PGN {
   Description: Position Delta, Rapid Update
 */
 export interface PGN_129027 extends PGN {
-  sid: number
-  timeDelta: string
-  latitudeDelta: number
-  longitudeDelta: number
+  fields: {
+    sid: number
+    timeDelta: string
+    latitudeDelta: number
+    longitudeDelta: number
+}
 }
 
 /*
@@ -5506,13 +5887,15 @@ export interface PGN_129027 extends PGN {
   Description: Altitude Delta, Rapid Update
 */
 export interface PGN_129028 extends PGN {
-  sid: number
-  timeDelta: string
-  gnssQuality: GnsMethod
-  direction: DirectionReference
-  reserved: number
-  cog: number
-  altitudeDelta: number
+  fields: {
+    sid: number
+    timeDelta: string
+    gnssQuality: GnsMethod
+    direction: DirectionReference
+    reserved: number
+    cog: number
+    altitudeDelta: number
+}
 }
 
 /*
@@ -5520,24 +5903,26 @@ export interface PGN_129028 extends PGN {
   Description: GNSS Position Data
 */
 export interface PGN_129029 extends PGN {
-  sid: number
-  date: string
-  time: string
-  latitude: number
-  longitude: number
-  altitude: number
-  gnssType: Gns
-  method: GnsMethod
-  integrity: GnsIntegrity
-  reserved: number
-  numberOfSvs: number
-  hdop: number
-  pdop: number
-  geoidalSeparation: number
-  referenceStations: number
-  referenceStationType: Gns
-  referenceStationId: number
-  ageOfDgnssCorrections: string
+  fields: {
+    sid: number
+    date: string
+    time: string
+    latitude: number
+    longitude: number
+    altitude: number
+    gnssType: Gns
+    method: GnsMethod
+    integrity: GnsIntegrity
+    reserved: number
+    numberOfSvs: number
+    hdop: number
+    pdop: number
+    geoidalSeparation: number
+    referenceStations: number
+    referenceStationType: Gns
+    referenceStationId: number
+    ageOfDgnssCorrections: string
+}
 }
 
 /*
@@ -5545,9 +5930,11 @@ export interface PGN_129029 extends PGN {
   Description: Time & Date
 */
 export interface PGN_129033 extends PGN {
-  date: string
-  time: string
-  localOffset: string
+  fields: {
+    date: string
+    time: string
+    localOffset: string
+}
 }
 
 /*
@@ -5555,26 +5942,28 @@ export interface PGN_129033 extends PGN {
   Description: AIS Class A Position Report
 */
 export interface PGN_129038 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  timeStamp: TimeStamp
-  cog: number
-  sog: number
-  communicationState: number
-  aisTransceiverInformation: AisTransceiver
-  heading: number
-  rateOfTurn: number
-  navStatus: NavStatus
-  specialManeuverIndicator: AisSpecialManeuver
-  reserved: number
-  spare18: string
-  reserved19: number
-  sequenceId: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    timeStamp: TimeStamp
+    cog: number
+    sog: number
+    communicationState: number
+    aisTransceiverInformation: AisTransceiver
+    heading: number
+    rateOfTurn: number
+    navStatus: NavStatus
+    specialManeuverIndicator: AisSpecialManeuver
+    reserved: number
+    spare18: string
+    reserved19: number
+    sequenceId: number
+}
 }
 
 /*
@@ -5582,29 +5971,31 @@ export interface PGN_129038 extends PGN {
   Description: AIS Class B Position Report
 */
 export interface PGN_129039 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  timeStamp: TimeStamp
-  cog: number
-  sog: number
-  communicationState: number
-  aisTransceiverInformation: AisTransceiver
-  heading: number
-  regionalApplication: string
-  regionalApplicationB: string
-  unitType: AisType
-  integratedDisplay: boolean
-  dsc: boolean
-  band: AisBand
-  canHandleMsg22: boolean
-  aisMode: AisMode
-  aisCommunicationState: AisCommunicationState
-  reserved: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    timeStamp: TimeStamp
+    cog: number
+    sog: number
+    communicationState: number
+    aisTransceiverInformation: AisTransceiver
+    heading: number
+    regionalApplication: string
+    regionalApplicationB: string
+    unitType: AisType
+    integratedDisplay: boolean
+    dsc: boolean
+    band: AisBand
+    canHandleMsg22: boolean
+    aisMode: AisMode
+    aisCommunicationState: AisCommunicationState
+    reserved: number
+}
 }
 
 /*
@@ -5612,33 +6003,35 @@ export interface PGN_129039 extends PGN {
   Description: AIS Class B Extended Position Report
 */
 export interface PGN_129040 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  timeStamp: TimeStamp
-  cog: number
-  sog: number
-  regionalApplication: string
-  regionalApplicationB: string
-  reserved: number
-  typeOfShip: ShipType
-  trueHeading: number
-  reserved16: number
-  gnssType: PositionFixDevice
-  length: number
-  beam: number
-  positionReferenceFromStarboard: number
-  positionReferenceFromBow: number
-  name: string
-  dte: Available
-  aisMode: AisMode
-  spare25: string
-  aisTransceiverInformation: AisTransceiver
-  reserved27: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    timeStamp: TimeStamp
+    cog: number
+    sog: number
+    regionalApplication: string
+    regionalApplicationB: string
+    reserved: number
+    typeOfShip: ShipType
+    trueHeading: number
+    reserved16: number
+    gnssType: PositionFixDevice
+    length: number
+    beam: number
+    positionReferenceFromStarboard: number
+    positionReferenceFromBow: number
+    name: string
+    dte: Available
+    aisMode: AisMode
+    spare25: string
+    aisTransceiverInformation: AisTransceiver
+    reserved27: number
+}
 }
 
 /*
@@ -5646,29 +6039,31 @@ export interface PGN_129040 extends PGN {
   Description: AIS Aids to Navigation (AtoN) Report
 */
 export interface PGN_129041 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  timeStamp: TimeStamp
-  lengthDiameter: number
-  beamDiameter: number
-  positionReferenceFromStarboardEdge: number
-  positionReferenceFromTrueNorthFacingEdge: number
-  atonType: AtonType
-  offPositionIndicator: boolean
-  virtualAtonFlag: boolean
-  assignedModeFlag: AisAssignedMode
-  spare: string
-  positionFixingDeviceType: PositionFixDevice
-  reserved19: number
-  atonStatus: number
-  aisTransceiverInformation: AisTransceiver
-  reserved22: number
-  atonName: string
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    timeStamp: TimeStamp
+    lengthDiameter: number
+    beamDiameter: number
+    positionReferenceFromStarboardEdge: number
+    positionReferenceFromTrueNorthFacingEdge: number
+    atonType: AtonType
+    offPositionIndicator: boolean
+    virtualAtonFlag: boolean
+    assignedModeFlag: AisAssignedMode
+    spare: string
+    positionFixingDeviceType: PositionFixDevice
+    reserved19: number
+    atonStatus: number
+    aisTransceiverInformation: AisTransceiver
+    reserved22: number
+    atonName: string
+}
 }
 
 /*
@@ -5676,11 +6071,13 @@ export interface PGN_129041 extends PGN {
   Description: Datum
 */
 export interface PGN_129044 extends PGN {
-  localDatum: string
-  deltaLatitude: number
-  deltaLongitude: number
-  deltaAltitude: number
-  referenceDatum: string
+  fields: {
+    localDatum: string
+    deltaLatitude: number
+    deltaLongitude: number
+    deltaAltitude: number
+    referenceDatum: string
+}
 }
 
 /*
@@ -5688,16 +6085,18 @@ export interface PGN_129044 extends PGN {
   Description: User Datum
 */
 export interface PGN_129045 extends PGN {
-  deltaX: number
-  deltaY: number
-  deltaZ: number
-  rotationInX: string
-  rotationInY: string
-  rotationInZ: string
-  scale: string
-  ellipsoidSemiMajorAxis: number
-  ellipsoidFlatteningInverse: string
-  datumName: string
+  fields: {
+    deltaX: number
+    deltaY: number
+    deltaZ: number
+    rotationInX: string
+    rotationInY: string
+    rotationInZ: string
+    scale: string
+    ellipsoidSemiMajorAxis: number
+    ellipsoidFlatteningInverse: string
+    datumName: string
+}
 }
 
 /*
@@ -5705,12 +6104,14 @@ export interface PGN_129045 extends PGN {
   Description: Cross Track Error
 */
 export interface PGN_129283 extends PGN {
-  sid: number
-  xteMode: ResidualMode
-  reserved: number
-  navigationTerminated: boolean
-  xte: number
-  reserved6: number
+  fields: {
+    sid: number
+    xteMode: ResidualMode
+    reserved: number
+    navigationTerminated: boolean
+    xte: number
+    reserved6: number
+}
 }
 
 /*
@@ -5718,21 +6119,23 @@ export interface PGN_129283 extends PGN {
   Description: Navigation Data
 */
 export interface PGN_129284 extends PGN {
-  sid: number
-  distanceToWaypoint: number
-  courseBearingReference: DirectionReference
-  perpendicularCrossed: boolean
-  arrivalCircleEntered: boolean
-  calculationType: BearingMode
-  etaTime: string
-  etaDate: string
-  bearingOriginToDestinationWaypoint: number
-  bearingPositionToDestinationWaypoint: number
-  originWaypointNumber: number
-  destinationWaypointNumber: number
-  destinationLatitude: number
-  destinationLongitude: number
-  waypointClosingVelocity: number
+  fields: {
+    sid: number
+    distanceToWaypoint: number
+    courseBearingReference: DirectionReference
+    perpendicularCrossed: boolean
+    arrivalCircleEntered: boolean
+    calculationType: BearingMode
+    etaTime: string
+    etaDate: string
+    bearingOriginToDestinationWaypoint: number
+    bearingPositionToDestinationWaypoint: number
+    originWaypointNumber: number
+    destinationWaypointNumber: number
+    destinationLatitude: number
+    destinationLongitude: number
+    waypointClosingVelocity: number
+}
 }
 
 /*
@@ -5740,19 +6143,21 @@ export interface PGN_129284 extends PGN {
   Description: Navigation - Route/WP Information
 */
 export interface PGN_129285 extends PGN {
-  startRps: number
-  nitems: number
-  databaseId: number
-  routeId: number
-  navigationDirectionInRoute: Direction
-  supplementaryRouteWpDataAvailable: OffOn
-  reserved: number
-  routeName: string
-  reserved9: number
-  wpId: number
-  wpName: string
-  wpLatitude: number
-  wpLongitude: number
+  fields: {
+    startRps: number
+    nitems: number
+    databaseId: number
+    routeId: number
+    navigationDirectionInRoute: Direction
+    supplementaryRouteWpDataAvailable: OffOn
+    reserved: number
+    routeName: string
+    reserved9: number
+    wpId: number
+    wpName: string
+    wpLatitude: number
+    wpLongitude: number
+}
 }
 
 /*
@@ -5760,12 +6165,14 @@ export interface PGN_129285 extends PGN {
   Description: Set & Drift, Rapid Update
 */
 export interface PGN_129291 extends PGN {
-  sid: number
-  setReference: DirectionReference
-  reserved: number
-  set: number
-  drift: number
-  reserved6: number
+  fields: {
+    sid: number
+    setReference: DirectionReference
+    reserved: number
+    set: number
+    drift: number
+    reserved6: number
+}
 }
 
 /*
@@ -5773,11 +6180,13 @@ export interface PGN_129291 extends PGN {
   Description: Navigation - Route / Time to+from Mark
 */
 export interface PGN_129301 extends PGN {
-  sid: number
-  timeToMark: string
-  markType: MarkType
-  reserved: number
-  markId: number
+  fields: {
+    sid: number
+    timeToMark: string
+    markType: MarkType
+    reserved: number
+    markId: number
+}
 }
 
 /*
@@ -5785,16 +6194,18 @@ export interface PGN_129301 extends PGN {
   Description: Bearing and Distance between two Marks
 */
 export interface PGN_129302 extends PGN {
-  sid: number
-  bearingReference: DirectionReference
-  calculationType: BearingMode
-  reserved: number
-  bearingOriginToDestination: number
-  distance: number
-  originMarkType: MarkType
-  destinationMarkType: MarkType
-  originMarkId: number
-  destinationMarkId: number
+  fields: {
+    sid: number
+    bearingReference: DirectionReference
+    calculationType: BearingMode
+    reserved: number
+    bearingOriginToDestination: number
+    distance: number
+    originMarkType: MarkType
+    destinationMarkType: MarkType
+    originMarkId: number
+    destinationMarkId: number
+}
 }
 
 /*
@@ -5802,17 +6213,19 @@ export interface PGN_129302 extends PGN {
   Description: GNSS Control Status
 */
 export interface PGN_129538 extends PGN {
-  svElevationMask: number
-  pdopMask: number
-  pdopSwitch: number
-  snrMask: number
-  gnssModeDesired: GnssMode
-  dgnssModeDesired: DgnssMode
-  positionVelocityFilter: boolean
-  maxCorrectionAge: string
-  antennaAltitudeFor2dMode: number
-  useAntennaAltitudeFor2dMode: boolean
-  reserved: number
+  fields: {
+    svElevationMask: number
+    pdopMask: number
+    pdopSwitch: number
+    snrMask: number
+    gnssModeDesired: GnssMode
+    dgnssModeDesired: DgnssMode
+    positionVelocityFilter: boolean
+    maxCorrectionAge: string
+    antennaAltitudeFor2dMode: number
+    useAntennaAltitudeFor2dMode: boolean
+    reserved: number
+}
 }
 
 /*
@@ -5820,13 +6233,15 @@ export interface PGN_129538 extends PGN {
   Description: GNSS DOPs
 */
 export interface PGN_129539 extends PGN {
-  sid: number
-  desiredMode: GnssMode
-  actualMode: GnssMode
-  reserved: number
-  hdop: number
-  vdop: number
-  tdop: number
+  fields: {
+    sid: number
+    desiredMode: GnssMode
+    actualMode: GnssMode
+    reserved: number
+    hdop: number
+    vdop: number
+    tdop: number
+}
 }
 
 /*
@@ -5834,17 +6249,19 @@ export interface PGN_129539 extends PGN {
   Description: GNSS Sats in View
 */
 export interface PGN_129540 extends PGN {
-  sid: number
-  rangeResidualMode: RangeResidualMode
-  reserved: number
-  satsInView: number
-  prn: number
-  elevation: number
-  azimuth: number
-  snr: number
-  rangeResiduals: number
-  status: SatelliteStatus
-  reserved11: number
+  fields: {
+    sid: number
+    rangeResidualMode: RangeResidualMode
+    reserved: number
+    satsInView: number
+    prn: number
+    elevation: number
+    azimuth: number
+    snr: number
+    rangeResiduals: number
+    status: SatelliteStatus
+    reserved11: number
+}
 }
 
 /*
@@ -5852,20 +6269,22 @@ export interface PGN_129540 extends PGN {
   Description: GPS Almanac Data
 */
 export interface PGN_129541 extends PGN {
-  prn: number
-  gpsWeekNumber: number
-  svHealthBits: number
-  eccentricity: number
-  almanacReferenceTime: number
-  inclinationAngle: number
-  rateOfRightAscension: number
-  rootOfSemiMajorAxis: number
-  argumentOfPerigee: number
-  longitudeOfAscensionNode: number
-  meanAnomaly: number
-  clockParameter1: number
-  clockParameter2: number
-  reserved: number
+  fields: {
+    prn: number
+    gpsWeekNumber: number
+    svHealthBits: number
+    eccentricity: number
+    almanacReferenceTime: number
+    inclinationAngle: number
+    rateOfRightAscension: number
+    rootOfSemiMajorAxis: number
+    argumentOfPerigee: number
+    longitudeOfAscensionNode: number
+    meanAnomaly: number
+    clockParameter1: number
+    clockParameter2: number
+    reserved: number
+}
 }
 
 /*
@@ -5873,14 +6292,16 @@ export interface PGN_129541 extends PGN {
   Description: GNSS Pseudorange Noise Statistics
 */
 export interface PGN_129542 extends PGN {
-  sid: number
-  rmsOfPositionUncertainty: number
-  stdOfMajorAxis: number
-  stdOfMinorAxis: number
-  orientationOfMajorAxis: number
-  stdOfLatError: number
-  stdOfLonError: number
-  stdOfAltError: number
+  fields: {
+    sid: number
+    rmsOfPositionUncertainty: number
+    stdOfMajorAxis: number
+    stdOfMinorAxis: number
+    orientationOfMajorAxis: number
+    stdOfLatError: number
+    stdOfLonError: number
+    stdOfAltError: number
+}
 }
 
 /*
@@ -5888,16 +6309,18 @@ export interface PGN_129542 extends PGN {
   Description: GNSS RAIM Output
 */
 export interface PGN_129545 extends PGN {
-  sid: number
-  integrityFlag: GnsIntegrity
-  reserved: number
-  latitudeExpectedError: number
-  longitudeExpectedError: number
-  altitudeExpectedError: number
-  svIdOfMostLikelyFailedSat: number
-  probabilityOfMissedDetection: number
-  estimateOfPseudorangeBias: number
-  stdDeviationOfBias: number
+  fields: {
+    sid: number
+    integrityFlag: GnsIntegrity
+    reserved: number
+    latitudeExpectedError: number
+    longitudeExpectedError: number
+    altitudeExpectedError: number
+    svIdOfMostLikelyFailedSat: number
+    probabilityOfMissedDetection: number
+    estimateOfPseudorangeBias: number
+    stdDeviationOfBias: number
+}
 }
 
 /*
@@ -5905,11 +6328,13 @@ export interface PGN_129545 extends PGN {
   Description: GNSS RAIM Settings
 */
 export interface PGN_129546 extends PGN {
-  radialPositionErrorMaximumThreshold: number
-  probabilityOfFalseAlarm: number
-  probabilityOfMissedDetection: number
-  pseudorangeResidualFilteringTimeConstant: string
-  reserved: number
+  fields: {
+    radialPositionErrorMaximumThreshold: number
+    probabilityOfFalseAlarm: number
+    probabilityOfMissedDetection: number
+    pseudorangeResidualFilteringTimeConstant: string
+    reserved: number
+}
 }
 
 /*
@@ -5917,14 +6342,16 @@ export interface PGN_129546 extends PGN {
   Description: GNSS Pseudorange Error Statistics
 */
 export interface PGN_129547 extends PGN {
-  sid: number
-  rmsStdDevOfRangeInputs: number
-  stdDevOfMajorErrorEllipse: number
-  stdDevOfMinorErrorEllipse: number
-  orientationOfErrorEllipse: number
-  stdDevLatError: number
-  stdDevLonError: number
-  stdDevAltError: number
+  fields: {
+    sid: number
+    rmsStdDevOfRangeInputs: number
+    stdDevOfMajorErrorEllipse: number
+    stdDevOfMinorErrorEllipse: number
+    orientationOfErrorEllipse: number
+    stdDevLatError: number
+    stdDevLonError: number
+    stdDevAltError: number
+}
 }
 
 /*
@@ -5932,17 +6359,19 @@ export interface PGN_129547 extends PGN {
   Description: DGNSS Corrections
 */
 export interface PGN_129549 extends PGN {
-  sid: number
-  referenceStationId: number
-  referenceStationType: Gns
-  timeOfCorrections: string
-  stationHealth: StationHealth
-  reserved: number
-  satelliteId: number
-  prc: number
-  rrc: number
-  udre: number
-  iod: number
+  fields: {
+    sid: number
+    referenceStationId: number
+    referenceStationType: Gns
+    timeOfCorrections: string
+    stationHealth: StationHealth
+    reserved: number
+    satelliteId: number
+    prc: number
+    rrc: number
+    udre: number
+    iod: number
+}
 }
 
 /*
@@ -5950,13 +6379,15 @@ export interface PGN_129549 extends PGN {
   Description: GNSS Differential Correction Receiver Interface
 */
 export interface PGN_129550 extends PGN {
-  channel: number
-  frequency: number
-  serialInterfaceBitRate: SerialBitRate
-  serialInterfaceDetectionMode: SerialDetectionMode
-  differentialSource: DifferentialSource
-  differentialOperationMode: DifferentialMode
-  reserved: number
+  fields: {
+    channel: number
+    frequency: number
+    serialInterfaceBitRate: SerialBitRate
+    serialInterfaceDetectionMode: SerialDetectionMode
+    differentialSource: DifferentialSource
+    differentialOperationMode: DifferentialMode
+    reserved: number
+}
 }
 
 /*
@@ -5964,20 +6395,22 @@ export interface PGN_129550 extends PGN {
   Description: GNSS Differential Correction Receiver Signal
 */
 export interface PGN_129551 extends PGN {
-  sid: number
-  channel: number
-  signalStrength: number
-  signalSnr: number
-  frequency: number
-  stationType: Gns
-  referenceStationId: number
-  differentialSignalBitRate: SerialBitRate
-  differentialSignalDetectionMode: SerialDetectionMode
-  usedAsCorrectionSource: boolean
-  reserved: number
-  differentialSource: DifferentialSource
-  timeSinceLastSatDifferentialSync: string
-  satelliteServiceIdNo: number
+  fields: {
+    sid: number
+    channel: number
+    signalStrength: number
+    signalSnr: number
+    frequency: number
+    stationType: Gns
+    referenceStationId: number
+    differentialSignalBitRate: SerialBitRate
+    differentialSignalDetectionMode: SerialDetectionMode
+    usedAsCorrectionSource: boolean
+    reserved: number
+    differentialSource: DifferentialSource
+    timeSinceLastSatDifferentialSync: string
+    satelliteServiceIdNo: number
+}
 }
 
 /*
@@ -5986,20 +6419,22 @@ export interface PGN_129551 extends PGN {
   Explanation: Almanac data for GLONASS products. The alamant contains satellite vehicle course orbital parameters. These parameters are described in the GLONASS ICS Section 4.5 Table 4.3. See URL.
 */
 export interface PGN_129556 extends PGN {
-  prn: number
-  na: number
-  reserved: number
-  cna: number
-  hna: number
-  EpsilonNa: number
-  DeltatnaDot: number
-  OmegaNa: number
-  DeltaTna: number
-  tna: number
-  LambdaNa: number
-  DeltaIna: number
-  TauCa: number
-  TauNa: number
+  fields: {
+    prn: number
+    na: number
+    reserved: number
+    cna: number
+    hna: number
+    EpsilonNa: number
+    DeltatnaDot: number
+    OmegaNa: number
+    DeltaTna: number
+    tna: number
+    LambdaNa: number
+    DeltaIna: number
+    TauCa: number
+    TauNa: number
+}
 }
 
 /*
@@ -6007,18 +6442,20 @@ export interface PGN_129556 extends PGN {
   Description: AIS DGNSS Broadcast Binary Message
 */
 export interface PGN_129792 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: number
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  longitude: number
-  latitude: number
-  reserved9: number
-  spare10: string
-  numberOfBitsInBinaryDataField: number
-  binaryData: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: number
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    longitude: number
+    latitude: number
+    reserved9: number
+    spare10: string
+    numberOfBitsInBinaryDataField: number
+    binaryData: number
+}
 }
 
 /*
@@ -6026,20 +6463,22 @@ export interface PGN_129792 extends PGN {
   Description: AIS UTC and Date Report
 */
 export interface PGN_129793 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  reserved: number
-  positionTime: string
-  communicationState: number
-  aisTransceiverInformation: AisTransceiver
-  positionDate: string
-  reserved13: number
-  gnssType: PositionFixDevice
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    reserved: number
+    positionTime: string
+    communicationState: number
+    aisTransceiverInformation: AisTransceiver
+    positionDate: string
+    reserved13: number
+    gnssType: PositionFixDevice
+}
 }
 
 /*
@@ -6047,27 +6486,29 @@ export interface PGN_129793 extends PGN {
   Description: AIS Class A Static and Voyage Related Data
 */
 export interface PGN_129794 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  imoNumber: number
-  callsign: string
-  name: string
-  typeOfShip: ShipType
-  length: number
-  beam: number
-  positionReferenceFromStarboard: number
-  positionReferenceFromBow: number
-  etaDate: string
-  etaTime: string
-  draft: number
-  destination: string
-  aisVersionIndicator: AisVersion
-  gnssType: PositionFixDevice
-  dte: Available
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  reserved21: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    imoNumber: number
+    callsign: string
+    name: string
+    typeOfShip: ShipType
+    length: number
+    beam: number
+    positionReferenceFromStarboard: number
+    positionReferenceFromBow: number
+    etaDate: string
+    etaTime: string
+    draft: number
+    destination: string
+    aisVersionIndicator: AisVersion
+    gnssType: PositionFixDevice
+    dte: Available
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    reserved21: number
+}
 }
 
 /*
@@ -6075,18 +6516,20 @@ export interface PGN_129794 extends PGN {
   Description: AIS Addressed Binary Message
 */
 export interface PGN_129795 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  sequenceNumber: number
-  destinationId: string
-  reserved8: number
-  retransmitFlag: boolean
-  reserved10: number
-  numberOfBitsInBinaryDataField: number
-  binaryData: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    sequenceNumber: number
+    destinationId: string
+    reserved8: number
+    retransmitFlag: boolean
+    reserved10: number
+    numberOfBitsInBinaryDataField: number
+    binaryData: number
+}
 }
 
 /*
@@ -6094,15 +6537,17 @@ export interface PGN_129795 extends PGN {
   Description: AIS Acknowledge
 */
 export interface PGN_129796 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  destinationId: string
-  sequenceNumber: number
-  reserved9: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    destinationId: string
+    sequenceNumber: number
+    reserved9: number
+}
 }
 
 /*
@@ -6110,14 +6555,16 @@ export interface PGN_129796 extends PGN {
   Description: AIS Binary Broadcast Message
 */
 export interface PGN_129797 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: number
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  numberOfBitsInBinaryDataField: number
-  binaryData: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: number
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    numberOfBitsInBinaryDataField: number
+    binaryData: number
+}
 }
 
 /*
@@ -6125,23 +6572,25 @@ export interface PGN_129797 extends PGN {
   Description: AIS SAR Aircraft Position Report
 */
 export interface PGN_129798 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  longitude: number
-  latitude: number
-  positionAccuracy: PositionAccuracy
-  raim: RaimFlag
-  timeStamp: TimeStamp
-  cog: number
-  sog: number
-  communicationState: number
-  aisTransceiverInformation: AisTransceiver
-  altitude: number
-  reservedForRegionalApplications: number
-  dte: Available
-  spare: string
-  reserved17: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    longitude: number
+    latitude: number
+    positionAccuracy: PositionAccuracy
+    raim: RaimFlag
+    timeStamp: TimeStamp
+    cog: number
+    sog: number
+    communicationState: number
+    aisTransceiverInformation: AisTransceiver
+    altitude: number
+    reservedForRegionalApplications: number
+    dte: Available
+    spare: string
+    reserved17: number
+}
 }
 
 /*
@@ -6150,12 +6599,14 @@ export interface PGN_129798 extends PGN {
   Explanation: The Radio Channel is NOT a numeric field, it has been observed to contain values such as 9000L1-L3 and 9000F1-F3 (indicating private channels as allowed in some countries.)
 */
 export interface PGN_129799 extends PGN {
-  rxFrequency: number
-  txFrequency: number
-  radioChannel: string
-  txPower: number
-  mode: TelephoneMode
-  channelBandwidth: number
+  fields: {
+    rxFrequency: number
+    txFrequency: number
+    radioChannel: string
+    txPower: number
+    mode: TelephoneMode
+    channelBandwidth: number
+}
 }
 
 /*
@@ -6163,13 +6614,15 @@ export interface PGN_129799 extends PGN {
   Description: AIS UTC/Date Inquiry
 */
 export interface PGN_129800 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  destinationId: string
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    destinationId: string
+}
 }
 
 /*
@@ -6177,17 +6630,19 @@ export interface PGN_129800 extends PGN {
   Description: AIS Addressed Safety Related Message
 */
 export interface PGN_129801 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  sequenceNumber: number
-  destinationId: string
-  reserved8: number
-  retransmitFlag: boolean
-  spare10: string
-  safetyRelatedText: string
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    sequenceNumber: number
+    destinationId: string
+    reserved8: number
+    retransmitFlag: boolean
+    spare10: string
+    safetyRelatedText: string
+}
 }
 
 /*
@@ -6195,13 +6650,15 @@ export interface PGN_129801 extends PGN {
   Description: AIS Safety Related Broadcast Message
 */
 export interface PGN_129802 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  safetyRelatedText: string
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    safetyRelatedText: string
+}
 }
 
 /*
@@ -6209,28 +6666,30 @@ export interface PGN_129802 extends PGN {
   Description: AIS Interrogation
 */
 export interface PGN_129803 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  destinationId1: string
-  reserved8: number
-  messageId11: AisMessageId
-  slotOffset11: number
-  spare11: string
-  messageId12: AisMessageId
-  slotOffset12: number
-  reserved14: number
-  reserved15: number
-  destinationId2: string
-  reserved17: number
-  messageId21: AisMessageId
-  slotOffset21: number
-  spare20: string
-  reserved21: number
-  sid: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    destinationId1: string
+    reserved8: number
+    messageId11: AisMessageId
+    slotOffset11: number
+    spare11: string
+    messageId12: AisMessageId
+    slotOffset12: number
+    reserved14: number
+    reserved15: number
+    destinationId2: string
+    reserved17: number
+    messageId21: AisMessageId
+    slotOffset21: number
+    spare20: string
+    reserved21: number
+    sid: number
+}
 }
 
 /*
@@ -6238,20 +6697,22 @@ export interface PGN_129803 extends PGN {
   Description: AIS Assignment Mode Command
 */
 export interface PGN_129804 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  destinationIdA: string
-  offsetA: number
-  incrementA: number
-  destinationIdB: string
-  offsetB: number
-  incrementB: number
-  spare13: string
-  reserved14: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    destinationIdA: string
+    offsetA: number
+    incrementA: number
+    destinationIdB: string
+    offsetB: number
+    incrementB: number
+    spare13: string
+    reserved14: number
+}
 }
 
 /*
@@ -6259,16 +6720,18 @@ export interface PGN_129804 extends PGN {
   Description: AIS Data Link Management Message
 */
 export interface PGN_129805 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  offset: number
-  numberOfSlots: number
-  timeout: string
-  increment: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    offset: number
+    numberOfSlots: number
+    timeout: string
+    increment: number
+}
 }
 
 /*
@@ -6276,29 +6739,31 @@ export interface PGN_129805 extends PGN {
   Description: AIS Channel Management
 */
 export interface PGN_129806 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  reserved: number
-  aisTransceiverInformation: AisTransceiver
-  spare6: string
-  channelA: number
-  channelB: number
-  reserved9: number
-  power: PowerMode
-  txRxMode: TxRxMode
-  northEastLongitudeCorner1: number
-  northEastLatitudeCorner1: number
-  southWestLongitudeCorner2: number
-  southWestLatitudeCorner2: number
-  reserved16: number
-  addressedOrBroadcastMessageIndicator: BroadcastIndicator
-  channelABandwidth: Bandwidth
-  channelBBandwidth: Bandwidth
-  reserved20: number
-  transitionalZoneSize: ZoneSize
-  spare22: string
-  reserved23: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    reserved: number
+    aisTransceiverInformation: AisTransceiver
+    spare6: string
+    channelA: number
+    channelB: number
+    reserved9: number
+    power: PowerMode
+    txRxMode: TxRxMode
+    northEastLongitudeCorner1: number
+    northEastLatitudeCorner1: number
+    southWestLongitudeCorner2: number
+    southWestLatitudeCorner2: number
+    reserved16: number
+    addressedOrBroadcastMessageIndicator: BroadcastIndicator
+    channelABandwidth: Bandwidth
+    channelBBandwidth: Bandwidth
+    reserved20: number
+    transitionalZoneSize: ZoneSize
+    spare22: string
+    reserved23: number
+}
 }
 
 /*
@@ -6306,25 +6771,27 @@ export interface PGN_129806 extends PGN {
   Description: AIS Class B Group Assignment
 */
 export interface PGN_129807 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  sourceId: string
-  spare: string
-  txRxMode: TxRxMode
-  reserved6: number
-  northEastLongitudeCorner1: number
-  northEastLatitudeCorner1: number
-  southWestLongitudeCorner2: number
-  southWestLatitudeCorner2: number
-  stationType: StationType
-  reserved12: number
-  shipAndCargoFilter: ShipType
-  spare14: string
-  reserved15: number
-  reportingInterval: ReportingInterval
-  quietTime: string
-  spare18: string
-  reserved19: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    sourceId: string
+    spare: string
+    txRxMode: TxRxMode
+    reserved6: number
+    northEastLongitudeCorner1: number
+    northEastLatitudeCorner1: number
+    southWestLongitudeCorner2: number
+    southWestLatitudeCorner2: number
+    stationType: StationType
+    reserved12: number
+    shipAndCargoFilter: ShipType
+    spare14: string
+    reserved15: number
+    reportingInterval: ReportingInterval
+    quietTime: string
+    spare18: string
+    reserved19: number
+}
 }
 
 /*
@@ -6333,28 +6800,30 @@ export interface PGN_129807 extends PGN {
   Match: DSC Category == Distress
 */
 export interface PGN_129808_Distress extends PGN {
-  dscFormat: DscFormat
-  dscCategory: DscCategory
-  dscMessageAddress: string
-  natureOfDistress: DscNature
-  subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
-  proposedRxFrequencyChannel: string
-  proposedTxFrequencyChannel: string
-  telephoneNumber: string
-  latitudeOfVesselReported: number
-  longitudeOfVesselReported: number
-  timeOfPosition: string
-  mmsiOfShipInDistress: string
-  dscEosSymbol: number
-  expansionEnabled: boolean
-  reserved: number
-  callingRxFrequencyChannel: string
-  callingTxFrequencyChannel: string
-  timeOfReceipt: string
-  dateOfReceipt: string
-  dscEquipmentAssignedMessageId: number
-  dscExpansionFieldSymbol: DscExpansionData
-  dscExpansionFieldData: string
+  fields: {
+    dscFormat: DscFormat
+    dscCategory: DscCategory
+    dscMessageAddress: string
+    natureOfDistress: DscNature
+    subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
+    proposedRxFrequencyChannel: string
+    proposedTxFrequencyChannel: string
+    telephoneNumber: string
+    latitudeOfVesselReported: number
+    longitudeOfVesselReported: number
+    timeOfPosition: string
+    mmsiOfShipInDistress: string
+    dscEosSymbol: number
+    expansionEnabled: boolean
+    reserved: number
+    callingRxFrequencyChannel: string
+    callingTxFrequencyChannel: string
+    timeOfReceipt: string
+    dateOfReceipt: string
+    dscEquipmentAssignedMessageId: number
+    dscExpansionFieldSymbol: DscExpansionData
+    dscExpansionFieldData: string
+}
 }
 
 /*
@@ -6362,28 +6831,30 @@ export interface PGN_129808_Distress extends PGN {
   Description: DSC Call Information
 */
 export interface PGN_129808 extends PGN {
-  dscFormatSymbol: DscFormat
-  dscCategorySymbol: DscCategory
-  dscMessageAddress: string
-  _1stTelecommand: DscFirstTelecommand
-  subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
-  proposedRxFrequencyChannel: string
-  proposedTxFrequencyChannel: string
-  telephoneNumber: string
-  latitudeOfVesselReported: number
-  longitudeOfVesselReported: number
-  timeOfPosition: string
-  mmsiOfShipInDistress: string
-  dscEosSymbol: number
-  expansionEnabled: boolean
-  reserved: number
-  callingRxFrequencyChannel: string
-  callingTxFrequencyChannel: string
-  timeOfReceipt: string
-  dateOfReceipt: string
-  dscEquipmentAssignedMessageId: number
-  dscExpansionFieldSymbol: DscExpansionData
-  dscExpansionFieldData: string
+  fields: {
+    dscFormatSymbol: DscFormat
+    dscCategorySymbol: DscCategory
+    dscMessageAddress: string
+    _1stTelecommand: DscFirstTelecommand
+    subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
+    proposedRxFrequencyChannel: string
+    proposedTxFrequencyChannel: string
+    telephoneNumber: string
+    latitudeOfVesselReported: number
+    longitudeOfVesselReported: number
+    timeOfPosition: string
+    mmsiOfShipInDistress: string
+    dscEosSymbol: number
+    expansionEnabled: boolean
+    reserved: number
+    callingRxFrequencyChannel: string
+    callingTxFrequencyChannel: string
+    timeOfReceipt: string
+    dateOfReceipt: string
+    dscEquipmentAssignedMessageId: number
+    dscExpansionFieldSymbol: DscExpansionData
+    dscExpansionFieldData: string
+}
 }
 
 /*
@@ -6391,13 +6862,15 @@ export interface PGN_129808 extends PGN {
   Description: AIS Class B static data (msg 24 Part A)
 */
 export interface PGN_129809 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  name: string
-  aisTransceiverInformation: AisTransceiver
-  reserved: number
-  sequenceId: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    name: string
+    aisTransceiverInformation: AisTransceiver
+    reserved: number
+    sequenceId: number
+}
 }
 
 /*
@@ -6405,23 +6878,25 @@ export interface PGN_129809 extends PGN {
   Description: AIS Class B static data (msg 24 Part B)
 */
 export interface PGN_129810 extends PGN {
-  messageId: AisMessageId
-  repeatIndicator: RepeatIndicator
-  userId: string
-  typeOfShip: ShipType
-  vendorId: string
-  callsign: string
-  length: number
-  beam: number
-  positionReferenceFromStarboard: number
-  positionReferenceFromBow: number
-  mothershipUserId: string
-  reserved: number
-  spare13: string
-  gnssType: PositionFixDevice
-  aisTransceiverInformation: AisTransceiver
-  reserved16: number
-  sequenceId: number
+  fields: {
+    messageId: AisMessageId
+    repeatIndicator: RepeatIndicator
+    userId: string
+    typeOfShip: ShipType
+    vendorId: string
+    callsign: string
+    length: number
+    beam: number
+    positionReferenceFromStarboard: number
+    positionReferenceFromBow: number
+    mothershipUserId: string
+    reserved: number
+    spare13: string
+    gnssType: PositionFixDevice
+    aisTransceiverInformation: AisTransceiver
+    reserved16: number
+    sequenceId: number
+}
 }
 
 /*
@@ -6429,21 +6904,23 @@ export interface PGN_129810 extends PGN {
   Description: Loran-C TD Data
 */
 export interface PGN_130052 extends PGN {
-  groupRepetitionIntervalGri: string
-  masterRange: string
-  vSecondaryTd: string
-  wSecondaryTd: string
-  xSecondaryTd: string
-  ySecondaryTd: string
-  zSecondaryTd: string
-  stationStatusMaster: StationStatus[]
-  stationStatusV: StationStatus[]
-  stationStatusW: StationStatus[]
-  stationStatusX: StationStatus[]
-  stationStatusY: StationStatus[]
-  stationStatusZ: StationStatus[]
-  mode: ResidualMode
-  reserved: number
+  fields: {
+    groupRepetitionIntervalGri: string
+    masterRange: string
+    vSecondaryTd: string
+    wSecondaryTd: string
+    xSecondaryTd: string
+    ySecondaryTd: string
+    zSecondaryTd: string
+    stationStatusMaster: StationStatus[]
+    stationStatusV: StationStatus[]
+    stationStatusW: StationStatus[]
+    stationStatusX: StationStatus[]
+    stationStatusY: StationStatus[]
+    stationStatusZ: StationStatus[]
+    mode: ResidualMode
+    reserved: number
+}
 }
 
 /*
@@ -6451,21 +6928,23 @@ export interface PGN_130052 extends PGN {
   Description: Loran-C Range Data
 */
 export interface PGN_130053 extends PGN {
-  groupRepetitionIntervalGri: string
-  masterRange: string
-  vSecondaryRange: string
-  wSecondaryRange: string
-  xSecondaryRange: string
-  ySecondaryRange: string
-  zSecondaryRange: string
-  stationStatusMaster: StationStatus[]
-  stationStatusV: StationStatus[]
-  stationStatusW: StationStatus[]
-  stationStatusX: StationStatus[]
-  stationStatusY: StationStatus[]
-  stationStatusZ: StationStatus[]
-  mode: ResidualMode
-  reserved: number
+  fields: {
+    groupRepetitionIntervalGri: string
+    masterRange: string
+    vSecondaryRange: string
+    wSecondaryRange: string
+    xSecondaryRange: string
+    ySecondaryRange: string
+    zSecondaryRange: string
+    stationStatusMaster: StationStatus[]
+    stationStatusV: StationStatus[]
+    stationStatusW: StationStatus[]
+    stationStatusX: StationStatus[]
+    stationStatusY: StationStatus[]
+    stationStatusZ: StationStatus[]
+    mode: ResidualMode
+    reserved: number
+}
 }
 
 /*
@@ -6473,11 +6952,13 @@ export interface PGN_130053 extends PGN {
   Description: Loran-C Signal Data
 */
 export interface PGN_130054 extends PGN {
-  groupRepetitionIntervalGri: string
-  stationIdentifier: string
-  stationSnr: number
-  stationEcd: string
-  stationAsf: string
+  fields: {
+    groupRepetitionIntervalGri: string
+    stationIdentifier: string
+    stationSnr: number
+    stationEcd: string
+    stationAsf: string
+}
 }
 
 /*
@@ -6485,14 +6966,16 @@ export interface PGN_130054 extends PGN {
   Description: Label
 */
 export interface PGN_130060 extends PGN {
-  hardwareChannelId: number
-  pgn: string
-  dataSourceInstanceFieldNumber: number
-  dataSourceInstanceValue: number
-  secondaryEnumerationFieldNumber: number
-  secondaryEnumerationFieldValue: number
-  parameterFieldNumber: number
-  label: string
+  fields: {
+    hardwareChannelId: number
+    pgn: string
+    dataSourceInstanceFieldNumber: number
+    dataSourceInstanceValue: number
+    secondaryEnumerationFieldNumber: number
+    secondaryEnumerationFieldValue: number
+    parameterFieldNumber: number
+    label: string
+}
 }
 
 /*
@@ -6500,17 +6983,19 @@ export interface PGN_130060 extends PGN {
   Description: Channel Source Configuration
 */
 export interface PGN_130061 extends PGN {
-  dataSourceChannelId: number
-  sourceSelectionStatus: number
-  reserved: number
-  nameSelectionCriteriaMask: number
-  sourceName: string
-  pgn: string
-  dataSourceInstanceFieldNumber: number
-  dataSourceInstanceValue: number
-  secondaryEnumerationFieldNumber: number
-  secondaryEnumerationFieldValue: number
-  parameterFieldNumber: number
+  fields: {
+    dataSourceChannelId: number
+    sourceSelectionStatus: number
+    reserved: number
+    nameSelectionCriteriaMask: number
+    sourceName: string
+    pgn: string
+    dataSourceInstanceFieldNumber: number
+    dataSourceInstanceValue: number
+    secondaryEnumerationFieldNumber: number
+    secondaryEnumerationFieldValue: number
+    parameterFieldNumber: number
+}
 }
 
 /*
@@ -6518,18 +7003,20 @@ export interface PGN_130061 extends PGN {
   Description: Route and WP Service - Database List
 */
 export interface PGN_130064 extends PGN {
-  startDatabaseId: number
-  nitems: number
-  numberOfDatabasesAvailable: number
-  databaseId: number
-  databaseName: string
-  databaseTimestamp: string
-  databaseDatestamp: string
-  wpPositionResolution: WpPositionResolution
-  reserved: number
-  numberOfRoutesInDatabase: number
-  numberOfWpsInDatabase: number
-  numberOfBytesInDatabase: number
+  fields: {
+    startDatabaseId: number
+    nitems: number
+    numberOfDatabasesAvailable: number
+    databaseId: number
+    databaseName: string
+    databaseTimestamp: string
+    databaseDatestamp: string
+    wpPositionResolution: WpPositionResolution
+    reserved: number
+    numberOfRoutesInDatabase: number
+    numberOfWpsInDatabase: number
+    numberOfBytesInDatabase: number
+}
 }
 
 /*
@@ -6537,15 +7024,17 @@ export interface PGN_130064 extends PGN {
   Description: Route and WP Service - Route List
 */
 export interface PGN_130065 extends PGN {
-  startRouteId: number
-  nitems: number
-  numberOfRoutesInDatabase: number
-  databaseId: number
-  routeId: number
-  routeName: string
-  reserved: number
-  wpIdentificationMethod: WpIdentificationMethod
-  routeStatus: WpRouteStatus
+  fields: {
+    startRouteId: number
+    nitems: number
+    numberOfRoutesInDatabase: number
+    databaseId: number
+    routeId: number
+    routeName: string
+    reserved: number
+    wpIdentificationMethod: WpIdentificationMethod
+    routeStatus: WpRouteStatus
+}
 }
 
 /*
@@ -6553,18 +7042,20 @@ export interface PGN_130065 extends PGN {
   Description: Route and WP Service - Route/WP-List Attributes
 */
 export interface PGN_130066 extends PGN {
-  databaseId: number
-  routeId: number
-  routeWpListName: string
-  routeWpListTimestamp: string
-  routeWpListDatestamp: string
-  changeAtLastTimestamp: WpChange[]
-  numberOfWpsInTheRouteWpList: number
-  criticalSupplementaryParameters: WpCriticalParameters[]
-  navigationMethod: WpNavigationMethod
-  wpIdentificationMethod: WpIdentificationMethod
-  routeStatus: WpRouteStatus
-  xteLimitForTheRoute: number
+  fields: {
+    databaseId: number
+    routeId: number
+    routeWpListName: string
+    routeWpListTimestamp: string
+    routeWpListDatestamp: string
+    changeAtLastTimestamp: WpChange[]
+    numberOfWpsInTheRouteWpList: number
+    criticalSupplementaryParameters: WpCriticalParameters[]
+    navigationMethod: WpNavigationMethod
+    wpIdentificationMethod: WpIdentificationMethod
+    routeStatus: WpRouteStatus
+    xteLimitForTheRoute: number
+}
 }
 
 /*
@@ -6572,15 +7063,17 @@ export interface PGN_130066 extends PGN {
   Description: Route and WP Service - Route - WP Name & Position
 */
 export interface PGN_130067 extends PGN {
-  startRps: number
-  nitems: number
-  numberOfWpsInTheRouteWpList: number
-  databaseId: number
-  routeId: number
-  wpId: number
-  wpName: string
-  wpLatitude: number
-  wpLongitude: number
+  fields: {
+    startRps: number
+    nitems: number
+    numberOfWpsInTheRouteWpList: number
+    databaseId: number
+    routeId: number
+    wpId: number
+    wpName: string
+    wpLatitude: number
+    wpLongitude: number
+}
 }
 
 /*
@@ -6588,13 +7081,15 @@ export interface PGN_130067 extends PGN {
   Description: Route and WP Service - Route - WP Name
 */
 export interface PGN_130068 extends PGN {
-  startRps: number
-  nitems: number
-  numberOfWpsInTheRouteWpList: number
-  databaseId: number
-  routeId: number
-  wpId: number
-  wpName: string
+  fields: {
+    startRps: number
+    nitems: number
+    numberOfWpsInTheRouteWpList: number
+    databaseId: number
+    routeId: number
+    wpId: number
+    wpName: string
+}
 }
 
 /*
@@ -6602,15 +7097,17 @@ export interface PGN_130068 extends PGN {
   Description: Route and WP Service - XTE Limit & Navigation Method
 */
 export interface PGN_130069 extends PGN {
-  startRps: number
-  nitems: number
-  numberOfWpsWithASpecificXteLimitOrNavMethod: number
-  databaseId: number
-  routeId: number
-  rps: number
-  xteLimitInTheLegAfterWp: number
-  navMethodInTheLegAfterWp: WpNavigationMethod
-  reserved: number
+  fields: {
+    startRps: number
+    nitems: number
+    numberOfWpsWithASpecificXteLimitOrNavMethod: number
+    databaseId: number
+    routeId: number
+    rps: number
+    xteLimitInTheLegAfterWp: number
+    navMethodInTheLegAfterWp: WpNavigationMethod
+    reserved: number
+}
 }
 
 /*
@@ -6618,13 +7115,15 @@ export interface PGN_130069 extends PGN {
   Description: Route and WP Service - WP Comment
 */
 export interface PGN_130070 extends PGN {
-  startId: number
-  nitems: number
-  numberOfWpsWithComments: number
-  databaseId: number
-  routeId: number
-  wpIdRps: number
-  comment: string
+  fields: {
+    startId: number
+    nitems: number
+    numberOfWpsWithComments: number
+    databaseId: number
+    routeId: number
+    wpIdRps: number
+    comment: string
+}
 }
 
 /*
@@ -6632,12 +7131,14 @@ export interface PGN_130070 extends PGN {
   Description: Route and WP Service - Route Comment
 */
 export interface PGN_130071 extends PGN {
-  startRouteId: number
-  nitems: number
-  numberOfRoutesWithComments: number
-  databaseId: number
-  routeId: number
-  comment: string
+  fields: {
+    startRouteId: number
+    nitems: number
+    numberOfRoutesWithComments: number
+    databaseId: number
+    routeId: number
+    comment: string
+}
 }
 
 /*
@@ -6645,11 +7146,13 @@ export interface PGN_130071 extends PGN {
   Description: Route and WP Service - Database Comment
 */
 export interface PGN_130072 extends PGN {
-  startDatabaseId: number
-  nitems: number
-  numberOfDatabasesWithComments: number
-  databaseId: number
-  comment: string
+  fields: {
+    startDatabaseId: number
+    nitems: number
+    numberOfDatabasesWithComments: number
+    databaseId: number
+    comment: string
+}
 }
 
 /*
@@ -6657,13 +7160,15 @@ export interface PGN_130072 extends PGN {
   Description: Route and WP Service - Radius of Turn
 */
 export interface PGN_130073 extends PGN {
-  startRps: number
-  nitems: number
-  numberOfWpsWithASpecificRadiusOfTurn: number
-  databaseId: number
-  routeId: number
-  rps: number
-  radiusOfTurn: number
+  fields: {
+    startRps: number
+    nitems: number
+    numberOfWpsWithASpecificRadiusOfTurn: number
+    databaseId: number
+    routeId: number
+    rps: number
+    radiusOfTurn: number
+}
 }
 
 /*
@@ -6671,15 +7176,17 @@ export interface PGN_130073 extends PGN {
   Description: Route and WP Service - WP List - WP Name & Position
 */
 export interface PGN_130074 extends PGN {
-  startWpId: number
-  nitems: number
-  numberOfValidWpsInTheWpList: number
-  databaseId: number
-  reserved: number
-  wpId: number
-  wpName: string
-  wpLatitude: number
-  wpLongitude: number
+  fields: {
+    startWpId: number
+    nitems: number
+    numberOfValidWpsInTheWpList: number
+    databaseId: number
+    reserved: number
+    wpId: number
+    wpName: string
+    wpLatitude: number
+    wpLongitude: number
+}
 }
 
 /*
@@ -6687,11 +7194,13 @@ export interface PGN_130074 extends PGN {
   Description: Wind Data
 */
 export interface PGN_130306 extends PGN {
-  sid: number
-  windSpeed: number
-  windAngle: number
-  reference: WindReference
-  reserved: number
+  fields: {
+    sid: number
+    windSpeed: number
+    windAngle: number
+    reference: WindReference
+    reserved: number
+}
 }
 
 /*
@@ -6700,11 +7209,13 @@ export interface PGN_130306 extends PGN {
   Explanation: This PGN was succeeded by PGN 130310, but it should no longer be generated and separate PGNs in range 130312..130315 should be used
 */
 export interface PGN_130310 extends PGN {
-  sid: number
-  waterTemperature: number
-  outsideAmbientAirTemperature: number
-  atmosphericPressure: number
-  reserved: number
+  fields: {
+    sid: number
+    waterTemperature: number
+    outsideAmbientAirTemperature: number
+    atmosphericPressure: number
+    reserved: number
+}
 }
 
 /*
@@ -6713,12 +7224,14 @@ export interface PGN_130310 extends PGN {
   Explanation: This PGN was introduced as a better version of PGN 130310, but it should no longer be generated and separate PGNs in range 130312..130315 should be used
 */
 export interface PGN_130311 extends PGN {
-  sid: number
-  temperatureSource: TemperatureSource
-  humiditySource: HumiditySource
-  temperature: number
-  humidity: number
-  atmosphericPressure: number
+  fields: {
+    sid: number
+    temperatureSource: TemperatureSource
+    humiditySource: HumiditySource
+    temperature: number
+    humidity: number
+    atmosphericPressure: number
+}
 }
 
 /*
@@ -6726,12 +7239,14 @@ export interface PGN_130311 extends PGN {
   Description: Temperature
 */
 export interface PGN_130312 extends PGN {
-  sid: number
-  instance: number
-  source: TemperatureSource
-  actualTemperature: number
-  setTemperature: number
-  reserved: number
+  fields: {
+    sid: number
+    instance: number
+    source: TemperatureSource
+    actualTemperature: number
+    setTemperature: number
+    reserved: number
+}
 }
 
 /*
@@ -6739,12 +7254,14 @@ export interface PGN_130312 extends PGN {
   Description: Humidity
 */
 export interface PGN_130313 extends PGN {
-  sid: number
-  instance: number
-  source: HumiditySource
-  actualHumidity: number
-  setHumidity: number
-  reserved: number
+  fields: {
+    sid: number
+    instance: number
+    source: HumiditySource
+    actualHumidity: number
+    setHumidity: number
+    reserved: number
+}
 }
 
 /*
@@ -6752,11 +7269,13 @@ export interface PGN_130313 extends PGN {
   Description: Actual Pressure
 */
 export interface PGN_130314 extends PGN {
-  sid: number
-  instance: number
-  source: PressureSource
-  pressure: number
-  reserved: number
+  fields: {
+    sid: number
+    instance: number
+    source: PressureSource
+    pressure: number
+    reserved: number
+}
 }
 
 /*
@@ -6764,11 +7283,13 @@ export interface PGN_130314 extends PGN {
   Description: Set Pressure
 */
 export interface PGN_130315 extends PGN {
-  sid: number
-  instance: number
-  source: PressureSource
-  pressure: number
-  reserved: number
+  fields: {
+    sid: number
+    instance: number
+    source: PressureSource
+    pressure: number
+    reserved: number
+}
 }
 
 /*
@@ -6776,11 +7297,13 @@ export interface PGN_130315 extends PGN {
   Description: Temperature Extended Range
 */
 export interface PGN_130316 extends PGN {
-  sid: number
-  instance: number
-  source: TemperatureSource
-  temperature: number
-  setTemperature: number
+  fields: {
+    sid: number
+    instance: number
+    source: TemperatureSource
+    temperature: number
+    setTemperature: number
+}
 }
 
 /*
@@ -6788,17 +7311,19 @@ export interface PGN_130316 extends PGN {
   Description: Tide Station Data
 */
 export interface PGN_130320 extends PGN {
-  mode: ResidualMode
-  tideTendency: Tide
-  reserved: number
-  measurementDate: string
-  measurementTime: string
-  stationLatitude: number
-  stationLongitude: number
-  tideLevel: number
-  tideLevelStandardDeviation: number
-  stationId: string
-  stationName: string
+  fields: {
+    mode: ResidualMode
+    tideTendency: Tide
+    reserved: number
+    measurementDate: string
+    measurementTime: string
+    stationLatitude: number
+    stationLongitude: number
+    tideLevel: number
+    tideLevelStandardDeviation: number
+    stationId: string
+    stationName: string
+}
 }
 
 /*
@@ -6806,16 +7331,18 @@ export interface PGN_130320 extends PGN {
   Description: Salinity Station Data
 */
 export interface PGN_130321 extends PGN {
-  mode: ResidualMode
-  reserved: number
-  measurementDate: string
-  measurementTime: string
-  stationLatitude: number
-  stationLongitude: number
-  salinity: string
-  waterTemperature: number
-  stationId: string
-  stationName: string
+  fields: {
+    mode: ResidualMode
+    reserved: number
+    measurementDate: string
+    measurementTime: string
+    stationLatitude: number
+    stationLongitude: number
+    salinity: string
+    waterTemperature: number
+    stationId: string
+    stationName: string
+}
 }
 
 /*
@@ -6823,19 +7350,21 @@ export interface PGN_130321 extends PGN {
   Description: Current Station Data
 */
 export interface PGN_130322 extends PGN {
-  mode: ResidualMode
-  state: FloodState
-  reserved: number
-  measurementDate: string
-  measurementTime: string
-  stationLatitude: number
-  stationLongitude: number
-  measurementDepth: number
-  currentSpeed: number
-  currentFlowDirection: number
-  waterTemperature: number
-  stationId: string
-  stationName: string
+  fields: {
+    mode: ResidualMode
+    state: FloodState
+    reserved: number
+    measurementDate: string
+    measurementTime: string
+    stationLatitude: number
+    stationLongitude: number
+    measurementDepth: number
+    currentSpeed: number
+    currentFlowDirection: number
+    waterTemperature: number
+    stationId: string
+    stationName: string
+}
 }
 
 /*
@@ -6843,21 +7372,23 @@ export interface PGN_130322 extends PGN {
   Description: Meteorological Station Data
 */
 export interface PGN_130323 extends PGN {
-  mode: ResidualMode
-  reserved: number
-  measurementDate: string
-  measurementTime: string
-  stationLatitude: number
-  stationLongitude: number
-  windSpeed: number
-  windDirection: number
-  windReference: WindReference
-  reserved10: number
-  windGusts: number
-  atmosphericPressure: number
-  ambientTemperature: number
-  stationId: string
-  stationName: string
+  fields: {
+    mode: ResidualMode
+    reserved: number
+    measurementDate: string
+    measurementTime: string
+    stationLatitude: number
+    stationLongitude: number
+    windSpeed: number
+    windDirection: number
+    windReference: WindReference
+    reserved10: number
+    windGusts: number
+    atmosphericPressure: number
+    ambientTemperature: number
+    stationId: string
+    stationName: string
+}
 }
 
 /*
@@ -6865,24 +7396,26 @@ export interface PGN_130323 extends PGN {
   Description: Moored Buoy Station Data
 */
 export interface PGN_130324 extends PGN {
-  mode: ResidualMode
-  reserved: number
-  measurementDate: string
-  measurementTime: string
-  stationLatitude: number
-  stationLongitude: number
-  windSpeed: number
-  windDirection: number
-  windReference: WindReference
-  reserved10: number
-  windGusts: number
-  waveHeight: number
-  dominantWavePeriod: string
-  atmosphericPressure: number
-  pressureTendencyRate: number
-  airTemperature: number
-  waterTemperature: number
-  stationId: string
+  fields: {
+    mode: ResidualMode
+    reserved: number
+    measurementDate: string
+    measurementTime: string
+    stationLatitude: number
+    stationLongitude: number
+    windSpeed: number
+    windDirection: number
+    windReference: WindReference
+    reserved10: number
+    windGusts: number
+    waveHeight: number
+    dominantWavePeriod: string
+    atmosphericPressure: number
+    pressureTendencyRate: number
+    airTemperature: number
+    waterTemperature: number
+    stationId: string
+}
 }
 
 /*
@@ -6891,18 +7424,20 @@ export interface PGN_130324 extends PGN {
   Explanation: This PGN provides a lighting controller settings and number of supported capabilities.
 */
 export interface PGN_130330 extends PGN {
-  globalEnable: number
-  defaultSettingsCommand: LightingCommand
-  reserved: number
-  nameOfTheLightingController: string
-  maxScenes: number
-  maxSceneConfigurationCount: number
-  maxZones: number
-  maxColorSequences: number
-  maxColorSequenceColorCount: number
-  numberOfPrograms: number
-  controllerCapabilities: number
-  identifyDevice: number
+  fields: {
+    globalEnable: number
+    defaultSettingsCommand: LightingCommand
+    reserved: number
+    nameOfTheLightingController: string
+    maxScenes: number
+    maxSceneConfigurationCount: number
+    maxZones: number
+    maxColorSequences: number
+    maxColorSequenceColorCount: number
+    numberOfPrograms: number
+    controllerCapabilities: number
+    identifyDevice: number
+}
 }
 
 /*
@@ -6910,12 +7445,14 @@ export interface PGN_130330 extends PGN {
   Description: Payload Mass
 */
 export interface PGN_130560 extends PGN {
-  sid: number
-  measurementStatus: number
-  reserved: number
-  measurementId: number
-  payloadMass: number
-  reserved6: number
+  fields: {
+    sid: number
+    measurementStatus: number
+    reserved: number
+    measurementId: number
+    payloadMass: number
+    reserved6: number
+}
 }
 
 /*
@@ -6924,20 +7461,22 @@ export interface PGN_130560 extends PGN {
   Explanation: This PGN is used to report or configure a name for a given zone. A zone is a grouping of devices that are controlled by a Scene. This PGN is only sent upon request.
 */
 export interface PGN_130561 extends PGN {
-  zoneIndex: number
-  zoneName: string
-  redComponent: number
-  greenComponent: number
-  blueComponent: number
-  colorTemperature: number
-  intensity: number
-  programId: number
-  programColorSequenceIndex: number
-  programIntensity: number
-  programRate: number
-  programColorSequence: number
-  zoneEnabled: OffOn
-  reserved: number
+  fields: {
+    zoneIndex: number
+    zoneName: string
+    redComponent: number
+    greenComponent: number
+    blueComponent: number
+    colorTemperature: number
+    intensity: number
+    programId: number
+    programColorSequenceIndex: number
+    programIntensity: number
+    programRate: number
+    programColorSequence: number
+    zoneEnabled: OffOn
+    reserved: number
+}
 }
 
 /*
@@ -6946,18 +7485,20 @@ export interface PGN_130561 extends PGN {
   Explanation: A Lighting Scene is a sequence of zone program configurations.
 */
 export interface PGN_130562 extends PGN {
-  sceneIndex: number
-  zoneName: string
-  control: number
-  configurationCount: number
-  configurationIndex: number
-  zoneIndex: number
-  devicesId: number
-  programIndex: number
-  programColorSequenceIndex: number
-  programIntensity: number
-  programRate: number
-  programColorSequenceRate: number
+  fields: {
+    sceneIndex: number
+    zoneName: string
+    control: number
+    configurationCount: number
+    configurationIndex: number
+    zoneIndex: number
+    devicesId: number
+    programIndex: number
+    programColorSequenceIndex: number
+    programIntensity: number
+    programRate: number
+    programColorSequenceRate: number
+}
 }
 
 /*
@@ -6966,24 +7507,26 @@ export interface PGN_130562 extends PGN {
   Explanation: This PGN is used to provide status and capabilities of a lighting device. A lighting device may be a virtual device connected to a lighting controller or physical device on the network.
 */
 export interface PGN_130563 extends PGN {
-  deviceId: number
-  deviceCapabilities: number
-  colorCapabilities: number
-  zoneIndex: number
-  nameOfLightingDevice: string
-  status: number
-  redComponent: number
-  greenComponent: number
-  blueComponent: number
-  colorTemperature: number
-  intensity: number
-  programId: number
-  programColorSequenceIndex: number
-  programIntensity: number
-  programRate: number
-  programColorSequenceRate: number
-  enabled: OffOn
-  reserved: number
+  fields: {
+    deviceId: number
+    deviceCapabilities: number
+    colorCapabilities: number
+    zoneIndex: number
+    nameOfLightingDevice: string
+    status: number
+    redComponent: number
+    greenComponent: number
+    blueComponent: number
+    colorTemperature: number
+    intensity: number
+    programId: number
+    programColorSequenceIndex: number
+    programIntensity: number
+    programRate: number
+    programColorSequenceRate: number
+    enabled: OffOn
+    reserved: number
+}
 }
 
 /*
@@ -6992,11 +7535,13 @@ export interface PGN_130563 extends PGN {
   Explanation: This PGN allows for enumeration of the lighting devices on the controller.
 */
 export interface PGN_130564 extends PGN {
-  indexOfFirstDevice: number
-  totalNumberOfDevices: number
-  numberOfDevices: number
-  deviceId: number
-  status: number
+  fields: {
+    indexOfFirstDevice: number
+    totalNumberOfDevices: number
+    numberOfDevices: number
+    deviceId: number
+    status: number
+}
 }
 
 /*
@@ -7005,14 +7550,16 @@ export interface PGN_130564 extends PGN {
   Explanation: Sequences could be 1 to (PGN Lighting - System Configuration) Max Color Sequence Color Count colors.
 */
 export interface PGN_130565 extends PGN {
-  sequenceIndex: number
-  colorCount: number
-  colorIndex: number
-  redComponent: number
-  greenComponent: number
-  blueComponent: number
-  colorTemperature: number
-  intensity: number
+  fields: {
+    sequenceIndex: number
+    colorCount: number
+    colorIndex: number
+    redComponent: number
+    greenComponent: number
+    blueComponent: number
+    colorTemperature: number
+    intensity: number
+}
 }
 
 /*
@@ -7021,11 +7568,13 @@ export interface PGN_130565 extends PGN {
   Explanation: This PGN describes an available program on the controller. Can be a built in required NMEA one or a custom vendor program.
 */
 export interface PGN_130566 extends PGN {
-  programId: number
-  nameOfProgram: string
-  description: string
-  programCapabilities: number
-  reserved: number
+  fields: {
+    programId: number
+    nameOfProgram: string
+    description: string
+    programCapabilities: number
+    reserved: number
+}
 }
 
 /*
@@ -7033,29 +7582,31 @@ export interface PGN_130566 extends PGN {
   Description: Watermaker Input Setting and Status
 */
 export interface PGN_130567 extends PGN {
-  watermakerOperatingState: WatermakerState
-  productionStartStop: boolean
-  rinseStartStop: boolean
-  lowPressurePumpStatus: boolean
-  highPressurePumpStatus: boolean
-  emergencyStop: boolean
-  productSolenoidValveStatus: OkWarning
-  flushModeStatus: boolean
-  salinityStatus: OkWarning
-  sensorStatus: OkWarning
-  oilChangeIndicatorStatus: OkWarning
-  filterStatus: OkWarning
-  systemStatus: OkWarning
-  reserved: number
-  salinity: number
-  productWaterTemperature: number
-  preFilterPressure: number
-  postFilterPressure: number
-  feedPressure: number
-  systemHighPressure: number
-  productWaterFlow: number
-  brineWaterFlow: number
-  runTime: string
+  fields: {
+    watermakerOperatingState: WatermakerState
+    productionStartStop: boolean
+    rinseStartStop: boolean
+    lowPressurePumpStatus: boolean
+    highPressurePumpStatus: boolean
+    emergencyStop: boolean
+    productSolenoidValveStatus: OkWarning
+    flushModeStatus: boolean
+    salinityStatus: OkWarning
+    sensorStatus: OkWarning
+    oilChangeIndicatorStatus: OkWarning
+    filterStatus: OkWarning
+    systemStatus: OkWarning
+    reserved: number
+    salinity: number
+    productWaterTemperature: number
+    preFilterPressure: number
+    postFilterPressure: number
+    feedPressure: number
+    systemHighPressure: number
+    productWaterFlow: number
+    brineWaterFlow: number
+    runTime: string
+}
 }
 
 /*
@@ -7063,23 +7614,25 @@ export interface PGN_130567 extends PGN {
   Description: Current Status and File
 */
 export interface PGN_130569 extends PGN {
-  zone: EntertainmentZone
-  source: EntertainmentSource
-  number: number
-  id: number
-  playStatus: EntertainmentPlayStatus
-  elapsedTrackTime: string
-  trackTime: string
-  repeatStatus: EntertainmentRepeatStatus
-  shuffleStatus: EntertainmentShuffleStatus
-  saveFavoriteNumber: number
-  playFavoriteNumber: number
-  thumbsUpDown: EntertainmentLikeStatus
-  signalStrength: number
-  radioFrequency: number
-  hdFrequencyMulticast: number
-  deleteFavoriteNumber: number
-  totalNumberOfTracks: number
+  fields: {
+    zone: EntertainmentZone
+    source: EntertainmentSource
+    number: number
+    id: number
+    playStatus: EntertainmentPlayStatus
+    elapsedTrackTime: string
+    trackTime: string
+    repeatStatus: EntertainmentRepeatStatus
+    shuffleStatus: EntertainmentShuffleStatus
+    saveFavoriteNumber: number
+    playFavoriteNumber: number
+    thumbsUpDown: EntertainmentLikeStatus
+    signalStrength: number
+    radioFrequency: number
+    hdFrequencyMulticast: number
+    deleteFavoriteNumber: number
+    totalNumberOfTracks: number
+}
 }
 
 /*
@@ -7087,23 +7640,25 @@ export interface PGN_130569 extends PGN {
   Description: Library Data File
 */
 export interface PGN_130570 extends PGN {
-  source: EntertainmentSource
-  number: number
-  id: number
-  type: EntertainmentType
-  name: string
-  track: number
-  station: number
-  favorite: number
-  radioFrequency: number
-  hdFrequency: number
-  zone: EntertainmentZone
-  inPlayQueue: boolean
-  locked: boolean
-  reserved: number
-  artistName: string
-  albumName: string
-  stationName: string
+  fields: {
+    source: EntertainmentSource
+    number: number
+    id: number
+    type: EntertainmentType
+    name: string
+    track: number
+    station: number
+    favorite: number
+    radioFrequency: number
+    hdFrequency: number
+    zone: EntertainmentZone
+    inPlayQueue: boolean
+    locked: boolean
+    reserved: number
+    artistName: string
+    albumName: string
+    stationName: string
+}
 }
 
 /*
@@ -7111,18 +7666,20 @@ export interface PGN_130570 extends PGN {
   Description: Library Data Group
 */
 export interface PGN_130571 extends PGN {
-  source: EntertainmentSource
-  number: number
-  type: EntertainmentType
-  zone: EntertainmentZone
-  groupId: number
-  idOffset: number
-  idCount: number
-  totalIdCount: number
-  idType: EntertainmentIdType
-  id: number
-  name: string
-  artist: string
+  fields: {
+    source: EntertainmentSource
+    number: number
+    type: EntertainmentType
+    zone: EntertainmentZone
+    groupId: number
+    idOffset: number
+    idCount: number
+    totalIdCount: number
+    idType: EntertainmentIdType
+    id: number
+    name: string
+    artist: string
+}
 }
 
 /*
@@ -7130,15 +7687,17 @@ export interface PGN_130571 extends PGN {
   Description: Library Data Search
 */
 export interface PGN_130572 extends PGN {
-  source: EntertainmentSource
-  number: number
-  groupId: number
-  groupType1: EntertainmentGroup
-  groupName1: string
-  groupType2: EntertainmentGroup
-  groupName2: string
-  groupType3: EntertainmentGroup
-  groupName3: string
+  fields: {
+    source: EntertainmentSource
+    number: number
+    groupId: number
+    groupType1: EntertainmentGroup
+    groupName1: string
+    groupType2: EntertainmentGroup
+    groupName2: string
+    groupType3: EntertainmentGroup
+    groupName3: string
+}
 }
 
 /*
@@ -7146,19 +7705,21 @@ export interface PGN_130572 extends PGN {
   Description: Supported Source Data
 */
 export interface PGN_130573 extends PGN {
-  idOffset: number
-  idCount: number
-  totalIdCount: number
-  id: number
-  source: EntertainmentSource
-  number: number
-  name: string
-  playSupport: EntertainmentPlayStatusBitfield[]
-  browseSupport: EntertainmentGroupBitfield[]
-  thumbsSupport: boolean
-  connected: boolean
-  repeatSupport: EntertainmentRepeatBitfield[]
-  shuffleSupport: EntertainmentShuffleBitfield[]
+  fields: {
+    idOffset: number
+    idCount: number
+    totalIdCount: number
+    id: number
+    source: EntertainmentSource
+    number: number
+    name: string
+    playSupport: EntertainmentPlayStatusBitfield[]
+    browseSupport: EntertainmentGroupBitfield[]
+    thumbsSupport: boolean
+    connected: boolean
+    repeatSupport: EntertainmentRepeatBitfield[]
+    shuffleSupport: EntertainmentShuffleBitfield[]
+}
 }
 
 /*
@@ -7166,11 +7727,13 @@ export interface PGN_130573 extends PGN {
   Description: Supported Zone Data
 */
 export interface PGN_130574 extends PGN {
-  firstZoneId: number
-  zoneCount: number
-  totalZoneCount: number
-  zoneId: EntertainmentZone
-  name: string
+  fields: {
+    firstZoneId: number
+    zoneCount: number
+    totalZoneCount: number
+    zoneId: EntertainmentZone
+    name: string
+}
 }
 
 /*
@@ -7178,9 +7741,11 @@ export interface PGN_130574 extends PGN {
   Description: Small Craft Status
 */
 export interface PGN_130576 extends PGN {
-  portTrimTab: number
-  starboardTrimTab: number
-  reserved: number
+  fields: {
+    portTrimTab: number
+    starboardTrimTab: number
+    reserved: number
+}
 }
 
 /*
@@ -7188,16 +7753,18 @@ export interface PGN_130576 extends PGN {
   Description: Direction Data
 */
 export interface PGN_130577 extends PGN {
-  dataMode: ResidualMode
-  cogReference: DirectionReference
-  reserved: number
-  sid: number
-  cog: number
-  sog: number
-  heading: number
-  speedThroughWater: number
-  set: number
-  drift: number
+  fields: {
+    dataMode: ResidualMode
+    cogReference: DirectionReference
+    reserved: number
+    sid: number
+    cog: number
+    sog: number
+    heading: number
+    speedThroughWater: number
+    set: number
+    drift: number
+}
 }
 
 /*
@@ -7205,12 +7772,14 @@ export interface PGN_130577 extends PGN {
   Description: Vessel Speed Components
 */
 export interface PGN_130578 extends PGN {
-  longitudinalSpeedWaterReferenced: number
-  transverseSpeedWaterReferenced: number
-  longitudinalSpeedGroundReferenced: number
-  transverseSpeedGroundReferenced: number
-  sternSpeedWaterReferenced: number
-  sternSpeedGroundReferenced: number
+  fields: {
+    longitudinalSpeedWaterReferenced: number
+    transverseSpeedWaterReferenced: number
+    longitudinalSpeedGroundReferenced: number
+    transverseSpeedGroundReferenced: number
+    sternSpeedWaterReferenced: number
+    sternSpeedGroundReferenced: number
+}
 }
 
 /*
@@ -7218,12 +7787,14 @@ export interface PGN_130578 extends PGN {
   Description: System Configuration
 */
 export interface PGN_130579 extends PGN {
-  power: boolean
-  defaultSettings: EntertainmentDefaultSettings
-  tunerRegions: EntertainmentRegions
-  maxFavorites: number
-  videoProtocols: VideoProtocols
-  reserved: number
+  fields: {
+    power: boolean
+    defaultSettings: EntertainmentDefaultSettings
+    tunerRegions: EntertainmentRegions
+    maxFavorites: number
+    videoProtocols: VideoProtocols
+    reserved: number
+}
 }
 
 /*
@@ -7231,10 +7802,12 @@ export interface PGN_130579 extends PGN {
   Description: System Configuration (deprecated)
 */
 export interface PGN_130580 extends PGN {
-  power: boolean
-  defaultSettings: EntertainmentDefaultSettings
-  tunerRegions: EntertainmentRegions
-  maxFavorites: number
+  fields: {
+    power: boolean
+    defaultSettings: EntertainmentDefaultSettings
+    tunerRegions: EntertainmentRegions
+    maxFavorites: number
+}
 }
 
 /*
@@ -7242,11 +7815,13 @@ export interface PGN_130580 extends PGN {
   Description: Zone Configuration (deprecated)
 */
 export interface PGN_130581 extends PGN {
-  firstZoneId: number
-  zoneCount: number
-  totalZoneCount: number
-  zoneId: EntertainmentZone
-  zoneName: string
+  fields: {
+    firstZoneId: number
+    zoneCount: number
+    totalZoneCount: number
+    zoneId: EntertainmentZone
+    zoneName: string
+}
 }
 
 /*
@@ -7254,13 +7829,15 @@ export interface PGN_130581 extends PGN {
   Description: Zone Volume
 */
 export interface PGN_130582 extends PGN {
-  zoneId: EntertainmentZone
-  volume: number
-  volumeChange: EntertainmentVolumeControl
-  mute: boolean
-  reserved: number
-  channel: EntertainmentChannel
-  reserved7: number
+  fields: {
+    zoneId: EntertainmentZone
+    volume: number
+    volumeChange: EntertainmentVolumeControl
+    mute: boolean
+    reserved: number
+    channel: EntertainmentChannel
+    reserved7: number
+}
 }
 
 /*
@@ -7268,11 +7845,13 @@ export interface PGN_130582 extends PGN {
   Description: Available Audio EQ presets
 */
 export interface PGN_130583 extends PGN {
-  firstPreset: number
-  presetCount: number
-  totalPresetCount: number
-  presetType: EntertainmentEq
-  presetName: string
+  fields: {
+    firstPreset: number
+    presetCount: number
+    totalPresetCount: number
+    presetType: EntertainmentEq
+    presetName: string
+}
 }
 
 /*
@@ -7280,13 +7859,15 @@ export interface PGN_130583 extends PGN {
   Description: Available Bluetooth addresses
 */
 export interface PGN_130584 extends PGN {
-  firstAddress: number
-  addressCount: number
-  totalAddressCount: number
-  bluetoothAddress: number
-  status: BluetoothStatus
-  deviceName: string
-  signalStrength: number
+  fields: {
+    firstAddress: number
+    addressCount: number
+    totalAddressCount: number
+    bluetoothAddress: number
+    status: BluetoothStatus
+    deviceName: string
+    signalStrength: number
+}
 }
 
 /*
@@ -7294,11 +7875,13 @@ export interface PGN_130584 extends PGN {
   Description: Bluetooth source status
 */
 export interface PGN_130585 extends PGN {
-  sourceNumber: number
-  status: BluetoothSourceStatus
-  forgetDevice: boolean
-  discovering: boolean
-  bluetoothAddress: number
+  fields: {
+    sourceNumber: number
+    status: BluetoothSourceStatus
+    forgetDevice: boolean
+    discovering: boolean
+    bluetoothAddress: number
+}
 }
 
 /*
@@ -7306,19 +7889,21 @@ export interface PGN_130585 extends PGN {
   Description: Zone Configuration
 */
 export interface PGN_130586 extends PGN {
-  zoneId: EntertainmentZone
-  volumeLimit: number
-  fade: number
-  balance: number
-  subVolume: number
-  eqTreble: number
-  eqMidRange: number
-  eqBass: number
-  presetType: EntertainmentEq
-  audioFilter: EntertainmentFilter
-  highPassFilterFrequency: number
-  lowPassFilterFrequency: number
-  channel: EntertainmentChannel
+  fields: {
+    zoneId: EntertainmentZone
+    volumeLimit: number
+    fade: number
+    balance: number
+    subVolume: number
+    eqTreble: number
+    eqMidRange: number
+    eqBass: number
+    presetType: EntertainmentEq
+    audioFilter: EntertainmentFilter
+    highPassFilterFrequency: number
+    lowPassFilterFrequency: number
+    channel: EntertainmentChannel
+}
 }
 
 /*
@@ -7329,14 +7914,16 @@ export interface PGN_130586 extends PGN {
   Match: Proprietary ID == Init #2
 */
 export interface PGN_130816_Navico_Init2 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  a: number
-  b: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    a: number
+    b: number
+}
 }
 
 /*
@@ -7347,18 +7934,20 @@ export interface PGN_130816_Navico_Init2 extends PGN {
   Match: Proprietary ID == AM Radio
 */
 export interface PGN_130816_Navico_AmRadio extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: SonichubTuning
-  frequency: number
-  noiseLevel: number
-  signalLevel: number
-  reserved11: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: SonichubTuning
+    frequency: number
+    noiseLevel: number
+    signalLevel: number
+    reserved11: number
+    text: string
+}
 }
 
 /*
@@ -7369,13 +7958,15 @@ export interface PGN_130816_Navico_AmRadio extends PGN {
   Match: Proprietary ID == Zone Info
 */
 export interface PGN_130816_Navico_ZoneInfo extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  zone: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    zone: number
+}
 }
 
 /*
@@ -7386,13 +7977,15 @@ export interface PGN_130816_Navico_ZoneInfo extends PGN {
   Match: Proprietary ID == Source
 */
 export interface PGN_130816_Navico_Source extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  source: SonichubSource
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    source: SonichubSource
+}
 }
 
 /*
@@ -7403,15 +7996,17 @@ export interface PGN_130816_Navico_Source extends PGN {
   Match: Proprietary ID == Source List
 */
 export interface PGN_130816_Navico_SourceList extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  sourceId: number
-  a: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    sourceId: number
+    a: number
+    text: string
+}
 }
 
 /*
@@ -7422,13 +8017,15 @@ export interface PGN_130816_Navico_SourceList extends PGN {
   Match: Proprietary ID == Control
 */
 export interface PGN_130816_Navico_Control extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: FusionMuteCommand
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: FusionMuteCommand
+}
 }
 
 /*
@@ -7439,18 +8036,20 @@ export interface PGN_130816_Navico_Control extends PGN {
   Match: Proprietary ID == FM Radio
 */
 export interface PGN_130816_Navico_FmRadio extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: SonichubTuning
-  frequency: number
-  noiseLevel: number
-  signalLevel: number
-  reserved11: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: SonichubTuning
+    frequency: number
+    noiseLevel: number
+    signalLevel: number
+    reserved11: number
+    text: string
+}
 }
 
 /*
@@ -7461,18 +8060,20 @@ export interface PGN_130816_Navico_FmRadio extends PGN {
   Match: Proprietary ID == Playlist
 */
 export interface PGN_130816_Navico_Playlist extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: SonichubPlaylist
-  a: number
-  currentTrack: number
-  tracks: number
-  length: string
-  positionInTrack: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: SonichubPlaylist
+    a: number
+    currentTrack: number
+    tracks: number
+    length: string
+    positionInTrack: string
+}
 }
 
 /*
@@ -7483,14 +8084,16 @@ export interface PGN_130816_Navico_Playlist extends PGN {
   Match: Proprietary ID == Track
 */
 export interface PGN_130816_Navico_Track extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: number
+    text: string
+}
 }
 
 /*
@@ -7501,14 +8104,16 @@ export interface PGN_130816_Navico_Track extends PGN {
   Match: Proprietary ID == Artist
 */
 export interface PGN_130816_Navico_Artist extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: number
+    text: string
+}
 }
 
 /*
@@ -7519,14 +8124,16 @@ export interface PGN_130816_Navico_Artist extends PGN {
   Match: Proprietary ID == Album
 */
 export interface PGN_130816_Navico_Album extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: number
+    text: string
+}
 }
 
 /*
@@ -7537,17 +8144,19 @@ export interface PGN_130816_Navico_Album extends PGN {
   Match: Proprietary ID == Menu Item
 */
 export interface PGN_130816_Navico_MenuItem extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  item: number
-  c: number
-  d: number
-  e: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    item: number
+    c: number
+    d: number
+    e: number
+    text: string
+}
 }
 
 /*
@@ -7558,13 +8167,15 @@ export interface PGN_130816_Navico_MenuItem extends PGN {
   Match: Proprietary ID == Zones
 */
 export interface PGN_130816_Navico_Zones extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  zones: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    zones: number
+}
 }
 
 /*
@@ -7575,14 +8186,16 @@ export interface PGN_130816_Navico_Zones extends PGN {
   Match: Proprietary ID == Max Volume
 */
 export interface PGN_130816_Navico_MaxVolume extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  zone: number
-  level: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    zone: number
+    level: number
+}
 }
 
 /*
@@ -7593,14 +8206,16 @@ export interface PGN_130816_Navico_MaxVolume extends PGN {
   Match: Proprietary ID == Volume
 */
 export interface PGN_130816_Navico_Volume extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  zone: number
-  level: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    zone: number
+    level: number
+}
 }
 
 /*
@@ -7611,12 +8226,14 @@ export interface PGN_130816_Navico_Volume extends PGN {
   Match: Proprietary ID == Init #1
 */
 export interface PGN_130816_Navico_Init1 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+}
 }
 
 /*
@@ -7627,13 +8244,15 @@ export interface PGN_130816_Navico_Init1 extends PGN {
   Match: Proprietary ID == Position
 */
 export interface PGN_130816_Navico_Position extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  position: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    position: string
+}
 }
 
 /*
@@ -7644,14 +8263,16 @@ export interface PGN_130816_Navico_Position extends PGN {
   Match: Proprietary ID == Init #3
 */
 export interface PGN_130816_Navico_Init3 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SonichubCommand
-  control: SonichubControl
-  a: number
-  b: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SonichubCommand
+    control: SonichubControl
+    a: number
+    b: number
+}
 }
 
 /*
@@ -7662,17 +8283,19 @@ export interface PGN_130816_Navico_Init3 extends PGN {
   Match: Proprietary ID == Text
 */
 export interface PGN_130816_Simrad_Text extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  proprietaryId: SimnetCommand
-  a: number
-  b: number
-  c: number
-  sid: number
-  prio: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    proprietaryId: SimnetCommand
+    a: number
+    b: number
+    c: number
+    sid: number
+    prio: number
+    text: string
+}
 }
 
 /*
@@ -7682,14 +8305,16 @@ export interface PGN_130816_Simrad_Text extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130817_Navico extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+}
 }
 
 /*
@@ -7699,17 +8324,19 @@ export interface PGN_130817_Navico extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130817_Lowrance extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  productCode: number
-  model: string
-  a: number
-  b: number
-  c: number
-  firmwareVersion: string
-  firmwareDate: string
-  firmwareTime: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    productCode: number
+    model: string
+    a: number
+    b: number
+    c: number
+    firmwareVersion: string
+    firmwareDate: string
+    firmwareTime: string
+}
 }
 
 /*
@@ -7717,12 +8344,14 @@ export interface PGN_130817_Lowrance extends PGN {
   Description: Simnet: Reprogram Data
 */
 export interface PGN_130818 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  version: number
-  sequence: number
-  data: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    version: number
+    sequence: number
+    data: number
+}
 }
 
 /*
@@ -7730,9 +8359,11 @@ export interface PGN_130818 extends PGN {
   Description: Simnet: Request Reprogram
 */
 export interface PGN_130819 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -7742,12 +8373,14 @@ export interface PGN_130819 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130820_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  reserved4: number
-  status: number
-  reserved6: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    reserved4: number
+    status: number
+    reserved6: number
+}
 }
 
 /*
@@ -7757,14 +8390,16 @@ export interface PGN_130820_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130820_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+}
 }
 
 /*
@@ -7775,15 +8410,17 @@ export interface PGN_130820_Furuno extends PGN {
   Match: Message ID == API Version
 */
 export interface PGN_130820_FusionElectronics_ApiVersion extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  hwVersionMajor: number
-  hwVersionMinor: number
-  swVersionMajor: number
-  swVersionMinor: number
-  buildNumber: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    hwVersionMajor: number
+    hwVersionMinor: number
+    swVersionMajor: number
+    swVersionMinor: number
+    buildNumber: number
+}
 }
 
 /*
@@ -7794,15 +8431,17 @@ export interface PGN_130820_FusionElectronics_ApiVersion extends PGN {
   Match: Message ID == Source
 */
 export interface PGN_130820_FusionElectronics_Source extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  currentSourceId: number
-  sourceType: FusionSourceType
-  flags: number
-  source: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    currentSourceId: number
+    sourceType: FusionSourceType
+    flags: number
+    source: string
+}
 }
 
 /*
@@ -7813,11 +8452,13 @@ export interface PGN_130820_FusionElectronics_Source extends PGN {
   Match: Message ID == Source Count
 */
 export interface PGN_130820_FusionElectronics_SourceCount extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceCount: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceCount: number
+}
 }
 
 /*
@@ -7828,16 +8469,18 @@ export interface PGN_130820_FusionElectronics_SourceCount extends PGN {
   Match: Message ID == Track Info
 */
 export interface PGN_130820_FusionElectronics_TrackInfo extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  flags: FusionPlayStatus
-  track: number
-  trackCount: number
-  length: string
-  positionInTrack: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    flags: FusionPlayStatus
+    track: number
+    trackCount: number
+    length: string
+    positionInTrack: string
+}
 }
 
 /*
@@ -7848,13 +8491,15 @@ export interface PGN_130820_FusionElectronics_TrackInfo extends PGN {
   Match: Message ID == Track Title
 */
 export interface PGN_130820_FusionElectronics_TrackTitle extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  index: number
-  track: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    index: number
+    track: string
+}
 }
 
 /*
@@ -7865,13 +8510,15 @@ export interface PGN_130820_FusionElectronics_TrackTitle extends PGN {
   Match: Message ID == Track Artist
 */
 export interface PGN_130820_FusionElectronics_TrackArtist extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  index: number
-  artist: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    index: number
+    artist: string
+}
 }
 
 /*
@@ -7882,13 +8529,15 @@ export interface PGN_130820_FusionElectronics_TrackArtist extends PGN {
   Match: Message ID == Track Album
 */
 export interface PGN_130820_FusionElectronics_TrackAlbum extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  index: number
-  album: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    index: number
+    album: string
+}
 }
 
 /*
@@ -7899,11 +8548,13 @@ export interface PGN_130820_FusionElectronics_TrackAlbum extends PGN {
   Match: Message ID == Unit Name
 */
 export interface PGN_130820_FusionElectronics_UnitName extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  name: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    name: string
+}
 }
 
 /*
@@ -7914,12 +8565,14 @@ export interface PGN_130820_FusionElectronics_UnitName extends PGN {
   Match: Message ID == Zone Name
 */
 export interface PGN_130820_FusionElectronics_ZoneName extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  number: number
-  name: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    number: number
+    name: string
+}
 }
 
 /*
@@ -7930,12 +8583,14 @@ export interface PGN_130820_FusionElectronics_ZoneName extends PGN {
   Match: Message ID == Track Progress
 */
 export interface PGN_130820_FusionElectronics_TrackProgress extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  progress: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    progress: string
+}
 }
 
 /*
@@ -7946,15 +8601,17 @@ export interface PGN_130820_FusionElectronics_TrackProgress extends PGN {
   Match: Message ID == Tuner
 */
 export interface PGN_130820_FusionElectronics_Tuner extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: FusionRadioSource
-  scanning: number
-  frequency: number
-  signalStrength: number
-  track: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: FusionRadioSource
+    scanning: number
+    frequency: number
+    signalStrength: number
+    track: string
+}
 }
 
 /*
@@ -7965,14 +8622,16 @@ export interface PGN_130820_FusionElectronics_Tuner extends PGN {
   Match: Message ID == Marine Tuner
 */
 export interface PGN_130820_FusionElectronics_MarineTuner extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channel: number
-  signalStrength: number
-  name: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channel: number
+    signalStrength: number
+    name: string
+}
 }
 
 /*
@@ -7983,12 +8642,14 @@ export interface PGN_130820_FusionElectronics_MarineTuner extends PGN {
   Match: Message ID == Marine Squelch
 */
 export interface PGN_130820_FusionElectronics_MarineSquelch extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  squelch: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    squelch: number
+}
 }
 
 /*
@@ -7999,12 +8660,14 @@ export interface PGN_130820_FusionElectronics_MarineSquelch extends PGN {
   Match: Message ID == Marine Scan Mode
 */
 export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  scan: boolean
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    scan: boolean
+}
 }
 
 /*
@@ -8015,15 +8678,17 @@ export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
   Match: Message ID == Menu Item
 */
 export interface PGN_130820_FusionElectronics_MenuItem extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  itemIndex: number
-  flags: number
-  lockId: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    itemIndex: number
+    flags: number
+    lockId: number
+    text: string
+}
 }
 
 /*
@@ -8034,12 +8699,14 @@ export interface PGN_130820_FusionElectronics_MenuItem extends PGN {
   Match: Message ID == Aux Gain
 */
 export interface PGN_130820_FusionElectronics_AuxGain extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  gain: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    gain: number
+}
 }
 
 /*
@@ -8051,12 +8718,14 @@ export interface PGN_130820_FusionElectronics_AuxGain extends PGN {
   Match: ID == USB repeat
 */
 export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  id: FusionSetting
-  status: FusionRepeatStatus
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    id: FusionSetting
+    status: FusionRepeatStatus
+}
 }
 
 /*
@@ -8067,12 +8736,14 @@ export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
   Match: Message ID == Setting
 */
 export interface PGN_130820_FusionElectronics_Setting extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  id: FusionSetting
-  value: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    id: FusionSetting
+    value: number
+}
 }
 
 /*
@@ -8083,13 +8754,15 @@ export interface PGN_130820_FusionElectronics_Setting extends PGN {
   Match: Message ID == Settings
 */
 export interface PGN_130820_FusionElectronics_Settings extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  count: number
-  id: FusionSetting
-  value: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    count: number
+    id: FusionSetting
+    value: number
+}
 }
 
 /*
@@ -8100,11 +8773,13 @@ export interface PGN_130820_FusionElectronics_Settings extends PGN {
   Match: Message ID == Mute
 */
 export interface PGN_130820_FusionElectronics_Mute extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  mute: FusionMuteCommand
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    mute: FusionMuteCommand
+}
 }
 
 /*
@@ -8115,12 +8790,14 @@ export interface PGN_130820_FusionElectronics_Mute extends PGN {
   Match: Message ID == Balance
 */
 export interface PGN_130820_FusionElectronics_Balance extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone: number
-  value: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone: number
+    value: number
+}
 }
 
 /*
@@ -8131,12 +8808,14 @@ export interface PGN_130820_FusionElectronics_Balance extends PGN {
   Match: Message ID == Low Pass Filter
 */
 export interface PGN_130820_FusionElectronics_LowPassFilter extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone: number
-  filter: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone: number
+    filter: number
+}
 }
 
 /*
@@ -8147,14 +8826,16 @@ export interface PGN_130820_FusionElectronics_LowPassFilter extends PGN {
   Match: Message ID == Sublevels
 */
 export interface PGN_130820_FusionElectronics_Sublevels extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone1: number
-  zone2: number
-  zone3: number
-  zone4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone1: number
+    zone2: number
+    zone3: number
+    zone4: number
+}
 }
 
 /*
@@ -8165,14 +8846,16 @@ export interface PGN_130820_FusionElectronics_Sublevels extends PGN {
   Match: Message ID == Tone
 */
 export interface PGN_130820_FusionElectronics_Tone extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone: number
-  bass: number
-  mid: number
-  treble: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone: number
+    bass: number
+    mid: number
+    treble: number
+}
 }
 
 /*
@@ -8183,14 +8866,16 @@ export interface PGN_130820_FusionElectronics_Tone extends PGN {
   Match: Message ID == Volume Limits
 */
 export interface PGN_130820_FusionElectronics_VolumeLimits extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone1VolumeLimit: number
-  zone2VolumeLimit: number
-  zone3VolumeLimit: number
-  zone4VolumeLimit: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone1VolumeLimit: number
+    zone2VolumeLimit: number
+    zone3VolumeLimit: number
+    zone4VolumeLimit: number
+}
 }
 
 /*
@@ -8201,14 +8886,16 @@ export interface PGN_130820_FusionElectronics_VolumeLimits extends PGN {
   Match: Message ID == Volume
 */
 export interface PGN_130820_FusionElectronics_Volume extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone1: number
-  zone2: number
-  zone3: number
-  zone4: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone1: number
+    zone2: number
+    zone3: number
+    zone4: number
+}
 }
 
 /*
@@ -8219,15 +8906,17 @@ export interface PGN_130820_FusionElectronics_Volume extends PGN {
   Match: Message ID == Capabilities
 */
 export interface PGN_130820_FusionElectronics_Capabilities extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone1: number
-  zone2: number
-  zone3: number
-  zone4: number
-  global: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone1: number
+    zone2: number
+    zone3: number
+    zone4: number
+    global: number
+}
 }
 
 /*
@@ -8238,12 +8927,14 @@ export interface PGN_130820_FusionElectronics_Capabilities extends PGN {
   Match: Message ID == Line Level Control
 */
 export interface PGN_130820_FusionElectronics_LineLevelControl extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  zone: number
-  control: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    zone: number
+    control: number
+}
 }
 
 /*
@@ -8254,11 +8945,13 @@ export interface PGN_130820_FusionElectronics_LineLevelControl extends PGN {
   Match: Message ID == Power
 */
 export interface PGN_130820_FusionElectronics_Power extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  state: FusionPowerState
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    state: FusionPowerState
+}
 }
 
 /*
@@ -8269,15 +8962,17 @@ export interface PGN_130820_FusionElectronics_Power extends PGN {
   Match: Message ID == Sirius
 */
 export interface PGN_130820_FusionElectronics_Sirius extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  comState: FusionSiriusComState
-  alert: FusionSiriusComState
-  advisoryChannel: number
-  tuningMode: FusionSiriusTuningMode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    comState: FusionSiriusComState
+    alert: FusionSiriusComState
+    advisoryChannel: number
+    tuningMode: FusionSiriusTuningMode
+}
 }
 
 /*
@@ -8288,13 +8983,15 @@ export interface PGN_130820_FusionElectronics_Sirius extends PGN {
   Match: Message ID == SiriusXM Channel
 */
 export interface PGN_130820_FusionElectronics_SiriusXmChannel extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channelNumber: number
-  channel: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channelNumber: number
+    channel: string
+}
 }
 
 /*
@@ -8305,13 +9002,15 @@ export interface PGN_130820_FusionElectronics_SiriusXmChannel extends PGN {
   Match: Message ID == SiriusXM Title
 */
 export interface PGN_130820_FusionElectronics_SiriusXmTitle extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channel: number
-  title: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channel: number
+    title: string
+}
 }
 
 /*
@@ -8322,13 +9021,15 @@ export interface PGN_130820_FusionElectronics_SiriusXmTitle extends PGN {
   Match: Message ID == SiriusXM Artist
 */
 export interface PGN_130820_FusionElectronics_SiriusXmArtist extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channel: number
-  artist: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channel: number
+    artist: string
+}
 }
 
 /*
@@ -8339,13 +9040,15 @@ export interface PGN_130820_FusionElectronics_SiriusXmArtist extends PGN {
   Match: Message ID == SiriusXM Genre
 */
 export interface PGN_130820_FusionElectronics_SiriusXmGenre extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channel: number
-  genre: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channel: number
+    genre: string
+}
 }
 
 /*
@@ -8356,13 +9059,15 @@ export interface PGN_130820_FusionElectronics_SiriusXmGenre extends PGN {
   Match: Message ID == SiriusXM Category
 */
 export interface PGN_130820_FusionElectronics_SiriusXmCategory extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  channel: number
-  name: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    channel: number
+    name: string
+}
 }
 
 /*
@@ -8373,12 +9078,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmCategory extends PGN {
   Match: Message ID == SiriusXm Signal
 */
 export interface PGN_130820_FusionElectronics_SiriusXmSignal extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  signal: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    signal: number
+}
 }
 
 /*
@@ -8389,13 +9096,15 @@ export interface PGN_130820_FusionElectronics_SiriusXmSignal extends PGN {
   Match: Message ID == SiriusXM Presets
 */
 export interface PGN_130820_FusionElectronics_SiriusXmPresets extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: FusionStatusMessageId
-  sourceId: number
-  count: number
-  values: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: FusionStatusMessageId
+    sourceId: number
+    count: number
+    values: number
+}
 }
 
 /*
@@ -8405,11 +9114,13 @@ export interface PGN_130820_FusionElectronics_SiriusXmPresets extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130821_Navico extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  message: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    message: string
+}
 }
 
 /*
@@ -8419,19 +9130,21 @@ export interface PGN_130821_Navico extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130821_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  f: number
-  g: number
-  h: number
-  i: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    f: number
+    g: number
+    h: number
+    i: number
+}
 }
 
 /*
@@ -8439,10 +9152,12 @@ export interface PGN_130821_Furuno extends PGN {
   Description: Navico: Unknown 1
 */
 export interface PGN_130822 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  data: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    data: number
+}
 }
 
 /*
@@ -8450,14 +9165,16 @@ export interface PGN_130822 extends PGN {
   Description: Maretron: Proprietary Temperature High Range
 */
 export interface PGN_130823 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  instance: number
-  source: TemperatureSource
-  actualTemperature: number
-  setTemperature: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    instance: number
+    source: TemperatureSource
+    actualTemperature: number
+    setTemperature: number
+}
 }
 
 /*
@@ -8468,12 +9185,14 @@ export interface PGN_130823 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130824_BG extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  key: string
-  length: string
-  value: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    key: string
+    length: string
+    value: string
+}
 }
 
 /*
@@ -8483,14 +9202,16 @@ export interface PGN_130824_BG extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130824_Maretron extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  field4: number
-  field5: number
-  field6: number
-  field7: number
-  field8: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    field4: number
+    field5: number
+    field6: number
+    field7: number
+    field8: number
+}
 }
 
 /*
@@ -8498,10 +9219,12 @@ export interface PGN_130824_Maretron extends PGN {
   Description: Navico: Unknown 2
 */
 export interface PGN_130825 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  data: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    data: number
+}
 }
 
 /*
@@ -8509,15 +9232,17 @@ export interface PGN_130825 extends PGN {
   Description: Lowrance: unknown
 */
 export interface PGN_130827 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  f: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    f: number
+}
 }
 
 /*
@@ -8525,9 +9250,11 @@ export interface PGN_130827 extends PGN {
   Description: Simnet: Set Serial Number
 */
 export interface PGN_130828 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8535,9 +9262,11 @@ export interface PGN_130828 extends PGN {
   Description: Suzuki: Engine and Storage Device Config
 */
 export interface PGN_130831 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8545,9 +9274,11 @@ export interface PGN_130831 extends PGN {
   Description: Simnet: Fuel Used - High Resolution
 */
 export interface PGN_130832 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8555,15 +9286,17 @@ export interface PGN_130832 extends PGN {
   Description: B&G: User and Remote rename
 */
 export interface PGN_130833 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  dataType: string
-  length: number
-  reserved6: number
-  decimals: BandgDecimals
-  shortName: string
-  longName: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    dataType: string
+    length: number
+    reserved6: number
+    decimals: BandgDecimals
+    shortName: string
+    longName: string
+}
 }
 
 /*
@@ -8571,9 +9304,11 @@ export interface PGN_130833 extends PGN {
   Description: Simnet: Engine and Tank Configuration
 */
 export interface PGN_130834 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8581,9 +9316,11 @@ export interface PGN_130834 extends PGN {
   Description: Simnet: Set Engine and Tank Configuration
 */
 export interface PGN_130835 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8593,18 +9330,20 @@ export interface PGN_130835 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130836_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  c: number
-  device: number
-  instance: number
-  f: number
-  tankType: TankType
-  capacity: number
-  g: number
-  h: number
-  i: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    c: number
+    device: number
+    instance: number
+    f: number
+    tankType: TankType
+    capacity: number
+    g: number
+    h: number
+    i: number
+}
 }
 
 /*
@@ -8614,18 +9353,20 @@ export interface PGN_130836_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130836_Maretron extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  instance: number
-  indicatorNumber: number
-  startDate: string
-  startTime: string
-  offCounter: number
-  onCounter: number
-  errorCounter: number
-  switchStatus: OffOn
-  reserved12: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    instance: number
+    indicatorNumber: number
+    startDate: string
+    startTime: string
+    offCounter: number
+    onCounter: number
+    errorCounter: number
+    switchStatus: OffOn
+    reserved12: number
+}
 }
 
 /*
@@ -8635,9 +9376,11 @@ export interface PGN_130836_Maretron extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130837_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8647,18 +9390,20 @@ export interface PGN_130837_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130837_Maretron extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  instance: number
-  indicatorNumber: number
-  startDate: string
-  startTime: string
-  accumulatedOffPeriod: string
-  accumulatedOnPeriod: string
-  accumulatedErrorPeriod: string
-  switchStatus: OffOn
-  reserved12: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    instance: number
+    indicatorNumber: number
+    startDate: string
+    startTime: string
+    accumulatedOffPeriod: string
+    accumulatedOnPeriod: string
+    accumulatedErrorPeriod: string
+    switchStatus: OffOn
+    reserved12: number
+}
 }
 
 /*
@@ -8666,9 +9411,11 @@ export interface PGN_130837_Maretron extends PGN {
   Description: Simnet: Fluid Level Warning
 */
 export interface PGN_130838 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8676,9 +9423,11 @@ export interface PGN_130838 extends PGN {
   Description: Simnet: Pressure Sensor Configuration
 */
 export interface PGN_130839 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8686,9 +9435,11 @@ export interface PGN_130839 extends PGN {
   Description: Simnet: Data User Group Configuration
 */
 export interface PGN_130840 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8698,15 +9449,17 @@ export interface PGN_130840 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130842_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: number
-  repeatIndicator: RepeatIndicator
-  d: number
-  e: number
-  userId: string
-  name: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: number
+    repeatIndicator: RepeatIndicator
+    d: number
+    e: number
+    userId: string
+    name: string
+}
 }
 
 /*
@@ -8716,18 +9469,20 @@ export interface PGN_130842_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130842_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  f: number
-  g: number
-  h: number
-  i: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    f: number
+    g: number
+    h: number
+    i: number
+}
 }
 
 /*
@@ -8738,24 +9493,26 @@ export interface PGN_130842_Furuno extends PGN {
   Match: Message ID == Msg 24 Part B
 */
 export interface PGN_130842_Simrad_Msg24PartB extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: number
-  repeatIndicator: RepeatIndicator
-  d: number
-  e: number
-  userId: string
-  typeOfShip: ShipType
-  vendorId: string
-  callsign: string
-  length: number
-  beam: number
-  positionReferenceFromStarboard: number
-  positionReferenceFromBow: number
-  mothershipUserId: string
-  spare17: string
-  reserved18: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: number
+    repeatIndicator: RepeatIndicator
+    d: number
+    e: number
+    userId: string
+    typeOfShip: ShipType
+    vendorId: string
+    callsign: string
+    length: number
+    beam: number
+    positionReferenceFromStarboard: number
+    positionReferenceFromBow: number
+    mothershipUserId: string
+    spare17: string
+    reserved18: number
+}
 }
 
 /*
@@ -8765,14 +9522,16 @@ export interface PGN_130842_Simrad_Msg24PartB extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130843_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  yaw: number
-  pitch: number
-  roll: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    yaw: number
+    pitch: number
+    roll: number
+}
 }
 
 /*
@@ -8782,9 +9541,11 @@ export interface PGN_130843_Furuno extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130843_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8794,9 +9555,11 @@ export interface PGN_130843_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130845_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8806,17 +9569,19 @@ export interface PGN_130845_Furuno extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130845_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  address: number
-  repeatIndicator: RepeatIndicator
-  displayGroup: SimnetDisplayGroup
-  reserved7: number
-  key: string
-  spare9: string
-  minlength: number
-  value: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    address: number
+    repeatIndicator: RepeatIndicator
+    displayGroup: SimnetDisplayGroup
+    reserved7: number
+    key: string
+    spare9: string
+    minlength: number
+    value: string
+}
 }
 
 /*
@@ -8826,17 +9591,19 @@ export interface PGN_130845_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130846_Simrad extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  address: number
-  b: number
-  displayGroup: SimnetDisplayGroup
-  d: number
-  key: string
-  spare9: string
-  length: number
-  value: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    address: number
+    b: number
+    displayGroup: SimnetDisplayGroup
+    d: number
+    key: string
+    spare9: string
+    length: number
+    value: string
+}
 }
 
 /*
@@ -8846,9 +9613,11 @@ export interface PGN_130846_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130846_Furuno extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+}
 }
 
 /*
@@ -8856,14 +9625,16 @@ export interface PGN_130846_Furuno extends PGN {
   Description: SeaTalk: Node Statistics
 */
 export interface PGN_130847 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  productCode: number
-  year: number
-  month: number
-  deviceNumber: number
-  nodeVoltage: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    productCode: number
+    year: number
+    month: number
+    deviceNumber: number
+    nodeVoltage: number
+}
 }
 
 /*
@@ -8871,15 +9642,17 @@ export interface PGN_130847 extends PGN {
   Description: SeaTalk: Waypoint Information
 */
 export interface PGN_130848 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  sid: number
-  waypointName: string
-  waypointSequence: string
-  bearingToWaypointTrue: number
-  bearingToWaypointMagnetic: number
-  distanceToWaypoint: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    sid: number
+    waypointName: string
+    waypointSequence: string
+    bearingToWaypointTrue: number
+    bearingToWaypointMagnetic: number
+    distanceToWaypoint: number
+}
 }
 
 /*
@@ -8890,17 +9663,19 @@ export interface PGN_130848 extends PGN {
   Match: Proprietary ID == Autopilot
 */
 export interface PGN_130850_Simrad_Autopilot extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  address: number
-  reserved5: number
-  proprietaryId: SimnetEventCommand
-  apStatus: SimnetApStatus
-  apCommand: SimnetApEvents
-  spare9: string
-  direction: SimnetDirection
-  angle: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    address: number
+    reserved5: number
+    proprietaryId: SimnetEventCommand
+    apStatus: SimnetApStatus
+    apCommand: SimnetApEvents
+    spare9: string
+    direction: SimnetDirection
+    angle: number
+}
 }
 
 /*
@@ -8911,17 +9686,19 @@ export interface PGN_130850_Simrad_Autopilot extends PGN {
   Match: Proprietary ID == AP command
 */
 export interface PGN_130850_Simrad_ApCommand extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: SimnetEventCommand
-  unusedA: number
-  controllingDevice: number
-  event: SimnetApEvents
-  unusedB: number
-  direction: SimnetDirection
-  angle: number
-  unusedC: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: SimnetEventCommand
+    unusedA: number
+    controllingDevice: number
+    event: SimnetApEvents
+    unusedB: number
+    direction: SimnetDirection
+    angle: number
+    unusedC: number
+}
 }
 
 /*
@@ -8933,17 +9710,19 @@ export interface PGN_130850_Simrad_ApCommand extends PGN {
   Match: Proprietary ID == Alarm
 */
 export interface PGN_130850_Simrad_Alarm extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  address: number
-  reserved5: number
-  proprietaryId: SimnetEventCommand
-  reserved7: number
-  alarm: SimnetAlarm
-  messageId: number
-  f: number
-  g: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    address: number
+    reserved5: number
+    proprietaryId: SimnetEventCommand
+    reserved7: number
+    alarm: SimnetAlarm
+    messageId: number
+    f: number
+    g: number
+}
 }
 
 /*
@@ -8951,17 +9730,19 @@ export interface PGN_130850_Simrad_Alarm extends PGN {
   Description: Simnet: Event Reply: AP command
 */
 export interface PGN_130851 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  proprietaryId: SimnetEventCommand
-  b: number
-  address: number
-  event: SimnetApEvents
-  c: number
-  direction: SimnetDirection
-  angle: number
-  g: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    proprietaryId: SimnetEventCommand
+    b: number
+    address: number
+    event: SimnetApEvents
+    c: number
+    direction: SimnetDirection
+    angle: number
+    g: number
+}
 }
 
 /*
@@ -8970,13 +9751,15 @@ export interface PGN_130851 extends PGN {
   Explanation: Usually accompanied by a PGN 130850 'Simnet: Alarm' message with the same information in binary form.
 */
 export interface PGN_130856 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  messageId: number
-  b: number
-  c: number
-  text: string
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    messageId: number
+    b: number
+    c: number
+    text: string
+}
 }
 
 /*
@@ -8985,15 +9768,17 @@ export interface PGN_130856 extends PGN {
   Explanation: Seen as sent by AC-42 and H5000 AP only so far.
 */
 export interface PGN_130860 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  a: number
-  b: number
-  c: number
-  d: number
-  e: number
-  f: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    a: number
+    b: number
+    c: number
+    d: number
+    e: number
+    f: number
+}
 }
 
 /*
@@ -9001,13 +9786,15 @@ export interface PGN_130860 extends PGN {
   Description: Airmar: Additional Weather Data
 */
 export interface PGN_130880 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  c: number
-  apparentWindchillTemperature: number
-  trueWindchillTemperature: number
-  dewpoint: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    c: number
+    apparentWindchillTemperature: number
+    trueWindchillTemperature: number
+    dewpoint: number
+}
 }
 
 /*
@@ -9015,13 +9802,15 @@ export interface PGN_130880 extends PGN {
   Description: Airmar: Heater Control
 */
 export interface PGN_130881 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  c: number
-  plateTemperature: number
-  airTemperature: number
-  dewpoint: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    c: number
+    plateTemperature: number
+    airTemperature: number
+    dewpoint: number
+}
 }
 
 /*
@@ -9029,31 +9818,36 @@ export interface PGN_130881 extends PGN {
   Description: SeaTalk: Route Information
 */
 export interface PGN_130918 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  currentWaypointSequence: number
-  currentWaypointName: string
-  nextWaypointSequence: number
-  nextWaypointName: string
-  unknown: number
-  distancePositionToNextWaypoint: number
-  bearingPositionToNextWaypointTrue: number
-  bearingCurrentWaypointToNextWaypointTrue: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    currentWaypointSequence: number
+    currentWaypointName: string
+    nextWaypointSequence: number
+    nextWaypointName: string
+    unknown: number
+    distancePositionToNextWaypoint: number
+    bearingPositionToNextWaypointTrue: number
+    bearingCurrentWaypointToNextWaypointTrue: number
 }
+}
+
 
 /*
   PGN: 130944
   Description: Airmar: POST
 */
 export interface PGN_130944 extends PGN {
-  manufacturerCode: ManufacturerCode
-  reserved: number
-  industryCode: IndustryCode
-  control: AirmarPostControl
-  reserved5: number
-  numberOfIdTestResultPairsToFollow: number
-  testId: AirmarPostId
-  testResult: number
+  fields: {
+    manufacturerCode: ManufacturerCode
+    reserved: number
+    industryCode: IndustryCode
+    control: AirmarPostControl
+    reserved5: number
+    numberOfIdTestResultPairsToFollow: number
+    testId: AirmarPostId
+    testResult: number
+}
 }
 

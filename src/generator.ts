@@ -86,11 +86,14 @@ pgns.LookupBitEnumerations.forEach((en: any) => {
 })
 
 console.log('export interface PGN {')
-console.log('  pgn: string')
+console.log('  pgn: number')
 console.log('  prio: number')
 console.log('  src: number')
 console.log('  dst: number')
 console.log('  timestamp: string')
+console.log('  input?: string[]')
+console.log('  description?: string')
+console.log('  fields?: any')
 console.log('}\n')
 
 /*
@@ -174,6 +177,7 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
   }
 
   console.log(`export interface ${typeName} extends PGN {`)
+  console.log("  fields: {")
   pgn.Fields.forEach((field: Field) => {
     let type = 'string'
     switch (field.FieldType) {
@@ -204,8 +208,9 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
         break
     }
 
-    console.log(`  ${fixIdentifier(field.Id, '_')}: ${type}`)
+    console.log(`    ${fixIdentifier(field.Id, '_')}: ${type}`)
   })
+  console.log('}')
   console.log('}\n')
 }
 

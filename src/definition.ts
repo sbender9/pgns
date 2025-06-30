@@ -65,6 +65,44 @@ export enum PhysicalQuantity {
   VolumetricFlow = 'VOLUMETRIC_FLOW'
 }
 
+export type EnumValue = {
+  Name: string,
+  Value: number
+}
+
+export interface EnumBase {
+  Name: string
+}
+
+export interface Enumeration extends EnumBase {
+  MaxValue: number,
+  EnumValues: EnumValue[]
+}
+
+export type EnumBitValue = {
+  Name: string,
+  Bit: number
+}
+
+export interface BitEnumeration extends EnumBase {
+  MaxValue: number,
+  EnumBitValues: EnumBitValue[]
+}
+
+export type EnumFieldTypeValue = {
+  name: string,
+  value: number,
+  FieldType: string,
+  Resolution?: number,
+  Unit?: string,
+  Bits: string
+}
+
+export interface FieldTypeEnumeration extends EnumBase {
+  MaxValue: number,
+  EnumFieldTypeValues: EnumFieldTypeValue[]
+}
+
 export type Field = {
   Id: string
   Name: string
@@ -88,7 +126,8 @@ export type Field = {
   LookupEnumeration?: string
   LookupIndirectEnumeration?: string
   LookupIndirectEnumerationFieldOrder?: number
-  LookupBitEnumeration?: string
+  LookupBitEnumeration?: string,
+  LookupFieldTypeEnumeration: string
 }
 
 export type Definition = {
