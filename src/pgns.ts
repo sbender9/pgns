@@ -23,7 +23,7 @@ export interface PGN_59392Fields extends PGNFields {
   control?: enums.IsoControl|number
   groupFunction?: number
   reserved?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_59392 extends PGN {
@@ -36,7 +36,7 @@ export interface PGN_59392 extends PGN {
   Explanation: As defined by ISO, this message has a data length of 3 bytes with no padding added to complete the single frame. The appropriate response to this message is based on the PGN being requested, and whether the receiver supports the requested PGN.
 */
 export interface PGN_59904Fields extends PGNFields {
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_59904 extends PGN {
@@ -68,7 +68,7 @@ export interface PGN_60416_RtsFields extends PGNFields {
   messageSize?: number
   packets?: number
   packetsReply?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_60416_Rts extends PGN {
@@ -86,7 +86,7 @@ export interface PGN_60416_CtsFields extends PGNFields {
   maxPackets?: number
   nextSid?: number
   reserved?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_60416_Cts extends PGN {
@@ -104,7 +104,7 @@ export interface PGN_60416_EomFields extends PGNFields {
   totalMessageSize?: number
   totalNumberOfFramesReceived?: number
   reserved?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_60416_Eom extends PGN {
@@ -122,7 +122,7 @@ export interface PGN_60416_BamFields extends PGNFields {
   messageSize?: number
   packets?: number
   reserved?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_60416_Bam extends PGN {
@@ -139,7 +139,7 @@ export interface PGN_60416_AbortFields extends PGNFields {
   groupFunctionCode?: enums.IsoCommand|number
   reason?: number
   reserved?: number
-  pgn?: string
+  pgn?: number
 }
 
 export interface PGN_60416_Abort extends PGN {
@@ -1369,12 +1369,13 @@ export interface PGN_65480 extends PGN {
 */
 export interface PGN_126208Fields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   transmissionInterval?: string
   transmissionIntervalOffset?: string
   numberOfParameters?: number
   parameter?: string
   value?: string
+  list: any[]
 }
 
 export interface PGN_126208 extends PGN {
@@ -1389,12 +1390,13 @@ export interface PGN_126208 extends PGN {
 */
 export interface PGN_126208_CommandFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   priority?: enums.Priority|number
   reserved?: number
   numberOfParameters?: number
   parameter?: string
   value?: string
+  list: any[]
 }
 
 export interface PGN_126208_Command extends PGN {
@@ -1409,11 +1411,12 @@ export interface PGN_126208_Command extends PGN {
 */
 export interface PGN_126208_AcknowledgeFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   pgnErrorCode?: enums.PgnErrorCode|number
   transmissionIntervalPriorityErrorCode?: enums.TransmissionInterval|number
   numberOfParameters?: number
   parameter?: enums.ParameterField|number
+  list: any[]
 }
 
 export interface PGN_126208_Acknowledge extends PGN {
@@ -1428,7 +1431,7 @@ export interface PGN_126208_Acknowledge extends PGN {
 */
 export interface PGN_126208_ReadFieldsFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
   industryCode?: enums.IndustryCode|number
@@ -1438,6 +1441,8 @@ export interface PGN_126208_ReadFieldsFields extends PGNFields {
   selectionParameter?: string
   selectionValue?: string
   parameter?: string
+  list: any[]
+  list2: any[]
 }
 
 export interface PGN_126208_ReadFields extends PGN {
@@ -1452,7 +1457,7 @@ export interface PGN_126208_ReadFields extends PGN {
 */
 export interface PGN_126208_ReadFieldsReplyFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
   industryCode?: enums.IndustryCode|number
@@ -1463,6 +1468,8 @@ export interface PGN_126208_ReadFieldsReplyFields extends PGNFields {
   selectionValue?: string
   parameter?: string
   value?: string
+  list: any[]
+  list2: any[]
 }
 
 export interface PGN_126208_ReadFieldsReply extends PGN {
@@ -1477,7 +1484,7 @@ export interface PGN_126208_ReadFieldsReply extends PGN {
 */
 export interface PGN_126208_WriteFieldsFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
   industryCode?: enums.IndustryCode|number
@@ -1488,6 +1495,8 @@ export interface PGN_126208_WriteFieldsFields extends PGNFields {
   selectionValue?: string
   parameter?: string
   value?: string
+  list: any[]
+  list2: any[]
 }
 
 export interface PGN_126208_WriteFields extends PGN {
@@ -1502,7 +1511,7 @@ export interface PGN_126208_WriteFields extends PGN {
 */
 export interface PGN_126208_WriteFieldsReplyFields extends PGNFields {
   functionCode?: enums.GroupFunction|number
-  pgn?: string
+  pgn?: number
   manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
   industryCode?: enums.IndustryCode|number
@@ -1513,6 +1522,8 @@ export interface PGN_126208_WriteFieldsReplyFields extends PGNFields {
   selectionValue?: string
   parameter?: string
   value?: string
+  list: any[]
+  list2: any[]
 }
 
 export interface PGN_126208_WriteFieldsReply extends PGN {
@@ -1525,7 +1536,8 @@ export interface PGN_126208_WriteFieldsReply extends PGN {
 */
 export interface PGN_126464Fields extends PGNFields {
   functionCode?: enums.PgnListFunction|number
-  pgn?: string
+  pgn?: number
+  list: any[]
 }
 
 export interface PGN_126464 extends PGN {
@@ -1920,6 +1932,7 @@ export interface PGN_126720_Airmar_CalibrateSpeedFields extends PGNFields {
   numberOfPairsOfDataPoints?: number
   inputFrequency?: number
   outputSpeed?: number
+  list: any[]
 }
 
 export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
@@ -2301,6 +2314,7 @@ export interface PGN_126987Fields extends PGNFields {
   triggerMethod?: number
   thresholdDataFormat?: number
   thresholdLevel?: number
+  list: any[]
 }
 
 export interface PGN_126987 extends PGN {
@@ -2325,6 +2339,7 @@ export interface PGN_126988Fields extends PGNFields {
   valueParameterNumber?: number
   valueDataFormat?: number
   valueData?: number
+  list: any[]
 }
 
 export interface PGN_126988 extends PGN {
@@ -2880,6 +2895,7 @@ export interface PGN_127503Fields extends PGNFields {
   realPower?: number
   reactivePower?: number
   powerFactor?: number
+  list: any[]
 }
 
 export interface PGN_127503 extends PGN {
@@ -2903,6 +2919,7 @@ export interface PGN_127504Fields extends PGNFields {
   realPower?: number
   reactivePower?: number
   powerFactor?: number
+  list: any[]
 }
 
 export interface PGN_127504 extends PGN {
@@ -3666,6 +3683,7 @@ export interface PGN_129029Fields extends PGNFields {
   referenceStationType?: enums.Gns|number
   referenceStationId?: number
   ageOfDgnssCorrections?: string
+  list: any[]
 }
 
 export interface PGN_129029 extends PGN {
@@ -3921,6 +3939,7 @@ export interface PGN_129285Fields extends PGNFields {
   wpName?: string
   wpLatitude?: number
   wpLongitude?: number
+  list: any[]
 }
 
 export interface PGN_129285 extends PGN {
@@ -4037,6 +4056,7 @@ export interface PGN_129540Fields extends PGNFields {
   rangeResiduals?: number
   status?: enums.SatelliteStatus|number
   reserved11?: number
+  list: any[]
 }
 
 export interface PGN_129540 extends PGN {
@@ -4351,6 +4371,7 @@ export interface PGN_129796Fields extends PGNFields {
   destinationId: string
   sequenceNumber?: number
   reserved9?: number
+  list: any[]
 }
 
 export interface PGN_129796 extends PGN {
@@ -4553,6 +4574,7 @@ export interface PGN_129805Fields extends PGNFields {
   numberOfSlots?: number
   timeout?: string
   increment?: number
+  list: any[]
 }
 
 export interface PGN_129805 extends PGN {
@@ -4651,6 +4673,7 @@ export interface PGN_129808_DistressFields extends PGNFields {
   dscEquipmentAssignedMessageId?: number
   dscExpansionFieldSymbol?: enums.DscExpansionData|number
   dscExpansionFieldData?: string
+  list: any[]
 }
 
 export interface PGN_129808_Distress extends PGN {
@@ -4684,6 +4707,7 @@ export interface PGN_129808Fields extends PGNFields {
   dscEquipmentAssignedMessageId?: number
   dscExpansionFieldSymbol?: enums.DscExpansionData|number
   dscExpansionFieldData?: string
+  list: any[]
 }
 
 export interface PGN_129808 extends PGN {
@@ -4810,7 +4834,7 @@ export interface PGN_130054 extends PGN {
 */
 export interface PGN_130060Fields extends PGNFields {
   hardwareChannelId?: number
-  pgn?: string
+  pgn?: number
   dataSourceInstanceFieldNumber?: number
   dataSourceInstanceValue?: number
   secondaryEnumerationFieldNumber?: number
@@ -4833,7 +4857,7 @@ export interface PGN_130061Fields extends PGNFields {
   reserved?: number
   nameSelectionCriteriaMask?: number
   sourceName?: string
-  pgn?: string
+  pgn?: number
   dataSourceInstanceFieldNumber?: number
   dataSourceInstanceValue?: number
   secondaryEnumerationFieldNumber?: number
@@ -4862,6 +4886,7 @@ export interface PGN_130064Fields extends PGNFields {
   numberOfRoutesInDatabase?: number
   numberOfWpsInDatabase?: number
   numberOfBytesInDatabase?: number
+  list: any[]
 }
 
 export interface PGN_130064 extends PGN {
@@ -4882,6 +4907,7 @@ export interface PGN_130065Fields extends PGNFields {
   reserved?: number
   wpIdentificationMethod?: enums.WpIdentificationMethod|number
   routeStatus?: enums.WpRouteStatus|number
+  list: any[]
 }
 
 export interface PGN_130065 extends PGN {
@@ -4925,6 +4951,7 @@ export interface PGN_130067Fields extends PGNFields {
   wpName?: string
   wpLatitude?: number
   wpLongitude?: number
+  list: any[]
 }
 
 export interface PGN_130067 extends PGN {
@@ -4943,6 +4970,7 @@ export interface PGN_130068Fields extends PGNFields {
   routeId?: number
   wpId?: number
   wpName?: string
+  list: any[]
 }
 
 export interface PGN_130068 extends PGN {
@@ -4963,6 +4991,7 @@ export interface PGN_130069Fields extends PGNFields {
   xteLimitInTheLegAfterWp?: number
   navMethodInTheLegAfterWp?: enums.WpNavigationMethod|number
   reserved?: number
+  list: any[]
 }
 
 export interface PGN_130069 extends PGN {
@@ -4981,6 +5010,7 @@ export interface PGN_130070Fields extends PGNFields {
   routeId?: number
   wpIdRps?: number
   comment?: string
+  list: any[]
 }
 
 export interface PGN_130070 extends PGN {
@@ -4998,6 +5028,7 @@ export interface PGN_130071Fields extends PGNFields {
   databaseId?: number
   routeId?: number
   comment?: string
+  list: any[]
 }
 
 export interface PGN_130071 extends PGN {
@@ -5014,6 +5045,7 @@ export interface PGN_130072Fields extends PGNFields {
   numberOfDatabasesWithComments?: number
   databaseId?: number
   comment?: string
+  list: any[]
 }
 
 export interface PGN_130072 extends PGN {
@@ -5032,6 +5064,7 @@ export interface PGN_130073Fields extends PGNFields {
   routeId?: number
   rps?: number
   radiusOfTurn?: number
+  list: any[]
 }
 
 export interface PGN_130073 extends PGN {
@@ -5052,6 +5085,7 @@ export interface PGN_130074Fields extends PGNFields {
   wpName?: string
   wpLatitude?: number
   wpLongitude?: number
+  list: any[]
 }
 
 export interface PGN_130074 extends PGN {
@@ -5398,6 +5432,7 @@ export interface PGN_130562Fields extends PGNFields {
   programIntensity?: number
   programRate?: number
   programColorSequenceRate?: number
+  list: any[]
 }
 
 export interface PGN_130562 extends PGN {
@@ -5445,6 +5480,7 @@ export interface PGN_130564Fields extends PGNFields {
   numberOfDevices?: number
   deviceId?: number
   status?: number
+  list: any[]
 }
 
 export interface PGN_130564 extends PGN {
@@ -5465,6 +5501,7 @@ export interface PGN_130565Fields extends PGNFields {
   blueComponent?: number
   colorTemperature?: number
   intensity?: number
+  list: any[]
 }
 
 export interface PGN_130565 extends PGN {
@@ -5595,6 +5632,7 @@ export interface PGN_130571Fields extends PGNFields {
   id?: number
   name?: string
   artist?: string
+  list: any[]
 }
 
 export interface PGN_130571 extends PGN {
@@ -5639,6 +5677,7 @@ export interface PGN_130573Fields extends PGNFields {
   connected?: enums.YesNo|number
   repeatSupport?: enums.EntertainmentRepeatBitfield[]
   shuffleSupport?: enums.EntertainmentShuffleBitfield[]
+  list: any[]
 }
 
 export interface PGN_130573 extends PGN {
@@ -5655,6 +5694,7 @@ export interface PGN_130574Fields extends PGNFields {
   totalZoneCount?: number
   zoneId?: enums.EntertainmentZone|number
   name?: string
+  list: any[]
 }
 
 export interface PGN_130574 extends PGN {
@@ -5755,6 +5795,7 @@ export interface PGN_130581Fields extends PGNFields {
   totalZoneCount?: number
   zoneId?: enums.EntertainmentZone|number
   zoneName?: string
+  list: any[]
 }
 
 export interface PGN_130581 extends PGN {
@@ -5789,6 +5830,7 @@ export interface PGN_130583Fields extends PGNFields {
   totalPresetCount?: number
   presetType?: enums.EntertainmentEq|number
   presetName?: string
+  list: any[]
 }
 
 export interface PGN_130583 extends PGN {
@@ -5807,6 +5849,7 @@ export interface PGN_130584Fields extends PGNFields {
   status?: enums.BluetoothStatus|number
   deviceName?: string
   signalStrength?: number
+  list: any[]
 }
 
 export interface PGN_130584 extends PGN {
@@ -6794,6 +6837,7 @@ export interface PGN_130820_FusionElectronics_SettingsFields extends PGNFields {
   count?: number
   id?: enums.FusionSetting|number
   value?: number
+  list: any[]
 }
 
 export interface PGN_130820_FusionElectronics_Settings extends PGN {
@@ -7270,6 +7314,7 @@ export interface PGN_130824_BGFields extends PGNFields {
   key?: string
   length?: string
   value?: string
+  list: any[]
 }
 
 export interface PGN_130824_BG extends PGN {

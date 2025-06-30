@@ -215,13 +215,23 @@ if (argv.pgns) {
           if (field.LookupBitEnumeration) {
             type = `enums.${enumName(field.LookupBitEnumeration)}[]`
           }
-          break
+        break
+
+      case 'PGN':
+        type = 'number'
+        break
       }
 
       const required = field.PartOfPrimaryKey == true || field.BitLength === 1 ? '' : '?'
 
       console.log(`  ${fixIdentifier(field.Id, '_')}${required}: ${type}`)
     })
+    if ( pgn.RepeatingFieldSet1Size !== undefined ) {
+      console.log(`  list: any[]`)
+    }
+    if ( pgn.RepeatingFieldSet2Size !== undefined ) {
+      console.log(`  list2: any[]`)
+    }
     console.log('}\n')
 
     console.log(`export interface ${typeName} extends PGN {`)
