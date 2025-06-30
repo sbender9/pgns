@@ -220,7 +220,9 @@ if ( argv.pgns ) {
         break
       }
 
-      console.log(`  ${fixIdentifier(field.Id, '_')}: ${type}`)
+      const required = field.PartOfPrimaryKey == true ? '' : '?'
+
+      console.log(`  ${fixIdentifier(field.Id, '_')}${required}: ${type}`)
     })
     console.log('}\n')
 
