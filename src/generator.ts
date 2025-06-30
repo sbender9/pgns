@@ -17,8 +17,13 @@
 
 import camelCase from 'camelcase'
 import { pgns, getPGNs } from './index'
-
 import { Definition, Field } from './definition'
+import minimist from 'minimist'
+
+const argv = minimist(process.argv.slice(2), {
+  boolean: ['enums', 'pgns'],
+  alias: { h: 'help' }
+})
 
 const filtered: Definition[] = getPGNs() as Definition[]
 
@@ -41,8 +46,24 @@ function organizePGNs() {
 
 organizePGNs()
 
-pgns.LookupEnumerations.forEach((en: any) => {
-  if (en.Name !== 'YES_NO') {
+if ( argv.enums ) {
+  pgns.LookupEnumerations.forEach((en: any) => {
+    if (en.Name !== 'YES_NO') {
+      const done: { [key: string]: number } = {}
+      console.log(`export enum ${enumName(en.Name)} {`)
+      en.EnumValues.forEach((v: any) => {
+        const name = enumName(v.Name)
+        const found = done[name]
+        if (!found) {
+          done[name] = 1
+          console.log(`  ${name} = '${v.Name}',`)
+        }
+      })
+      console.log('}\n')
+    }
+  })
+
+  pgns.LookupIndirectEnumerations.forEach((en: any) => {
     const done: { [key: string]: number } = {}
     console.log(`export enum ${enumName(en.Name)} {`)
     en.EnumValues.forEach((v: any) => {
@@ -54,133 +75,122 @@ pgns.LookupEnumerations.forEach((en: any) => {
       }
     })
     console.log('}\n')
-  }
-})
-
-pgns.LookupIndirectEnumerations.forEach((en: any) => {
-  const done: { [key: string]: number } = {}
-  console.log(`export enum ${enumName(en.Name)} {`)
-  en.EnumValues.forEach((v: any) => {
-    const name = enumName(v.Name)
-    const found = done[name]
-    if (!found) {
-      done[name] = 1
-      console.log(`  ${name} = '${v.Name}',`)
-    }
   })
-  console.log('}\n')
-})
 
-pgns.LookupBitEnumerations.forEach((en: any) => {
-  const done: { [key: string]: number } = {}
-  console.log(`export enum ${enumName(en.Name)} {`)
-  en.EnumBitValues.forEach((v: any) => {
-    const name = enumName(v.Name)
-    const found = done[name]
-    if (!found) {
-      done[name] = 1
-      console.log(`  ${name} = '${v.Name}',`)
-    }
+  pgns.LookupBitEnumerations.forEach((en: any) => {
+    const done: { [key: string]: number } = {}
+    console.log(`export enum ${enumName(en.Name)} {`)
+    en.EnumBitValues.forEach((v: any) => {
+      const name = enumName(v.Name)
+      const found = done[name]
+      if (!found) {
+        done[name] = 1
+        console.log(`  ${name} = '${v.Name}',`)
+      }
+    })
+    console.log('}\n')
   })
-  console.log('}\n')
-})
-
-console.log('export interface PGN {')
-console.log('  pgn: number')
-console.log('  prio: number')
-console.log('  src: number')
-console.log('  dst: number')
-console.log('  timestamp: string')
-console.log('  input?: string[]')
-console.log('  description?: string')
-console.log('  fields?: any')
-console.log('}\n')
-
-/*
-function getMatchFields(pgn: Definition) : Field[] {
-  return pgn.Fields.filter(field => field.Match !== undefined)
 }
 
-function getPGNsWithMatchs(pgns: Definition[], count: number) : Definition[] {
-  const res : Definition[] = []
-  pgns.forEach(pgn => {
+if ( argv.pgns ) {
+  console.log('import * as enums from \'./enums\'\n')
+  
+  console.log('export interface PGN {')
+  console.log('  pgn: number')
+  console.log('  prio?: number')
+  console.log('  src?: number')
+  console.log('  dst: number')
+  console.log('  timestamp?: string')
+  console.log('  input?: string[]')
+  console.log('  description?: string')
+  console.log('  fields?: any')
+  console.log('}\n')
+
+  /*
+    function getMatchFields(pgn: Definition) : Field[] {
+    return pgn.Fields.filter(field => field.Match !== undefined)
+    }
+
+    function getPGNsWithMatchs(pgns: Definition[], count: number) : Definition[] {
+    const res : Definition[] = []
+    pgns.forEach(pgn => {
     const matches = getMatchFields(pgn)
     if ( matches.length == count ) {
-      res.push(pgn)
+    res.push(pgn)
     }
-  })
-  return res
-}
+    })
+    return res
+    }
 
-function getMaxMatchs(pgns: Definition[]) : number {
-  let res = 0
-  pgns.forEach(pgn => {
+    function getMaxMatchs(pgns: Definition[]) : number {
+    let res = 0
+    pgns.forEach(pgn => {
     const matches = getMatchFields(pgn)
     if ( matches.length > res ) {
-      res = matches.length
+    res = matches.length
     }
-  })
-  return res
-}
-*/
+    })
+    return res
+    }
+  */
 
-pgnNumbers.forEach((pgnNumber) => {
-  const pgns = organized[pgnNumber]
-  pgns.forEach((pgn: any) => {
-    outputPGN(pgn, pgns.length > 1)
-  })
-  /*
-  const pgns = organized[pgnNumber]
-  if ( pgns.length === 1 ) {
-    outputPGN(pgns[0], false)
-  } else {
-    const matchesByCount = []
-    for ( let i = 0; i < getMaxMatchs(pgns); i++ ) {
+  pgnNumbers.forEach((pgnNumber) => {
+    const pgns = organized[pgnNumber]
+    pgns.forEach((pgn: any) => {
+      outputPGN(pgn, pgns.length > 1)
+    })
+    /*
+      const pgns = organized[pgnNumber]
+      if ( pgns.length === 1 ) {
+      outputPGN(pgns[0], false)
+      } else {
+      const matchesByCount = []
+      for ( let i = 0; i < getMaxMatchs(pgns); i++ ) {
       const withCount = getPGNsWithMatchs(pgns, i)
       withCount.forEach(pgn => {
-        outputPGN(pgn, true, i)
+      outputPGN(pgn, true, i)
+      })
+      }
+      }
+    */
+  })
+
+  function outputPGN(pgn: Definition, isMulti: boolean) {
+    console.log('/*')
+    console.log(`  PGN: ${pgn.PGN}`)
+    console.log(`  Description: ${pgn.Description}`)
+    if (pgn.Explanation) {
+      console.log(`  Explanation: ${pgn.Explanation}`)
+    }
+    if (isMulti) {
+      pgn.Fields.forEach((field: Field) => {
+        if (field.Match) {
+          console.log(
+            `  Match: ${field.Name} == ${field.Description || field.Match}`
+          )
+        }
       })
     }
+    console.log('*/')
+
+    let typeName = `PGN_${pgn.PGN}`
+
+    if (isMulti) {
+      pgn.Fields.forEach((field: Field) => {
+        if (field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
+          const desc = field.Description
+                ? enumName(field.Description)
+                : field.Match
+          typeName = typeName + `_${desc}`
+        }
+      })
     }
-    */
-})
 
-function outputPGN(pgn: Definition, isMulti: boolean) {
-  console.log('/*')
-  console.log(`  PGN: ${pgn.PGN}`)
-  console.log(`  Description: ${pgn.Description}`)
-  if (pgn.Explanation) {
-    console.log(`  Explanation: ${pgn.Explanation}`)
-  }
-  if (isMulti) {
+    console.log(`export interface ${typeName} extends PGN {`)
+    console.log("  fields: {")
     pgn.Fields.forEach((field: Field) => {
-      if (field.Match) {
-        console.log(
-          `  Match: ${field.Name} == ${field.Description || field.Match}`
-        )
-      }
-    })
-  }
-  console.log('*/')
-
-  let typeName = `PGN_${pgn.PGN}`
-
-  if (isMulti) {
-    pgn.Fields.forEach((field: Field) => {
-      if (field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
-        const desc = field.Description
-          ? enumName(field.Description)
-          : field.Match
-        typeName = typeName + `_${desc}`
-      }
-    })
-  }
-
-  console.log(`export interface ${typeName} extends PGN {`)
-  console.log("  fields: {")
-  pgn.Fields.forEach((field: Field) => {
-    let type = 'string'
-    switch (field.FieldType) {
+      let type = 'string'
+      switch (field.FieldType) {
       case 'NUMBER':
       case 'RESERVED':
       case 'BINARY':
@@ -191,27 +201,29 @@ function outputPGN(pgn: Definition, isMulti: boolean) {
         if (field.LookupEnumeration === 'YES_NO') {
           type = 'boolean'
         } else if (field.LookupEnumeration) {
-          type = enumName(field.LookupEnumeration)
+          type = `enums.${enumName(field.LookupEnumeration)}`
         }
         break
 
       case 'INDIRECT_LOOKUP':
         if (field.LookupIndirectEnumeration) {
-          type = enumName(field.LookupIndirectEnumeration)
+          type = `enums.${enumName(field.LookupIndirectEnumeration)}`
         }
         break
 
       case 'BITLOOKUP':
         if (field.LookupBitEnumeration) {
-          type = enumName(field.LookupBitEnumeration) + '[]'
+          type = `enums.${enumName(field.LookupBitEnumeration)}[]`
         }
         break
-    }
+      }
 
-    console.log(`    ${fixIdentifier(field.Id, '_')}: ${type}`)
-  })
-  console.log('}')
-  console.log('}\n')
+      console.log(`    ${fixIdentifier(field.Id, '_')}: ${type}`)
+    })
+    console.log('  }')
+    console.log('}\n')
+  }
+
 }
 
 function fixIdentifier(str: string, prefix: string) {
@@ -221,12 +233,12 @@ function fixIdentifier(str: string, prefix: string) {
   if (
     !(
       (firstChar >= 'a' && firstChar <= 'z') ||
-      (firstChar >= 'A' && firstChar <= 'Z') ||
-      firstChar === '_' ||
-      firstChar === '$'
+        (firstChar >= 'A' && firstChar <= 'Z') ||
+        firstChar === '_' ||
+        firstChar === '$'
     ) &&
-    firstChar !== '+' &&
-    firstChar !== '-'
+      firstChar !== '+' &&
+      firstChar !== '-'
   ) {
     res = `${prefix}` + str
   }
@@ -241,10 +253,10 @@ function fixIdentifier(str: string, prefix: string) {
       newS = newS + 'Plus'
     } else if (
       (char >= 'a' && char <= 'z') ||
-      (char >= 'A' && char <= 'Z') ||
-      (char >= '0' && char <= '9') ||
-      char === '_' ||
-      char === '$'
+        (char >= 'A' && char <= 'Z') ||
+        (char >= '0' && char <= '9') ||
+        char === '_' ||
+        char === '$'
     ) {
       newS = newS + char
     }

@@ -15,7 +15,9 @@
     "lint-fix": "eslint --fix",
     "lint": "eslint",
     "format": "npm run prettier && npm run lint",
-    "generate": "node dist/generator.js > src/pgns.ts"
+    "generate:enums": "node dist/generator.js --enums > src/enums.ts",
+    "generate:pgns": "node dist/generator.js --pgns > src/pgns.ts",
+    "generate": "npm run generate:enums && npm run generate:pgns"
   },
   "author": "Scott Bender <scott@scottbender.net>",
   "contributors": [
@@ -38,10 +40,12 @@
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.6",
+    "@types/minimist": "^1.2.5",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.0.4",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
+    "minimist": "^1.2.8",
     "mocha": "^11.7.1",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",

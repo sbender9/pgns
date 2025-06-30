@@ -1,2649 +1,11 @@
-export enum LightingCommand {
-  Idle = 'Idle',
-  DetectDevices = 'Detect Devices',
-  Reboot = 'Reboot',
-  FactoryReset = 'Factory Reset',
-  PoweringUp = 'Powering Up',
-}
-
-export enum IndustryCode {
-  Global = 'Global',
-  Highway = 'Highway',
-  Agriculture = 'Agriculture',
-  Construction = 'Construction',
-  Marine = 'Marine',
-  Industrial = 'Industrial',
-}
-
-export enum ManufacturerCode {
-  ArksEnterprisesInc = 'ARKS Enterprises, Inc.',
-  FwMurphyenovationControls = 'FW Murphy/Enovation Controls',
-  TwinDisc = 'Twin Disc',
-  KohlerPowerSystems = 'Kohler Power Systems',
-  HemisphereGpsInc = 'Hemisphere GPS Inc',
-  BepMarine = 'BEP Marine',
-  Airmar = 'Airmar',
-  Maretron = 'Maretron',
-  Lowrance = 'Lowrance',
-  MercuryMarine = 'Mercury Marine',
-  NautibusElectronicGmbH = 'Nautibus Electronic GmbH',
-  BlueWaterData = 'Blue Water Data',
-  Westerbeke = 'Westerbeke',
-  IssproInc = 'ISSPRO Inc',
-  OffshoreSystemsukLtd = 'Offshore Systems (UK) Ltd.',
-  Evinrudebrp = 'Evinrude/BRP',
-  CpacSystemsAb = 'CPAC Systems AB',
-  XantrexTechnologyInc = 'Xantrex Technology Inc.',
-  MarlinTechnologiesInc = 'Marlin Technologies, Inc.',
-  YanmarMarine = 'Yanmar Marine',
-  VolvoPenta = 'Volvo Penta',
-  HondaMarine = 'Honda Marine',
-  CarlingTechnologiesIncmoritzAerospace = 'Carling Technologies Inc. (Moritz Aerospace)',
-  BeedeInstruments = 'Beede Instruments',
-  FloscanInstrumentCoInc = 'Floscan Instrument Co. Inc.',
-  Nobletec = 'Nobletec',
-  MysticValleyCommunications = 'Mystic Valley Communications',
-  Actia = 'Actia',
-  DisenosYTechnologia = 'Disenos Y Technologia',
-  DigitalSwitchingSystems = 'Digital Switching Systems',
-  Xintexatena = 'Xintex/Atena',
-  EmmiNetworkSL = 'EMMI NETWORK S.L.',
-  Zf = 'ZF',
-  Garmin = 'Garmin',
-  YachtMonitoringSolutions = 'Yacht Monitoring Solutions',
-  SailormadeMarineTelemetrytetraTechnologyLtd = 'Sailormade Marine Telemetry/Tetra Technology LTD',
-  Eride = 'Eride',
-  HondaMotorCompanyLtd = 'Honda Motor Company LTD',
-  Groco = 'Groco',
-  Actisense = 'Actisense',
-  AmphenolLtwTechnology = 'Amphenol LTW Technology',
-  Navico = 'Navico',
-  HamiltonJet = 'Hamilton Jet',
-  SeaRecovery = 'Sea Recovery',
-  CoelmoSrlItaly = 'Coelmo SRL Italy',
-  EmpirBus = 'Empir Bus',
-  NovAtel = 'NovAtel',
-  SleipnerMotorAs = 'Sleipner Motor AS',
-  MbwTechnologies = 'MBW Technologies',
-  FischerPanda = 'Fischer Panda',
-  Icom = 'ICOM',
-  Qwerty = 'Qwerty',
-  Dief = 'Dief',
-  BoeningAutomationstechnologieGmbHCoKg = 'Boening Automationstechnologie GmbH & Co. KG',
-  KoreanMaritimeUniversity = 'Korean Maritime University',
-  ThraneAndThrane = 'Thrane and Thrane',
-  Mastervolt = 'Mastervolt',
-  FischerPandaGenerators = 'Fischer Panda Generators',
-  VictronEnergy = 'Victron Energy',
-  RollsRoyceMarine = 'Rolls Royce Marine',
-  ElectronicDesign = 'Electronic Design',
-  NorthernLights = 'Northern Lights',
-  Glendinning = 'Glendinning',
-  BG = 'B & G',
-  RosePointNavigationSystems = 'Rose Point Navigation Systems',
-  JohnsonOutdoorsMarineElectronicsIncGeonav = 'Johnson Outdoors Marine Electronics Inc Geonav',
-  Capi2 = 'Capi 2',
-  BeyondMeasure = 'Beyond Measure',
-  LivorsiMarine = 'Livorsi Marine',
-  ComNav = 'ComNav',
-  Chetco = 'Chetco',
-  FusionElectronics = 'Fusion Electronics',
-  StandardHorizon = 'Standard Horizon',
-  TrueHeadingAb = 'True Heading AB',
-  EgersundMarineElectronicsAs = 'Egersund Marine Electronics AS',
-  EmTrakMarineElectronics = 'em-trak Marine Electronics',
-  TohatsuCoJp = 'Tohatsu Co, JP',
-  DigitalYacht = 'Digital Yacht',
-  ComarSystemsLimited = 'Comar Systems Limited',
-  Cummins = 'Cummins',
-  VdoakaContinentalCorporation = 'VDO (aka Continental-Corporation)',
-  ParkerHannifinAkaVillageMarineTech = 'Parker Hannifin aka Village Marine Tech',
-  AlltekMarineElectronicsCorp = 'Alltek Marine Electronics Corp',
-  SanGiorgioSEIN = 'SAN GIORGIO S.E.I.N',
-  VeethreeElectronicsMarine = 'Veethree Electronics & Marine',
-  HumminbirdMarineElectronics = 'Humminbird Marine Electronics',
-  SiTexMarineElectronics = 'SI-TEX Marine Electronics',
-  SeaCrossMarineAb = 'Sea Cross Marine AB',
-  GmeAkaStandardCommunicationsPtyLtd = 'GME aka Standard Communications Pty LTD',
-  OceanSatBv = 'Ocean Sat BV',
-  ChetcoDigitialInstruments = 'Chetco Digitial Instruments',
-  Watcheye = 'Watcheye',
-  LcjCapteurs = 'Lcj Capteurs',
-  AttwoodMarine = 'Attwood Marine',
-  NaviopSRL = 'Naviop S.R.L.',
-  VesperMarineLtd = 'Vesper Marine Ltd',
-  MarinesoftCoLtd = 'Marinesoft Co. LTD',
-  NoLandEngineering = 'NoLand Engineering',
-  TransasUsa = 'Transas USA',
-  NationalInstrumentsKorea = 'National Instruments Korea',
-  NationalMarineElectronicsAssociation = 'National Marine Electronics Association',
-  OnwaMarine = 'Onwa Marine',
-  Webasto = 'Webasto',
-  MarinecraftsouthKorea = 'Marinecraft (South Korea)',
-  McMurdoGroupAkaOroliaLtd = 'McMurdo Group aka Orolia LTD',
-  Advansea = 'Advansea',
-  Kvh = 'KVH',
-  SanJoseTechnology = 'San Jose Technology',
-  YachtControl = 'Yacht Control',
-  SuzukiMotorCorporation = 'Suzuki Motor Corporation',
-  UsCoastGuard = 'US Coast Guard',
-  ShipModuleAkaCustomware = 'Ship Module aka Customware',
-  AquaticAv = 'Aquatic AV',
-  AventicsGmbH = 'Aventics GmbH',
-  Intellian = 'Intellian',
-  SamwonIt = 'SamwonIT',
-  ArltTecnologies = 'Arlt Tecnologies',
-  BavariaYacts = 'Bavaria Yacts',
-  DiverseYachtServices = 'Diverse Yacht Services',
-  WemaUSADbaKus = 'Wema U.S.A dba KUS',
-  ShenzhenJiuzhouHimunication = 'Shenzhen Jiuzhou Himunication',
-  RockfordCorp = 'Rockford Corp',
-  HarmanInternational = 'Harman International',
-  JlAudio = 'JL Audio',
-  LarsThrane = 'Lars Thrane',
-  Autonnic = 'Autonnic',
-  YachtDevices = 'Yacht Devices',
-  ReapSystems = 'REAP Systems',
-  AuElectronicsGroup = 'Au Electronics Group',
-  LxNav = 'LxNav',
-  LittelfuseIncformerlyCarlingTechnologies = 'Littelfuse, Inc (formerly Carling Technologies)',
-  DaeMyung = 'DaeMyung',
-  Woosung = 'Woosung',
-  IsottaIfraSrl = 'ISOTTA IFRA srl',
-  ClarionUs = 'Clarion US',
-  HmiSystems = 'HMI Systems',
-  OceanSignal = 'Ocean Signal',
-  Seekeeper = 'Seekeeper',
-  PolyPlanar = 'Poly Planar',
-  FischerPandaDe = 'Fischer Panda DE',
-  BroydaIndustries = 'Broyda Industries',
-  CanadianAutomotive = 'Canadian Automotive',
-  TidesMarine = 'Tides Marine',
-  Lumishore = 'Lumishore',
-  StillWaterDesignsAndAudio = 'Still Water Designs and Audio',
-  BjTechnologiesbeneteau = 'BJ Technologies (Beneteau)',
-  GillSensors = 'Gill Sensors',
-  BlueWaterDesalination = 'Blue Water Desalination',
-  Flir = 'FLIR',
-  UndheimSystems = 'Undheim Systems',
-  LewmarInc = 'Lewmar Inc',
-  TeamSurv = 'TeamSurv',
-  FellMarine = 'Fell Marine',
-  Oceanvolt = 'Oceanvolt',
-  Prospec = 'Prospec',
-  DataPanelCorp = 'Data Panel Corp',
-  L3Technologies = 'L3 Technologies',
-  RhodanMarineSystems = 'Rhodan Marine Systems',
-  NexfourSolutions = 'Nexfour Solutions',
-  AsaElectronics = 'ASA Electronics',
-  MarinesCosouthKorea = 'Marines Co (South Korea)',
-  NauticOn = 'Nautic-on',
-  Sentinel = 'Sentinel',
-  JlMarineYstems = 'JL Marine ystems',
-  Ecotronix = 'Ecotronix',
-  ZontisaMarine = 'Zontisa Marine',
-  ExorInternational = 'EXOR International',
-  TimbolierIndustries = 'Timbolier Industries',
-  TjcMicro = 'TJC Micro',
-  CoxPowertrain = 'Cox Powertrain',
-  BlueSeas = 'Blue Seas',
-  KobeltManufacturingCoLtd = 'Kobelt Manufacturing Co. Ltd',
-  BlueOceanIot = 'Blue Ocean IOT',
-  XentaSystems = 'Xenta Systems',
-  UltraflexSpA = 'Ultraflex SpA',
-  LintestSmartBoat = 'Lintest SmartBoat',
-  Soundmax = 'Soundmax',
-  TeamItaliaMarineonyxMarineAutomationSRL = 'Team Italia Marine (Onyx Marine Automation s.r.l)',
-  Entratech = 'Entratech',
-  ItcInc = 'ITC Inc.',
-  TheMarineGuardianLlc = 'The Marine Guardian LLC',
-  SonicCorporation = 'Sonic Corporation',
-  ProNav = 'ProNav',
-  VetusMaxwellInc = 'Vetus Maxwell INC.',
-  LithiumPros = 'Lithium Pros',
-  Boatrax = 'Boatrax',
-  MarolCoLtd = 'Marol Co ltd',
-  CalypsoInstruments = 'CALYPSO Instruments',
-  SpotZeroWater = 'Spot Zero Water',
-  LithionicsBatteryLlc = 'Lithionics Battery LLC',
-  QuickTeckElectronicsLtd = 'Quick-teck Electronics Ltd',
-  UnidenAmerica = 'Uniden America',
-  Nauticoncept = 'Nauticoncept',
-  ShadowCasterLedLightingLlc = 'Shadow-Caster LED lighting LLC',
-  WetSoundsLlc = 'Wet Sounds, LLC',
-  ETACircuitBreakers = 'E-T-A Circuit Breakers',
-  Scheiber = 'Scheiber',
-  SmartYachtsInternationalLimited = 'Smart Yachts International Limited',
-  Dockmate = 'Dockmate',
-  BobsMachine = 'Bobs Machine',
-  L3HarrisAsv = 'L3Harris ASV',
-  BalmarLlc = 'Balmar LLC',
-  ElettromediaSpa = 'Elettromedia spa',
-  Electromaax = 'Electromaax',
-  AcrossOceansSystemsLtd = 'Across Oceans Systems Ltd.',
-  KiwiYachting = 'Kiwi Yachting',
-  BsbArtificialIntelligenceGmbH = 'BSB Artificial Intelligence GmbH',
-  OrcaTechnologoesAs = 'Orca Technologoes AS',
-  TbsElectronicsBv = 'TBS Electronics BV',
-  TechnotonElectroics = 'Technoton Electroics',
-  MgEnergySystemsBV = 'MG Energy Systems B.V.',
-  SeaMacineRoboticsInc = 'Sea Macine Robotics Inc.',
-  VistaManufacturing = 'Vista Manufacturing',
-  Zipwake = 'Zipwake',
-  SailmonBv = 'Sailmon BV',
-  AirmoniqProKft = 'Airmoniq Pro Kft',
-  SierraMarine = 'Sierra Marine',
-  XinuoInformationTechnologyxiamen = 'Xinuo Information Technology (Xiamen)',
-  Septentrio = 'Septentrio',
-  NkeMarineElecronics = 'NKE Marine Elecronics',
-  SuperTrackAps = 'SuperTrack Aps',
-  HondaElectronicsCoLtd = 'Honda Electronics Co., LTD',
-  RaritanEngineeringCompanyInc = 'Raritan Engineering Company, Inc',
-  IntegratedPowerSolutionsAg = 'Integrated Power Solutions AG',
-  InteractiveTechnologiesInc = 'Interactive Technologies, Inc.',
-  LtgTech = 'LTG-Tech',
-  EnergySolutionsukLtd = 'Energy Solutions (UK) LTD.',
-  WattFuelCellCorp = 'WATT Fuel Cell Corp',
-  ProMainer = 'Pro Mainer',
-  DragonflyEnergy = 'Dragonfly Energy',
-  KodenElectronicsCoLtd = 'Koden Electronics Co., Ltd',
-  HumphreeAb = 'Humphree AB',
-  HinkleyYachts = 'Hinkley Yachts',
-  GlobalMarineManagementGmbHgmm = 'Global Marine Management GmbH (GMM)',
-  TriskelMarineLtd = 'Triskel Marine Ltd',
-  WarwickControlTechnologies = 'Warwick Control Technologies',
-  DolphinCharger = 'Dolphin Charger',
-  BarnacleSystemsInc = 'Barnacle Systems Inc',
-  RadianIoTInc = 'Radian IoT, Inc.',
-  OceanLedMarineLtd = 'Ocean LED Marine Ltd',
-  BluNav = 'BluNav',
-  OvanantongSaiyangElectronicsCoLtd = 'OVA (Nantong Saiyang Electronics Co., Ltd)',
-  RadPropulsion = 'RAD Propulsion',
-  ElectricYacht = 'Electric Yacht',
-  ElcoMotorYachts = 'Elco Motor Yachts',
-  TecnosealFoundrySRL = 'Tecnoseal Foundry S.r.l',
-  ProChargingSystemsLlc = 'Pro Charging Systems, LLC',
-  EvexCoLtd = 'EVEX Co., LTD',
-  GobiusSensorTechnologyAb = 'Gobius Sensor Technology AB',
-  ArcoMarine = 'Arco Marine',
-  LencoMarineInc = 'Lenco Marine Inc.',
-  NaocontrolSL = 'Naocontrol S.L.',
-  Revatek = 'Revatek',
-  Aeolionics = 'Aeolionics',
-  PredictWindLtd = 'PredictWind Ltd',
-  EgisMobileElectric = 'Egis Mobile Electric',
-  StarboardYachtGroup = 'Starboard Yacht Group',
-  RoswellMarine = 'Roswell Marine',
-  EPropulsionguangdongEPropulsionTechnologyLtd = 'ePropulsion (Guangdong ePropulsion Technology Ltd.)',
-  MicroAirLlc = 'Micro-Air LLC',
-  VitalBattery = 'Vital Battery',
-  RideControllerLlc = 'Ride Controller LLC',
-  TocaroBlue = 'Tocaro Blue',
-  VanquishYachts = 'Vanquish Yachts',
-  FtTechnologies = 'FT Technologies',
-  AlpsAlpineCoLtd = 'Alps Alpine Co., Ltd.',
-  EForceMarine = 'E-Force Marine',
-  CmcMarine = 'CMC Marine',
-  NanjingSandemarineInformationTechnologyCoLtd = 'Nanjing Sandemarine Information Technology Co., Ltd.',
-  TeleflexMarineseaStarSolutions = 'Teleflex Marine (SeaStar Solutions)',
-  Raymarine = 'Raymarine',
-  Navionics = 'Navionics',
-  JapanRadioCo = 'Japan Radio Co',
-  NorthstarTechnologies = 'Northstar Technologies',
-  Furuno = 'Furuno',
-  Trimble = 'Trimble',
-  Simrad = 'Simrad',
-  Litton = 'Litton',
-  KvasarAb = 'Kvasar AB',
-  Mmp = 'MMP',
-  VectorCantech = 'Vector Cantech',
-  YamahaMarine = 'Yamaha Marine',
-  FariaInstruments = 'Faria Instruments',
-}
-
-export enum AisMessageId {
-  ScheduledClassAPositionReport = 'Scheduled Class A position report',
-  AssignedScheduledClassAPositionReport = 'Assigned scheduled Class A position report',
-  InterrogatedClassAPositionReport = 'Interrogated Class A position report',
-  BaseStationReport = 'Base station report',
-  StaticAndVoyageRelatedData = 'Static and voyage related data',
-  BinaryAddressedMessage = 'Binary addressed message',
-  BinaryAcknowledgement = 'Binary acknowledgement',
-  BinaryBroadcastMessage = 'Binary broadcast message',
-  StandardSarAircraftPositionReport = 'Standard SAR aircraft position report',
-  UtcdateInquiry = 'UTC/date inquiry',
-  UtcdateResponse = 'UTC/date response',
-  SafetyRelatedAddressedMessage = 'Safety related addressed message',
-  SafetyRelatedAcknowledgement = 'Safety related acknowledgement',
-  SatetyRelatedBroadcastMessage = 'Satety related broadcast message',
-  Interrogation = 'Interrogation',
-  AssignmentModeCommand = 'Assignment mode command',
-  DgnssBroadcastBinaryMessage = 'DGNSS broadcast binary message',
-  StandardClassBPositionReport = 'Standard Class B position report',
-  ExtendedClassBPositionReport = 'Extended Class B position report',
-  DataLinkManagementMessage = 'Data link management message',
-  AtonReport = 'ATON report',
-  ChannelManagement = 'Channel management',
-  GroupAssignmentCommand = 'Group assignment command',
-  StaticDataReport = 'Static data report',
-  SingleSlotBinaryMessage = 'Single slot binary message',
-  MultipleSlotBinaryMessage = 'Multiple slot binary message',
-  PositionReportForLongRangeApplications = 'Position report for long range applications',
-}
-
-export enum ShipType {
-  Unavailable = 'Unavailable',
-  WingInGround = 'Wing In Ground',
-  WingInGroundhazardCatX = 'Wing In Ground (hazard cat X)',
-  WingInGroundhazardCatY = 'Wing In Ground (hazard cat Y)',
-  WingInGroundhazardCatZ = 'Wing In Ground (hazard cat Z)',
-  WingInGroundhazardCatOs = 'Wing In Ground (hazard cat OS)',
-  WingInGroundnoAdditionalInformation = 'Wing In Ground (no additional information)',
-  Fishing = 'Fishing',
-  Towing = 'Towing',
-  TowingExceeds200MOrWiderThan25M = 'Towing exceeds 200m or wider than 25m',
-  EngagedInDredgingOrUnderwaterOperations = 'Engaged in dredging or underwater operations',
-  EngagedInDivingOperations = 'Engaged in diving operations',
-  EngagedInMilitaryOperations = 'Engaged in military operations',
-  Sailing = 'Sailing',
-  Pleasure = 'Pleasure',
-  HighSpeedCraft = 'High speed craft',
-  HighSpeedCrafthazardCatX = 'High speed craft (hazard cat X)',
-  HighSpeedCrafthazardCatY = 'High speed craft (hazard cat Y)',
-  HighSpeedCrafthazardCatZ = 'High speed craft (hazard cat Z)',
-  HighSpeedCrafthazardCatOs = 'High speed craft (hazard cat OS)',
-  HighSpeedCraftnoAdditionalInformation = 'High speed craft (no additional information)',
-  PilotVessel = 'Pilot vessel',
-  Sar = 'SAR',
-  Tug = 'Tug',
-  PortTender = 'Port tender',
-  AntiPollution = 'Anti-pollution',
-  LawEnforcement = 'Law enforcement',
-  Spare = 'Spare',
-  Spare2 = 'Spare #2',
-  Medical = 'Medical',
-  ShipsAndAircraftOfStatesNotPartiesToAnArmedConflict = 'Ships and aircraft of States not parties to an armed conflict',
-  PassengerShip = 'Passenger ship',
-  PassengerShiphazardCatX = 'Passenger ship (hazard cat X)',
-  PassengerShiphazardCatY = 'Passenger ship (hazard cat Y)',
-  PassengerShiphazardCatZ = 'Passenger ship (hazard cat Z)',
-  PassengerShiphazardCatOs = 'Passenger ship (hazard cat OS)',
-  PassengerShipnoAdditionalInformation = 'Passenger ship (no additional information)',
-  CargoShip = 'Cargo ship',
-  CargoShiphazardCatX = 'Cargo ship (hazard cat X)',
-  CargoShiphazardCatY = 'Cargo ship (hazard cat Y)',
-  CargoShiphazardCatZ = 'Cargo ship (hazard cat Z)',
-  CargoShiphazardCatOs = 'Cargo ship (hazard cat OS)',
-  CargoShipnoAdditionalInformation = 'Cargo ship (no additional information)',
-  Tanker = 'Tanker',
-  TankerhazardCatX = 'Tanker (hazard cat X)',
-  TankerhazardCatY = 'Tanker (hazard cat Y)',
-  TankerhazardCatZ = 'Tanker (hazard cat Z)',
-  TankerhazardCatOs = 'Tanker (hazard cat OS)',
-  TankernoAdditionalInformation = 'Tanker (no additional information)',
-  Other = 'Other',
-  OtherhazardCatX = 'Other (hazard cat X)',
-  OtherhazardCatY = 'Other (hazard cat Y)',
-  OtherhazardCatZ = 'Other (hazard cat Z)',
-  OtherhazardCatOs = 'Other (hazard cat OS)',
-  OthernoAdditionalInformation = 'Other (no additional information)',
-}
-
-export enum DeviceClass {
-  ReservedFor2000Use = 'Reserved for 2000 Use',
-  SystemTools = 'System tools',
-  SafetySystems = 'Safety systems',
-  InternetworkDevice = 'Internetwork device',
-  ElectricalDistribution = 'Electrical Distribution',
-  ElectricalGeneration = 'Electrical Generation',
-  SteeringAndControlSurfaces = 'Steering and Control surfaces',
-  Propulsion = 'Propulsion',
-  Navigation = 'Navigation',
-  Communication = 'Communication',
-  SensorCommunicationInterface = 'Sensor Communication Interface',
-  InstrumentationgeneralSystems = 'Instrumentation/general systems',
-  ExternalEnvironment = 'External Environment',
-  InternalEnvironment = 'Internal Environment',
-  DeckPlusCargoPlusFishingEquipmentSystems = 'Deck + cargo + fishing equipment systems',
-  HumanInterface = 'Human Interface',
-  Display = 'Display',
-  Entertainment = 'Entertainment',
-}
-
-export enum RepeatIndicator {
-  Initial = 'Initial',
-  FirstRetransmission = 'First retransmission',
-  SecondRetransmission = 'Second retransmission',
-  FinalRetransmission = 'Final retransmission',
-}
-
-export enum TxRxMode {
-  TxAtxBRxArxB = 'Tx A/Tx B, Rx A/Rx B',
-  TxARxArxB = 'Tx A, Rx A/Rx B',
-  TxBRxArxB = 'Tx B, Rx A/Rx B',
-}
-
-export enum StationType {
-  AllTypesOfMobileStation = 'All types of mobile station',
-  AllTypesOfClassBMobileStation = 'All types of Class B mobile station',
-  SarAirborneMobileStation = 'SAR airborne mobile station',
-  AtoNStation = 'AtoN station',
-  ClassBCsShipborneMobileStation = 'Class B CS shipborne mobile station',
-  InlandWaterways = 'Inland waterways',
-  RegionalUse7 = 'Regional use 7',
-  RegionalUse8 = 'Regional use 8',
-  RegionalUse9 = 'Regional use 9',
-}
-
-export enum ReportingInterval {
-  AsGivenByTheAutonomousMode = 'As given by the autonomous mode',
-  _10Min = '10 min',
-  _6Min = '6 min',
-  _3Min = '3 min',
-  _1Min = '1 min',
-  _30Sec = '30 sec',
-  _15Sec = '15 sec',
-  _10Sec = '10 sec',
-  _5Sec = '5 sec',
-  _2SecnotApplicableToClassBCs = '2 sec (not applicable to Class B CS)',
-  NextShorterReportingInterval = 'Next shorter reporting interval',
-  NextLongerReportingInterval = 'Next longer reporting interval',
-}
-
-export enum AisTransceiver {
-  ChannelAVdlReception = 'Channel A VDL reception',
-  ChannelBVdlReception = 'Channel B VDL reception',
-  ChannelAVdlTransmission = 'Channel A VDL transmission',
-  ChannelBVdlTransmission = 'Channel B VDL transmission',
-  OwnInformationNotBroadcast = 'Own information not broadcast',
-  Reserved = 'Reserved',
-}
-
-export enum AisAssignedMode {
-  AutonomousAndContinuous = 'Autonomous and continuous',
-  AssignedMode = 'Assigned mode',
-}
-
-export enum AtonType {
-  DefaultTypeOfAtoNNotSpecified = 'Default: Type of AtoN not specified',
-  ReferencePoint = 'Reference point',
-  Racon = 'RACON',
-  FixedStructureOffShore = 'Fixed structure off-shore',
-  ReservedForFutureUse = 'Reserved for future use',
-  FixedLightWithoutSectors = 'Fixed light: without sectors',
-  FixedLightWithSectors = 'Fixed light: with sectors',
-  FixedLeadingLightFront = 'Fixed leading light front',
-  FixedLeadingLightRear = 'Fixed leading light rear',
-  FixedBeaconCardinalN = 'Fixed beacon: cardinal N',
-  FixedBeaconCardinalE = 'Fixed beacon: cardinal E',
-  FixedBeaconCardinalS = 'Fixed beacon: cardinal S',
-  FixedBeaconCardinalW = 'Fixed beacon: cardinal W',
-  FixedBeaconPortHand = 'Fixed beacon: port hand',
-  FixedBeaconStarboardHand = 'Fixed beacon: starboard hand',
-  FixedBeaconPreferredChannelPortHand = 'Fixed beacon: preferred channel port hand',
-  FixedBeaconPreferredChannelStarboardHand = 'Fixed beacon: preferred channel starboard hand',
-  FixedBeaconIsolatedDanger = 'Fixed beacon: isolated danger',
-  FixedBeaconSafeWater = 'Fixed beacon: safe water',
-  FixedBeaconSpecialMark = 'Fixed beacon: special mark',
-  FloatingAtoNCardinalN = 'Floating AtoN: cardinal N',
-  FloatingAtoNCardinalE = 'Floating AtoN: cardinal E',
-  FloatingAtoNCardinalS = 'Floating AtoN: cardinal S',
-  FloatingAtoNCardinalW = 'Floating AtoN: cardinal W',
-  FloatingAtoNPortHandMark = 'Floating AtoN: port hand mark',
-  FloatingAtoNStarboardHandMark = 'Floating AtoN: starboard hand mark',
-  FloatingAtoNPreferredChannelPortHand = 'Floating AtoN: preferred channel port hand',
-  FloatingAtoNPreferredChannelStarboardHand = 'Floating AtoN: preferred channel starboard hand',
-  FloatingAtoNIsolatedDanger = 'Floating AtoN: isolated danger',
-  FloatingAtoNSafeWater = 'Floating AtoN: safe water',
-  FloatingAtoNSpecialMark = 'Floating AtoN: special mark',
-  FloatingAtoNLightVessellanbyrigs = 'Floating AtoN: light vessel/LANBY/rigs',
-}
-
-export enum AisSpecialManeuver {
-  NotAvailable = 'Not available',
-  NotEngagedInSpecialManeuver = 'Not engaged in special maneuver',
-  EngagedInSpecialManeuver = 'Engaged in special maneuver',
-  Reserved = 'Reserved',
-}
-
-export enum PositionFixDevice {
-  DefaultUndefined = 'Default: undefined',
-  Gps = 'GPS',
-  Glonass = 'GLONASS',
-  CombinedGpsglonass = 'Combined GPS/GLONASS',
-  LoranC = 'Loran-C',
-  Chayka = 'Chayka',
-  IntegratedNavigationSystem = 'Integrated navigation system',
-  Surveyed = 'Surveyed',
-  Galileo = 'Galileo',
-}
-
-export enum Gns {
-  Gps = 'GPS',
-  Glonass = 'GLONASS',
-  GpsPlusglonass = 'GPS+GLONASS',
-  GpsPlussbaswaas = 'GPS+SBAS/WAAS',
-  GpsPlussbaswaasPlusglonass = 'GPS+SBAS/WAAS+GLONASS',
-  Chayka = 'Chayka',
-  Integrated = 'integrated',
-  Surveyed = 'surveyed',
-  Galileo = 'Galileo',
-}
-
-export enum EngineInstance {
-  SingleEngineOrDualEnginePort = 'Single Engine or Dual Engine Port',
-  DualEngineStarboard = 'Dual Engine Starboard',
-}
-
-export enum GearStatus {
-  Forward = 'Forward',
-  Neutral = 'Neutral',
-  Reverse = 'Reverse',
-}
-
-export enum Direction {
-  Forward = 'Forward',
-  Reverse = 'Reverse',
-}
-
-export enum PositionAccuracy {
-  Low = 'Low',
-  High = 'High',
-}
-
-export enum RaimFlag {
-  NotInUse = 'not in use',
-  InUse = 'in use',
-}
-
-export enum TimeStamp {
-  NotAvailable = 'Not available',
-  ManualInputMode = 'Manual input mode',
-  DeadReckoningMode = 'Dead reckoning mode',
-  PositioningSystemIsInoperative = 'Positioning system is inoperative',
-}
-
-export enum GnsMethod {
-  NoGnss = 'no GNSS',
-  GnssFix = 'GNSS fix',
-  DgnssFix = 'DGNSS fix',
-  PreciseGnss = 'Precise GNSS',
-  RtkFixedInteger = 'RTK Fixed Integer',
-  RtkFloat = 'RTK float',
-  EstimateddrMode = 'Estimated (DR) mode',
-  ManualInput = 'Manual Input',
-  SimulateMode = 'Simulate mode',
-}
-
-export enum GnsIntegrity {
-  NoIntegrityChecking = 'No integrity checking',
-  Safe = 'Safe',
-  Caution = 'Caution',
-  Unsafe = 'Unsafe',
-}
-
-export enum SystemTime {
-  Gps = 'GPS',
-  Glonass = 'GLONASS',
-  RadioStation = 'Radio Station',
-  LocalCesiumClock = 'Local Cesium clock',
-  LocalRubidiumClock = 'Local Rubidium clock',
-  LocalCrystalClock = 'Local Crystal clock',
-}
-
-export enum MagneticVariation {
-  Manual = 'Manual',
-  AutomaticChart = 'Automatic Chart',
-  AutomaticTable = 'Automatic Table',
-  AutomaticCalculation = 'Automatic Calculation',
-  Wmm2000 = 'WMM 2000',
-  Wmm2005 = 'WMM 2005',
-  Wmm2010 = 'WMM 2010',
-  Wmm2015 = 'WMM 2015',
-  Wmm2020 = 'WMM 2020',
-}
-
-export enum ResidualMode {
-  Autonomous = 'Autonomous',
-  DifferentialEnhanced = 'Differential enhanced',
-  Estimated = 'Estimated',
-  Simulator = 'Simulator',
-  Manual = 'Manual',
-}
-
-export enum WindReference {
-  TruegroundReferencedToNorth = 'True (ground referenced to North)',
-  MagneticgroundReferencedToMagneticNorth = 'Magnetic (ground referenced to Magnetic North)',
-  Apparent = 'Apparent',
-  TrueboatReferenced = 'True (boat referenced)',
-  TruewaterReferenced = 'True (water referenced)',
-}
-
-export enum WaterReference {
-  PaddleWheel = 'Paddle wheel',
-  PitotTube = 'Pitot tube',
-  Doppler = 'Doppler',
-  CorrelationultraSound = 'Correlation (ultra sound)',
-  ElectroMagnetic = 'Electro Magnetic',
-}
-
-export enum OkWarning {
-  Ok = 'OK',
-  Warning = 'Warning',
-}
-
-export enum OffOn {
-  Off = 'Off',
-  On = 'On',
-}
-
-export enum OffOnControl {
-  Off = 'Off',
-  On = 'On',
-  Reserved = 'Reserved',
-  TakeNoActionnoChange = 'Take no action (no change)',
-}
-
-export enum DirectionReference {
-  True = 'True',
-  Magnetic = 'Magnetic',
-  Error = 'Error',
-}
-
-export enum DirectionRudder {
-  NoOrder = 'No Order',
-  MoveToStarboard = 'Move to starboard',
-  MoveToPort = 'Move to port',
-}
-
-export enum NavStatus {
-  UnderWayUsingEngine = 'Under way using engine',
-  AtAnchor = 'At anchor',
-  NotUnderCommand = 'Not under command',
-  RestrictedManeuverability = 'Restricted maneuverability',
-  ConstrainedByHerDraught = 'Constrained by her draught',
-  Moored = 'Moored',
-  Aground = 'Aground',
-  EngagedInFishing = 'Engaged in Fishing',
-  UnderWaySailing = 'Under way sailing',
-  HazardousMaterialHighSpeed = 'Hazardous material - High Speed',
-  HazardousMaterialWingInGround = 'Hazardous material - Wing in Ground',
-  PowerDrivenVesselTowingAstern = 'Power-driven vessel towing astern',
-  PowerDrivenVesselPushingAheadOrTowingAlongside = 'Power-driven vessel pushing ahead or towing alongside',
-  AisSart = 'AIS-SART',
-}
-
-export enum PowerFactor {
-  Leading = 'Leading',
-  Lagging = 'Lagging',
-  Error = 'Error',
-}
-
-export enum TemperatureSource {
-  SeaTemperature = 'Sea Temperature',
-  OutsideTemperature = 'Outside Temperature',
-  InsideTemperature = 'Inside Temperature',
-  EngineRoomTemperature = 'Engine Room Temperature',
-  MainCabinTemperature = 'Main Cabin Temperature',
-  LiveWellTemperature = 'Live Well Temperature',
-  BaitWellTemperature = 'Bait Well Temperature',
-  RefrigerationTemperature = 'Refrigeration Temperature',
-  HeatingSystemTemperature = 'Heating System Temperature',
-  DewPointTemperature = 'Dew Point Temperature',
-  ApparentWindChillTemperature = 'Apparent Wind Chill Temperature',
-  TheoreticalWindChillTemperature = 'Theoretical Wind Chill Temperature',
-  HeatIndexTemperature = 'Heat Index Temperature',
-  FreezerTemperature = 'Freezer Temperature',
-  ExhaustGasTemperature = 'Exhaust Gas Temperature',
-  ShaftSealTemperature = 'Shaft Seal Temperature',
-}
-
-export enum HumiditySource {
-  Inside = 'Inside',
-  Outside = 'Outside',
-}
-
-export enum PressureSource {
-  Atmospheric = 'Atmospheric',
-  Water = 'Water',
-  Steam = 'Steam',
-  CompressedAir = 'Compressed Air',
-  Hydraulic = 'Hydraulic',
-  Filter = 'Filter',
-  AltimeterSetting = 'AltimeterSetting',
-  Oil = 'Oil',
-  Fuel = 'Fuel',
-}
-
-export enum DscFormat {
-  GeographicalArea = 'Geographical area',
-  Distress = 'Distress',
-  CommonInterest = 'Common interest',
-  AllShips = 'All ships',
-  IndividualStations = 'Individual stations',
-  NonCallingPurpose = 'Non-calling purpose',
-  IndividualStationAutomatic = 'Individual station automatic',
-}
-
-export enum DscCategory {
-  Routine = 'Routine',
-  Safety = 'Safety',
-  Urgency = 'Urgency',
-  Distress = 'Distress',
-}
-
-export enum DscNature {
-  Fire = 'Fire',
-  Flooding = 'Flooding',
-  Collision = 'Collision',
-  Grounding = 'Grounding',
-  Listing = 'Listing',
-  Sinking = 'Sinking',
-  DisabledAndAdrift = 'Disabled and adrift',
-  Undesignated = 'Undesignated',
-  AbandoningShip = 'Abandoning ship',
-  Piracy = 'Piracy',
-  ManOverboard = 'Man overboard',
-  EpirbEmission = 'EPIRB emission',
-}
-
-export enum DscFirstTelecommand {
-  F3Eg3EAllModesTp = 'F3E/G3E All modes TP',
-  F3Eg3EDuplexTp = 'F3E/G3E duplex TP',
-  Polling = 'Polling',
-  UnableToComply = 'Unable to comply',
-  EndOfCall = 'End of call',
-  Data = 'Data',
-  J3ETp = 'J3E TP',
-  DistressAcknowledgement = 'Distress acknowledgement',
-  DistressRelay = 'Distress relay',
-  F1Bj2BTtyFec = 'F1B/J2B TTY-FEC',
-  F1Bj2BTtyArq = 'F1B/J2B TTY-ARQ',
-  Test = 'Test',
-  ShipPositionOrLocationRegistrationUpdating = 'Ship position or location registration updating',
-  NoInformation = 'No information',
-}
-
-export enum DscSecondTelecommand {
-  NoReasonGiven = 'No reason given',
-  CongestionAtMsc = 'Congestion at MSC',
-  Busy = 'Busy',
-  QueueIndication = 'Queue indication',
-  StationBarred = 'Station barred',
-  NoOperatorAvailable = 'No operator available',
-  OperatorTemporarilyUnavailable = 'Operator temporarily unavailable',
-  EquipmentDisabled = 'Equipment disabled',
-  UnableToUseProposedChannel = 'Unable to use proposed channel',
-  UnableToUseProposedMode = 'Unable to use proposed mode',
-  ShipsAndAircraftOfStatesNotPartiesToAnArmedConflict = 'Ships and aircraft of States not parties to an armed conflict',
-  MedicalTransports = 'Medical transports',
-  PayPhonepublicCallOffice = 'Pay phone/public call office',
-  Faxdata = 'Fax/data',
-  NoInformation = 'No information',
-}
-
-export enum DscExpansionData {
-  EnhancedPosition = 'Enhanced position',
-  SourceAndDatumOfPosition = 'Source and datum of position',
-  Sog = 'SOG',
-  Cog = 'COG',
-  AdditionalStationIdentification = 'Additional station identification',
-  EnhancedGeographicArea = 'Enhanced geographic area',
-  NumberOfPersonsOnBoard = 'Number of persons on board',
-}
-
-export enum SeatalkAlarmStatus {
-  AlarmConditionNotMet = 'Alarm condition not met',
-  AlarmConditionMetAndNotSilenced = 'Alarm condition met and not silenced',
-  AlarmConditionMetAndSilenced = 'Alarm condition met and silenced',
-}
-
-export enum SeatalkAlarmId {
-  NoAlarm = 'No Alarm',
-  ShallowDepth = 'Shallow Depth',
-  DeepDepth = 'Deep Depth',
-  ShallowAnchor = 'Shallow Anchor',
-  DeepAnchor = 'Deep Anchor',
-  OffCourse = 'Off Course',
-  AwaHigh = 'AWA High',
-  AwaLow = 'AWA Low',
-  AwsHigh = 'AWS High',
-  AwsLow = 'AWS Low',
-  TwaHigh = 'TWA High',
-  TwaLow = 'TWA Low',
-  TwsHigh = 'TWS High',
-  TwsLow = 'TWS Low',
-  WpArrival = 'WP Arrival',
-  BoatSpeedHigh = 'Boat Speed High',
-  BoatSpeedLow = 'Boat Speed Low',
-  SeaTemperatureHigh = 'Sea Temperature High',
-  SeaTemperatureLow = 'Sea Temperature Low',
-  PilotWatch = 'Pilot Watch',
-  PilotOffCourse = 'Pilot Off Course',
-  PilotWindShift = 'Pilot Wind Shift',
-  PilotLowBattery = 'Pilot Low Battery',
-  PilotLastMinuteOfWatch = 'Pilot Last Minute Of Watch',
-  PilotNoNmeaData = 'Pilot No NMEA Data',
-  PilotLargeXte = 'Pilot Large XTE',
-  PilotNmeaDataError = 'Pilot NMEA DataError',
-  PilotCuDisconnected = 'Pilot CU Disconnected',
-  PilotAutoRelease = 'Pilot Auto Release',
-  PilotWayPointAdvance = 'Pilot Way Point Advance',
-  PilotDriveStopped = 'Pilot Drive Stopped',
-  PilotTypeUnspecified = 'Pilot Type Unspecified',
-  PilotCalibrationRequired = 'Pilot Calibration Required',
-  PilotLastHeading = 'Pilot Last Heading',
-  PilotNoPilot = 'Pilot No Pilot',
-  PilotRouteComplete = 'Pilot Route Complete',
-  PilotVariableText = 'Pilot Variable Text',
-  GpsFailure = 'GPS Failure',
-  Mob = 'MOB',
-  Seatalk1Anchor = 'Seatalk1 Anchor',
-  PilotSwappedMotorPower = 'Pilot Swapped Motor Power',
-  PilotStandbyTooFastToFish = 'Pilot Standby Too Fast To Fish',
-  PilotNoGpsFix = 'Pilot No GPS Fix',
-  PilotNoGpsCog = 'Pilot No GPS COG',
-  PilotStartUp = 'Pilot Start Up',
-  PilotTooSlow = 'Pilot Too Slow',
-  PilotNoCompass = 'Pilot No Compass',
-  PilotRateGyroFault = 'Pilot Rate Gyro Fault',
-  PilotCurrentLimit = 'Pilot Current Limit',
-  PilotWayPointAdvancePort = 'Pilot Way Point Advance Port',
-  PilotWayPointAdvanceStbd = 'Pilot Way Point Advance Stbd',
-  PilotNoWindData = 'Pilot No Wind Data',
-  PilotNoSpeedData = 'Pilot No Speed Data',
-  PilotSeatalkFail1 = 'Pilot Seatalk Fail1',
-  PilotSeatalkFail2 = 'Pilot Seatalk Fail2',
-  PilotWarningTooFastToFish = 'Pilot Warning Too Fast To Fish',
-  PilotAutoDocksideFail = 'Pilot Auto Dockside Fail',
-  PilotTurnTooFast = 'Pilot Turn Too Fast',
-  PilotNoNavData = 'Pilot No Nav Data',
-  PilotLostWaypointData = 'Pilot Lost Waypoint Data',
-  PilotEepromCorrupt = 'Pilot EEPROM Corrupt',
-  PilotRudderFeedbackFail = 'Pilot Rudder Feedback Fail',
-  PilotAutolearnFail1 = 'Pilot Autolearn Fail1',
-  PilotAutolearnFail2 = 'Pilot Autolearn Fail2',
-  PilotAutolearnFail3 = 'Pilot Autolearn Fail3',
-  PilotAutolearnFail4 = 'Pilot Autolearn Fail4',
-  PilotAutolearnFail5 = 'Pilot Autolearn Fail5',
-  PilotAutolearnFail6 = 'Pilot Autolearn Fail6',
-  PilotWarningCalRequired = 'Pilot Warning Cal Required',
-  PilotWarningOffCourse = 'Pilot Warning OffCourse',
-  PilotWarningXte = 'Pilot Warning XTE',
-  PilotWarningWindShift = 'Pilot Warning Wind Shift',
-  PilotWarningDriveShort = 'Pilot Warning Drive Short',
-  PilotWarningClutchShort = 'Pilot Warning Clutch Short',
-  PilotWarningSolenoidShort = 'Pilot Warning Solenoid Short',
-  PilotJoystickFault = 'Pilot Joystick Fault',
-  PilotNoJoystickData = 'Pilot No Joystick Data',
-  PilotInvalidCommand = 'Pilot Invalid Command',
-  AisTxMalfunction = 'AIS TX Malfunction',
-  AisAntennaVswrFault = 'AIS Antenna VSWR fault',
-  AisRxChannel1Malfunction = 'AIS Rx channel 1 malfunction',
-  AisRxChannel2Malfunction = 'AIS Rx channel 2 malfunction',
-  AisNoSensorPositionInUse = 'AIS No sensor position in use',
-  AisNoValidSogInformation = 'AIS No valid SOG information',
-  AisNoValidCogInformation = 'AIS No valid COG information',
-  Ais12VAlarm = 'AIS 12V alarm',
-  Ais6VAlarm = 'AIS 6V alarm',
-  AisNoiseThresholdExceededChannelA = 'AIS Noise threshold exceeded channel A',
-  AisNoiseThresholdExceededChannelB = 'AIS Noise threshold exceeded channel B',
-  AisTransmitterPaFault = 'AIS Transmitter PA fault',
-  Ais3V3Alarm = 'AIS 3V3 alarm',
-  AisRxChannel70Malfunction = 'AIS Rx channel 70 malfunction',
-  AisHeadingLostinvalid = 'AIS Heading lost/invalid',
-  AisInternalGpsLost = 'AIS internal GPS lost',
-  AisNoSensorPosition = 'AIS No sensor position',
-  AisLockFailure = 'AIS Lock failure',
-  AisInternalGgaTimeout = 'AIS Internal GGA timeout',
-  AisProtocolStackRestart = 'AIS Protocol stack restart',
-  PilotNoIpsCommunications = 'Pilot No IPS communications',
-  PilotPowerOnOrSleepSwitchResetWhileEngaged = 'Pilot Power-On or Sleep-Switch Reset While Engaged',
-  PilotUnexpectedResetWhileEngaged = 'Pilot Unexpected Reset While Engaged',
-  AisDangerousTarget = 'AIS Dangerous Target',
-  AisLostTarget = 'AIS Lost Target',
-  AisSafetyRelatedMessageusedToSilence = 'AIS Safety Related Message (used to silence)',
-  AisConnectionLost = 'AIS Connection Lost',
-  NoFix = 'No Fix',
-}
-
-export enum SeatalkAlarmGroup {
-  Instrument = 'Instrument',
-  Autopilot = 'Autopilot',
-  Radar = 'Radar',
-  ChartPlotter = 'Chart Plotter',
-  Ais = 'AIS',
-}
-
-export enum SeatalkPilotMode {
-  Standby = 'Standby',
-  Auto = 'Auto',
-  Wind = 'Wind',
-  Track = 'Track',
-}
-
-export enum EntertainmentZone {
-  AllZones = 'All zones',
-  Zone1 = 'Zone 1',
-  Zone2 = 'Zone 2',
-  Zone3 = 'Zone 3',
-  Zone4 = 'Zone 4',
-}
-
-export enum EntertainmentSource {
-  VesselAlarm = 'Vessel alarm',
-  Am = 'AM',
-  Fm = 'FM',
-  Weather = 'Weather',
-  Dab = 'DAB',
-  Aux = 'Aux',
-  Usb = 'USB',
-  Cd = 'CD',
-  Mp3 = 'MP3',
-  AppleIOs = 'Apple iOS',
-  Android = 'Android',
-  Bluetooth = 'Bluetooth',
-  SiriusXm = 'Sirius XM',
-  Pandora = 'Pandora',
-  Spotify = 'Spotify',
-  Slacker = 'Slacker',
-  Songza = 'Songza',
-  AppleRadio = 'Apple Radio',
-  LastFm = 'Last FM',
-  Ethernet = 'Ethernet',
-  VideoMp4 = 'Video MP4',
-  VideoDvd = 'Video DVD',
-  VideoBluRay = 'Video BluRay',
-  Hdmi = 'HDMI',
-  Video = 'Video',
-}
-
-export enum EntertainmentPlayStatus {
-  Play = 'Play',
-  Pause = 'Pause',
-  Stop = 'Stop',
-  Ff1X = 'FF 1x',
-  Ff2X = 'FF 2x',
-  Ff3X = 'FF 3x',
-  Ff4X = 'FF 4x',
-  Rw1X = 'RW 1x',
-  Rw2X = 'RW 2x',
-  Rw3X = 'RW 3x',
-  Rw4X = 'RW 4x',
-  SkipAhead = 'Skip ahead',
-  SkipBack = 'Skip back',
-  JogAhead = 'Jog ahead',
-  JogBack = 'Jog back',
-  SeekUp = 'Seek up',
-  SeekDown = 'Seek down',
-  ScanUp = 'Scan up',
-  ScanDown = 'Scan down',
-  TuneUp = 'Tune up',
-  TuneDown = 'Tune down',
-  SlowMotion75X = 'Slow motion .75x',
-  SlowMotion5X = 'Slow motion .5x',
-  SlowMotion25X = 'Slow motion .25x',
-  SlowMotion125X = 'Slow motion .125x',
-}
-
-export enum EntertainmentRepeatStatus {
-  Off = 'Off',
-  One = 'One',
-  All = 'All',
-}
-
-export enum EntertainmentShuffleStatus {
-  Off = 'Off',
-  PlayQueue = 'Play queue',
-  All = 'All',
-}
-
-export enum EntertainmentLikeStatus {
-  None = 'None',
-  ThumbsUp = 'Thumbs up',
-  ThumbsDown = 'Thumbs down',
-}
-
-export enum EntertainmentType {
-  File = 'File',
-  PlaylistName = 'Playlist Name',
-  GenreName = 'Genre Name',
-  AlbumName = 'Album Name',
-  ArtistName = 'Artist Name',
-  TrackName = 'Track Name',
-  StationName = 'Station Name',
-  StationNumber = 'Station Number',
-  FavouriteNumber = 'Favourite Number',
-  PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info',
-}
-
-export enum EntertainmentGroup {
-  File = 'File',
-  PlaylistName = 'Playlist Name',
-  GenreName = 'Genre Name',
-  AlbumName = 'Album Name',
-  ArtistName = 'Artist Name',
-  TrackName = 'Track Name',
-  StationName = 'Station Name',
-  StationNumber = 'Station Number',
-  FavouriteNumber = 'Favourite Number',
-  PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info',
-}
-
-export enum EntertainmentChannel {
-  AllChannels = 'All channels',
-  StereoFullRange = 'Stereo full range',
-  StereoFront = 'Stereo front',
-  StereoBack = 'Stereo back',
-  StereoSurround = 'Stereo surround',
-  Center = 'Center',
-  Subwoofer = 'Subwoofer',
-  FrontLeft = 'Front left',
-  FrontRight = 'Front right',
-  BackLeft = 'Back left',
-  BackRight = 'Back right',
-  SurroundLeft = 'Surround left',
-  SurroundRight = 'Surround right',
-}
-
-export enum EntertainmentEq {
-  Flat = 'Flat',
-  Rock = 'Rock',
-  Hall = 'Hall',
-  Jazz = 'Jazz',
-  Pop = 'Pop',
-  Live = 'Live',
-  Classic = 'Classic',
-  Vocal = 'Vocal',
-  Arena = 'Arena',
-  Cinema = 'Cinema',
-  Custom = 'Custom',
-}
-
-export enum EntertainmentFilter {
-  FullRange = 'Full range',
-  HighPass = 'High pass',
-  LowPass = 'Low pass',
-  BandPass = 'Band pass',
-  NotchFilter = 'Notch filter',
-}
-
-export enum AlertType {
-  EmergencyAlarm = 'Emergency Alarm',
-  Alarm = 'Alarm',
-  Warning = 'Warning',
-  Caution = 'Caution',
-}
-
-export enum AlertCategory {
-  Navigational = 'Navigational',
-  Technical = 'Technical',
-}
-
-export enum AlertTriggerCondition {
-  Manual = 'Manual',
-  Auto = 'Auto',
-  Test = 'Test',
-  Disabled = 'Disabled',
-}
-
-export enum AlertThresholdStatus {
-  Normal = 'Normal',
-  ThresholdExceeded = 'Threshold Exceeded',
-  ExtremeThresholdExceeded = 'Extreme Threshold Exceeded',
-  LowThresholdExceeded = 'Low Threshold Exceeded',
-  Acknowledged = 'Acknowledged',
-  AwaitingAcknowledge = 'Awaiting Acknowledge',
-}
-
-export enum AlertState {
-  Disabled = 'Disabled',
-  Normal = 'Normal',
-  Active = 'Active',
-  Silenced = 'Silenced',
-  Acknowledged = 'Acknowledged',
-  AwaitingAcknowledge = 'Awaiting Acknowledge',
-}
-
-export enum AlertLanguageId {
-  Englishus = 'English (US)',
-  Englishuk = 'English (UK)',
-  Arabic = 'Arabic',
-  Chinesesimplified = 'Chinese (simplified)',
-  Croatian = 'Croatian',
-  Danish = 'Danish',
-  Dutch = 'Dutch',
-  Finnish = 'Finnish',
-  French = 'French',
-  German = 'German',
-  Greek = 'Greek',
-  Italian = 'Italian',
-  Japanese = 'Japanese',
-  Korean = 'Korean',
-  Norwegian = 'Norwegian',
-  Polish = 'Polish',
-  Portuguese = 'Portuguese',
-  Russian = 'Russian',
-  Spanish = 'Spanish',
-  Swedish = 'Swedish',
-}
-
-export enum AlertResponseCommand {
-  Acknowledge = 'Acknowledge',
-  TemporarySilence = 'Temporary Silence',
-  TestCommandOff = 'Test Command off',
-  TestCommandOn = 'Test Command on',
-}
-
-export enum ConverterState {
-  Off = 'Off',
-  LowPowerMode = 'Low Power Mode',
-  Fault = 'Fault',
-  Bulk = 'Bulk',
-  Absorption = 'Absorption',
-  Float = 'Float',
-  Storage = 'Storage',
-  Equalize = 'Equalize',
-  PassThru = 'Pass thru',
-  Inverting = 'Inverting',
-  Assisting = 'Assisting',
-}
-
-export enum ThrusterDirectionControl {
-  Off = 'Off',
-  Ready = 'Ready',
-  ToPort = 'To Port',
-  ToStarboard = 'To Starboard',
-}
-
-export enum ThrusterRetractControl {
-  Off = 'Off',
-  Extend = 'Extend',
-  Retract = 'Retract',
-}
-
-export enum ThrusterMotorType {
-  _12Vdc = '12VDC',
-  _24Vdc = '24VDC',
-  _48Vdc = '48VDC',
-  _24Vac = '24VAC',
-  Hydraulic = 'Hydraulic',
-}
-
-export enum BootState {
-  InStartupMonitor = 'in Startup Monitor',
-  RunningBootloader = 'running Bootloader',
-  RunningApplication = 'running Application',
-}
-
-export enum AccessLevel {
-  Locked = 'Locked',
-  UnlockedLevel1 = 'unlocked level 1',
-  UnlockedLevel2 = 'unlocked level 2',
-}
-
-export enum TransmissionInterval {
-  Acknowledge = 'Acknowledge',
-  TransmitIntervalpriorityNotSupported = 'Transmit Interval/Priority not supported',
-  TransmitIntervalTooLow = 'Transmit Interval too low',
-  AccessDenied = 'Access denied',
-  NotSupported = 'Not supported',
-}
-
-export enum ParameterField {
-  Acknowledge = 'Acknowledge',
-  InvalidParameterField = 'Invalid parameter field',
-  TemporaryError = 'Temporary error',
-  ParameterOutOfRange = 'Parameter out of range',
-  AccessDenied = 'Access denied',
-  NotSupported = 'Not supported',
-  ReadOrWriteNotSupported = 'Read or Write not supported',
-}
-
-export enum PgnListFunction {
-  TransmitPgnList = 'Transmit PGN list',
-  ReceivePgnList = 'Receive PGN list',
-}
-
-export enum FusionCommand {
-  Play = 'Play',
-  Pause = 'Pause',
-  Next = 'Next',
-  Prev = 'Prev',
-}
-
-export enum FusionSiriusCommand {
-  Next = 'Next',
-  Prev = 'Prev',
-}
-
-export enum FusionMuteCommand {
-  MuteOn = 'Mute On',
-  MuteOff = 'Mute Off',
-}
-
-export enum SeatalkKeystroke {
-  Auto = 'Auto',
-  Standby = 'Standby',
-  Wind = 'Wind',
-  _1 = '-1',
-  _10 = '-10',
-  Plus1 = '+1',
-  Plus10 = '+10',
-  _1And10 = '-1 and -10',
-  Plus1AndPlus10 = '+1 and +10',
-  Track = 'Track',
-}
-
-export enum SeatalkDeviceId {
-  S100 = 'S100',
-  CourseComputer = 'Course Computer',
-}
-
-export enum SeatalkNetworkGroup {
-  None = 'None',
-  Helm1 = 'Helm 1',
-  Helm2 = 'Helm 2',
-  Cockpit = 'Cockpit',
-  Flybridge = 'Flybridge',
-  Mast = 'Mast',
-  Group1 = 'Group 1',
-  Group2 = 'Group 2',
-  Group3 = 'Group 3',
-  Group4 = 'Group 4',
-  Group5 = 'Group 5',
-}
-
-export enum SeatalkDisplayColor {
-  Day1 = 'Day 1',
-  Day2 = 'Day 2',
-  Redblack = 'Red/Black',
-  Inverse = 'Inverse',
-}
-
-export enum AirmarCalibrateFunction {
-  NormalcancelCalibration = 'Normal/cancel calibration',
-  EnterCalibrationMode = 'Enter calibration mode',
-  ResetCalibrationTo0 = 'Reset calibration to 0',
-  Verify = 'Verify',
-  ResetCompassToDefaults = 'Reset compass to defaults',
-  ResetDampingToDefaults = 'Reset damping to defaults',
-}
-
-export enum AirmarCalibrateStatus {
-  Queried = 'Queried',
-  Passed = 'Passed',
-  FailedTimeout = 'Failed - timeout',
-  FailedTiltError = 'Failed - tilt error',
-  FailedOther = 'Failed - other',
-  InProgress = 'In progress',
-}
-
-export enum AirmarTemperatureInstance {
-  DeviceSensor = 'Device Sensor',
-  OnboardWaterSensor = 'Onboard Water Sensor',
-  OptionalWaterSensor = 'Optional Water Sensor',
-}
-
-export enum AirmarFilter {
-  NoFilter = 'No filter',
-  BasicIirFilter = 'Basic IIR filter',
-}
-
-export enum ControllerState {
-  ErrorActive = 'Error Active',
-  ErrorPassive = 'Error Passive',
-  BusOff = 'Bus Off',
-}
-
-export enum EquipmentStatus {
-  Operational = 'Operational',
-  Fault = 'Fault',
-}
-
-export enum MobStatus {
-  MobEmitterActivated = 'MOB Emitter Activated',
-  ManualOnBoardMobButtonActivation = 'Manual on-board MOB Button Activation',
-  TestMode = 'Test mode',
-}
-
-export enum LowBattery {
-  Good = 'Good',
-  Low = 'Low',
-}
-
-export enum TurnMode {
-  RudderLimitControlled = 'Rudder limit controlled',
-  TurnRateControlled = 'Turn rate controlled',
-  RadiusControlled = 'Radius controlled',
-}
-
-export enum Acceptability {
-  BadLevel = 'Bad level',
-  BadFrequency = 'Bad frequency',
-  BeingQualified = 'Being qualified',
-  Good = 'Good',
-}
-
-export enum Line {
-  Line1 = 'Line 1',
-  Line2 = 'Line 2',
-  Line3 = 'Line 3',
-}
-
-export enum Waveform {
-  SineWave = 'Sine wave',
-  ModifiedSineWave = 'Modified sine wave',
-}
-
-export enum TankType {
-  Fuel = 'Fuel',
-  Water = 'Water',
-  GrayWater = 'Gray water',
-  LiveWell = 'Live well',
-  Oil = 'Oil',
-  BlackWater = 'Black water',
-}
-
-export enum DcSource {
-  Battery = 'Battery',
-  Alternator = 'Alternator',
-  Convertor = 'Convertor',
-  SolarCell = 'Solar cell',
-  WindGenerator = 'Wind generator',
-}
-
-export enum ChargerState {
-  NotCharging = 'Not charging',
-  Bulk = 'Bulk',
-  Absorption = 'Absorption',
-  Overcharge = 'Overcharge',
-  Equalise = 'Equalise',
-  Float = 'Float',
-  NoFloat = 'No float',
-  ConstantVi = 'Constant VI',
-  Disabled = 'Disabled',
-  Fault = 'Fault',
-}
-
-export enum ChargingAlgorithm {
-  Trickle = 'Trickle',
-  ConstantVoltageConstantCurrent = 'Constant voltage / Constant current',
-  _2StagenoFloat = '2 stage (no float)',
-  _3Stage = '3 stage',
-}
-
-export enum ChargerMode {
-  Standalone = 'Standalone',
-  Primary = 'Primary',
-  Secondary = 'Secondary',
-  Echo = 'Echo',
-}
-
-export enum InverterState {
-  Invert = 'Invert',
-  AcPassthru = 'AC passthru',
-  LoadSense = 'Load sense',
-  Fault = 'Fault',
-  Disabled = 'Disabled',
-}
-
-export enum BatteryType {
-  Flooded = 'Flooded',
-  Gel = 'Gel',
-  Agm = 'AGM',
-}
-
-export enum BatteryVoltage {
-  _6V = '6V',
-  _12V = '12V',
-  _24V = '24V',
-  _32V = '32V',
-  _36V = '36V',
-  _42V = '42V',
-  _48V = '48V',
-}
-
-export enum BatteryChemistry {
-  Pblead = 'Pb (Lead)',
-  Li = 'Li',
-  NiCd = 'NiCd',
-  ZnO = 'ZnO',
-  NiMh = 'NiMH',
-}
-
-export enum GoodWarningError {
-  Good = 'Good',
-  Warning = 'Warning',
-  Error = 'Error',
-}
-
-export enum Tracking {
-  Cancelled = 'Cancelled',
-  Acquiring = 'Acquiring',
-  Tracking = 'Tracking',
-  Lost = 'Lost',
-}
-
-export enum TargetAcquisition {
-  Manual = 'Manual',
-  Automatic = 'Automatic',
-}
-
-export enum WindlassDirection {
-  Off = 'Off',
-  Down = 'Down',
-  Up = 'Up',
-}
-
-export enum SpeedType {
-  SingleSpeed = 'Single speed',
-  DualSpeed = 'Dual speed',
-  ProportionalSpeed = 'Proportional speed',
-}
-
-export enum WindlassMotion {
-  WindlassStopped = 'Windlass stopped',
-  DeploymentOccurring = 'Deployment occurring',
-  RetrievalOccurring = 'Retrieval occurring',
-}
-
-export enum RodeType {
-  ChainPresentlyDetected = 'Chain presently detected',
-  RopePresentlyDetected = 'Rope presently detected',
-}
-
-export enum DockingStatus {
-  NotDocked = 'Not docked',
-  FullyDocked = 'Fully docked',
-}
-
-export enum AisType {
-  Sotdma = 'SOTDMA',
-  Cs = 'CS',
-}
-
-export enum AisBand {
-  Top525KHzOfMarineBand = 'Top 525 kHz of marine band',
-  EntireMarineBand = 'Entire marine band',
-}
-
-export enum AisMode {
-  Autonomous = 'Autonomous',
-  Assigned = 'Assigned',
-}
-
-export enum AisCommunicationState {
-  Sotdma = 'SOTDMA',
-  Itdma = 'ITDMA',
-}
-
-export enum Available {
-  Available = 'Available',
-  NotAvailable = 'Not available',
-}
-
-export enum BearingMode {
-  GreatCircle = 'Great Circle',
-  Rhumbline = 'Rhumbline',
-}
-
-export enum MarkType {
-  Collision = 'Collision',
-  TurningPoint = 'Turning point',
-  Reference = 'Reference',
-  Wheelover = 'Wheelover',
-  Waypoint = 'Waypoint',
-}
-
-export enum GnssMode {
-  _1D = '1D',
-  _2D = '2D',
-  _3D = '3D',
-  Auto = 'Auto',
-}
-
-export enum RangeResidualMode {
-  RangeResidualsWereUsedToCalculateData = 'Range residuals were used to calculate data',
-  RangeResidualsWereCalculatedAfterThePosition = 'Range residuals were calculated after the position',
-}
-
-export enum DgnssMode {
-  None = 'None',
-  SbasIfAvailable = 'SBAS if available',
-  Sbas = 'SBAS',
-}
-
-export enum SatelliteStatus {
-  NotTracked = 'Not tracked',
-  Tracked = 'Tracked',
-  Used = 'Used',
-  NotTrackedPlusdiff = 'Not tracked+Diff',
-  TrackedPlusdiff = 'Tracked+Diff',
-  UsedPlusdiff = 'Used+Diff',
-}
-
-export enum AisVersion {
-  ItuRM13711 = 'ITU-R M.1371-1',
-  ItuRM13713 = 'ITU-R M.1371-3',
-  ItuRM13715 = 'ITU-R M.1371-5',
-  ItuRM1371FutureEdition = 'ITU-R M.1371 future edition',
-}
-
-export enum Tide {
-  Falling = 'Falling',
-  Rising = 'Rising',
-}
-
-export enum WatermakerState {
-  Stopped = 'Stopped',
-  Starting = 'Starting',
-  Running = 'Running',
-  Stopping = 'Stopping',
-  Flushing = 'Flushing',
-  Rinsing = 'Rinsing',
-  Initiating = 'Initiating',
-  Manual = 'Manual',
-}
-
-export enum EntertainmentIdType {
-  Group = 'Group',
-  File = 'File',
-  EncryptedGroup = 'Encrypted group',
-  EncryptedFile = 'Encrypted file',
-}
-
-export enum EntertainmentDefaultSettings {
-  SaveCurrentSettingsAsUserDefault = 'Save current settings as user default',
-  LoadUserDefault = 'Load user default',
-  LoadManufacturerDefault = 'Load manufacturer default',
-}
-
-export enum EntertainmentRegions {
-  Usa = 'USA',
-  Europe = 'Europe',
-  Asia = 'Asia',
-  MiddleEast = 'Middle East',
-  LatinAmerica = 'Latin America',
-  Australia = 'Australia',
-  Russia = 'Russia',
-  Japan = 'Japan',
-}
-
-export enum VideoProtocols {
-  Pal = 'PAL',
-  Ntsc = 'NTSC',
-}
-
-export enum EntertainmentVolumeControl {
-  Up = 'Up',
-  Down = 'Down',
-}
-
-export enum BluetoothStatus {
-  Connected = 'Connected',
-  NotConnected = 'Not connected',
-  NotPaired = 'Not paired',
-}
-
-export enum BluetoothSourceStatus {
-  Reserved = 'Reserved',
-  Connected = 'Connected',
-  Connecting = 'Connecting',
-  NotConnected = 'Not connected',
-}
-
-export enum SonichubCommand {
-  Init2 = 'Init #2',
-  AmRadio = 'AM Radio',
-  ZoneInfo = 'Zone Info',
-  Source = 'Source',
-  SourceList = 'Source List',
-  Control = 'Control',
-  FmRadio = 'FM Radio',
-  Playlist = 'Playlist',
-  Track = 'Track',
-  Artist = 'Artist',
-  Album = 'Album',
-  MenuItem = 'Menu Item',
-  Zones = 'Zones',
-  MaxVolume = 'Max Volume',
-  Volume = 'Volume',
-  Init1 = 'Init #1',
-  Position = 'Position',
-  Init3 = 'Init #3',
-}
-
-export enum SimnetApMode {
-  Heading = 'Heading',
-  Wind = 'Wind',
-  Nav = 'Nav',
-  NoDrift = 'No Drift',
-}
-
-export enum SimnetDeviceModel {
-  Ac = 'AC',
-  OtherDevice = 'Other device',
-  Nac = 'NAC',
-}
-
-export enum SimnetDeviceReport {
-  Status = 'Status',
-  SendStatus = 'Send Status',
-  Mode = 'Mode',
-  SendMode = 'Send Mode',
-  SailingProcessorStatus = 'Sailing Processor Status',
-}
-
-export enum SimnetApStatus {
-  Manual = 'Manual',
-  Automatic = 'Automatic',
-}
-
-export enum SimnetCommand {
-  Text = 'Text',
-}
-
-export enum SimnetEventCommand {
-  Alarm = 'Alarm',
-  ApCommand = 'AP command',
-  Autopilot = 'Autopilot',
-}
-
-export enum SimnetNightMode {
-  Day = 'Day',
-  Night = 'Night',
-}
-
-export enum SimnetNightModeColor {
-  Red = 'Red',
-  Green = 'Green',
-  Blue = 'Blue',
-  White = 'White',
-}
-
-export enum SimnetDisplayGroup {
-  Default = 'Default',
-  Group1 = 'Group 1',
-  Group2 = 'Group 2',
-  Group3 = 'Group 3',
-  Group4 = 'Group 4',
-  Group5 = 'Group 5',
-  Group6 = 'Group 6',
-}
-
-export enum SimnetHourDisplay {
-  _24Hour = '24 hour',
-  _12Hour = '12 hour',
-}
-
-export enum SimnetTimeFormat {
-  Mmddyyyy = 'MM/dd/yyyy',
-  Ddmmyyyy = 'dd/MM/yyyy',
-}
-
-export enum SimnetBacklightLevel {
-  _10min = '10% (Min)',
-  DayMode = 'Day mode',
-  NightMode = 'Night mode',
-  _20 = '20%',
-  _30 = '30%',
-  _40 = '40%',
-  _50 = '50%',
-  _60 = '60%',
-  _70 = '70%',
-  _80 = '80%',
-  _90 = '90%',
-  _100max = '100% (Max)',
-}
-
-export enum SimnetApEvents {
-  Standby = 'Standby',
-  AutoMode = 'Auto mode',
-  NavMode = 'Nav mode',
-  NonFollowUpMode = 'Non Follow Up mode',
-  FollowUpMode = 'Follow Up mode',
-  WindMode = 'Wind mode',
-  Squareturn = 'Square (Turn)',
-  CTurn = 'C-Turn',
-  UTurn = 'U-Turn',
-  Spiralturn = 'Spiral (Turn)',
-  ZigZagturn = 'Zig Zag (Turn)',
-  LazySturn = 'Lazy-S (Turn)',
-  Depthturn = 'Depth (Turn)',
-  ChangeCourse = 'Change course',
-  TimerSync = 'Timer sync',
-  PingPortEnd = 'Ping port end',
-  PingStarboardEnd = 'Ping starboard end',
-}
-
-export enum SimnetDirection {
-  Port = 'Port',
-  Starboard = 'Starboard',
-  LeftRudderport = 'Left rudder (port)',
-  RightRudderstarboard = 'Right rudder (starboard)',
-}
-
-export enum SimnetAlarm {
-  LowBoatSpeed = 'Low boat speed',
-  WindDataMissing = 'Wind data missing',
-}
-
-export enum FusionMessageId {
-  RequestStatus = 'Request Status',
-  Source = 'Source',
-  TrackInfo = 'Track Info',
-  TrackTitle = 'Track Title',
-  TrackArtist = 'Track Artist',
-  TrackAlbum = 'Track Album',
-  TrackProgress = 'Track Progress',
-  AmfmStation = 'AM/FM Station',
-  Vhf = 'VHF',
-  Squelch = 'Squelch',
-  Scan = 'Scan',
-  Mute = 'Mute',
-  Replay = 'Replay',
-  SetZoneVolume = 'Set Zone Volume',
-  SetAllVolumes = 'Set All Volumes',
-  SubVolume = 'Sub Volume',
-  Tone = 'Tone',
-  Volume = 'Volume',
-  Power = 'Power',
-  UnitName = 'Unit Name',
-  SiriusXmChannel = 'SiriusXM Channel',
-  SiriusXmTitle = 'SiriusXM Title',
-  SiriusXmArtist = 'SiriusXM Artist',
-  SiriusXmGenre = 'SiriusXM Genre',
-  ZoneName = 'Zone Name',
-}
-
-export enum FusionPlayStatus {
-  Invalid = 'Invalid',
-  Playing = 'Playing',
-  Paused = 'Paused',
-  Stopped = 'Stopped',
-  SkipForward = 'Skip Forward',
-  SkipRewind = 'Skip Rewind',
-}
-
-export enum FusionSourceType {
-  Am = 'AM',
-  Fm = 'FM',
-  Aux = 'Aux',
-  Sirius = 'Sirius',
-  Ipod = 'Ipod',
-  Usb = 'USB',
-  Dvd = 'DVD',
-  Vhf = 'VHF',
-  Invalid = 'Invalid',
-  Mtp = 'MTP',
-  Bluetooth = 'Bluetooth',
-  Arc = 'ARC',
-  Android = 'Android',
-  Pandora = 'Pandora',
-  Dab = 'DAB',
-  AirPlay = 'AirPlay',
-  Upnp = 'UPNP',
-  Unknown = 'Unknown',
-}
-
-export enum FusionSiriusComState {
-  Unknown = 'Unknown',
-  Off = 'Off',
-  Initialising = 'Initialising',
-  On = 'On',
-}
-
-export enum FusionSiriusAlert {
-  Unknown = 'Unknown',
-  None = 'None',
-  Antenna = 'Antenna',
-  NoSignal = 'NoSignal',
-  SubscriptionUpdate = 'Subscription Update',
-}
-
-export enum FusionSiriusTuningMode {
-  Normal = 'Normal',
-  Category = 'Category',
-  Preset = 'Preset',
-}
-
-export enum FusionStatusMessageId {
-  Unknown = 'Unknown',
-  ApiVersion = 'API Version',
-  Source = 'Source',
-  SourceCount = 'Source Count',
-  TrackInfo = 'Track Info',
-  TrackTitle = 'Track Title',
-  TrackArtist = 'Track Artist',
-  TrackAlbum = 'Track Album',
-  CoverArt = 'Cover Art',
-  TrackProgress = 'Track Progress',
-  TunerAlign = 'Tuner Align',
-  Tuner = 'Tuner',
-  MarineTuner = 'Marine Tuner',
-  MarineSquelch = 'Marine Squelch',
-  MarineScanMode = 'Marine Scan Mode',
-  MenuAction = 'Menu Action',
-  MenuCount = 'Menu Count',
-  MenuItem = 'Menu Item',
-  MenuLockId = 'Menu Lock ID',
-  AuxGain = 'Aux Gain',
-  Setting = 'Setting',
-  Settings = 'Settings',
-  UpdateFirmwareResult = 'Update Firmware Result',
-  Mute = 'Mute',
-  Balance = 'Balance',
-  LowPassFilter = 'Low Pass Filter',
-  Sublevels = 'Sublevels',
-  Tone = 'Tone',
-  VolumeLimits = 'Volume Limits',
-  Volume = 'Volume',
-  Capabilities = 'Capabilities',
-  LineLevelControl = 'Line Level Control',
-  Power = 'Power',
-  UnitName = 'Unit Name',
-  Sirius = 'Sirius',
-  SiriusXmPresetEvent = 'SiriusXM Preset Event',
-  SiriusXmChannel = 'SiriusXM Channel',
-  SiriusXmTitle = 'SiriusXM Title',
-  SiriusXmArtist = 'SiriusXM Artist',
-  SiriusXmGenre = 'SiriusXM Genre',
-  SiriusXmCategory = 'SiriusXM Category',
-  SiriusXmSignal = 'SiriusXm Signal',
-  SiriusXmParentalRequest = 'SiriusXM Parental Request',
-  SiriusXmDiagnostics = 'SiriusXM Diagnostics',
-  SiriusXmPresets = 'SiriusXM Presets',
-  ZoneName = 'Zone Name',
-}
-
-export enum SonichubControl {
-  Set = 'Set',
-  Ack = 'Ack',
-}
-
-export enum SonichubSource {
-  Am = 'AM',
-  Fm = 'FM',
-  IPod = 'iPod',
-  Usb = 'USB',
-  Aux = 'AUX',
-  Aux2 = 'AUX 2',
-  Mic = 'Mic',
-}
-
-export enum IsoControl {
-  Ack = 'ACK',
-  Nak = 'NAK',
-  AccessDenied = 'Access Denied',
-  AddressBusy = 'Address Busy',
-}
-
-export enum IsoCommand {
-  Ack = 'ACK',
-  Rts = 'RTS',
-  Cts = 'CTS',
-  Eom = 'EOM',
-  Bam = 'BAM',
-  Abort = 'Abort',
-}
-
-export enum GroupFunction {
-  Request = 'Request',
-  Command = 'Command',
-  Acknowledge = 'Acknowledge',
-  ReadFields = 'Read Fields',
-  ReadFieldsReply = 'Read Fields Reply',
-  WriteFields = 'Write Fields',
-  WriteFieldsReply = 'Write Fields Reply',
-}
-
-export enum AirmarCommand {
-  AttitudeOffsets = 'Attitude Offsets',
-  CalibrateCompass = 'Calibrate Compass',
-  TrueWindOptions = 'True Wind Options',
-  SimulateMode = 'Simulate Mode',
-  CalibrateDepth = 'Calibrate Depth',
-  CalibrateSpeed = 'Calibrate Speed',
-  CalibrateTemperature = 'Calibrate Temperature',
-  SpeedFilter = 'Speed Filter',
-  TemperatureFilter = 'Temperature Filter',
-  Nmea2000Options = 'NMEA 2000 options',
-}
-
-export enum AirmarDepthQualityFactor {
-  DepthUnlocked = 'Depth unlocked',
-  Quality10 = 'Quality 10%',
-  Quality20 = 'Quality 20%',
-  Quality30 = 'Quality 30%',
-  Quality40 = 'Quality 40%',
-  Quality50 = 'Quality 50%',
-  Quality60 = 'Quality 60%',
-  Quality70 = 'Quality 70%',
-  Quality80 = 'Quality 80%',
-  Quality90 = 'Quality 90%',
-  Quality100 = 'Quality 100%',
-}
-
-export enum PgnErrorCode {
-  Acknowledge = 'Acknowledge',
-  PgnNotSupported = 'PGN not supported',
-  PgnNotAvailable = 'PGN not available',
-  AccessDenied = 'Access denied',
-  NotSupported = 'Not supported',
-  TagNotSupported = 'Tag not supported',
-  ReadOrWriteNotSupported = 'Read or Write not supported',
-}
-
-export enum AirmarTransmissionInterval {
-  MeasureInterval = 'Measure interval',
-  RequestedByUser = 'Requested by user',
-}
-
-export enum MobPositionSource {
-  PositionEstimatedByTheVessel = 'Position estimated by the vessel',
-  PositionReportedByMobEmitter = 'Position reported by MOB emitter',
-}
-
-export enum SteeringMode {
-  MainSteering = 'Main Steering',
-  NonFollowUpDevice = 'Non-Follow-Up Device',
-  FollowUpDevice = 'Follow-Up Device',
-  HeadingControlStandalone = 'Heading Control Standalone',
-  HeadingControl = 'Heading Control',
-  TrackControl = 'Track Control',
-}
-
-export enum FusionRadioSource {
-  Am = 'AM',
-  Fm = 'FM',
-}
-
-export enum FusionSetting {
-  AlphaSearchThreshold = 'Alpha Search Threshold',
-  IPodSubtitles = 'iPod Subtitles',
-  Zone2Linked = 'Zone 2 Linked',
-  Zone2Enabled = 'Zone 2 Enabled',
-  Zone3Enabled = 'Zone 3 Enabled',
-  Zone4Enabled = 'Zone 4 Enabled',
-  Telemute = 'Telemute',
-  TunerRegion = 'Tuner Region',
-  MarineZone = 'Marine Zone',
-  UsbRepeat = 'USB repeat',
-  UsbShuffle = 'USB shuffle',
-  IPodAlbumArtwork = 'iPod Album Artwork',
-  IPodRepeat = 'iPod repeat',
-  IPodShuffle = 'iPod shuffle',
-  AmPreset0 = 'AM Preset 0',
-  AmPreset1 = 'AM Preset 1',
-  AmPreset2 = 'AM Preset 2',
-  AmPreset3 = 'AM Preset 3',
-  AmPreset4 = 'AM Preset 4',
-  AmPreset5 = 'AM Preset 5',
-  AmPreset6 = 'AM Preset 6',
-  AmPreset7 = 'AM Preset 7',
-  AmPreset8 = 'AM Preset 8',
-  AmPreset9 = 'AM Preset 9',
-  AmPreset10 = 'AM Preset 10',
-  AmPreset11 = 'AM Preset 11',
-  AmPreset12 = 'AM Preset 12',
-  AmPreset13 = 'AM Preset 13',
-  AmPreset14 = 'AM Preset 14',
-  FmPreset0 = 'FM Preset 0',
-  FmPreset1 = 'FM Preset 1',
-  FmPreset2 = 'FM Preset 2',
-  FmPreset3 = 'FM Preset 3',
-  FmPreset4 = 'FM Preset 4',
-  FmPreset5 = 'FM Preset 5',
-  FmPreset6 = 'FM Preset 6',
-  FmPreset7 = 'FM Preset 7',
-  FmPreset8 = 'FM Preset 8',
-  FmPreset9 = 'FM Preset 9',
-  FmPreset10 = 'FM Preset 10',
-  FmPreset11 = 'FM Preset 11',
-  FmPreset12 = 'FM Preset 12',
-  FmPreset13 = 'FM Preset 13',
-  FmPreset14 = 'FM Preset 14',
-  VhfPreset0 = 'VHF Preset 0',
-  VhfPreset1 = 'VHF Preset 1',
-  VhfPreset2 = 'VHF Preset 2',
-  VhfPreset3 = 'VHF Preset 3',
-  VhfPreset4 = 'VHF Preset 4',
-  VhfPreset5 = 'VHF Preset 5',
-  VhfPreset6 = 'VHF Preset 6',
-  VhfPreset7 = 'VHF Preset 7',
-  VhfPreset8 = 'VHF Preset 8',
-  VhfPreset9 = 'VHF Preset 9',
-  VhfPreset10 = 'VHF Preset 10',
-  VhfPreset11 = 'VHF Preset 11',
-  VhfPreset12 = 'VHF Preset 12',
-  VhfPreset13 = 'VHF Preset 13',
-  VhfPreset14 = 'VHF Preset 14',
-  ClockTime = 'Clock Time',
-  ClockAlarm = 'Clock Alarm',
-  IPodVideoSignal = 'iPod Video Signal',
-  IPodMonitorAspect = 'iPod Monitor Aspect',
-  AuxNameIndex = 'Aux Name Index',
-  AmEnabled = 'AM Enabled',
-  VhfEnabled = 'VHF Enabled',
-  Language = 'Language',
-  InternalAmpsOn = 'Internal Amps On',
-  MtpRepeat = 'MTP Repeat',
-  MtpShuffle = 'MTP Shuffle',
-  IdAccessorySource = 'Id Accessory Source',
-  NmeaPower = 'NMEA Power',
-  LowPowerMode = 'Low Power Mode',
-  DvdRegion = 'DVD region',
-  VolumeZoneSync = 'Volume Zone Sync',
-  MaxVolumeStart = 'Max Volume Start',
-  BtAutoConnect = 'BT Auto Connect',
-  NullSetting = 'Null Setting',
-}
-
-export enum FusionRepeatStatus {
-  Off = 'Off',
-  Onetrack = 'One/track',
-  Allalbum = 'All/album',
-}
-
-export enum AirmarPostControl {
-  ReportPreviousValues = 'Report previous values',
-  GenerateNewValues = 'Generate new values',
-}
-
-export enum AirmarPostId {
-  FormatCode = 'Format Code',
-  FactoryEeprom = 'Factory EEPROM',
-  UserEeprom = 'User EEPROM',
-  WaterTemperatureSensor = 'Water Temperature Sensor',
-  SonarTransceiver = 'Sonar Transceiver',
-  SpeedSensor = 'Speed sensor',
-  InternalTemperatureSensor = 'Internal temperature sensor',
-  BatteryVoltageSensor = 'Battery voltage sensor',
-}
-
-export enum SonichubTuning {
-  SeekingUp = 'Seeking up',
-  Tuned = 'Tuned',
-  SeekingDown = 'Seeking down',
-}
-
-export enum SonichubPlaylist {
-  Report = 'Report',
-  NextSong = 'Next song',
-  PreviousSong = 'Previous song',
-}
-
-export enum FusionPowerState {
-  On = 'On',
-  Off = 'Off',
-}
-
-export enum Priority {
-  _0 = '0',
-  _1 = '1',
-  _2 = '2',
-  _3 = '3',
-  _4 = '4',
-  _5 = '5',
-  _6 = '6',
-  _7 = '7',
-  LeaveUnchanged = 'Leave unchanged',
-  ResetToDefault = 'Reset to default',
-}
-
-export enum DeviceTempState {
-  Cold = 'Cold',
-  Warm = 'Warm',
-  Hot = 'Hot',
-}
-
-export enum BandgDecimals {
-  _0 = '0',
-  _1 = '1',
-  _2 = '2',
-  _3 = '3',
-  _4 = '4',
-  Auto = 'Auto',
-}
-
-export enum GarminColorMode {
-  Day = 'Day',
-  Night = 'Night',
-  Color = 'Color',
-}
-
-export enum GarminColor {
-  DayFullColor = 'Day full color',
-  DayHighContrast = 'Day high contrast',
-  NightFullColor = 'Night full color',
-  NightRedblack = 'Night red/black',
-  NightGreenblack = 'Night green/black',
-}
-
-export enum GarminBacklightLevel {
-  _0 = '0%',
-  _5 = '5%',
-  _10 = '10%',
-  _15 = '15%',
-  _20 = '20%',
-  _25 = '25%',
-  _30 = '30%',
-  _35 = '35%',
-  _40 = '40%',
-  _45 = '45%',
-  _50 = '50%',
-  _55 = '55%',
-  _60 = '60%',
-  _65 = '65%',
-  _70 = '70%',
-  _75 = '75%',
-  _80 = '80%',
-  _85 = '85%',
-  _90 = '90%',
-  _95 = '95%',
-  _100 = '100%',
-}
-
-export enum SeatalkPilotMode16 {
-  Standby = 'Standby',
-  AutoCompassCommanded = 'Auto, compass commanded',
-  VaneWindMode = 'Vane, Wind Mode',
-  TrackMode = 'Track Mode',
-  NoDriftCogReferencedinTrackCourseChanges = 'No Drift, COG referenced (In track, course changes)',
-}
-
-export enum StationHealth {
-  NotWorking = 'Not Working',
-  Unmonitored = 'Unmonitored',
-  HealthyOperational = 'Healthy Operational',
-  HealthyTestMode = 'Healthy Test Mode',
-  TestMode = 'Test Mode',
-}
-
-export enum SerialBitRate {
-  _25 = '25',
-  _50 = '50',
-  _100 = '100',
-  _200 = '200',
-  _300 = '300',
-  _600 = '600',
-  _1200 = '1200',
-  _2400 = '2400',
-  _4800 = '4800',
-  _9600 = '9600',
-  _19200 = '19200',
-  _38400 = '38400',
-  _57600 = '57600',
-}
-
-export enum SerialDetectionMode {
-  AutoBitRate = 'Auto bit rate',
-  ManualBitRate = 'Manual bit rate',
-}
-
-export enum DifferentialSource {
-  Auto = 'Auto',
-  Loran = 'Loran',
-  MskBeacon = 'MSK Beacon',
-  FmSubcarrier = 'FM Subcarrier',
-  Ais = 'AIS',
-  GroundBasedRadio = 'Ground based radio',
-  Sbas = 'SBAS',
-  Satellite = 'Satellite',
-}
-
-export enum DifferentialMode {
-  Manual = 'Manual',
-  AutoPower = 'Auto Power',
-  AutoRange = 'Auto Range',
-}
-
-export enum WpPositionResolution {
-  MoreThan01Min = 'more than 0.1 min',
-  _00101Min = '<0.01 .. 0.1] min',
-  _0001001Min = '<0.001 .. 0.01] min',
-  _000010001Min = '<0.0001 .. 0.001] min',
-  _000001Min = '<0 .. 0.0001] min',
-}
-
-export enum WpIdentificationMethod {
-  WaypointsInWpList = 'Waypoints in WP list',
-  WaypointsEmbeddedInRoute = 'Waypoints embedded in route',
-}
-
-export enum WpRouteStatus {
-  Active = 'Active',
-  Inactive = 'Inactive',
-  Deleted = 'Deleted',
-}
-
-export enum WpNavigationMethod {
-  GreatCircle = 'Great Circle',
-  RhumbLine = 'Rhumb Line',
-}
-
-export enum InverterMode {
-  Standalone = 'Standalone',
-  SeriesMaster = 'Series Master',
-  SeriesSlave = 'Series Slave',
-  ParallelMaster = 'Parallel Master',
-  ParallelSlave = 'Parallel Slave',
-}
-
-export enum CertificationLevel {
-  LevelA = 'Level A',
-  LevelB = 'Level B',
-}
-
-export enum AgsMode {
-  Off = 'Off',
-  On = 'On',
-  Automatic = 'Automatic',
-}
-
-export enum AgsOperatingState {
-  QuietTime = 'Quiet time',
-  AutoOn = 'Auto on',
-  AutoOff = 'Auto off',
-  ManualOn = 'Manual On',
-  ManualOff = 'Manual Off',
-  GeneratorShutdown = 'Generator shutdown',
-  ExternalShutdown = 'External shutdown',
-  Fault = 'Fault',
-  Suspend = 'Suspend',
-  NotOperating = 'Not operating',
-}
-
-export enum AgsGeneratingState {
-  Preheating = 'Preheating',
-  StartDelay = 'Start delay',
-  Cranking = 'Cranking',
-  StarterCooling = 'Starter cooling',
-  WarmingUp = 'Warming up',
-  CoolingDown = 'Cooling down',
-  SpinningUp = 'Spinning up',
-  ShutdownBypass = 'Shutdown bypass',
-  Stopping = 'Stopping',
-  Running = 'Running',
-  Stopped = 'Stopped',
-  CrankDelaty = 'Crank delaty',
-}
-
-export enum AgsOnReason {
-  NotOn = 'Not on',
-  DcVoltageLow = 'DC voltage low',
-  BatteryStateOfChargeLow = 'Battery state of charge low',
-  AcCurrentHigh = 'AC current high',
-  ContactClosed = 'Contact closed',
-  ManualOn = 'Manual on',
-  Exercise = 'Exercise',
-  NonQuietTime = 'Non Quiet time',
-  ExternalOnViaAgs = 'External on via AGS',
-  ExternalOnViaGenerator = 'External on via generator',
-  UnableToStop = 'Unable to stop',
-}
-
-export enum AgsOffReason {
-  NotOff = 'Not off',
-  DcVoltageHigh = 'DC voltage high',
-  BatteryStateOfChargeHigh = 'Battery state of charge high',
-  AcCurrentLow = 'AC current low',
-  ContactOpened = 'Contact opened',
-  ReachedAbsorption = 'Reached absorption',
-  ReachedFloat = 'Reached float',
-  ManualOff = 'Manual off',
-  MaxRunTime = 'Max run time',
-  MaxAutoCycle = 'Max auto cycle',
-  ExerciseDone = 'Exercise done',
-  QuietTime = 'Quiet time',
-  ExternalOffViaAgs = 'External off via AGS',
-  SafeMode = 'Safe mode',
-  ExternalOffViaGenerator = 'External off via generator',
-  ExternalShutdown = 'External shutdown',
-  AutoOff = 'Auto off',
-  Fault = 'Fault',
-  UnableToStart = 'Unable to start',
-}
-
-export enum TelephoneMode {
-  F3Eg3ESimplexTelephone = 'F3E/G3E simplex, telephone',
-  F3Eg3EDuplexTelephone = 'F3E/G3E duplex, telephone',
-  J3ETelephone = 'J3E, telephone',
-  H3ETelephone = 'H3E, telephone',
-  F1Bj2BFecNbdpTelexteleprinter = 'F1B/J2B FEC NBDP, telex/teleprinter',
-  F1Bj2BArqNbdpTelexteleprinter = 'F1B/J2B ARQ NBDP, telex/teleprinter',
-  F1Bj2BReceiveOnlyTeleprinterdsc = 'F1B/J2B receive only, teleprinter/DSC',
-  F1Bj2BTeleprinterdsc = 'F1B/J2B, teleprinter/DSC',
-  A1AMorseTapeRecorder = 'A1A Morse, tape recorder',
-  A1AMorseMorseKeyheadSet = 'A1A Morse, Morse key/head set',
-  F1Cf2Cf3CFaxMachine = 'F1C/F2C/F3C, FAX machine',
-}
-
-export enum PowerMode {
-  High = 'High',
-  Low = 'Low',
-}
-
-export enum BroadcastIndicator {
-  BroadcastGeoAreaMessage = 'Broadcast geo area message',
-  AddressedMessage = 'Addressed message',
-}
-
-export enum Bandwidth {
-  Default = 'Default',
-  _125KHz = '12.5 kHz',
-}
-
-export enum FloodState {
-  Flood = 'Flood',
-  Slack = 'Slack',
-  Ebb = 'Ebb',
-}
-
-export enum AcLine {
-  Line1 = 'Line 1',
-  Line2 = 'Line 2',
-  Line3 = 'Line 3',
-}
-
-export enum ZoneSize {
-  _1Nm = '1 nm',
-  _2Nm = '2 nm',
-  _3Nm = '3 nm',
-  _4Nm = '4 nm',
-  _5Nm = '5 nm',
-  _6Nm = '6 nm',
-}
-
-export enum DeviceFunction {
-  Diagnostic = 'Diagnostic',
-  BusTrafficLogger = 'Bus Traffic Logger',
-  AlarmEnunciator = 'Alarm Enunciator',
-  EmergencyPositionIndicatingRadioBeaconepirb = 'Emergency Position Indicating Radio Beacon (EPIRB)',
-  ManOverboard = 'Man Overboard',
-  VoyageDataRecorder = 'Voyage Data Recorder',
-  Camera = 'Camera',
-  PcGateway = 'PC Gateway',
-  Nmea2000ToAnalogGateway = 'NMEA 2000 to Analog Gateway',
-  AnalogToNmea2000Gateway = 'Analog to NMEA 2000 Gateway',
-  Nmea2000ToSerialGateway = 'NMEA 2000 to Serial Gateway',
-  Nmea0183Gateway = 'NMEA 0183 Gateway',
-  NmeaNetworkGateway = 'NMEA Network Gateway',
-  Nmea2000WirelessGateway = 'NMEA 2000 Wireless Gateway',
-  Router = 'Router',
-  Bridge = 'Bridge',
-  Repeater = 'Repeater',
-  BinaryEventMonitor = 'Binary Event Monitor',
-  LoadController = 'Load Controller',
-  AcdcInput = 'AC/DC Input',
-  FunctionController = 'Function Controller',
-  Engine = 'Engine',
-  DcGeneratoralternator = 'DC Generator/Alternator',
-  SolarPanelsolarArray = 'Solar Panel (Solar Array)',
-  WindGeneratordc = 'Wind Generator (DC)',
-  FuelCell = 'Fuel Cell',
-  NetworkPowerSupply = 'Network Power Supply',
-  AcGenerator = 'AC Generator',
-  AcBus = 'AC Bus',
-  AcMainsutilityshore = 'AC Mains (Utility/Shore)',
-  AcOutput = 'AC Output',
-  PowerConverterBatteryCharger = 'Power Converter - Battery Charger',
-  PowerConverterBatteryChargerPlusinverter = 'Power Converter - Battery Charger+Inverter',
-  PowerConverterInverter = 'Power Converter - Inverter',
-  PowerConverterDc = 'Power Converter - DC',
-  Battery = 'Battery',
-  EngineGateway = 'Engine Gateway',
-  FollowUpController = 'Follow-up Controller',
-  ModeController = 'Mode Controller',
-  Autopilot = 'Autopilot',
-  Rudder = 'Rudder',
-  HeadingSensors = 'Heading Sensors',
-  Trimtabsinterceptors = 'Trim (Tabs)/Interceptors',
-  AttitudepitchRollYawControl = 'Attitude (Pitch, Roll, Yaw) Control',
-  EngineroomMonitoring = 'Engineroom Monitoring',
-  EngineController = 'Engine Controller',
-  Motor = 'Motor',
-  Transmission = 'Transmission',
-  ThrottleshiftControl = 'Throttle/Shift Control',
-  Actuator = 'Actuator',
-  GaugeInterface = 'Gauge Interface',
-  GaugeLarge = 'Gauge Large',
-  GaugeSmall = 'Gauge Small',
-  BottomDepth = 'Bottom Depth',
-  BottomDepthspeed = 'Bottom Depth/Speed',
-  BottomDepthspeedtemperature = 'Bottom Depth/Speed/Temperature',
-  OwnshipAttitude = 'Ownship Attitude',
-  OwnshipPositiongnss = 'Ownship Position (GNSS)',
-  OwnshipPositionloranC = 'Ownship Position (Loran C)',
-  Speed = 'Speed',
-  TurnRateIndicator = 'Turn Rate Indicator',
-  IntegratedNavigation = 'Integrated Navigation',
-  IntegratedNavigationSystem = 'Integrated Navigation System',
-  NavigationManagement = 'Navigation Management',
-  AutomaticIdentificationSystemais = 'Automatic Identification System (AIS)',
-  Radar = 'Radar',
-  InfraredImaging = 'Infrared Imaging',
-  Ecdis = 'ECDIS',
-  Ecs = 'ECS',
-  DirectionFinder = 'Direction Finder',
-  VoyageStatus = 'Voyage Status',
-  Epirb = 'EPIRB',
-  Ais = 'AIS',
-  Dsc = 'DSC',
-  DataReceivertransceiver = 'Data Receiver/Transceiver',
-  Satellite = 'Satellite',
-  RadioTelephonemfhf = 'Radio-telephone (MF/HF)',
-  Radiotelephone = 'Radiotelephone',
-  Temperature = 'Temperature',
-  Pressure = 'Pressure',
-  FluidLevel = 'Fluid Level',
-  Flow = 'Flow',
-  Humidity = 'Humidity',
-  TimedateSystems = 'Time/Date Systems',
-  Vdr = 'VDR',
-  IntegratedInstrumentation = 'Integrated Instrumentation',
-  GeneralPurposeDisplays = 'General Purpose Displays',
-  GeneralSensorBox = 'General Sensor Box',
-  WeatherInstruments = 'Weather Instruments',
-  Transducergeneral = 'Transducer/General',
-  Nmea0183Converter = 'NMEA 0183 Converter',
-  Atmospheric = 'Atmospheric',
-  Aquatic = 'Aquatic',
-  Hvac = 'HVAC',
-  Scalecatch = 'Scale (Catch)',
-  ButtonInterface = 'Button Interface',
-  SwitchInterface = 'Switch Interface',
-  AnalogInterface = 'Analog Interface',
-  Display = 'Display',
-  MultimediaPlayer = 'Multimedia Player',
-  MultimediaController = 'Multimedia Controller',
-}
-
-export enum StationStatus {
-  StationInUse = 'Station in use',
-  LowSnr = 'Low SNR',
-  CycleError = 'Cycle Error',
-  Blink = 'Blink',
-}
-
-export enum EngineStatus1 {
-  CheckEngine = 'Check Engine',
-  OverTemperature = 'Over Temperature',
-  LowOilPressure = 'Low Oil Pressure',
-  LowOilLevel = 'Low Oil Level',
-  LowFuelPressure = 'Low Fuel Pressure',
-  LowSystemVoltage = 'Low System Voltage',
-  LowCoolantLevel = 'Low Coolant Level',
-  WaterFlow = 'Water Flow',
-  WaterInFuel = 'Water In Fuel',
-  ChargeIndicator = 'Charge Indicator',
-  PreheatIndicator = 'Preheat Indicator',
-  HighBoostPressure = 'High Boost Pressure',
-  RevLimitExceeded = 'Rev Limit Exceeded',
-  EgrSystem = 'EGR System',
-  ThrottlePositionSensor = 'Throttle Position Sensor',
-  EmergencyStop = 'Emergency Stop',
-}
-
-export enum EngineStatus2 {
-  WarningLevel1 = 'Warning Level 1',
-  WarningLevel2 = 'Warning Level 2',
-  PowerReduction = 'Power Reduction',
-  MaintenanceNeeded = 'Maintenance Needed',
-  EngineCommError = 'Engine Comm Error',
-  SubOrSecondaryThrottle = 'Sub or Secondary Throttle',
-  NeutralStartProtect = 'Neutral Start Protect',
-  EngineShuttingDown = 'Engine Shutting Down',
-}
-
-export enum EntertainmentPlayStatusBitfield {
-  Play = 'Play',
-  Pause = 'Pause',
-  Stop = 'Stop',
-  Ff1X = 'FF 1x',
-  Ff2X = 'FF 2x',
-  Ff3X = 'FF 3x',
-  Ff4X = 'FF 4x',
-  Rw1X = 'RW 1x',
-  Rw2X = 'RW 2x',
-  Rw3X = 'RW 3x',
-  Rw4X = 'RW 4x',
-  SkipAhead = 'Skip ahead',
-  SkipBack = 'Skip back',
-  JogAhead = 'Jog ahead',
-  JogBack = 'Jog back',
-  SeekUp = 'Seek up',
-  SeekDown = 'Seek down',
-  ScanUp = 'Scan up',
-  ScanDown = 'Scan down',
-  TuneUp = 'Tune up',
-  TuneDown = 'Tune down',
-  SlowMotion75X = 'Slow motion .75x',
-  SlowMotion5X = 'Slow motion .5x',
-  SlowMotion25X = 'Slow motion .25x',
-  SlowMotion125X = 'Slow motion .125x',
-  SourceRenaming = 'Source renaming',
-}
-
-export enum EntertainmentGroupBitfield {
-  File = 'File',
-  PlaylistName = 'Playlist Name',
-  GenreName = 'Genre Name',
-  AlbumName = 'Album Name',
-  ArtistName = 'Artist Name',
-  TrackName = 'Track Name',
-  StationName = 'Station Name',
-  StationNumber = 'Station Number',
-  FavouriteNumber = 'Favourite Number',
-  PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info',
-}
-
-export enum ThrusterControlEvents {
-  AnotherDeviceControllingThruster = 'Another device controlling thruster',
-  BoatSpeedTooFastToSafelyUseThruster = 'Boat speed too fast to safely use thruster',
-}
-
-export enum ThrusterMotorEvents {
-  MotorOverTemperatureCutout = 'Motor over temperature cutout',
-  MotorOverCurrentCutout = 'Motor over current cutout',
-  LowOilLevelWarning = 'Low oil level warning',
-  OilOverTemperatureWarning = 'Oil over temperature warning',
-  ControllerUnderVoltageCutout = 'Controller under voltage cutout',
-  ManufacturerDefined = 'Manufacturer defined',
-}
-
-export enum WindlassControl {
-  AnotherDeviceControllingWindlass = 'Another device controlling windlass',
-}
-
-export enum WindlassOperation {
-  SystemError = 'System error',
-  SensorError = 'Sensor error',
-  NoWindlassMotionDetected = 'No windlass motion detected',
-  RetrievalDockingDistanceReached = 'Retrieval docking distance reached',
-  EndOfRodeReached = 'End of rode reached',
-}
-
-export enum WindlassMonitoring {
-  ControllerUnderVoltageCutOut = 'Controller under voltage cut-out',
-  ControllerOverCurrentCutOut = 'Controller over current cut-out',
-  ControllerOverTemperatureCutOut = 'Controller over temperature cut-out',
-  ManufacturerDefined = 'Manufacturer defined',
-}
-
-export enum SimnetApModeBitfield {
-  Standby = 'Standby',
-  Heading = 'Heading',
-  Nav = 'Nav',
-  NoDrift = 'No Drift',
-  Wind = 'Wind',
-}
-
-export enum SimnetAlertBitfield {
-  NoGpsFix = 'No GPS fix',
-  NoActiveAutopilotControlUnit = 'No active autopilot control unit',
-  NoAutopilotComputer = 'No autopilot computer',
-  ApClutchOverload = 'AP clutch overload',
-  ApClutchDisengaged = 'AP clutch disengaged',
-  RudderControllerFault = 'Rudder controller fault',
-  NoRudderResponse = 'No rudder response',
-  RudderDriveOverload = 'Rudder drive overload',
-  HighDriveSupply = 'High drive supply',
-  LowDriveSupply = 'Low drive supply',
-  MemoryFail = 'Memory fail',
-  ApPositionDataMissing = 'AP position data missing',
-  ApSpeedDataMissing = 'AP speed data missing',
-  ApDepthDataMissing = 'AP depth data missing',
-  ApHeadingDataMissing = 'AP heading data missing',
-  ApNavDataMissing = 'AP nav data missing',
-  ApRudderDataMissing = 'AP rudder data missing',
-  ApWindDataMissing = 'AP wind data missing',
-  ApOffCourse = 'AP off course',
-  HighDriveTemperature = 'High drive temperature',
-  DriveInhibit = 'Drive inhibit',
-  RudderLimit = 'Rudder limit',
-  DriveComputerMissing = 'Drive computer missing',
-  DriveReadyMissing = 'Drive ready missing',
-  EvcComError = 'EVC com error',
-  EvcOverride = 'EVC override',
-  LowCanBusVoltage = 'Low CAN bus voltage',
-  CanBusSupplyOverload = 'CAN bus supply overload',
-  WindSensorBatteryLow = 'Wind sensor battery low',
-}
-
-export enum EntertainmentRepeatBitfield {
-  Song = 'Song',
-  PlayQueue = 'Play queue',
-}
-
-export enum EntertainmentShuffleBitfield {
-  PlayQueue = 'Play queue',
-  All = 'All',
-}
-
-export enum WpChange {
-  ChangeInMainDatapositionName = 'Change in main data (Position, Name)',
-  ChangeInSupplementaryParametersorNewAdded = 'Change in supplementary parameters (or new added)',
-  ChangedNumberOfWPsInRoutewpListAndorNameChangedadded = 'Changed number of WPs in Route/WP-List, and/or name changed/added',
-  RouteChangeSupplementaryParametersorNewAdded = 'Route: Change supplementary parameters (or new added)',
-  OtherNotSpecifiedChanged = 'Other not specified changed',
-}
-
-export enum WpCriticalParameters {
-  NavigationMethod = 'Navigation Method',
-  XteLimit = 'XTE Limit',
-}
+import * as enums from './enums'
 
 export interface PGN {
   pgn: number
-  prio: number
-  src: number
+  prio?: number
+  src?: number
   dst: number
-  timestamp: string
+  timestamp?: string
   input?: string[]
   description?: string
   fields?: any
@@ -2656,11 +18,11 @@ export interface PGN {
 */
 export interface PGN_59392 extends PGN {
   fields: {
-    control: IsoControl
+    control: enums.IsoControl
     groupFunction: number
     reserved: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2671,7 +33,7 @@ export interface PGN_59392 extends PGN {
 export interface PGN_59904 extends PGN {
   fields: {
     pgn: string
-}
+  }
 }
 
 /*
@@ -2683,7 +45,7 @@ export interface PGN_60160 extends PGN {
   fields: {
     sid: number
     data: number
-}
+  }
 }
 
 /*
@@ -2694,12 +56,12 @@ export interface PGN_60160 extends PGN {
 */
 export interface PGN_60416_Rts extends PGN {
   fields: {
-    groupFunctionCode: IsoCommand
+    groupFunctionCode: enums.IsoCommand
     messageSize: number
     packets: number
     packetsReply: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2710,12 +72,12 @@ export interface PGN_60416_Rts extends PGN {
 */
 export interface PGN_60416_Cts extends PGN {
   fields: {
-    groupFunctionCode: IsoCommand
+    groupFunctionCode: enums.IsoCommand
     maxPackets: number
     nextSid: number
     reserved: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2726,12 +88,12 @@ export interface PGN_60416_Cts extends PGN {
 */
 export interface PGN_60416_Eom extends PGN {
   fields: {
-    groupFunctionCode: IsoCommand
+    groupFunctionCode: enums.IsoCommand
     totalMessageSize: number
     totalNumberOfFramesReceived: number
     reserved: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2742,12 +104,12 @@ export interface PGN_60416_Eom extends PGN {
 */
 export interface PGN_60416_Bam extends PGN {
   fields: {
-    groupFunctionCode: IsoCommand
+    groupFunctionCode: enums.IsoCommand
     messageSize: number
     packets: number
     reserved: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2758,11 +120,11 @@ export interface PGN_60416_Bam extends PGN {
 */
 export interface PGN_60416_Abort extends PGN {
   fields: {
-    groupFunctionCode: IsoCommand
+    groupFunctionCode: enums.IsoCommand
     reason: number
     reserved: number
     pgn: string
-}
+  }
 }
 
 /*
@@ -2773,16 +135,16 @@ export interface PGN_60416_Abort extends PGN {
 export interface PGN_60928 extends PGN {
   fields: {
     uniqueNumber: number
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     deviceInstanceLower: number
     deviceInstanceUpper: number
-    deviceFunction: DeviceFunction
+    deviceFunction: enums.DeviceFunction
     spare: string
-    deviceClass: DeviceClass
+    deviceClass: enums.DeviceClass
     systemInstance: number
-    industryGroup: IndustryCode
+    industryGroup: enums.IndustryCode
     arbitraryAddressCapable: boolean
-}
+  }
 }
 
 /*
@@ -2794,15 +156,15 @@ export interface PGN_60928 extends PGN {
 */
 export interface PGN_61184_Raymarine_WirelessKeypadLightControl extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     variant: number
     wirelessSetting: number
     wiredSetting: number
     reserved8: number
-}
+  }
 }
 
 /*
@@ -2813,14 +175,14 @@ export interface PGN_61184_Raymarine_WirelessKeypadLightControl extends PGN {
 */
 export interface PGN_61184_Raymarine extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     PID: number
     variant: number
     beepControl: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -2831,12 +193,12 @@ export interface PGN_61184_Raymarine extends PGN {
 */
 export interface PGN_61184_VictronEnergy extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     registerId: number
     payload: number
-}
+  }
 }
 
 /*
@@ -2849,7 +211,7 @@ export interface PGN_65001 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -2862,7 +224,7 @@ export interface PGN_65002 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -2875,7 +237,7 @@ export interface PGN_65003 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -2888,7 +250,7 @@ export interface PGN_65004 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -2899,7 +261,7 @@ export interface PGN_65005 extends PGN {
   fields: {
     totalEnergyExport: number
     totalEnergyImport: number
-}
+  }
 }
 
 /*
@@ -2910,9 +272,9 @@ export interface PGN_65006 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -2923,7 +285,7 @@ export interface PGN_65007 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -2936,7 +298,7 @@ export interface PGN_65008 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -2947,9 +309,9 @@ export interface PGN_65009 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -2960,7 +322,7 @@ export interface PGN_65010 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -2973,7 +335,7 @@ export interface PGN_65011 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -2984,9 +346,9 @@ export interface PGN_65012 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -2997,7 +359,7 @@ export interface PGN_65013 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3010,7 +372,7 @@ export interface PGN_65014 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3021,9 +383,9 @@ export interface PGN_65015 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -3034,7 +396,7 @@ export interface PGN_65016 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3047,7 +409,7 @@ export interface PGN_65017 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3058,7 +420,7 @@ export interface PGN_65018 extends PGN {
   fields: {
     totalEnergyExport: number
     totalEnergyImport: number
-}
+  }
 }
 
 /*
@@ -3069,9 +431,9 @@ export interface PGN_65019 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -3082,7 +444,7 @@ export interface PGN_65020 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3095,7 +457,7 @@ export interface PGN_65021 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3106,9 +468,9 @@ export interface PGN_65022 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -3119,7 +481,7 @@ export interface PGN_65023 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3132,7 +494,7 @@ export interface PGN_65024 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3143,9 +505,9 @@ export interface PGN_65025 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -3156,7 +518,7 @@ export interface PGN_65026 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3169,7 +531,7 @@ export interface PGN_65027 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3180,9 +542,9 @@ export interface PGN_65028 extends PGN {
   fields: {
     reactivePower: number
     powerFactor: number
-    powerFactorLagging: PowerFactor
+    powerFactorLagging: enums.PowerFactor
     reserved: number
-}
+  }
 }
 
 /*
@@ -3193,7 +555,7 @@ export interface PGN_65029 extends PGN {
   fields: {
     realPower: number
     apparentPower: number
-}
+  }
 }
 
 /*
@@ -3206,7 +568,7 @@ export interface PGN_65030 extends PGN {
     lineNeutralAcRmsVoltage: number
     acFrequency: number
     acRmsCurrent: number
-}
+  }
 }
 
 /*
@@ -3217,17 +579,17 @@ export interface PGN_65030 extends PGN {
 export interface PGN_65240 extends PGN {
   fields: {
     uniqueNumber: number
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     deviceInstanceLower: number
     deviceInstanceUpper: number
-    deviceFunction: DeviceFunction
+    deviceFunction: enums.DeviceFunction
     reserved: number
-    deviceClass: DeviceClass
+    deviceClass: enums.DeviceClass
     systemInstance: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved10: number
     newSourceAddress: number
-}
+  }
 }
 
 /*
@@ -3236,12 +598,12 @@ export interface PGN_65240 extends PGN {
 */
 export interface PGN_65280 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     heave: number
     reserved5: number
-}
+  }
 }
 
 /*
@@ -3250,14 +612,14 @@ export interface PGN_65280 extends PGN {
 */
 export interface PGN_65284 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     bankInstance: number
     indicatorNumber: number
     breakerCurrent: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3268,12 +630,12 @@ export interface PGN_65284 extends PGN {
 */
 export interface PGN_65285_Airmar extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    bootState: BootState
+    industryCode: enums.IndustryCode
+    bootState: enums.BootState
     reserved5: number
-}
+  }
 }
 
 /*
@@ -3284,13 +646,13 @@ export interface PGN_65285_Airmar extends PGN {
 */
 export interface PGN_65285_Lowrance extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    temperatureSource: TemperatureSource
+    industryCode: enums.IndustryCode
+    temperatureSource: enums.TemperatureSource
     actualTemperature: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -3301,16 +663,16 @@ export interface PGN_65285_Lowrance extends PGN {
 */
 export interface PGN_65286_Chetco extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     instance: number
     dimmer1: number
     dimmer2: number
     dimmer3: number
     dimmer4: number
     control: number
-}
+  }
 }
 
 /*
@@ -3321,11 +683,11 @@ export interface PGN_65286_Chetco extends PGN {
 */
 export interface PGN_65286_Airmar extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3336,14 +698,14 @@ export interface PGN_65286_Airmar extends PGN {
 */
 export interface PGN_65287_Airmar extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     formatCode: number
-    accessLevel: AccessLevel
+    accessLevel: enums.AccessLevel
     reserved6: number
     accessSeedKey: number
-}
+  }
 }
 
 /*
@@ -3354,11 +716,11 @@ export interface PGN_65287_Airmar extends PGN {
 */
 export interface PGN_65287_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3367,15 +729,15 @@ export interface PGN_65287_Simrad extends PGN {
 */
 export interface PGN_65288 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
-    alarmStatus: SeatalkAlarmStatus
-    alarmId: SeatalkAlarmId
-    alarmGroup: SeatalkAlarmGroup
+    alarmStatus: enums.SeatalkAlarmStatus
+    alarmId: enums.SeatalkAlarmId
+    alarmGroup: enums.SeatalkAlarmGroup
     alarmPriority: number
-}
+  }
 }
 
 /*
@@ -3384,11 +746,11 @@ export interface PGN_65288 extends PGN {
 */
 export interface PGN_65289 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3397,11 +759,11 @@ export interface PGN_65289 extends PGN {
 */
 export interface PGN_65290 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3410,11 +772,11 @@ export interface PGN_65290 extends PGN {
 */
 export interface PGN_65292 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3425,11 +787,11 @@ export interface PGN_65292 extends PGN {
 */
 export interface PGN_65293_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3440,13 +802,13 @@ export interface PGN_65293_Simrad extends PGN {
 */
 export interface PGN_65293_DiverseYachtServices extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     instance: number
     reserved5: number
     loadCell: number
-}
+  }
 }
 
 /*
@@ -3456,15 +818,15 @@ export interface PGN_65293_DiverseYachtServices extends PGN {
 */
 export interface PGN_65302 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     reserved8: number
-}
+  }
 }
 
 /*
@@ -3477,14 +839,14 @@ export interface PGN_65302 extends PGN {
 */
 export interface PGN_65305_Simrad_Status extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    model: SimnetDeviceModel
-    report: SimnetDeviceReport
-    status: SimnetApStatus
+    industryCode: enums.IndustryCode
+    model: enums.SimnetDeviceModel
+    report: enums.SimnetDeviceReport
+    status: enums.SimnetApStatus
     spare7: string
-}
+  }
 }
 
 /*
@@ -3497,13 +859,13 @@ export interface PGN_65305_Simrad_Status extends PGN {
 */
 export interface PGN_65305_Simrad_SendStatus extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    model: SimnetDeviceModel
-    report: SimnetDeviceReport
+    industryCode: enums.IndustryCode
+    model: enums.SimnetDeviceModel
+    report: enums.SimnetDeviceReport
     spare6: string
-}
+  }
 }
 
 /*
@@ -3516,14 +878,14 @@ export interface PGN_65305_Simrad_SendStatus extends PGN {
 */
 export interface PGN_65305_Simrad_Mode extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    model: SimnetDeviceModel
-    report: SimnetDeviceReport
-    mode: SimnetApModeBitfield[]
+    industryCode: enums.IndustryCode
+    model: enums.SimnetDeviceModel
+    report: enums.SimnetDeviceReport
+    mode: enums.SimnetApModeBitfield[]
     spare7: string
-}
+  }
 }
 
 /*
@@ -3536,13 +898,13 @@ export interface PGN_65305_Simrad_Mode extends PGN {
 */
 export interface PGN_65305_Simrad_SendMode extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    model: SimnetDeviceModel
-    report: SimnetDeviceReport
+    industryCode: enums.IndustryCode
+    model: enums.SimnetDeviceModel
+    report: enums.SimnetDeviceReport
     spare6: string
-}
+  }
 }
 
 /*
@@ -3555,13 +917,13 @@ export interface PGN_65305_Simrad_SendMode extends PGN {
 */
 export interface PGN_65305_Simrad_SailingProcessorStatus extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    model: SimnetDeviceModel
-    report: SimnetDeviceReport
+    industryCode: enums.IndustryCode
+    model: enums.SimnetDeviceModel
+    report: enums.SimnetDeviceReport
     data: number
-}
+  }
 }
 
 /*
@@ -3570,14 +932,14 @@ export interface PGN_65305_Simrad_SailingProcessorStatus extends PGN {
 */
 export interface PGN_65309 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     status: number
     batteryStatus: number
     batteryChargeStatus: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3586,13 +948,13 @@ export interface PGN_65309 extends PGN {
 */
 export interface PGN_65312 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     unknown: number
     signalStrength: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -3602,16 +964,16 @@ export interface PGN_65312 extends PGN {
 */
 export interface PGN_65340 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
     reserved9: number
-}
+  }
 }
 
 /*
@@ -3620,14 +982,14 @@ export interface PGN_65340 extends PGN {
 */
 export interface PGN_65341 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    mode: SimnetApMode
+    mode: enums.SimnetApMode
     reserved6: number
     angle: number
-}
+  }
 }
 
 /*
@@ -3636,13 +998,13 @@ export interface PGN_65341 extends PGN {
 */
 export interface PGN_65345 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     windDatum: number
     rollingAverageWindAngle: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -3656,7 +1018,7 @@ export interface PGN_65350 extends PGN {
     c: number
     d: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -3665,14 +1027,14 @@ export interface PGN_65350 extends PGN {
 */
 export interface PGN_65359 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     headingTrue: number
     headingMagnetic: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3681,14 +1043,14 @@ export interface PGN_65359 extends PGN {
 */
 export interface PGN_65360 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     targetHeadingTrue: number
     targetHeadingMagnetic: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3697,13 +1059,13 @@ export interface PGN_65360 extends PGN {
 */
 export interface PGN_65361 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    alarmId: SeatalkAlarmId
-    alarmGroup: SeatalkAlarmGroup
+    industryCode: enums.IndustryCode
+    alarmId: enums.SeatalkAlarmId
+    alarmGroup: enums.SeatalkAlarmGroup
     reserved6: number
-}
+  }
 }
 
 /*
@@ -3712,9 +1074,9 @@ export interface PGN_65361 extends PGN {
 */
 export interface PGN_65371 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     firstKey: number
     secondKey: number
@@ -3723,7 +1085,7 @@ export interface PGN_65371 extends PGN {
     reserved9: number
     encoderPosition: number
     reserved11: number
-}
+  }
 }
 
 /*
@@ -3732,14 +1094,14 @@ export interface PGN_65371 extends PGN {
 */
 export interface PGN_65374 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     variant: number
     status: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3748,14 +1110,14 @@ export interface PGN_65374 extends PGN {
 */
 export interface PGN_65379 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    pilotMode: SeatalkPilotMode16
+    industryCode: enums.IndustryCode
+    pilotMode: enums.SeatalkPilotMode16
     subMode: number
     pilotModeData: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3764,13 +1126,13 @@ export interface PGN_65379 extends PGN {
 */
 export interface PGN_65408 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
-    depthQualityFactor: AirmarDepthQualityFactor
+    depthQualityFactor: enums.AirmarDepthQualityFactor
     reserved6: number
-}
+  }
 }
 
 /*
@@ -3779,14 +1141,14 @@ export interface PGN_65408 extends PGN {
 */
 export interface PGN_65409 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     durationOfInterval: string
     numberOfPulsesReceived: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3795,14 +1157,14 @@ export interface PGN_65409 extends PGN {
 */
 export interface PGN_65410 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     internalDeviceTemperature: number
     supplyVoltage: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -3812,16 +1174,16 @@ export interface PGN_65410 extends PGN {
 */
 export interface PGN_65420 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
     reserved9: number
-}
+  }
 }
 
 /*
@@ -3830,11 +1192,11 @@ export interface PGN_65420 extends PGN {
 */
 export interface PGN_65480 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-}
+  }
 }
 
 /*
@@ -3844,14 +1206,14 @@ export interface PGN_65480 extends PGN {
 */
 export interface PGN_126208 extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
     transmissionInterval: string
     transmissionIntervalOffset: string
     numberOfParameters: number
     parameter: string
     value: string
-}
+  }
 }
 
 /*
@@ -3862,14 +1224,14 @@ export interface PGN_126208 extends PGN {
 */
 export interface PGN_126208_Command extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    priority: Priority
+    priority: enums.Priority
     reserved: number
     numberOfParameters: number
     parameter: string
     value: string
-}
+  }
 }
 
 /*
@@ -3880,13 +1242,13 @@ export interface PGN_126208_Command extends PGN {
 */
 export interface PGN_126208_Acknowledge extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    pgnErrorCode: PgnErrorCode
-    transmissionIntervalPriorityErrorCode: TransmissionInterval
+    pgnErrorCode: enums.PgnErrorCode
+    transmissionIntervalPriorityErrorCode: enums.TransmissionInterval
     numberOfParameters: number
-    parameter: ParameterField
-}
+    parameter: enums.ParameterField
+  }
 }
 
 /*
@@ -3897,18 +1259,18 @@ export interface PGN_126208_Acknowledge extends PGN {
 */
 export interface PGN_126208_ReadFields extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     uniqueId: number
     numberOfSelectionPairs: number
     numberOfParameters: number
     selectionParameter: string
     selectionValue: string
     parameter: string
-}
+  }
 }
 
 /*
@@ -3919,11 +1281,11 @@ export interface PGN_126208_ReadFields extends PGN {
 */
 export interface PGN_126208_ReadFieldsReply extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     uniqueId: number
     numberOfSelectionPairs: number
     numberOfParameters: number
@@ -3931,7 +1293,7 @@ export interface PGN_126208_ReadFieldsReply extends PGN {
     selectionValue: string
     parameter: string
     value: string
-}
+  }
 }
 
 /*
@@ -3942,11 +1304,11 @@ export interface PGN_126208_ReadFieldsReply extends PGN {
 */
 export interface PGN_126208_WriteFields extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     uniqueId: number
     numberOfSelectionPairs: number
     numberOfParameters: number
@@ -3954,7 +1316,7 @@ export interface PGN_126208_WriteFields extends PGN {
     selectionValue: string
     parameter: string
     value: string
-}
+  }
 }
 
 /*
@@ -3965,11 +1327,11 @@ export interface PGN_126208_WriteFields extends PGN {
 */
 export interface PGN_126208_WriteFieldsReply extends PGN {
   fields: {
-    functionCode: GroupFunction
+    functionCode: enums.GroupFunction
     pgn: string
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     uniqueId: number
     numberOfSelectionPairs: number
     numberOfParameters: number
@@ -3977,7 +1339,7 @@ export interface PGN_126208_WriteFieldsReply extends PGN {
     selectionValue: string
     parameter: string
     value: string
-}
+  }
 }
 
 /*
@@ -3986,9 +1348,9 @@ export interface PGN_126208_WriteFieldsReply extends PGN {
 */
 export interface PGN_126464 extends PGN {
   fields: {
-    functionCode: PgnListFunction
+    functionCode: enums.PgnListFunction
     pgn: string
-}
+  }
 }
 
 /*
@@ -4001,17 +1363,17 @@ export interface PGN_126464 extends PGN {
 */
 export interface PGN_126720_Raymarine__0X81F0__0X84 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     command: number
     unknown1: number
-    pilotMode: SeatalkPilotMode
+    pilotMode: enums.SeatalkPilotMode
     subMode: number
     pilotModeData: number
     unknown2: number
-}
+  }
 }
 
 /*
@@ -4023,14 +1385,14 @@ export interface PGN_126720_Raymarine__0X81F0__0X84 extends PGN {
 */
 export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     unknown: number
     sourceId: number
-    command: FusionCommand
-}
+    command: enums.FusionCommand
+  }
 }
 
 /*
@@ -4042,14 +1404,14 @@ export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
 */
 export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     unknown: number
     sourceId: number
-    command: FusionSiriusCommand
-}
+    command: enums.FusionSiriusCommand
+  }
 }
 
 /*
@@ -4061,12 +1423,12 @@ export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
 */
 export interface PGN_126720_FusionElectronics_RequestStatus extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: FusionMessageId
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.FusionMessageId
     unknown: number
-}
+  }
 }
 
 /*
@@ -4078,13 +1440,13 @@ export interface PGN_126720_FusionElectronics_RequestStatus extends PGN {
 */
 export interface PGN_126720_FusionElectronics_Source extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: FusionMessageId
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.FusionMessageId
     unknown: number
     sourceId: number
-}
+  }
 }
 
 /*
@@ -4096,12 +1458,12 @@ export interface PGN_126720_FusionElectronics_Source extends PGN {
 */
 export interface PGN_126720_FusionElectronics_23 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: FusionMessageId
-    command: FusionMuteCommand
-}
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.FusionMessageId
+    command: enums.FusionMuteCommand
+  }
 }
 
 /*
@@ -4113,14 +1475,14 @@ export interface PGN_126720_FusionElectronics_23 extends PGN {
 */
 export interface PGN_126720_FusionElectronics_SetZoneVolume extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: FusionMessageId
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.FusionMessageId
     unknown: number
     zone: number
     volume: number
-}
+  }
 }
 
 /*
@@ -4132,16 +1494,16 @@ export interface PGN_126720_FusionElectronics_SetZoneVolume extends PGN {
 */
 export interface PGN_126720_FusionElectronics_SetAllVolumes extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: FusionMessageId
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.FusionMessageId
     unknown: number
     zone1: number
     zone2: number
     zone3: number
     zone4: number
-}
+  }
 }
 
 /*
@@ -4154,16 +1516,16 @@ export interface PGN_126720_FusionElectronics_SetAllVolumes extends PGN {
 */
 export interface PGN_126720_Raymarine__0X81F0__0X86 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     command: number
     device: number
-    key: SeatalkKeystroke
+    key: enums.SeatalkKeystroke
     keyinverted: number
     unknownData: number
-}
+  }
 }
 
 /*
@@ -4176,14 +1538,14 @@ export interface PGN_126720_Raymarine__0X81F0__0X86 extends PGN {
 */
 export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
     command: number
     reserved6: number
-    device: SeatalkDeviceId
-}
+    device: enums.SeatalkDeviceId
+  }
 }
 
 /*
@@ -4195,16 +1557,16 @@ export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
 */
 export interface PGN_126720_Raymarine__0X0C8C extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
-    group: SeatalkNetworkGroup
+    group: enums.SeatalkNetworkGroup
     unknown1: number
     command: number
     brightness: number
     unknown2: number
-}
+  }
 }
 
 /*
@@ -4217,16 +1579,16 @@ export interface PGN_126720_Raymarine__0X0C8C extends PGN {
 */
 export interface PGN_126720_Raymarine__0X0C8C_Color extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
-    group: SeatalkNetworkGroup
+    group: enums.SeatalkNetworkGroup
     unknown1: number
     command: number
-    color: SeatalkDisplayColor
+    color: enums.SeatalkDisplayColor
     unknown2: number
-}
+  }
 }
 
 /*
@@ -4238,14 +1600,14 @@ export interface PGN_126720_Raymarine__0X0C8C_Color extends PGN {
 */
 export interface PGN_126720_Airmar_AttitudeOffsets extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     azimuthOffset: number
     pitchOffset: number
     rollOffset: number
-}
+  }
 }
 
 /*
@@ -4257,12 +1619,12 @@ export interface PGN_126720_Airmar_AttitudeOffsets extends PGN {
 */
 export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
-    calibrateFunction: AirmarCalibrateFunction
-    calibrationStatus: AirmarCalibrateStatus
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
+    calibrateFunction: enums.AirmarCalibrateFunction
+    calibrationStatus: enums.AirmarCalibrateStatus
     verifyScore: number
     xAxisGainValue: number
     yAxisGainValue: number
@@ -4273,7 +1635,7 @@ export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
     xAxisAngularOffset: number
     pitchAndRollDamping: string
     compassRateGyroDamping: string
-}
+  }
 }
 
 /*
@@ -4285,13 +1647,13 @@ export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
 */
 export interface PGN_126720_Airmar_TrueWindOptions extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     cogSubstitutionForHdg: boolean
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4303,13 +1665,13 @@ export interface PGN_126720_Airmar_TrueWindOptions extends PGN {
 */
 export interface PGN_126720_Airmar_SimulateMode extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
-    simulateMode: OffOn
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
+    simulateMode: enums.OffOn
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4321,13 +1683,13 @@ export interface PGN_126720_Airmar_SimulateMode extends PGN {
 */
 export interface PGN_126720_Airmar_CalibrateDepth extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     speedOfSoundMode: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4339,14 +1701,14 @@ export interface PGN_126720_Airmar_CalibrateDepth extends PGN {
 */
 export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     numberOfPairsOfDataPoints: number
     inputFrequency: number
     outputSpeed: number
-}
+  }
 }
 
 /*
@@ -4358,14 +1720,14 @@ export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
 */
 export interface PGN_126720_Airmar_CalibrateTemperature extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
-    temperatureInstance: AirmarTemperatureInstance
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
+    temperatureInstance: enums.AirmarTemperatureInstance
     reserved6: number
     temperatureOffset: number
-}
+  }
 }
 
 /*
@@ -4377,14 +1739,14 @@ export interface PGN_126720_Airmar_CalibrateTemperature extends PGN {
 */
 export interface PGN_126720_Airmar_SpeedFilter extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     filterType: number
     reserved6: number
     sampleInterval: string
-}
+  }
 }
 
 /*
@@ -4397,15 +1759,15 @@ export interface PGN_126720_Airmar_SpeedFilter extends PGN {
 */
 export interface PGN_126720_Airmar_SpeedFilter_IirFilter extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     filterType: number
     reserved6: number
     sampleInterval: string
     filterDuration: string
-}
+  }
 }
 
 /*
@@ -4417,14 +1779,14 @@ export interface PGN_126720_Airmar_SpeedFilter_IirFilter extends PGN {
 */
 export interface PGN_126720_Airmar_TemperatureFilter extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     filterType: number
     reserved6: number
     sampleInterval: string
-}
+  }
 }
 
 /*
@@ -4437,15 +1799,15 @@ export interface PGN_126720_Airmar_TemperatureFilter extends PGN {
 */
 export interface PGN_126720_Airmar_TemperatureFilter_IirFilter extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
     filterType: number
     reserved6: number
     sampleInterval: string
     filterDuration: string
-}
+  }
 }
 
 /*
@@ -4457,13 +1819,13 @@ export interface PGN_126720_Airmar_TemperatureFilter_IirFilter extends PGN {
 */
 export interface PGN_126720_Airmar_Nmea2000Options extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: AirmarCommand
-    transmissionInterval: AirmarTransmissionInterval
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.AirmarCommand
+    transmissionInterval: enums.AirmarTransmissionInterval
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4474,11 +1836,11 @@ export interface PGN_126720_Airmar_Nmea2000Options extends PGN {
 */
 export interface PGN_126720_Airmar extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     proprietaryId: number
-}
+  }
 }
 
 /*
@@ -4489,14 +1851,14 @@ export interface PGN_126720_Airmar extends PGN {
 */
 export interface PGN_126720_Maretron extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     productCode: number
     softwareCode: number
     command: number
     status: number
-}
+  }
 }
 
 /*
@@ -4511,18 +1873,18 @@ export interface PGN_126720_Maretron extends PGN {
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     unknownId1: number
     unknownId2: number
     unknownId3: number
     unknownId4: number
     spare8: string
-    mode: GarminColorMode
+    mode: enums.GarminColorMode
     spare10: string
-    backlight: GarminBacklightLevel
-}
+    backlight: enums.GarminBacklightLevel
+  }
 }
 
 /*
@@ -4538,18 +1900,18 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     unknownId1: number
     unknownId2: number
     unknownId3: number
     unknownId4: number
     spare8: string
-    mode: GarminColorMode
+    mode: enums.GarminColorMode
     spare10: string
-    backlight: GarminBacklightLevel
-}
+    backlight: enums.GarminBacklightLevel
+  }
 }
 
 /*
@@ -4565,18 +1927,18 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night exten
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     unknownId1: number
     unknownId2: number
     unknownId3: number
     unknownId4: number
     spare8: string
-    mode: GarminColorMode
+    mode: enums.GarminColorMode
     spare10: string
-    color: GarminColor
-}
+    color: enums.GarminColor
+  }
 }
 
 /*
@@ -4585,8 +1947,8 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color exten
 */
 export interface PGN_126983 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4602,11 +1964,11 @@ export interface PGN_126983 extends PGN {
     escalationSupport: boolean
     reserved: number
     acknowledgeSourceNetworkIdName: string
-    triggerCondition: AlertTriggerCondition
-    thresholdStatus: AlertThresholdStatus
+    triggerCondition: enums.AlertTriggerCondition
+    thresholdStatus: enums.AlertThresholdStatus
     alertPriority: number
-    alertState: AlertState
-}
+    alertState: enums.AlertState
+  }
 }
 
 /*
@@ -4615,8 +1977,8 @@ export interface PGN_126983 extends PGN {
 */
 export interface PGN_126984 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4625,9 +1987,9 @@ export interface PGN_126984 extends PGN {
     dataSourceIndexSource: number
     alertOccurrenceNumber: number
     acknowledgeSourceNetworkIdName: string
-    responseCommand: AlertResponseCommand
+    responseCommand: enums.AlertResponseCommand
     reserved: number
-}
+  }
 }
 
 /*
@@ -4636,8 +1998,8 @@ export interface PGN_126984 extends PGN {
 */
 export interface PGN_126985 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4645,10 +2007,10 @@ export interface PGN_126985 extends PGN {
     dataSourceInstance: number
     dataSourceIndexSource: number
     alertOccurrenceNumber: number
-    languageId: AlertLanguageId
+    languageId: enums.AlertLanguageId
     alertTextDescription: string
     alertLocationTextDescription: string
-}
+  }
 }
 
 /*
@@ -4657,8 +2019,8 @@ export interface PGN_126985 extends PGN {
 */
 export interface PGN_126986 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4672,7 +2034,7 @@ export interface PGN_126986 extends PGN {
     reactivationPeriod: number
     temporarySilencePeriod: number
     escalationPeriod: number
-}
+  }
 }
 
 /*
@@ -4681,8 +2043,8 @@ export interface PGN_126986 extends PGN {
 */
 export interface PGN_126987 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4695,7 +2057,7 @@ export interface PGN_126987 extends PGN {
     triggerMethod: number
     thresholdDataFormat: number
     thresholdLevel: number
-}
+  }
 }
 
 /*
@@ -4704,8 +2066,8 @@ export interface PGN_126987 extends PGN {
 */
 export interface PGN_126988 extends PGN {
   fields: {
-    alertType: AlertType
-    alertCategory: AlertCategory
+    alertType: enums.AlertType
+    alertCategory: enums.AlertCategory
     alertSystem: number
     alertSubSystem: number
     alertId: number
@@ -4717,7 +2079,7 @@ export interface PGN_126988 extends PGN {
     valueParameterNumber: number
     valueDataFormat: number
     valueData: number
-}
+  }
 }
 
 /*
@@ -4728,11 +2090,11 @@ export interface PGN_126988 extends PGN {
 export interface PGN_126992 extends PGN {
   fields: {
     sid: number
-    source: SystemTime
+    source: enums.SystemTime
     reserved: number
     date: string
     time: string
-}
+  }
 }
 
 /*
@@ -4744,11 +2106,11 @@ export interface PGN_126993 extends PGN {
   fields: {
     dataTransmitOffset: string
     sequenceCounter: number
-    controller1State: ControllerState
-    controller2State: ControllerState
-    equipmentStatus: EquipmentStatus
+    controller1State: enums.ControllerState
+    controller2State: enums.ControllerState
+    equipmentStatus: enums.EquipmentStatus
     reserved: number
-}
+  }
 }
 
 /*
@@ -4764,9 +2126,9 @@ export interface PGN_126996 extends PGN {
     softwareVersionCode: string
     modelVersion: string
     modelSerialCode: string
-    certificationLevel: CertificationLevel
+    certificationLevel: enums.CertificationLevel
     loadEquivalency: number
-}
+  }
 }
 
 /*
@@ -4779,7 +2141,7 @@ export interface PGN_126998 extends PGN {
     installationDescription1: string
     installationDescription2: string
     manufacturerInformation: string
-}
+  }
 }
 
 /*
@@ -4800,23 +2162,23 @@ export interface PGN_127233 extends PGN {
   fields: {
     sid: number
     mobEmitterId: number
-    manOverboardStatus: MobStatus
+    manOverboardStatus: enums.MobStatus
     reserved: number
     activationTime: string
-    positionSource: MobPositionSource
+    positionSource: enums.MobPositionSource
     reserved7: number
     positionDate: string
     positionTime: string
     latitude: number
     longitude: number
-    cogReference: DirectionReference
+    cogReference: enums.DirectionReference
     reserved13: number
     cog: number
     sog: number
     mmsiOfVesselOfOrigin: string
-    mobEmitterBatteryLowStatus: LowBattery
+    mobEmitterBatteryLowStatus: enums.LowBattery
     reserved18: number
-}
+  }
 }
 
 /*
@@ -4829,11 +2191,11 @@ export interface PGN_127237 extends PGN {
     offHeadingLimitExceeded: boolean
     offTrackLimitExceeded: boolean
     override: boolean
-    steeringMode: SteeringMode
-    turnMode: TurnMode
-    headingReference: DirectionReference
+    steeringMode: enums.SteeringMode
+    turnMode: enums.TurnMode
+    headingReference: enums.DirectionReference
     reserved: number
-    commandedRudderDirection: DirectionRudder
+    commandedRudderDirection: enums.DirectionRudder
     commandedRudderAngle: number
     headingToSteerCourse: number
     track: number
@@ -4843,7 +2205,7 @@ export interface PGN_127237 extends PGN {
     rateOfTurnOrder: number
     offTrackLimit: number
     vesselHeading: number
-}
+  }
 }
 
 /*
@@ -4853,12 +2215,12 @@ export interface PGN_127237 extends PGN {
 export interface PGN_127245 extends PGN {
   fields: {
     instance: number
-    directionOrder: DirectionRudder
+    directionOrder: enums.DirectionRudder
     reserved: number
     angleOrder: number
     position: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4871,9 +2233,9 @@ export interface PGN_127250 extends PGN {
     heading: number
     deviation: number
     variation: number
-    reference: DirectionReference
+    reference: enums.DirectionReference
     reserved: number
-}
+  }
 }
 
 /*
@@ -4885,7 +2247,7 @@ export interface PGN_127251 extends PGN {
     sid: number
     rate: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -4897,7 +2259,7 @@ export interface PGN_127252 extends PGN {
     sid: number
     heave: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -4911,7 +2273,7 @@ export interface PGN_127257 extends PGN {
     pitch: number
     roll: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -4921,12 +2283,12 @@ export interface PGN_127257 extends PGN {
 export interface PGN_127258 extends PGN {
   fields: {
     sid: number
-    source: MagneticVariation
+    source: enums.MagneticVariation
     reserved: number
     ageOfService: string
     variation: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -4935,12 +2297,12 @@ export interface PGN_127258 extends PGN {
 */
 export interface PGN_127488 extends PGN {
   fields: {
-    instance: EngineInstance
+    instance: enums.EngineInstance
     speed: number
     boostPressure: number
     tiltTrim: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -4949,7 +2311,7 @@ export interface PGN_127488 extends PGN {
 */
 export interface PGN_127489 extends PGN {
   fields: {
-    instance: EngineInstance
+    instance: enums.EngineInstance
     oilPressure: number
     oilTemperature: number
     temperature: number
@@ -4959,11 +2321,11 @@ export interface PGN_127489 extends PGN {
     coolantPressure: number
     fuelPressure: number
     reserved: number
-    discreteStatus1: EngineStatus1[]
-    discreteStatus2: EngineStatus2[]
+    discreteStatus1: enums.EngineStatus1[]
+    discreteStatus2: enums.EngineStatus2[]
     engineLoad: number
     engineTorque: number
-}
+  }
 }
 
 /*
@@ -4981,7 +2343,7 @@ export interface PGN_127490 extends PGN {
     coolantTemperature: number
     gearTemperature: number
     shaftTorque: number
-}
+  }
 }
 
 /*
@@ -5001,7 +2363,7 @@ export interface PGN_127491 extends PGN {
     maxChargeCurrent: number
     coolingSystemStatus: number
     heatingSystemStatus: number
-}
+  }
 }
 
 /*
@@ -5010,14 +2372,14 @@ export interface PGN_127491 extends PGN {
 */
 export interface PGN_127493 extends PGN {
   fields: {
-    instance: EngineInstance
-    transmissionGear: GearStatus
+    instance: enums.EngineInstance
+    transmissionGear: enums.GearStatus
     reserved: number
     oilPressure: number
     oilTemperature: number
     discreteStatus1: number
     reserved7: number
-}
+  }
 }
 
 /*
@@ -5040,7 +2402,7 @@ export interface PGN_127494 extends PGN {
     motorDcVoltageDeratingThreshold: number
     motorDcVoltageCutOffThreshold: number
     driveMotorHours: string
-}
+  }
 }
 
 /*
@@ -5066,7 +2428,7 @@ export interface PGN_127495 extends PGN {
     reserved14: number
     maximumChargeSoc: number
     minimumChargeSoc: number
-}
+  }
 }
 
 /*
@@ -5079,7 +2441,7 @@ export interface PGN_127496 extends PGN {
     distanceToEmpty: number
     estimatedFuelRemaining: number
     tripRunTime: string
-}
+  }
 }
 
 /*
@@ -5088,12 +2450,12 @@ export interface PGN_127496 extends PGN {
 */
 export interface PGN_127497 extends PGN {
   fields: {
-    instance: EngineInstance
+    instance: enums.EngineInstance
     tripFuelUsed: number
     fuelRateAverage: number
     fuelRateEconomy: number
     instantaneousFuelEconomy: number
-}
+  }
 }
 
 /*
@@ -5102,11 +2464,11 @@ export interface PGN_127497 extends PGN {
 */
 export interface PGN_127498 extends PGN {
   fields: {
-    instance: EngineInstance
+    instance: enums.EngineInstance
     ratedEngineSpeed: number
     vin: string
     softwareId: string
-}
+  }
 }
 
 /*
@@ -5123,7 +2485,7 @@ export interface PGN_127500 extends PGN {
     pwmDutyCycle: number
     timeon: number
     timeoff: number
-}
+  }
 }
 
 /*
@@ -5133,35 +2495,35 @@ export interface PGN_127500 extends PGN {
 export interface PGN_127501 extends PGN {
   fields: {
     instance: number
-    indicator1: OffOn
-    indicator2: OffOn
-    indicator3: OffOn
-    indicator4: OffOn
-    indicator5: OffOn
-    indicator6: OffOn
-    indicator7: OffOn
-    indicator8: OffOn
-    indicator9: OffOn
-    indicator10: OffOn
-    indicator11: OffOn
-    indicator12: OffOn
-    indicator13: OffOn
-    indicator14: OffOn
-    indicator15: OffOn
-    indicator16: OffOn
-    indicator17: OffOn
-    indicator18: OffOn
-    indicator19: OffOn
-    indicator20: OffOn
-    indicator21: OffOn
-    indicator22: OffOn
-    indicator23: OffOn
-    indicator24: OffOn
-    indicator25: OffOn
-    indicator26: OffOn
-    indicator27: OffOn
-    indicator28: OffOn
-}
+    indicator1: enums.OffOn
+    indicator2: enums.OffOn
+    indicator3: enums.OffOn
+    indicator4: enums.OffOn
+    indicator5: enums.OffOn
+    indicator6: enums.OffOn
+    indicator7: enums.OffOn
+    indicator8: enums.OffOn
+    indicator9: enums.OffOn
+    indicator10: enums.OffOn
+    indicator11: enums.OffOn
+    indicator12: enums.OffOn
+    indicator13: enums.OffOn
+    indicator14: enums.OffOn
+    indicator15: enums.OffOn
+    indicator16: enums.OffOn
+    indicator17: enums.OffOn
+    indicator18: enums.OffOn
+    indicator19: enums.OffOn
+    indicator20: enums.OffOn
+    indicator21: enums.OffOn
+    indicator22: enums.OffOn
+    indicator23: enums.OffOn
+    indicator24: enums.OffOn
+    indicator25: enums.OffOn
+    indicator26: enums.OffOn
+    indicator27: enums.OffOn
+    indicator28: enums.OffOn
+  }
 }
 
 /*
@@ -5171,35 +2533,35 @@ export interface PGN_127501 extends PGN {
 export interface PGN_127502 extends PGN {
   fields: {
     instance: number
-    switch1: OffOnControl
-    switch2: OffOnControl
-    switch3: OffOnControl
-    switch4: OffOnControl
-    switch5: OffOnControl
-    switch6: OffOnControl
-    switch7: OffOnControl
-    switch8: OffOnControl
-    switch9: OffOnControl
-    switch10: OffOnControl
-    switch11: OffOnControl
-    switch12: OffOnControl
-    switch13: OffOnControl
-    switch14: OffOnControl
-    switch15: OffOnControl
-    switch16: OffOnControl
-    switch17: OffOnControl
-    switch18: OffOnControl
-    switch19: OffOnControl
-    switch20: OffOnControl
-    switch21: OffOnControl
-    switch22: OffOnControl
-    switch23: OffOnControl
-    switch24: OffOnControl
-    switch25: OffOnControl
-    switch26: OffOnControl
-    switch27: OffOnControl
-    switch28: OffOnControl
-}
+    switch1: enums.OffOnControl
+    switch2: enums.OffOnControl
+    switch3: enums.OffOnControl
+    switch4: enums.OffOnControl
+    switch5: enums.OffOnControl
+    switch6: enums.OffOnControl
+    switch7: enums.OffOnControl
+    switch8: enums.OffOnControl
+    switch9: enums.OffOnControl
+    switch10: enums.OffOnControl
+    switch11: enums.OffOnControl
+    switch12: enums.OffOnControl
+    switch13: enums.OffOnControl
+    switch14: enums.OffOnControl
+    switch15: enums.OffOnControl
+    switch16: enums.OffOnControl
+    switch17: enums.OffOnControl
+    switch18: enums.OffOnControl
+    switch19: enums.OffOnControl
+    switch20: enums.OffOnControl
+    switch21: enums.OffOnControl
+    switch22: enums.OffOnControl
+    switch23: enums.OffOnControl
+    switch24: enums.OffOnControl
+    switch25: enums.OffOnControl
+    switch26: enums.OffOnControl
+    switch27: enums.OffOnControl
+    switch28: enums.OffOnControl
+  }
 }
 
 /*
@@ -5210,8 +2572,8 @@ export interface PGN_127503 extends PGN {
   fields: {
     instance: number
     numberOfLines: number
-    line: AcLine
-    acceptability: Acceptability
+    line: enums.AcLine
+    acceptability: enums.Acceptability
     reserved: number
     voltage: number
     current: number
@@ -5220,7 +2582,7 @@ export interface PGN_127503 extends PGN {
     realPower: number
     reactivePower: number
     powerFactor: number
-}
+  }
 }
 
 /*
@@ -5231,8 +2593,8 @@ export interface PGN_127504 extends PGN {
   fields: {
     instance: number
     numberOfLines: number
-    line: Line
-    waveform: Waveform
+    line: enums.Line
+    waveform: enums.Waveform
     reserved: number
     voltage: number
     current: number
@@ -5241,7 +2603,7 @@ export interface PGN_127504 extends PGN {
     realPower: number
     reactivePower: number
     powerFactor: number
-}
+  }
 }
 
 /*
@@ -5251,11 +2613,11 @@ export interface PGN_127504 extends PGN {
 export interface PGN_127505 extends PGN {
   fields: {
     instance: number
-    type: TankType
+    type: enums.TankType
     level: number
     capacity: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5266,13 +2628,13 @@ export interface PGN_127506 extends PGN {
   fields: {
     sid: number
     instance: number
-    dcType: DcSource
+    dcType: enums.DcSource
     stateOfCharge: number
     stateOfHealth: number
     timeRemaining: string
     rippleVoltage: number
     remainingCapacity: number
-}
+  }
 }
 
 /*
@@ -5283,13 +2645,13 @@ export interface PGN_127507 extends PGN {
   fields: {
     instance: number
     batteryInstance: number
-    operatingState: ChargerState
-    chargeMode: ChargerMode
-    enabled: OffOn
-    equalizationPending: OffOn
+    operatingState: enums.ChargerState
+    chargeMode: enums.ChargerMode
+    enabled: enums.OffOn
+    equalizationPending: enums.OffOn
     reserved: number
     equalizationTimeRemaining: string
-}
+  }
 }
 
 /*
@@ -5303,7 +2665,7 @@ export interface PGN_127508 extends PGN {
     current: number
     temperature: number
     sid: number
-}
+  }
 }
 
 /*
@@ -5316,10 +2678,10 @@ export interface PGN_127509 extends PGN {
     instance: number
     acInstance: number
     dcInstance: number
-    operatingState: InverterState
-    inverterEnable: OffOn
+    operatingState: enums.InverterState
+    inverterEnable: enums.OffOn
     reserved: number
-}
+  }
 }
 
 /*
@@ -5330,16 +2692,16 @@ export interface PGN_127510 extends PGN {
   fields: {
     instance: number
     batteryInstance: number
-    chargerEnableDisable: OffOn
+    chargerEnableDisable: enums.OffOn
     reserved: number
     chargeCurrentLimit: number
-    chargingAlgorithm: ChargingAlgorithm
-    chargerMode: ChargerMode
-    estimatedTemperature: DeviceTempState
-    equalizeOneTimeEnableDisable: OffOn
-    overChargeEnableDisable: OffOn
+    chargingAlgorithm: enums.ChargingAlgorithm
+    chargerMode: enums.ChargerMode
+    estimatedTemperature: enums.DeviceTempState
+    equalizeOneTimeEnableDisable: enums.OffOn
+    overChargeEnableDisable: enums.OffOn
     equalizeTime: string
-}
+  }
 }
 
 /*
@@ -5351,12 +2713,12 @@ export interface PGN_127511 extends PGN {
     instance: number
     acInstance: number
     dcInstance: number
-    inverterEnableDisable: OffOn
-    inverterMode: InverterMode
-    loadSenseEnableDisable: OffOn
+    inverterEnableDisable: enums.OffOn
+    inverterMode: enums.InverterMode
+    loadSenseEnableDisable: enums.OffOn
     loadSensePowerThreshold: number
     loadSenseInterval: string
-}
+  }
 }
 
 /*
@@ -5367,9 +2729,9 @@ export interface PGN_127512 extends PGN {
   fields: {
     instance: number
     generatorInstance: number
-    agsMode: AgsMode
+    agsMode: enums.AgsMode
     reserved: number
-}
+  }
 }
 
 /*
@@ -5379,16 +2741,16 @@ export interface PGN_127512 extends PGN {
 export interface PGN_127513 extends PGN {
   fields: {
     instance: number
-    batteryType: BatteryType
+    batteryType: enums.BatteryType
     supportsEqualization: boolean
     reserved: number
-    nominalVoltage: BatteryVoltage
-    chemistry: BatteryChemistry
+    nominalVoltage: enums.BatteryVoltage
+    chemistry: enums.BatteryChemistry
     capacity: number
     temperatureCoefficient: number
     peukertExponent: number
     chargeEfficiencyFactor: number
-}
+  }
 }
 
 /*
@@ -5399,11 +2761,11 @@ export interface PGN_127514 extends PGN {
   fields: {
     instance: number
     generatorInstance: number
-    agsOperatingState: AgsOperatingState
-    generatorState: AgsGeneratingState
-    generatorOnReason: AgsOnReason
-    generatorOffReason: AgsOffReason
-}
+    agsOperatingState: enums.AgsOperatingState
+    generatorState: enums.AgsGeneratingState
+    generatorOnReason: enums.AgsOnReason
+    generatorOffReason: enums.AgsOffReason
+  }
 }
 
 /*
@@ -5416,7 +2778,7 @@ export interface PGN_127744 extends PGN {
     connectionNumber: number
     acRmsCurrent: number
     power: number
-}
+  }
 }
 
 /*
@@ -5429,7 +2791,7 @@ export interface PGN_127745 extends PGN {
     connectionNumber: number
     acRmsCurrent: number
     power: number
-}
+  }
 }
 
 /*
@@ -5442,7 +2804,7 @@ export interface PGN_127746 extends PGN {
     connectionNumber: number
     acRmsCurrent: number
     power: number
-}
+  }
 }
 
 /*
@@ -5456,7 +2818,7 @@ export interface PGN_127747 extends PGN {
     acVoltageLineToNeutral: number
     acVoltageLineToLine: number
     frequency: number
-}
+  }
 }
 
 /*
@@ -5470,7 +2832,7 @@ export interface PGN_127748 extends PGN {
     acVoltageLineToNeutral: number
     acVoltageLineToLine: number
     frequency: number
-}
+  }
 }
 
 /*
@@ -5484,7 +2846,7 @@ export interface PGN_127749 extends PGN {
     acVoltageLineToNeutral: number
     acVoltageLineToLine: number
     frequency: number
-}
+  }
 }
 
 /*
@@ -5495,13 +2857,13 @@ export interface PGN_127750 extends PGN {
   fields: {
     sid: number
     connectionNumber: number
-    operatingState: ConverterState
-    temperatureState: GoodWarningError
-    overloadState: GoodWarningError
-    lowDcVoltageState: GoodWarningError
-    rippleState: GoodWarningError
+    operatingState: enums.ConverterState
+    temperatureState: enums.GoodWarningError
+    overloadState: enums.GoodWarningError
+    lowDcVoltageState: enums.GoodWarningError
+    rippleState: enums.GoodWarningError
     reserved: number
-}
+  }
 }
 
 /*
@@ -5515,7 +2877,7 @@ export interface PGN_127751 extends PGN {
     dcVoltage: number
     dcCurrent: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5528,7 +2890,7 @@ export interface PGN_128000 extends PGN {
     sid: number
     leewayAngle: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5543,7 +2905,7 @@ export interface PGN_128001 extends PGN {
     transverseAcceleration: number
     verticalAcceleration: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5560,7 +2922,7 @@ export interface PGN_128002 extends PGN {
     rotationalShaftSpeed: number
     motorDcVoltage: number
     motorDcCurrent: number
-}
+  }
 }
 
 /*
@@ -5577,7 +2939,7 @@ export interface PGN_128003 extends PGN {
     batteryVoltage: number
     batteryCurrent: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5588,14 +2950,14 @@ export interface PGN_128006 extends PGN {
   fields: {
     sid: number
     identifier: number
-    directionControl: ThrusterDirectionControl
-    powerEnabled: OffOn
-    retractControl: ThrusterRetractControl
+    directionControl: enums.ThrusterDirectionControl
+    powerEnabled: enums.OffOn
+    retractControl: enums.ThrusterRetractControl
     speedControl: number
-    controlEvents: ThrusterControlEvents[]
+    controlEvents: enums.ThrusterControlEvents[]
     commandTimeout: string
     azimuthControl: number
-}
+  }
 }
 
 /*
@@ -5605,12 +2967,12 @@ export interface PGN_128006 extends PGN {
 export interface PGN_128007 extends PGN {
   fields: {
     identifier: number
-    motorType: ThrusterMotorType
+    motorType: enums.ThrusterMotorType
     reserved: number
     powerRating: number
     maximumTemperatureRating: number
     maximumRotationalSpeed: number
-}
+  }
 }
 
 /*
@@ -5621,11 +2983,11 @@ export interface PGN_128008 extends PGN {
   fields: {
     sid: number
     identifier: number
-    motorEvents: ThrusterMotorEvents[]
+    motorEvents: enums.ThrusterMotorEvents[]
     current: number
     temperature: number
     operatingTime: string
-}
+  }
 }
 
 /*
@@ -5637,10 +2999,10 @@ export interface PGN_128259 extends PGN {
     sid: number
     speedWaterReferenced: number
     speedGroundReferenced: number
-    speedWaterReferencedType: WaterReference
+    speedWaterReferencedType: enums.WaterReference
     speedDirection: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5653,7 +3015,7 @@ export interface PGN_128267 extends PGN {
     depth: number
     offset: number
     range: number
-}
+  }
 }
 
 /*
@@ -5666,7 +3028,7 @@ export interface PGN_128275 extends PGN {
     time: string
     log: number
     tripLog: number
-}
+  }
 }
 
 /*
@@ -5677,10 +3039,10 @@ export interface PGN_128520 extends PGN {
   fields: {
     sid: number
     targetId: number
-    trackStatus: Tracking[]
+    trackStatus: enums.Tracking[]
     reportedTarget: boolean
-    targetAcquisition: TargetAcquisition
-    bearingReference: DirectionReference
+    targetAcquisition: enums.TargetAcquisition
+    bearingReference: enums.DirectionReference
     reserved: number
     bearing: number
     distance: number
@@ -5692,7 +3054,7 @@ export interface PGN_128520 extends PGN {
     name: string
     referenceTarget: boolean
     reserved17: number
-}
+  }
 }
 
 /*
@@ -5734,7 +3096,7 @@ export interface PGN_128538 extends PGN {
     elevatorBrakeStatus: number
     elevatorMotorRotationControlStatus: number
     reserved32: number
-}
+  }
 }
 
 /*
@@ -5750,7 +3112,7 @@ export interface PGN_128768 extends PGN {
     motorAccelerationDecelerationProfileSelection: number
     motorRotationalControlStatus: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5766,7 +3128,7 @@ export interface PGN_128769 extends PGN {
     elevatorCarUsage: number
     elevatorCarButtonSelection: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5777,19 +3139,19 @@ export interface PGN_128776 extends PGN {
   fields: {
     sid: number
     windlassId: number
-    windlassDirectionControl: WindlassDirection
-    anchorDockingControl: OffOn
-    speedControlType: SpeedType
+    windlassDirectionControl: enums.WindlassDirection
+    anchorDockingControl: enums.OffOn
+    speedControlType: enums.SpeedType
     reserved: number
     speedControl: number
-    powerEnable: OffOn
-    mechanicalLock: OffOn
-    deckAndAnchorWash: OffOn
-    anchorLight: OffOn
+    powerEnable: enums.OffOn
+    mechanicalLock: enums.OffOn
+    deckAndAnchorWash: enums.OffOn
+    anchorLight: enums.OffOn
     commandTimeout: string
-    windlassControlEvents: WindlassControl[]
+    windlassControlEvents: enums.WindlassControl[]
     reserved14: number
-}
+  }
 }
 
 /*
@@ -5800,15 +3162,15 @@ export interface PGN_128777 extends PGN {
   fields: {
     sid: number
     windlassId: number
-    windlassDirectionControl: WindlassDirection
-    windlassMotionStatus: WindlassMotion
-    rodeTypeStatus: RodeType
+    windlassDirectionControl: enums.WindlassDirection
+    windlassMotionStatus: enums.WindlassMotion
+    rodeTypeStatus: enums.RodeType
     reserved: number
     rodeCounterValue: number
     windlassLineSpeed: number
-    anchorDockingStatus: DockingStatus
-    windlassOperatingEvents: WindlassOperation[]
-}
+    anchorDockingStatus: enums.DockingStatus
+    windlassOperatingEvents: enums.WindlassOperation[]
+  }
 }
 
 /*
@@ -5819,12 +3181,12 @@ export interface PGN_128778 extends PGN {
   fields: {
     sid: number
     windlassId: number
-    windlassMonitoringEvents: WindlassMonitoring[]
+    windlassMonitoringEvents: enums.WindlassMonitoring[]
     controllerVoltage: number
     motorCurrent: number
     totalMotorTime: string
     reserved: number
-}
+  }
 }
 
 /*
@@ -5840,7 +3202,7 @@ export interface PGN_128780 extends PGN {
     maximumDeviceTravel: number
     directionOfTravel: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -5851,7 +3213,7 @@ export interface PGN_129025 extends PGN {
   fields: {
     latitude: number
     longitude: number
-}
+  }
 }
 
 /*
@@ -5861,12 +3223,12 @@ export interface PGN_129025 extends PGN {
 export interface PGN_129026 extends PGN {
   fields: {
     sid: number
-    cogReference: DirectionReference
+    cogReference: enums.DirectionReference
     reserved: number
     cog: number
     sog: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -5879,7 +3241,7 @@ export interface PGN_129027 extends PGN {
     timeDelta: string
     latitudeDelta: number
     longitudeDelta: number
-}
+  }
 }
 
 /*
@@ -5890,12 +3252,12 @@ export interface PGN_129028 extends PGN {
   fields: {
     sid: number
     timeDelta: string
-    gnssQuality: GnsMethod
-    direction: DirectionReference
+    gnssQuality: enums.GnsMethod
+    direction: enums.DirectionReference
     reserved: number
     cog: number
     altitudeDelta: number
-}
+  }
 }
 
 /*
@@ -5910,19 +3272,19 @@ export interface PGN_129029 extends PGN {
     latitude: number
     longitude: number
     altitude: number
-    gnssType: Gns
-    method: GnsMethod
-    integrity: GnsIntegrity
+    gnssType: enums.Gns
+    method: enums.GnsMethod
+    integrity: enums.GnsIntegrity
     reserved: number
     numberOfSvs: number
     hdop: number
     pdop: number
     geoidalSeparation: number
     referenceStations: number
-    referenceStationType: Gns
+    referenceStationType: enums.Gns
     referenceStationId: number
     ageOfDgnssCorrections: string
-}
+  }
 }
 
 /*
@@ -5934,7 +3296,7 @@ export interface PGN_129033 extends PGN {
     date: string
     time: string
     localOffset: string
-}
+  }
 }
 
 /*
@@ -5943,27 +3305,27 @@ export interface PGN_129033 extends PGN {
 */
 export interface PGN_129038 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
-    timeStamp: TimeStamp
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
+    timeStamp: enums.TimeStamp
     cog: number
     sog: number
     communicationState: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     heading: number
     rateOfTurn: number
-    navStatus: NavStatus
-    specialManeuverIndicator: AisSpecialManeuver
+    navStatus: enums.NavStatus
+    specialManeuverIndicator: enums.AisSpecialManeuver
     reserved: number
     spare18: string
     reserved19: number
     sequenceId: number
-}
+  }
 }
 
 /*
@@ -5972,30 +3334,30 @@ export interface PGN_129038 extends PGN {
 */
 export interface PGN_129039 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
-    timeStamp: TimeStamp
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
+    timeStamp: enums.TimeStamp
     cog: number
     sog: number
     communicationState: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     heading: number
     regionalApplication: string
     regionalApplicationB: string
-    unitType: AisType
+    unitType: enums.AisType
     integratedDisplay: boolean
     dsc: boolean
-    band: AisBand
+    band: enums.AisBand
     canHandleMsg22: boolean
-    aisMode: AisMode
-    aisCommunicationState: AisCommunicationState
+    aisMode: enums.AisMode
+    aisCommunicationState: enums.AisCommunicationState
     reserved: number
-}
+  }
 }
 
 /*
@@ -6004,34 +3366,34 @@ export interface PGN_129039 extends PGN {
 */
 export interface PGN_129040 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
-    timeStamp: TimeStamp
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
+    timeStamp: enums.TimeStamp
     cog: number
     sog: number
     regionalApplication: string
     regionalApplicationB: string
     reserved: number
-    typeOfShip: ShipType
+    typeOfShip: enums.ShipType
     trueHeading: number
     reserved16: number
-    gnssType: PositionFixDevice
+    gnssType: enums.PositionFixDevice
     length: number
     beam: number
     positionReferenceFromStarboard: number
     positionReferenceFromBow: number
     name: string
-    dte: Available
-    aisMode: AisMode
+    dte: enums.Available
+    aisMode: enums.AisMode
     spare25: string
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     reserved27: number
-}
+  }
 }
 
 /*
@@ -6040,30 +3402,30 @@ export interface PGN_129040 extends PGN {
 */
 export interface PGN_129041 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
-    timeStamp: TimeStamp
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
+    timeStamp: enums.TimeStamp
     lengthDiameter: number
     beamDiameter: number
     positionReferenceFromStarboardEdge: number
     positionReferenceFromTrueNorthFacingEdge: number
-    atonType: AtonType
+    atonType: enums.AtonType
     offPositionIndicator: boolean
     virtualAtonFlag: boolean
-    assignedModeFlag: AisAssignedMode
+    assignedModeFlag: enums.AisAssignedMode
     spare: string
-    positionFixingDeviceType: PositionFixDevice
+    positionFixingDeviceType: enums.PositionFixDevice
     reserved19: number
     atonStatus: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     reserved22: number
     atonName: string
-}
+  }
 }
 
 /*
@@ -6077,7 +3439,7 @@ export interface PGN_129044 extends PGN {
     deltaLongitude: number
     deltaAltitude: number
     referenceDatum: string
-}
+  }
 }
 
 /*
@@ -6096,7 +3458,7 @@ export interface PGN_129045 extends PGN {
     ellipsoidSemiMajorAxis: number
     ellipsoidFlatteningInverse: string
     datumName: string
-}
+  }
 }
 
 /*
@@ -6106,12 +3468,12 @@ export interface PGN_129045 extends PGN {
 export interface PGN_129283 extends PGN {
   fields: {
     sid: number
-    xteMode: ResidualMode
+    xteMode: enums.ResidualMode
     reserved: number
     navigationTerminated: boolean
     xte: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -6122,10 +3484,10 @@ export interface PGN_129284 extends PGN {
   fields: {
     sid: number
     distanceToWaypoint: number
-    courseBearingReference: DirectionReference
+    courseBearingReference: enums.DirectionReference
     perpendicularCrossed: boolean
     arrivalCircleEntered: boolean
-    calculationType: BearingMode
+    calculationType: enums.BearingMode
     etaTime: string
     etaDate: string
     bearingOriginToDestinationWaypoint: number
@@ -6135,7 +3497,7 @@ export interface PGN_129284 extends PGN {
     destinationLatitude: number
     destinationLongitude: number
     waypointClosingVelocity: number
-}
+  }
 }
 
 /*
@@ -6148,8 +3510,8 @@ export interface PGN_129285 extends PGN {
     nitems: number
     databaseId: number
     routeId: number
-    navigationDirectionInRoute: Direction
-    supplementaryRouteWpDataAvailable: OffOn
+    navigationDirectionInRoute: enums.Direction
+    supplementaryRouteWpDataAvailable: enums.OffOn
     reserved: number
     routeName: string
     reserved9: number
@@ -6157,7 +3519,7 @@ export interface PGN_129285 extends PGN {
     wpName: string
     wpLatitude: number
     wpLongitude: number
-}
+  }
 }
 
 /*
@@ -6167,12 +3529,12 @@ export interface PGN_129285 extends PGN {
 export interface PGN_129291 extends PGN {
   fields: {
     sid: number
-    setReference: DirectionReference
+    setReference: enums.DirectionReference
     reserved: number
     set: number
     drift: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -6183,10 +3545,10 @@ export interface PGN_129301 extends PGN {
   fields: {
     sid: number
     timeToMark: string
-    markType: MarkType
+    markType: enums.MarkType
     reserved: number
     markId: number
-}
+  }
 }
 
 /*
@@ -6196,16 +3558,16 @@ export interface PGN_129301 extends PGN {
 export interface PGN_129302 extends PGN {
   fields: {
     sid: number
-    bearingReference: DirectionReference
-    calculationType: BearingMode
+    bearingReference: enums.DirectionReference
+    calculationType: enums.BearingMode
     reserved: number
     bearingOriginToDestination: number
     distance: number
-    originMarkType: MarkType
-    destinationMarkType: MarkType
+    originMarkType: enums.MarkType
+    destinationMarkType: enums.MarkType
     originMarkId: number
     destinationMarkId: number
-}
+  }
 }
 
 /*
@@ -6218,14 +3580,14 @@ export interface PGN_129538 extends PGN {
     pdopMask: number
     pdopSwitch: number
     snrMask: number
-    gnssModeDesired: GnssMode
-    dgnssModeDesired: DgnssMode
+    gnssModeDesired: enums.GnssMode
+    dgnssModeDesired: enums.DgnssMode
     positionVelocityFilter: boolean
     maxCorrectionAge: string
     antennaAltitudeFor2dMode: number
     useAntennaAltitudeFor2dMode: boolean
     reserved: number
-}
+  }
 }
 
 /*
@@ -6235,13 +3597,13 @@ export interface PGN_129538 extends PGN {
 export interface PGN_129539 extends PGN {
   fields: {
     sid: number
-    desiredMode: GnssMode
-    actualMode: GnssMode
+    desiredMode: enums.GnssMode
+    actualMode: enums.GnssMode
     reserved: number
     hdop: number
     vdop: number
     tdop: number
-}
+  }
 }
 
 /*
@@ -6251,7 +3613,7 @@ export interface PGN_129539 extends PGN {
 export interface PGN_129540 extends PGN {
   fields: {
     sid: number
-    rangeResidualMode: RangeResidualMode
+    rangeResidualMode: enums.RangeResidualMode
     reserved: number
     satsInView: number
     prn: number
@@ -6259,9 +3621,9 @@ export interface PGN_129540 extends PGN {
     azimuth: number
     snr: number
     rangeResiduals: number
-    status: SatelliteStatus
+    status: enums.SatelliteStatus
     reserved11: number
-}
+  }
 }
 
 /*
@@ -6284,7 +3646,7 @@ export interface PGN_129541 extends PGN {
     clockParameter1: number
     clockParameter2: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -6301,7 +3663,7 @@ export interface PGN_129542 extends PGN {
     stdOfLatError: number
     stdOfLonError: number
     stdOfAltError: number
-}
+  }
 }
 
 /*
@@ -6311,7 +3673,7 @@ export interface PGN_129542 extends PGN {
 export interface PGN_129545 extends PGN {
   fields: {
     sid: number
-    integrityFlag: GnsIntegrity
+    integrityFlag: enums.GnsIntegrity
     reserved: number
     latitudeExpectedError: number
     longitudeExpectedError: number
@@ -6320,7 +3682,7 @@ export interface PGN_129545 extends PGN {
     probabilityOfMissedDetection: number
     estimateOfPseudorangeBias: number
     stdDeviationOfBias: number
-}
+  }
 }
 
 /*
@@ -6334,7 +3696,7 @@ export interface PGN_129546 extends PGN {
     probabilityOfMissedDetection: number
     pseudorangeResidualFilteringTimeConstant: string
     reserved: number
-}
+  }
 }
 
 /*
@@ -6351,7 +3713,7 @@ export interface PGN_129547 extends PGN {
     stdDevLatError: number
     stdDevLonError: number
     stdDevAltError: number
-}
+  }
 }
 
 /*
@@ -6362,16 +3724,16 @@ export interface PGN_129549 extends PGN {
   fields: {
     sid: number
     referenceStationId: number
-    referenceStationType: Gns
+    referenceStationType: enums.Gns
     timeOfCorrections: string
-    stationHealth: StationHealth
+    stationHealth: enums.StationHealth
     reserved: number
     satelliteId: number
     prc: number
     rrc: number
     udre: number
     iod: number
-}
+  }
 }
 
 /*
@@ -6382,12 +3744,12 @@ export interface PGN_129550 extends PGN {
   fields: {
     channel: number
     frequency: number
-    serialInterfaceBitRate: SerialBitRate
-    serialInterfaceDetectionMode: SerialDetectionMode
-    differentialSource: DifferentialSource
-    differentialOperationMode: DifferentialMode
+    serialInterfaceBitRate: enums.SerialBitRate
+    serialInterfaceDetectionMode: enums.SerialDetectionMode
+    differentialSource: enums.DifferentialSource
+    differentialOperationMode: enums.DifferentialMode
     reserved: number
-}
+  }
 }
 
 /*
@@ -6401,16 +3763,16 @@ export interface PGN_129551 extends PGN {
     signalStrength: number
     signalSnr: number
     frequency: number
-    stationType: Gns
+    stationType: enums.Gns
     referenceStationId: number
-    differentialSignalBitRate: SerialBitRate
-    differentialSignalDetectionMode: SerialDetectionMode
+    differentialSignalBitRate: enums.SerialBitRate
+    differentialSignalDetectionMode: enums.SerialDetectionMode
     usedAsCorrectionSource: boolean
     reserved: number
-    differentialSource: DifferentialSource
+    differentialSource: enums.DifferentialSource
     timeSinceLastSatDifferentialSync: string
     satelliteServiceIdNo: number
-}
+  }
 }
 
 /*
@@ -6434,7 +3796,7 @@ export interface PGN_129556 extends PGN {
     DeltaIna: number
     TauCa: number
     TauNa: number
-}
+  }
 }
 
 /*
@@ -6443,11 +3805,11 @@ export interface PGN_129556 extends PGN {
 */
 export interface PGN_129792 extends PGN {
   fields: {
-    messageId: AisMessageId
+    messageId: enums.AisMessageId
     repeatIndicator: number
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     longitude: number
     latitude: number
@@ -6455,7 +3817,7 @@ export interface PGN_129792 extends PGN {
     spare10: string
     numberOfBitsInBinaryDataField: number
     binaryData: number
-}
+  }
 }
 
 /*
@@ -6464,21 +3826,21 @@ export interface PGN_129792 extends PGN {
 */
 export interface PGN_129793 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
     reserved: number
     positionTime: string
     communicationState: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     positionDate: string
     reserved13: number
-    gnssType: PositionFixDevice
-}
+    gnssType: enums.PositionFixDevice
+  }
 }
 
 /*
@@ -6487,13 +3849,13 @@ export interface PGN_129793 extends PGN {
 */
 export interface PGN_129794 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     imoNumber: number
     callsign: string
     name: string
-    typeOfShip: ShipType
+    typeOfShip: enums.ShipType
     length: number
     beam: number
     positionReferenceFromStarboard: number
@@ -6502,13 +3864,13 @@ export interface PGN_129794 extends PGN {
     etaTime: string
     draft: number
     destination: string
-    aisVersionIndicator: AisVersion
-    gnssType: PositionFixDevice
-    dte: Available
+    aisVersionIndicator: enums.AisVersion
+    gnssType: enums.PositionFixDevice
+    dte: enums.Available
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     reserved21: number
-}
+  }
 }
 
 /*
@@ -6517,11 +3879,11 @@ export interface PGN_129794 extends PGN {
 */
 export interface PGN_129795 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     sequenceNumber: number
     destinationId: string
     reserved8: number
@@ -6529,7 +3891,7 @@ export interface PGN_129795 extends PGN {
     reserved10: number
     numberOfBitsInBinaryDataField: number
     binaryData: number
-}
+  }
 }
 
 /*
@@ -6538,16 +3900,16 @@ export interface PGN_129795 extends PGN {
 */
 export interface PGN_129796 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     destinationId: string
     sequenceNumber: number
     reserved9: number
-}
+  }
 }
 
 /*
@@ -6556,15 +3918,15 @@ export interface PGN_129796 extends PGN {
 */
 export interface PGN_129797 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: number
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     numberOfBitsInBinaryDataField: number
     binaryData: number
-}
+  }
 }
 
 /*
@@ -6573,24 +3935,24 @@ export interface PGN_129797 extends PGN {
 */
 export interface PGN_129798 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     longitude: number
     latitude: number
-    positionAccuracy: PositionAccuracy
-    raim: RaimFlag
-    timeStamp: TimeStamp
+    positionAccuracy: enums.PositionAccuracy
+    raim: enums.RaimFlag
+    timeStamp: enums.TimeStamp
     cog: number
     sog: number
     communicationState: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     altitude: number
     reservedForRegionalApplications: number
-    dte: Available
+    dte: enums.Available
     spare: string
     reserved17: number
-}
+  }
 }
 
 /*
@@ -6604,9 +3966,9 @@ export interface PGN_129799 extends PGN {
     txFrequency: number
     radioChannel: string
     txPower: number
-    mode: TelephoneMode
+    mode: enums.TelephoneMode
     channelBandwidth: number
-}
+  }
 }
 
 /*
@@ -6615,14 +3977,14 @@ export interface PGN_129799 extends PGN {
 */
 export interface PGN_129800 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     destinationId: string
-}
+  }
 }
 
 /*
@@ -6631,18 +3993,18 @@ export interface PGN_129800 extends PGN {
 */
 export interface PGN_129801 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     sequenceNumber: number
     destinationId: string
     reserved8: number
     retransmitFlag: boolean
     spare10: string
     safetyRelatedText: string
-}
+  }
 }
 
 /*
@@ -6651,14 +4013,14 @@ export interface PGN_129801 extends PGN {
 */
 export interface PGN_129802 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     safetyRelatedText: string
-}
+  }
 }
 
 /*
@@ -6667,29 +4029,29 @@ export interface PGN_129802 extends PGN {
 */
 export interface PGN_129803 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     destinationId1: string
     reserved8: number
-    messageId11: AisMessageId
+    messageId11: enums.AisMessageId
     slotOffset11: number
     spare11: string
-    messageId12: AisMessageId
+    messageId12: enums.AisMessageId
     slotOffset12: number
     reserved14: number
     reserved15: number
     destinationId2: string
     reserved17: number
-    messageId21: AisMessageId
+    messageId21: enums.AisMessageId
     slotOffset21: number
     spare20: string
     reserved21: number
     sid: number
-}
+  }
 }
 
 /*
@@ -6698,11 +4060,11 @@ export interface PGN_129803 extends PGN {
 */
 export interface PGN_129804 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     destinationIdA: string
     offsetA: number
@@ -6712,7 +4074,7 @@ export interface PGN_129804 extends PGN {
     incrementB: number
     spare13: string
     reserved14: number
-}
+  }
 }
 
 /*
@@ -6721,17 +4083,17 @@ export interface PGN_129804 extends PGN {
 */
 export interface PGN_129805 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     offset: number
     numberOfSlots: number
     timeout: string
     increment: number
-}
+  }
 }
 
 /*
@@ -6740,30 +4102,30 @@ export interface PGN_129805 extends PGN {
 */
 export interface PGN_129806 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     reserved: number
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     spare6: string
     channelA: number
     channelB: number
     reserved9: number
-    power: PowerMode
-    txRxMode: TxRxMode
+    power: enums.PowerMode
+    txRxMode: enums.TxRxMode
     northEastLongitudeCorner1: number
     northEastLatitudeCorner1: number
     southWestLongitudeCorner2: number
     southWestLatitudeCorner2: number
     reserved16: number
-    addressedOrBroadcastMessageIndicator: BroadcastIndicator
-    channelABandwidth: Bandwidth
-    channelBBandwidth: Bandwidth
+    addressedOrBroadcastMessageIndicator: enums.BroadcastIndicator
+    channelABandwidth: enums.Bandwidth
+    channelBBandwidth: enums.Bandwidth
     reserved20: number
-    transitionalZoneSize: ZoneSize
+    transitionalZoneSize: enums.ZoneSize
     spare22: string
     reserved23: number
-}
+  }
 }
 
 /*
@@ -6772,26 +4134,26 @@ export interface PGN_129806 extends PGN {
 */
 export interface PGN_129807 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     sourceId: string
     spare: string
-    txRxMode: TxRxMode
+    txRxMode: enums.TxRxMode
     reserved6: number
     northEastLongitudeCorner1: number
     northEastLatitudeCorner1: number
     southWestLongitudeCorner2: number
     southWestLatitudeCorner2: number
-    stationType: StationType
+    stationType: enums.StationType
     reserved12: number
-    shipAndCargoFilter: ShipType
+    shipAndCargoFilter: enums.ShipType
     spare14: string
     reserved15: number
-    reportingInterval: ReportingInterval
+    reportingInterval: enums.ReportingInterval
     quietTime: string
     spare18: string
     reserved19: number
-}
+  }
 }
 
 /*
@@ -6801,11 +4163,11 @@ export interface PGN_129807 extends PGN {
 */
 export interface PGN_129808_Distress extends PGN {
   fields: {
-    dscFormat: DscFormat
-    dscCategory: DscCategory
+    dscFormat: enums.DscFormat
+    dscCategory: enums.DscCategory
     dscMessageAddress: string
-    natureOfDistress: DscNature
-    subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
+    natureOfDistress: enums.DscNature
+    subsequentCommunicationModeOr2ndTelecommand: enums.DscSecondTelecommand
     proposedRxFrequencyChannel: string
     proposedTxFrequencyChannel: string
     telephoneNumber: string
@@ -6821,9 +4183,9 @@ export interface PGN_129808_Distress extends PGN {
     timeOfReceipt: string
     dateOfReceipt: string
     dscEquipmentAssignedMessageId: number
-    dscExpansionFieldSymbol: DscExpansionData
+    dscExpansionFieldSymbol: enums.DscExpansionData
     dscExpansionFieldData: string
-}
+  }
 }
 
 /*
@@ -6832,11 +4194,11 @@ export interface PGN_129808_Distress extends PGN {
 */
 export interface PGN_129808 extends PGN {
   fields: {
-    dscFormatSymbol: DscFormat
-    dscCategorySymbol: DscCategory
+    dscFormatSymbol: enums.DscFormat
+    dscCategorySymbol: enums.DscCategory
     dscMessageAddress: string
-    _1stTelecommand: DscFirstTelecommand
-    subsequentCommunicationModeOr2ndTelecommand: DscSecondTelecommand
+    _1stTelecommand: enums.DscFirstTelecommand
+    subsequentCommunicationModeOr2ndTelecommand: enums.DscSecondTelecommand
     proposedRxFrequencyChannel: string
     proposedTxFrequencyChannel: string
     telephoneNumber: string
@@ -6852,9 +4214,9 @@ export interface PGN_129808 extends PGN {
     timeOfReceipt: string
     dateOfReceipt: string
     dscEquipmentAssignedMessageId: number
-    dscExpansionFieldSymbol: DscExpansionData
+    dscExpansionFieldSymbol: enums.DscExpansionData
     dscExpansionFieldData: string
-}
+  }
 }
 
 /*
@@ -6863,14 +4225,14 @@ export interface PGN_129808 extends PGN {
 */
 export interface PGN_129809 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
     name: string
-    aisTransceiverInformation: AisTransceiver
+    aisTransceiverInformation: enums.AisTransceiver
     reserved: number
     sequenceId: number
-}
+  }
 }
 
 /*
@@ -6879,10 +4241,10 @@ export interface PGN_129809 extends PGN {
 */
 export interface PGN_129810 extends PGN {
   fields: {
-    messageId: AisMessageId
-    repeatIndicator: RepeatIndicator
+    messageId: enums.AisMessageId
+    repeatIndicator: enums.RepeatIndicator
     userId: string
-    typeOfShip: ShipType
+    typeOfShip: enums.ShipType
     vendorId: string
     callsign: string
     length: number
@@ -6892,11 +4254,11 @@ export interface PGN_129810 extends PGN {
     mothershipUserId: string
     reserved: number
     spare13: string
-    gnssType: PositionFixDevice
-    aisTransceiverInformation: AisTransceiver
+    gnssType: enums.PositionFixDevice
+    aisTransceiverInformation: enums.AisTransceiver
     reserved16: number
     sequenceId: number
-}
+  }
 }
 
 /*
@@ -6912,15 +4274,15 @@ export interface PGN_130052 extends PGN {
     xSecondaryTd: string
     ySecondaryTd: string
     zSecondaryTd: string
-    stationStatusMaster: StationStatus[]
-    stationStatusV: StationStatus[]
-    stationStatusW: StationStatus[]
-    stationStatusX: StationStatus[]
-    stationStatusY: StationStatus[]
-    stationStatusZ: StationStatus[]
-    mode: ResidualMode
+    stationStatusMaster: enums.StationStatus[]
+    stationStatusV: enums.StationStatus[]
+    stationStatusW: enums.StationStatus[]
+    stationStatusX: enums.StationStatus[]
+    stationStatusY: enums.StationStatus[]
+    stationStatusZ: enums.StationStatus[]
+    mode: enums.ResidualMode
     reserved: number
-}
+  }
 }
 
 /*
@@ -6936,15 +4298,15 @@ export interface PGN_130053 extends PGN {
     xSecondaryRange: string
     ySecondaryRange: string
     zSecondaryRange: string
-    stationStatusMaster: StationStatus[]
-    stationStatusV: StationStatus[]
-    stationStatusW: StationStatus[]
-    stationStatusX: StationStatus[]
-    stationStatusY: StationStatus[]
-    stationStatusZ: StationStatus[]
-    mode: ResidualMode
+    stationStatusMaster: enums.StationStatus[]
+    stationStatusV: enums.StationStatus[]
+    stationStatusW: enums.StationStatus[]
+    stationStatusX: enums.StationStatus[]
+    stationStatusY: enums.StationStatus[]
+    stationStatusZ: enums.StationStatus[]
+    mode: enums.ResidualMode
     reserved: number
-}
+  }
 }
 
 /*
@@ -6958,7 +4320,7 @@ export interface PGN_130054 extends PGN {
     stationSnr: number
     stationEcd: string
     stationAsf: string
-}
+  }
 }
 
 /*
@@ -6975,7 +4337,7 @@ export interface PGN_130060 extends PGN {
     secondaryEnumerationFieldValue: number
     parameterFieldNumber: number
     label: string
-}
+  }
 }
 
 /*
@@ -6995,7 +4357,7 @@ export interface PGN_130061 extends PGN {
     secondaryEnumerationFieldNumber: number
     secondaryEnumerationFieldValue: number
     parameterFieldNumber: number
-}
+  }
 }
 
 /*
@@ -7011,12 +4373,12 @@ export interface PGN_130064 extends PGN {
     databaseName: string
     databaseTimestamp: string
     databaseDatestamp: string
-    wpPositionResolution: WpPositionResolution
+    wpPositionResolution: enums.WpPositionResolution
     reserved: number
     numberOfRoutesInDatabase: number
     numberOfWpsInDatabase: number
     numberOfBytesInDatabase: number
-}
+  }
 }
 
 /*
@@ -7032,9 +4394,9 @@ export interface PGN_130065 extends PGN {
     routeId: number
     routeName: string
     reserved: number
-    wpIdentificationMethod: WpIdentificationMethod
-    routeStatus: WpRouteStatus
-}
+    wpIdentificationMethod: enums.WpIdentificationMethod
+    routeStatus: enums.WpRouteStatus
+  }
 }
 
 /*
@@ -7048,14 +4410,14 @@ export interface PGN_130066 extends PGN {
     routeWpListName: string
     routeWpListTimestamp: string
     routeWpListDatestamp: string
-    changeAtLastTimestamp: WpChange[]
+    changeAtLastTimestamp: enums.WpChange[]
     numberOfWpsInTheRouteWpList: number
-    criticalSupplementaryParameters: WpCriticalParameters[]
-    navigationMethod: WpNavigationMethod
-    wpIdentificationMethod: WpIdentificationMethod
-    routeStatus: WpRouteStatus
+    criticalSupplementaryParameters: enums.WpCriticalParameters[]
+    navigationMethod: enums.WpNavigationMethod
+    wpIdentificationMethod: enums.WpIdentificationMethod
+    routeStatus: enums.WpRouteStatus
     xteLimitForTheRoute: number
-}
+  }
 }
 
 /*
@@ -7073,7 +4435,7 @@ export interface PGN_130067 extends PGN {
     wpName: string
     wpLatitude: number
     wpLongitude: number
-}
+  }
 }
 
 /*
@@ -7089,7 +4451,7 @@ export interface PGN_130068 extends PGN {
     routeId: number
     wpId: number
     wpName: string
-}
+  }
 }
 
 /*
@@ -7105,9 +4467,9 @@ export interface PGN_130069 extends PGN {
     routeId: number
     rps: number
     xteLimitInTheLegAfterWp: number
-    navMethodInTheLegAfterWp: WpNavigationMethod
+    navMethodInTheLegAfterWp: enums.WpNavigationMethod
     reserved: number
-}
+  }
 }
 
 /*
@@ -7123,7 +4485,7 @@ export interface PGN_130070 extends PGN {
     routeId: number
     wpIdRps: number
     comment: string
-}
+  }
 }
 
 /*
@@ -7138,7 +4500,7 @@ export interface PGN_130071 extends PGN {
     databaseId: number
     routeId: number
     comment: string
-}
+  }
 }
 
 /*
@@ -7152,7 +4514,7 @@ export interface PGN_130072 extends PGN {
     numberOfDatabasesWithComments: number
     databaseId: number
     comment: string
-}
+  }
 }
 
 /*
@@ -7168,7 +4530,7 @@ export interface PGN_130073 extends PGN {
     routeId: number
     rps: number
     radiusOfTurn: number
-}
+  }
 }
 
 /*
@@ -7186,7 +4548,7 @@ export interface PGN_130074 extends PGN {
     wpName: string
     wpLatitude: number
     wpLongitude: number
-}
+  }
 }
 
 /*
@@ -7198,9 +4560,9 @@ export interface PGN_130306 extends PGN {
     sid: number
     windSpeed: number
     windAngle: number
-    reference: WindReference
+    reference: enums.WindReference
     reserved: number
-}
+  }
 }
 
 /*
@@ -7215,7 +4577,7 @@ export interface PGN_130310 extends PGN {
     outsideAmbientAirTemperature: number
     atmosphericPressure: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7226,12 +4588,12 @@ export interface PGN_130310 extends PGN {
 export interface PGN_130311 extends PGN {
   fields: {
     sid: number
-    temperatureSource: TemperatureSource
-    humiditySource: HumiditySource
+    temperatureSource: enums.TemperatureSource
+    humiditySource: enums.HumiditySource
     temperature: number
     humidity: number
     atmosphericPressure: number
-}
+  }
 }
 
 /*
@@ -7242,11 +4604,11 @@ export interface PGN_130312 extends PGN {
   fields: {
     sid: number
     instance: number
-    source: TemperatureSource
+    source: enums.TemperatureSource
     actualTemperature: number
     setTemperature: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7257,11 +4619,11 @@ export interface PGN_130313 extends PGN {
   fields: {
     sid: number
     instance: number
-    source: HumiditySource
+    source: enums.HumiditySource
     actualHumidity: number
     setHumidity: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7272,10 +4634,10 @@ export interface PGN_130314 extends PGN {
   fields: {
     sid: number
     instance: number
-    source: PressureSource
+    source: enums.PressureSource
     pressure: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7286,10 +4648,10 @@ export interface PGN_130315 extends PGN {
   fields: {
     sid: number
     instance: number
-    source: PressureSource
+    source: enums.PressureSource
     pressure: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7300,10 +4662,10 @@ export interface PGN_130316 extends PGN {
   fields: {
     sid: number
     instance: number
-    source: TemperatureSource
+    source: enums.TemperatureSource
     temperature: number
     setTemperature: number
-}
+  }
 }
 
 /*
@@ -7312,8 +4674,8 @@ export interface PGN_130316 extends PGN {
 */
 export interface PGN_130320 extends PGN {
   fields: {
-    mode: ResidualMode
-    tideTendency: Tide
+    mode: enums.ResidualMode
+    tideTendency: enums.Tide
     reserved: number
     measurementDate: string
     measurementTime: string
@@ -7323,7 +4685,7 @@ export interface PGN_130320 extends PGN {
     tideLevelStandardDeviation: number
     stationId: string
     stationName: string
-}
+  }
 }
 
 /*
@@ -7332,7 +4694,7 @@ export interface PGN_130320 extends PGN {
 */
 export interface PGN_130321 extends PGN {
   fields: {
-    mode: ResidualMode
+    mode: enums.ResidualMode
     reserved: number
     measurementDate: string
     measurementTime: string
@@ -7342,7 +4704,7 @@ export interface PGN_130321 extends PGN {
     waterTemperature: number
     stationId: string
     stationName: string
-}
+  }
 }
 
 /*
@@ -7351,8 +4713,8 @@ export interface PGN_130321 extends PGN {
 */
 export interface PGN_130322 extends PGN {
   fields: {
-    mode: ResidualMode
-    state: FloodState
+    mode: enums.ResidualMode
+    state: enums.FloodState
     reserved: number
     measurementDate: string
     measurementTime: string
@@ -7364,7 +4726,7 @@ export interface PGN_130322 extends PGN {
     waterTemperature: number
     stationId: string
     stationName: string
-}
+  }
 }
 
 /*
@@ -7373,7 +4735,7 @@ export interface PGN_130322 extends PGN {
 */
 export interface PGN_130323 extends PGN {
   fields: {
-    mode: ResidualMode
+    mode: enums.ResidualMode
     reserved: number
     measurementDate: string
     measurementTime: string
@@ -7381,14 +4743,14 @@ export interface PGN_130323 extends PGN {
     stationLongitude: number
     windSpeed: number
     windDirection: number
-    windReference: WindReference
+    windReference: enums.WindReference
     reserved10: number
     windGusts: number
     atmosphericPressure: number
     ambientTemperature: number
     stationId: string
     stationName: string
-}
+  }
 }
 
 /*
@@ -7397,7 +4759,7 @@ export interface PGN_130323 extends PGN {
 */
 export interface PGN_130324 extends PGN {
   fields: {
-    mode: ResidualMode
+    mode: enums.ResidualMode
     reserved: number
     measurementDate: string
     measurementTime: string
@@ -7405,7 +4767,7 @@ export interface PGN_130324 extends PGN {
     stationLongitude: number
     windSpeed: number
     windDirection: number
-    windReference: WindReference
+    windReference: enums.WindReference
     reserved10: number
     windGusts: number
     waveHeight: number
@@ -7415,7 +4777,7 @@ export interface PGN_130324 extends PGN {
     airTemperature: number
     waterTemperature: number
     stationId: string
-}
+  }
 }
 
 /*
@@ -7426,7 +4788,7 @@ export interface PGN_130324 extends PGN {
 export interface PGN_130330 extends PGN {
   fields: {
     globalEnable: number
-    defaultSettingsCommand: LightingCommand
+    defaultSettingsCommand: enums.LightingCommand
     reserved: number
     nameOfTheLightingController: string
     maxScenes: number
@@ -7437,7 +4799,7 @@ export interface PGN_130330 extends PGN {
     numberOfPrograms: number
     controllerCapabilities: number
     identifyDevice: number
-}
+  }
 }
 
 /*
@@ -7452,7 +4814,7 @@ export interface PGN_130560 extends PGN {
     measurementId: number
     payloadMass: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -7474,9 +4836,9 @@ export interface PGN_130561 extends PGN {
     programIntensity: number
     programRate: number
     programColorSequence: number
-    zoneEnabled: OffOn
+    zoneEnabled: enums.OffOn
     reserved: number
-}
+  }
 }
 
 /*
@@ -7498,7 +4860,7 @@ export interface PGN_130562 extends PGN {
     programIntensity: number
     programRate: number
     programColorSequenceRate: number
-}
+  }
 }
 
 /*
@@ -7524,9 +4886,9 @@ export interface PGN_130563 extends PGN {
     programIntensity: number
     programRate: number
     programColorSequenceRate: number
-    enabled: OffOn
+    enabled: enums.OffOn
     reserved: number
-}
+  }
 }
 
 /*
@@ -7541,7 +4903,7 @@ export interface PGN_130564 extends PGN {
     numberOfDevices: number
     deviceId: number
     status: number
-}
+  }
 }
 
 /*
@@ -7559,7 +4921,7 @@ export interface PGN_130565 extends PGN {
     blueComponent: number
     colorTemperature: number
     intensity: number
-}
+  }
 }
 
 /*
@@ -7574,7 +4936,7 @@ export interface PGN_130566 extends PGN {
     description: string
     programCapabilities: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7583,19 +4945,19 @@ export interface PGN_130566 extends PGN {
 */
 export interface PGN_130567 extends PGN {
   fields: {
-    watermakerOperatingState: WatermakerState
+    watermakerOperatingState: enums.WatermakerState
     productionStartStop: boolean
     rinseStartStop: boolean
     lowPressurePumpStatus: boolean
     highPressurePumpStatus: boolean
     emergencyStop: boolean
-    productSolenoidValveStatus: OkWarning
+    productSolenoidValveStatus: enums.OkWarning
     flushModeStatus: boolean
-    salinityStatus: OkWarning
-    sensorStatus: OkWarning
-    oilChangeIndicatorStatus: OkWarning
-    filterStatus: OkWarning
-    systemStatus: OkWarning
+    salinityStatus: enums.OkWarning
+    sensorStatus: enums.OkWarning
+    oilChangeIndicatorStatus: enums.OkWarning
+    filterStatus: enums.OkWarning
+    systemStatus: enums.OkWarning
     reserved: number
     salinity: number
     productWaterTemperature: number
@@ -7606,7 +4968,7 @@ export interface PGN_130567 extends PGN {
     productWaterFlow: number
     brineWaterFlow: number
     runTime: string
-}
+  }
 }
 
 /*
@@ -7615,24 +4977,24 @@ export interface PGN_130567 extends PGN {
 */
 export interface PGN_130569 extends PGN {
   fields: {
-    zone: EntertainmentZone
-    source: EntertainmentSource
+    zone: enums.EntertainmentZone
+    source: enums.EntertainmentSource
     number: number
     id: number
-    playStatus: EntertainmentPlayStatus
+    playStatus: enums.EntertainmentPlayStatus
     elapsedTrackTime: string
     trackTime: string
-    repeatStatus: EntertainmentRepeatStatus
-    shuffleStatus: EntertainmentShuffleStatus
+    repeatStatus: enums.EntertainmentRepeatStatus
+    shuffleStatus: enums.EntertainmentShuffleStatus
     saveFavoriteNumber: number
     playFavoriteNumber: number
-    thumbsUpDown: EntertainmentLikeStatus
+    thumbsUpDown: enums.EntertainmentLikeStatus
     signalStrength: number
     radioFrequency: number
     hdFrequencyMulticast: number
     deleteFavoriteNumber: number
     totalNumberOfTracks: number
-}
+  }
 }
 
 /*
@@ -7641,24 +5003,24 @@ export interface PGN_130569 extends PGN {
 */
 export interface PGN_130570 extends PGN {
   fields: {
-    source: EntertainmentSource
+    source: enums.EntertainmentSource
     number: number
     id: number
-    type: EntertainmentType
+    type: enums.EntertainmentType
     name: string
     track: number
     station: number
     favorite: number
     radioFrequency: number
     hdFrequency: number
-    zone: EntertainmentZone
+    zone: enums.EntertainmentZone
     inPlayQueue: boolean
     locked: boolean
     reserved: number
     artistName: string
     albumName: string
     stationName: string
-}
+  }
 }
 
 /*
@@ -7667,19 +5029,19 @@ export interface PGN_130570 extends PGN {
 */
 export interface PGN_130571 extends PGN {
   fields: {
-    source: EntertainmentSource
+    source: enums.EntertainmentSource
     number: number
-    type: EntertainmentType
-    zone: EntertainmentZone
+    type: enums.EntertainmentType
+    zone: enums.EntertainmentZone
     groupId: number
     idOffset: number
     idCount: number
     totalIdCount: number
-    idType: EntertainmentIdType
+    idType: enums.EntertainmentIdType
     id: number
     name: string
     artist: string
-}
+  }
 }
 
 /*
@@ -7688,16 +5050,16 @@ export interface PGN_130571 extends PGN {
 */
 export interface PGN_130572 extends PGN {
   fields: {
-    source: EntertainmentSource
+    source: enums.EntertainmentSource
     number: number
     groupId: number
-    groupType1: EntertainmentGroup
+    groupType1: enums.EntertainmentGroup
     groupName1: string
-    groupType2: EntertainmentGroup
+    groupType2: enums.EntertainmentGroup
     groupName2: string
-    groupType3: EntertainmentGroup
+    groupType3: enums.EntertainmentGroup
     groupName3: string
-}
+  }
 }
 
 /*
@@ -7710,16 +5072,16 @@ export interface PGN_130573 extends PGN {
     idCount: number
     totalIdCount: number
     id: number
-    source: EntertainmentSource
+    source: enums.EntertainmentSource
     number: number
     name: string
-    playSupport: EntertainmentPlayStatusBitfield[]
-    browseSupport: EntertainmentGroupBitfield[]
+    playSupport: enums.EntertainmentPlayStatusBitfield[]
+    browseSupport: enums.EntertainmentGroupBitfield[]
     thumbsSupport: boolean
     connected: boolean
-    repeatSupport: EntertainmentRepeatBitfield[]
-    shuffleSupport: EntertainmentShuffleBitfield[]
-}
+    repeatSupport: enums.EntertainmentRepeatBitfield[]
+    shuffleSupport: enums.EntertainmentShuffleBitfield[]
+  }
 }
 
 /*
@@ -7731,9 +5093,9 @@ export interface PGN_130574 extends PGN {
     firstZoneId: number
     zoneCount: number
     totalZoneCount: number
-    zoneId: EntertainmentZone
+    zoneId: enums.EntertainmentZone
     name: string
-}
+  }
 }
 
 /*
@@ -7745,7 +5107,7 @@ export interface PGN_130576 extends PGN {
     portTrimTab: number
     starboardTrimTab: number
     reserved: number
-}
+  }
 }
 
 /*
@@ -7754,8 +5116,8 @@ export interface PGN_130576 extends PGN {
 */
 export interface PGN_130577 extends PGN {
   fields: {
-    dataMode: ResidualMode
-    cogReference: DirectionReference
+    dataMode: enums.ResidualMode
+    cogReference: enums.DirectionReference
     reserved: number
     sid: number
     cog: number
@@ -7764,7 +5126,7 @@ export interface PGN_130577 extends PGN {
     speedThroughWater: number
     set: number
     drift: number
-}
+  }
 }
 
 /*
@@ -7779,7 +5141,7 @@ export interface PGN_130578 extends PGN {
     transverseSpeedGroundReferenced: number
     sternSpeedWaterReferenced: number
     sternSpeedGroundReferenced: number
-}
+  }
 }
 
 /*
@@ -7789,12 +5151,12 @@ export interface PGN_130578 extends PGN {
 export interface PGN_130579 extends PGN {
   fields: {
     power: boolean
-    defaultSettings: EntertainmentDefaultSettings
-    tunerRegions: EntertainmentRegions
+    defaultSettings: enums.EntertainmentDefaultSettings
+    tunerRegions: enums.EntertainmentRegions
     maxFavorites: number
-    videoProtocols: VideoProtocols
+    videoProtocols: enums.VideoProtocols
     reserved: number
-}
+  }
 }
 
 /*
@@ -7804,10 +5166,10 @@ export interface PGN_130579 extends PGN {
 export interface PGN_130580 extends PGN {
   fields: {
     power: boolean
-    defaultSettings: EntertainmentDefaultSettings
-    tunerRegions: EntertainmentRegions
+    defaultSettings: enums.EntertainmentDefaultSettings
+    tunerRegions: enums.EntertainmentRegions
     maxFavorites: number
-}
+  }
 }
 
 /*
@@ -7819,9 +5181,9 @@ export interface PGN_130581 extends PGN {
     firstZoneId: number
     zoneCount: number
     totalZoneCount: number
-    zoneId: EntertainmentZone
+    zoneId: enums.EntertainmentZone
     zoneName: string
-}
+  }
 }
 
 /*
@@ -7830,14 +5192,14 @@ export interface PGN_130581 extends PGN {
 */
 export interface PGN_130582 extends PGN {
   fields: {
-    zoneId: EntertainmentZone
+    zoneId: enums.EntertainmentZone
     volume: number
-    volumeChange: EntertainmentVolumeControl
+    volumeChange: enums.EntertainmentVolumeControl
     mute: boolean
     reserved: number
-    channel: EntertainmentChannel
+    channel: enums.EntertainmentChannel
     reserved7: number
-}
+  }
 }
 
 /*
@@ -7849,9 +5211,9 @@ export interface PGN_130583 extends PGN {
     firstPreset: number
     presetCount: number
     totalPresetCount: number
-    presetType: EntertainmentEq
+    presetType: enums.EntertainmentEq
     presetName: string
-}
+  }
 }
 
 /*
@@ -7864,10 +5226,10 @@ export interface PGN_130584 extends PGN {
     addressCount: number
     totalAddressCount: number
     bluetoothAddress: number
-    status: BluetoothStatus
+    status: enums.BluetoothStatus
     deviceName: string
     signalStrength: number
-}
+  }
 }
 
 /*
@@ -7877,11 +5239,11 @@ export interface PGN_130584 extends PGN {
 export interface PGN_130585 extends PGN {
   fields: {
     sourceNumber: number
-    status: BluetoothSourceStatus
+    status: enums.BluetoothSourceStatus
     forgetDevice: boolean
     discovering: boolean
     bluetoothAddress: number
-}
+  }
 }
 
 /*
@@ -7890,7 +5252,7 @@ export interface PGN_130585 extends PGN {
 */
 export interface PGN_130586 extends PGN {
   fields: {
-    zoneId: EntertainmentZone
+    zoneId: enums.EntertainmentZone
     volumeLimit: number
     fade: number
     balance: number
@@ -7898,12 +5260,12 @@ export interface PGN_130586 extends PGN {
     eqTreble: number
     eqMidRange: number
     eqBass: number
-    presetType: EntertainmentEq
-    audioFilter: EntertainmentFilter
+    presetType: enums.EntertainmentEq
+    audioFilter: enums.EntertainmentFilter
     highPassFilterFrequency: number
     lowPassFilterFrequency: number
-    channel: EntertainmentChannel
-}
+    channel: enums.EntertainmentChannel
+  }
 }
 
 /*
@@ -7915,15 +5277,15 @@ export interface PGN_130586 extends PGN {
 */
 export interface PGN_130816_Navico_Init2 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     a: number
     b: number
-}
+  }
 }
 
 /*
@@ -7935,19 +5297,19 @@ export interface PGN_130816_Navico_Init2 extends PGN {
 */
 export interface PGN_130816_Navico_AmRadio extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-    item: SonichubTuning
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+    item: enums.SonichubTuning
     frequency: number
     noiseLevel: number
     signalLevel: number
     reserved11: number
     text: string
-}
+  }
 }
 
 /*
@@ -7959,14 +5321,14 @@ export interface PGN_130816_Navico_AmRadio extends PGN {
 */
 export interface PGN_130816_Navico_ZoneInfo extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     zone: number
-}
+  }
 }
 
 /*
@@ -7978,14 +5340,14 @@ export interface PGN_130816_Navico_ZoneInfo extends PGN {
 */
 export interface PGN_130816_Navico_Source extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-    source: SonichubSource
-}
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+    source: enums.SonichubSource
+  }
 }
 
 /*
@@ -7997,16 +5359,16 @@ export interface PGN_130816_Navico_Source extends PGN {
 */
 export interface PGN_130816_Navico_SourceList extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     sourceId: number
     a: number
     text: string
-}
+  }
 }
 
 /*
@@ -8018,14 +5380,14 @@ export interface PGN_130816_Navico_SourceList extends PGN {
 */
 export interface PGN_130816_Navico_Control extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-    item: FusionMuteCommand
-}
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+    item: enums.FusionMuteCommand
+  }
 }
 
 /*
@@ -8037,19 +5399,19 @@ export interface PGN_130816_Navico_Control extends PGN {
 */
 export interface PGN_130816_Navico_FmRadio extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-    item: SonichubTuning
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+    item: enums.SonichubTuning
     frequency: number
     noiseLevel: number
     signalLevel: number
     reserved11: number
     text: string
-}
+  }
 }
 
 /*
@@ -8061,19 +5423,19 @@ export interface PGN_130816_Navico_FmRadio extends PGN {
 */
 export interface PGN_130816_Navico_Playlist extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-    item: SonichubPlaylist
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+    item: enums.SonichubPlaylist
     a: number
     currentTrack: number
     tracks: number
     length: string
     positionInTrack: string
-}
+  }
 }
 
 /*
@@ -8085,15 +5447,15 @@ export interface PGN_130816_Navico_Playlist extends PGN {
 */
 export interface PGN_130816_Navico_Track extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     item: number
     text: string
-}
+  }
 }
 
 /*
@@ -8105,15 +5467,15 @@ export interface PGN_130816_Navico_Track extends PGN {
 */
 export interface PGN_130816_Navico_Artist extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     item: number
     text: string
-}
+  }
 }
 
 /*
@@ -8125,15 +5487,15 @@ export interface PGN_130816_Navico_Artist extends PGN {
 */
 export interface PGN_130816_Navico_Album extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     item: number
     text: string
-}
+  }
 }
 
 /*
@@ -8145,18 +5507,18 @@ export interface PGN_130816_Navico_Album extends PGN {
 */
 export interface PGN_130816_Navico_MenuItem extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     item: number
     c: number
     d: number
     e: number
     text: string
-}
+  }
 }
 
 /*
@@ -8168,14 +5530,14 @@ export interface PGN_130816_Navico_MenuItem extends PGN {
 */
 export interface PGN_130816_Navico_Zones extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     zones: number
-}
+  }
 }
 
 /*
@@ -8187,15 +5549,15 @@ export interface PGN_130816_Navico_Zones extends PGN {
 */
 export interface PGN_130816_Navico_MaxVolume extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     zone: number
     level: number
-}
+  }
 }
 
 /*
@@ -8207,15 +5569,15 @@ export interface PGN_130816_Navico_MaxVolume extends PGN {
 */
 export interface PGN_130816_Navico_Volume extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     zone: number
     level: number
-}
+  }
 }
 
 /*
@@ -8227,13 +5589,13 @@ export interface PGN_130816_Navico_Volume extends PGN {
 */
 export interface PGN_130816_Navico_Init1 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
-}
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
+  }
 }
 
 /*
@@ -8245,14 +5607,14 @@ export interface PGN_130816_Navico_Init1 extends PGN {
 */
 export interface PGN_130816_Navico_Position extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     position: string
-}
+  }
 }
 
 /*
@@ -8264,15 +5626,15 @@ export interface PGN_130816_Navico_Position extends PGN {
 */
 export interface PGN_130816_Navico_Init3 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SonichubCommand
-    control: SonichubControl
+    proprietaryId: enums.SonichubCommand
+    control: enums.SonichubControl
     a: number
     b: number
-}
+  }
 }
 
 /*
@@ -8284,18 +5646,18 @@ export interface PGN_130816_Navico_Init3 extends PGN {
 */
 export interface PGN_130816_Simrad_Text extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
-    proprietaryId: SimnetCommand
+    proprietaryId: enums.SimnetCommand
     a: number
     b: number
     c: number
     sid: number
     prio: number
     text: string
-}
+  }
 }
 
 /*
@@ -8306,15 +5668,15 @@ export interface PGN_130816_Simrad_Text extends PGN {
 */
 export interface PGN_130817_Navico extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
-}
+  }
 }
 
 /*
@@ -8325,9 +5687,9 @@ export interface PGN_130817_Navico extends PGN {
 */
 export interface PGN_130817_Lowrance extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     productCode: number
     model: string
     a: number
@@ -8336,7 +5698,7 @@ export interface PGN_130817_Lowrance extends PGN {
     firmwareVersion: string
     firmwareDate: string
     firmwareTime: string
-}
+  }
 }
 
 /*
@@ -8345,13 +5707,13 @@ export interface PGN_130817_Lowrance extends PGN {
 */
 export interface PGN_130818 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     version: number
     sequence: number
     data: number
-}
+  }
 }
 
 /*
@@ -8360,10 +5722,10 @@ export interface PGN_130818 extends PGN {
 */
 export interface PGN_130819 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -8374,13 +5736,13 @@ export interface PGN_130819 extends PGN {
 */
 export interface PGN_130820_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     reserved4: number
     status: number
     reserved6: number
-}
+  }
 }
 
 /*
@@ -8391,15 +5753,15 @@ export interface PGN_130820_Simrad extends PGN {
 */
 export interface PGN_130820_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
-}
+  }
 }
 
 /*
@@ -8411,16 +5773,16 @@ export interface PGN_130820_Furuno extends PGN {
 */
 export interface PGN_130820_FusionElectronics_ApiVersion extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     hwVersionMajor: number
     hwVersionMinor: number
     swVersionMajor: number
     swVersionMinor: number
     buildNumber: number
-}
+  }
 }
 
 /*
@@ -8432,16 +5794,16 @@ export interface PGN_130820_FusionElectronics_ApiVersion extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Source extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     currentSourceId: number
-    sourceType: FusionSourceType
+    sourceType: enums.FusionSourceType
     flags: number
     source: string
-}
+  }
 }
 
 /*
@@ -8453,12 +5815,12 @@ export interface PGN_130820_FusionElectronics_Source extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SourceCount extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceCount: number
-}
+  }
 }
 
 /*
@@ -8470,17 +5832,17 @@ export interface PGN_130820_FusionElectronics_SourceCount extends PGN {
 */
 export interface PGN_130820_FusionElectronics_TrackInfo extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
-    flags: FusionPlayStatus
+    flags: enums.FusionPlayStatus
     track: number
     trackCount: number
     length: string
     positionInTrack: string
-}
+  }
 }
 
 /*
@@ -8492,14 +5854,14 @@ export interface PGN_130820_FusionElectronics_TrackInfo extends PGN {
 */
 export interface PGN_130820_FusionElectronics_TrackTitle extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     index: number
     track: string
-}
+  }
 }
 
 /*
@@ -8511,14 +5873,14 @@ export interface PGN_130820_FusionElectronics_TrackTitle extends PGN {
 */
 export interface PGN_130820_FusionElectronics_TrackArtist extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     index: number
     artist: string
-}
+  }
 }
 
 /*
@@ -8530,14 +5892,14 @@ export interface PGN_130820_FusionElectronics_TrackArtist extends PGN {
 */
 export interface PGN_130820_FusionElectronics_TrackAlbum extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     index: number
     album: string
-}
+  }
 }
 
 /*
@@ -8549,12 +5911,12 @@ export interface PGN_130820_FusionElectronics_TrackAlbum extends PGN {
 */
 export interface PGN_130820_FusionElectronics_UnitName extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     name: string
-}
+  }
 }
 
 /*
@@ -8566,13 +5928,13 @@ export interface PGN_130820_FusionElectronics_UnitName extends PGN {
 */
 export interface PGN_130820_FusionElectronics_ZoneName extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     number: number
     name: string
-}
+  }
 }
 
 /*
@@ -8584,13 +5946,13 @@ export interface PGN_130820_FusionElectronics_ZoneName extends PGN {
 */
 export interface PGN_130820_FusionElectronics_TrackProgress extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     progress: string
-}
+  }
 }
 
 /*
@@ -8602,16 +5964,16 @@ export interface PGN_130820_FusionElectronics_TrackProgress extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Tuner extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
-    sourceId: FusionRadioSource
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
+    sourceId: enums.FusionRadioSource
     scanning: number
     frequency: number
     signalStrength: number
     track: string
-}
+  }
 }
 
 /*
@@ -8623,15 +5985,15 @@ export interface PGN_130820_FusionElectronics_Tuner extends PGN {
 */
 export interface PGN_130820_FusionElectronics_MarineTuner extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channel: number
     signalStrength: number
     name: string
-}
+  }
 }
 
 /*
@@ -8643,13 +6005,13 @@ export interface PGN_130820_FusionElectronics_MarineTuner extends PGN {
 */
 export interface PGN_130820_FusionElectronics_MarineSquelch extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     squelch: number
-}
+  }
 }
 
 /*
@@ -8661,13 +6023,13 @@ export interface PGN_130820_FusionElectronics_MarineSquelch extends PGN {
 */
 export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     scan: boolean
-}
+  }
 }
 
 /*
@@ -8679,16 +6041,16 @@ export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
 */
 export interface PGN_130820_FusionElectronics_MenuItem extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     itemIndex: number
     flags: number
     lockId: number
     text: string
-}
+  }
 }
 
 /*
@@ -8700,13 +6062,13 @@ export interface PGN_130820_FusionElectronics_MenuItem extends PGN {
 */
 export interface PGN_130820_FusionElectronics_AuxGain extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     gain: number
-}
+  }
 }
 
 /*
@@ -8719,13 +6081,13 @@ export interface PGN_130820_FusionElectronics_AuxGain extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
-    id: FusionSetting
-    status: FusionRepeatStatus
-}
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
+    id: enums.FusionSetting
+    status: enums.FusionRepeatStatus
+  }
 }
 
 /*
@@ -8737,13 +6099,13 @@ export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Setting extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
-    id: FusionSetting
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
+    id: enums.FusionSetting
     value: number
-}
+  }
 }
 
 /*
@@ -8755,14 +6117,14 @@ export interface PGN_130820_FusionElectronics_Setting extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Settings extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     count: number
-    id: FusionSetting
+    id: enums.FusionSetting
     value: number
-}
+  }
 }
 
 /*
@@ -8774,12 +6136,12 @@ export interface PGN_130820_FusionElectronics_Settings extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Mute extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
-    mute: FusionMuteCommand
-}
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
+    mute: enums.FusionMuteCommand
+  }
 }
 
 /*
@@ -8791,13 +6153,13 @@ export interface PGN_130820_FusionElectronics_Mute extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Balance extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone: number
     value: number
-}
+  }
 }
 
 /*
@@ -8809,13 +6171,13 @@ export interface PGN_130820_FusionElectronics_Balance extends PGN {
 */
 export interface PGN_130820_FusionElectronics_LowPassFilter extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone: number
     filter: number
-}
+  }
 }
 
 /*
@@ -8827,15 +6189,15 @@ export interface PGN_130820_FusionElectronics_LowPassFilter extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Sublevels extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone1: number
     zone2: number
     zone3: number
     zone4: number
-}
+  }
 }
 
 /*
@@ -8847,15 +6209,15 @@ export interface PGN_130820_FusionElectronics_Sublevels extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Tone extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone: number
     bass: number
     mid: number
     treble: number
-}
+  }
 }
 
 /*
@@ -8867,15 +6229,15 @@ export interface PGN_130820_FusionElectronics_Tone extends PGN {
 */
 export interface PGN_130820_FusionElectronics_VolumeLimits extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone1VolumeLimit: number
     zone2VolumeLimit: number
     zone3VolumeLimit: number
     zone4VolumeLimit: number
-}
+  }
 }
 
 /*
@@ -8887,15 +6249,15 @@ export interface PGN_130820_FusionElectronics_VolumeLimits extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Volume extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone1: number
     zone2: number
     zone3: number
     zone4: number
-}
+  }
 }
 
 /*
@@ -8907,16 +6269,16 @@ export interface PGN_130820_FusionElectronics_Volume extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Capabilities extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone1: number
     zone2: number
     zone3: number
     zone4: number
     global: number
-}
+  }
 }
 
 /*
@@ -8928,13 +6290,13 @@ export interface PGN_130820_FusionElectronics_Capabilities extends PGN {
 */
 export interface PGN_130820_FusionElectronics_LineLevelControl extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     zone: number
     control: number
-}
+  }
 }
 
 /*
@@ -8946,12 +6308,12 @@ export interface PGN_130820_FusionElectronics_LineLevelControl extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Power extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
-    state: FusionPowerState
-}
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
+    state: enums.FusionPowerState
+  }
 }
 
 /*
@@ -8963,16 +6325,16 @@ export interface PGN_130820_FusionElectronics_Power extends PGN {
 */
 export interface PGN_130820_FusionElectronics_Sirius extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
-    comState: FusionSiriusComState
-    alert: FusionSiriusComState
+    comState: enums.FusionSiriusComState
+    alert: enums.FusionSiriusComState
     advisoryChannel: number
-    tuningMode: FusionSiriusTuningMode
-}
+    tuningMode: enums.FusionSiriusTuningMode
+  }
 }
 
 /*
@@ -8984,14 +6346,14 @@ export interface PGN_130820_FusionElectronics_Sirius extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmChannel extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channelNumber: number
     channel: string
-}
+  }
 }
 
 /*
@@ -9003,14 +6365,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmChannel extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmTitle extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channel: number
     title: string
-}
+  }
 }
 
 /*
@@ -9022,14 +6384,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmTitle extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmArtist extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channel: number
     artist: string
-}
+  }
 }
 
 /*
@@ -9041,14 +6403,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmArtist extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmGenre extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channel: number
     genre: string
-}
+  }
 }
 
 /*
@@ -9060,14 +6422,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmGenre extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmCategory extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     channel: number
     name: string
-}
+  }
 }
 
 /*
@@ -9079,13 +6441,13 @@ export interface PGN_130820_FusionElectronics_SiriusXmCategory extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmSignal extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     signal: number
-}
+  }
 }
 
 /*
@@ -9097,14 +6459,14 @@ export interface PGN_130820_FusionElectronics_SiriusXmSignal extends PGN {
 */
 export interface PGN_130820_FusionElectronics_SiriusXmPresets extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    messageId: FusionStatusMessageId
+    industryCode: enums.IndustryCode
+    messageId: enums.FusionStatusMessageId
     sourceId: number
     count: number
     values: number
-}
+  }
 }
 
 /*
@@ -9115,12 +6477,12 @@ export interface PGN_130820_FusionElectronics_SiriusXmPresets extends PGN {
 */
 export interface PGN_130821_Navico extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     message: string
-}
+  }
 }
 
 /*
@@ -9131,9 +6493,9 @@ export interface PGN_130821_Navico extends PGN {
 */
 export interface PGN_130821_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     a: number
     b: number
@@ -9144,7 +6506,7 @@ export interface PGN_130821_Furuno extends PGN {
     g: number
     h: number
     i: number
-}
+  }
 }
 
 /*
@@ -9153,11 +6515,11 @@ export interface PGN_130821_Furuno extends PGN {
 */
 export interface PGN_130822 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     data: number
-}
+  }
 }
 
 /*
@@ -9166,15 +6528,15 @@ export interface PGN_130822 extends PGN {
 */
 export interface PGN_130823 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     instance: number
-    source: TemperatureSource
+    source: enums.TemperatureSource
     actualTemperature: number
     setTemperature: number
-}
+  }
 }
 
 /*
@@ -9186,13 +6548,13 @@ export interface PGN_130823 extends PGN {
 */
 export interface PGN_130824_BG extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     key: string
     length: string
     value: string
-}
+  }
 }
 
 /*
@@ -9203,15 +6565,15 @@ export interface PGN_130824_BG extends PGN {
 */
 export interface PGN_130824_Maretron extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     field4: number
     field5: number
     field6: number
     field7: number
     field8: number
-}
+  }
 }
 
 /*
@@ -9220,11 +6582,11 @@ export interface PGN_130824_Maretron extends PGN {
 */
 export interface PGN_130825 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     data: number
-}
+  }
 }
 
 /*
@@ -9233,16 +6595,16 @@ export interface PGN_130825 extends PGN {
 */
 export interface PGN_130827 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
     f: number
-}
+  }
 }
 
 /*
@@ -9251,10 +6613,10 @@ export interface PGN_130827 extends PGN {
 */
 export interface PGN_130828 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9263,10 +6625,10 @@ export interface PGN_130828 extends PGN {
 */
 export interface PGN_130831 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9275,10 +6637,10 @@ export interface PGN_130831 extends PGN {
 */
 export interface PGN_130832 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9287,16 +6649,16 @@ export interface PGN_130832 extends PGN {
 */
 export interface PGN_130833 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     dataType: string
     length: number
     reserved6: number
-    decimals: BandgDecimals
+    decimals: enums.BandgDecimals
     shortName: string
     longName: string
-}
+  }
 }
 
 /*
@@ -9305,10 +6667,10 @@ export interface PGN_130833 extends PGN {
 */
 export interface PGN_130834 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9317,10 +6679,10 @@ export interface PGN_130834 extends PGN {
 */
 export interface PGN_130835 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9331,19 +6693,19 @@ export interface PGN_130835 extends PGN {
 */
 export interface PGN_130836_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     c: number
     device: number
     instance: number
     f: number
-    tankType: TankType
+    tankType: enums.TankType
     capacity: number
     g: number
     h: number
     i: number
-}
+  }
 }
 
 /*
@@ -9354,9 +6716,9 @@ export interface PGN_130836_Simrad extends PGN {
 */
 export interface PGN_130836_Maretron extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     instance: number
     indicatorNumber: number
     startDate: string
@@ -9364,9 +6726,9 @@ export interface PGN_130836_Maretron extends PGN {
     offCounter: number
     onCounter: number
     errorCounter: number
-    switchStatus: OffOn
+    switchStatus: enums.OffOn
     reserved12: number
-}
+  }
 }
 
 /*
@@ -9377,10 +6739,10 @@ export interface PGN_130836_Maretron extends PGN {
 */
 export interface PGN_130837_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9391,9 +6753,9 @@ export interface PGN_130837_Simrad extends PGN {
 */
 export interface PGN_130837_Maretron extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     instance: number
     indicatorNumber: number
     startDate: string
@@ -9401,9 +6763,9 @@ export interface PGN_130837_Maretron extends PGN {
     accumulatedOffPeriod: string
     accumulatedOnPeriod: string
     accumulatedErrorPeriod: string
-    switchStatus: OffOn
+    switchStatus: enums.OffOn
     reserved12: number
-}
+  }
 }
 
 /*
@@ -9412,10 +6774,10 @@ export interface PGN_130837_Maretron extends PGN {
 */
 export interface PGN_130838 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9424,10 +6786,10 @@ export interface PGN_130838 extends PGN {
 */
 export interface PGN_130839 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9436,10 +6798,10 @@ export interface PGN_130839 extends PGN {
 */
 export interface PGN_130840 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9450,16 +6812,16 @@ export interface PGN_130840 extends PGN {
 */
 export interface PGN_130842_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     messageId: number
-    repeatIndicator: RepeatIndicator
+    repeatIndicator: enums.RepeatIndicator
     d: number
     e: number
     userId: string
     name: string
-}
+  }
 }
 
 /*
@@ -9470,9 +6832,9 @@ export interface PGN_130842_Simrad extends PGN {
 */
 export interface PGN_130842_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
@@ -9482,7 +6844,7 @@ export interface PGN_130842_Furuno extends PGN {
     g: number
     h: number
     i: number
-}
+  }
 }
 
 /*
@@ -9494,15 +6856,15 @@ export interface PGN_130842_Furuno extends PGN {
 */
 export interface PGN_130842_Simrad_Msg24PartB extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     messageId: number
-    repeatIndicator: RepeatIndicator
+    repeatIndicator: enums.RepeatIndicator
     d: number
     e: number
     userId: string
-    typeOfShip: ShipType
+    typeOfShip: enums.ShipType
     vendorId: string
     callsign: string
     length: number
@@ -9512,7 +6874,7 @@ export interface PGN_130842_Simrad_Msg24PartB extends PGN {
     mothershipUserId: string
     spare17: string
     reserved18: number
-}
+  }
 }
 
 /*
@@ -9523,15 +6885,15 @@ export interface PGN_130842_Simrad_Msg24PartB extends PGN {
 */
 export interface PGN_130843_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     yaw: number
     pitch: number
     roll: number
-}
+  }
 }
 
 /*
@@ -9542,10 +6904,10 @@ export interface PGN_130843_Furuno extends PGN {
 */
 export interface PGN_130843_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9556,10 +6918,10 @@ export interface PGN_130843_Simrad extends PGN {
 */
 export interface PGN_130845_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9570,18 +6932,18 @@ export interface PGN_130845_Furuno extends PGN {
 */
 export interface PGN_130845_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     address: number
-    repeatIndicator: RepeatIndicator
-    displayGroup: SimnetDisplayGroup
+    repeatIndicator: enums.RepeatIndicator
+    displayGroup: enums.SimnetDisplayGroup
     reserved7: number
     key: string
     spare9: string
     minlength: number
     value: string
-}
+  }
 }
 
 /*
@@ -9592,18 +6954,18 @@ export interface PGN_130845_Simrad extends PGN {
 */
 export interface PGN_130846_Simrad extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     address: number
     b: number
-    displayGroup: SimnetDisplayGroup
+    displayGroup: enums.SimnetDisplayGroup
     d: number
     key: string
     spare9: string
     length: number
     value: string
-}
+  }
 }
 
 /*
@@ -9614,10 +6976,10 @@ export interface PGN_130846_Simrad extends PGN {
 */
 export interface PGN_130846_Furuno extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-}
+    industryCode: enums.IndustryCode
+  }
 }
 
 /*
@@ -9626,15 +6988,15 @@ export interface PGN_130846_Furuno extends PGN {
 */
 export interface PGN_130847 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     productCode: number
     year: number
     month: number
     deviceNumber: number
     nodeVoltage: number
-}
+  }
 }
 
 /*
@@ -9643,16 +7005,16 @@ export interface PGN_130847 extends PGN {
 */
 export interface PGN_130848 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     sid: number
     waypointName: string
     waypointSequence: string
     bearingToWaypointTrue: number
     bearingToWaypointMagnetic: number
     distanceToWaypoint: number
-}
+  }
 }
 
 /*
@@ -9664,18 +7026,18 @@ export interface PGN_130848 extends PGN {
 */
 export interface PGN_130850_Simrad_Autopilot extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     address: number
     reserved5: number
-    proprietaryId: SimnetEventCommand
-    apStatus: SimnetApStatus
-    apCommand: SimnetApEvents
+    proprietaryId: enums.SimnetEventCommand
+    apStatus: enums.SimnetApStatus
+    apCommand: enums.SimnetApEvents
     spare9: string
-    direction: SimnetDirection
+    direction: enums.SimnetDirection
     angle: number
-}
+  }
 }
 
 /*
@@ -9687,18 +7049,18 @@ export interface PGN_130850_Simrad_Autopilot extends PGN {
 */
 export interface PGN_130850_Simrad_ApCommand extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: SimnetEventCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.SimnetEventCommand
     unusedA: number
     controllingDevice: number
-    event: SimnetApEvents
+    event: enums.SimnetApEvents
     unusedB: number
-    direction: SimnetDirection
+    direction: enums.SimnetDirection
     angle: number
     unusedC: number
-}
+  }
 }
 
 /*
@@ -9711,18 +7073,18 @@ export interface PGN_130850_Simrad_ApCommand extends PGN {
 */
 export interface PGN_130850_Simrad_Alarm extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     address: number
     reserved5: number
-    proprietaryId: SimnetEventCommand
+    proprietaryId: enums.SimnetEventCommand
     reserved7: number
-    alarm: SimnetAlarm
+    alarm: enums.SimnetAlarm
     messageId: number
     f: number
     g: number
-}
+  }
 }
 
 /*
@@ -9731,18 +7093,18 @@ export interface PGN_130850_Simrad_Alarm extends PGN {
 */
 export interface PGN_130851 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    proprietaryId: SimnetEventCommand
+    industryCode: enums.IndustryCode
+    proprietaryId: enums.SimnetEventCommand
     b: number
     address: number
-    event: SimnetApEvents
+    event: enums.SimnetApEvents
     c: number
-    direction: SimnetDirection
+    direction: enums.SimnetDirection
     angle: number
     g: number
-}
+  }
 }
 
 /*
@@ -9752,14 +7114,14 @@ export interface PGN_130851 extends PGN {
 */
 export interface PGN_130856 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     messageId: number
     b: number
     c: number
     text: string
-}
+  }
 }
 
 /*
@@ -9769,16 +7131,16 @@ export interface PGN_130856 extends PGN {
 */
 export interface PGN_130860 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     a: number
     b: number
     c: number
     d: number
     e: number
     f: number
-}
+  }
 }
 
 /*
@@ -9787,14 +7149,14 @@ export interface PGN_130860 extends PGN {
 */
 export interface PGN_130880 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     c: number
     apparentWindchillTemperature: number
     trueWindchillTemperature: number
     dewpoint: number
-}
+  }
 }
 
 /*
@@ -9803,14 +7165,14 @@ export interface PGN_130880 extends PGN {
 */
 export interface PGN_130881 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     c: number
     plateTemperature: number
     airTemperature: number
     dewpoint: number
-}
+  }
 }
 
 /*
@@ -9819,9 +7181,9 @@ export interface PGN_130881 extends PGN {
 */
 export interface PGN_130918 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
+    industryCode: enums.IndustryCode
     currentWaypointSequence: number
     currentWaypointName: string
     nextWaypointSequence: number
@@ -9830,9 +7192,8 @@ export interface PGN_130918 extends PGN {
     distancePositionToNextWaypoint: number
     bearingPositionToNextWaypointTrue: number
     bearingCurrentWaypointToNextWaypointTrue: number
+  }
 }
-}
-
 
 /*
   PGN: 130944
@@ -9840,14 +7201,14 @@ export interface PGN_130918 extends PGN {
 */
 export interface PGN_130944 extends PGN {
   fields: {
-    manufacturerCode: ManufacturerCode
+    manufacturerCode: enums.ManufacturerCode
     reserved: number
-    industryCode: IndustryCode
-    control: AirmarPostControl
+    industryCode: enums.IndustryCode
+    control: enums.AirmarPostControl
     reserved5: number
     numberOfIdTestResultPairsToFollow: number
-    testId: AirmarPostId
+    testId: enums.AirmarPostId
     testResult: number
-}
+  }
 }
 
