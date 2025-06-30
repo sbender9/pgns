@@ -20,7 +20,7 @@ export interface PGN {
   Explanation: This message is provided by ISO 11783 for a handshake mechanism between transmitting and receiving devices. This message is the possible response to acknowledge the reception of a 'normal broadcast' message or the response to a specific command to indicate compliance or failure.
 */
 export interface PGN_59392Fields extends PGNFields {
-  control?: enums.IsoControl
+  control?: enums.IsoControl|number
   groupFunction?: number
   reserved?: number
   pgn?: string
@@ -64,7 +64,7 @@ export interface PGN_60160 extends PGN {
   Match: Group Function Code == RTS
 */
 export interface PGN_60416_RtsFields extends PGNFields {
-  groupFunctionCode?: enums.IsoCommand
+  groupFunctionCode?: enums.IsoCommand|number
   messageSize?: number
   packets?: number
   packetsReply?: number
@@ -82,7 +82,7 @@ export interface PGN_60416_Rts extends PGN {
   Match: Group Function Code == CTS
 */
 export interface PGN_60416_CtsFields extends PGNFields {
-  groupFunctionCode?: enums.IsoCommand
+  groupFunctionCode?: enums.IsoCommand|number
   maxPackets?: number
   nextSid?: number
   reserved?: number
@@ -100,7 +100,7 @@ export interface PGN_60416_Cts extends PGN {
   Match: Group Function Code == EOM
 */
 export interface PGN_60416_EomFields extends PGNFields {
-  groupFunctionCode?: enums.IsoCommand
+  groupFunctionCode?: enums.IsoCommand|number
   totalMessageSize?: number
   totalNumberOfFramesReceived?: number
   reserved?: number
@@ -118,7 +118,7 @@ export interface PGN_60416_Eom extends PGN {
   Match: Group Function Code == BAM
 */
 export interface PGN_60416_BamFields extends PGNFields {
-  groupFunctionCode?: enums.IsoCommand
+  groupFunctionCode?: enums.IsoCommand|number
   messageSize?: number
   packets?: number
   reserved?: number
@@ -136,7 +136,7 @@ export interface PGN_60416_Bam extends PGN {
   Match: Group Function Code == Abort
 */
 export interface PGN_60416_AbortFields extends PGNFields {
-  groupFunctionCode?: enums.IsoCommand
+  groupFunctionCode?: enums.IsoCommand|number
   reason?: number
   reserved?: number
   pgn?: string
@@ -153,15 +153,15 @@ export interface PGN_60416_Abort extends PGN {
 */
 export interface PGN_60928Fields extends PGNFields {
   uniqueNumber?: number
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   deviceInstanceLower?: number
   deviceInstanceUpper?: number
-  deviceFunction?: enums.DeviceFunction
+  deviceFunction?: enums.DeviceFunction|number
   spare?: string
-  deviceClass?: enums.DeviceClass
+  deviceClass?: enums.DeviceClass|number
   systemInstance?: number
-  industryGroup?: enums.IndustryCode
-  arbitraryAddressCapable?: boolean
+  industryGroup?: enums.IndustryCode|number
+  arbitraryAddressCapable?: enums.YesNo|number
 }
 
 export interface PGN_60928 extends PGN {
@@ -176,9 +176,9 @@ export interface PGN_60928 extends PGN {
   Match: Proprietary ID == Wireless Keypad Light Control
 */
 export interface PGN_61184_Raymarine_WirelessKeypadLightControlFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   variant?: number
   wirelessSetting?: number
@@ -197,9 +197,9 @@ export interface PGN_61184_Raymarine_WirelessKeypadLightControl extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_61184_RaymarineFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   PID: number
   variant?: number
   beepControl?: number
@@ -217,9 +217,9 @@ export interface PGN_61184_Raymarine extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_61184_VictronEnergyFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   registerId?: number
   payload?: number
 }
@@ -308,7 +308,7 @@ export interface PGN_65005 extends PGN {
 export interface PGN_65006Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -351,7 +351,7 @@ export interface PGN_65008 extends PGN {
 export interface PGN_65009Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -394,7 +394,7 @@ export interface PGN_65011 extends PGN {
 export interface PGN_65012Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -437,7 +437,7 @@ export interface PGN_65014 extends PGN {
 export interface PGN_65015Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -493,7 +493,7 @@ export interface PGN_65018 extends PGN {
 export interface PGN_65019Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -536,7 +536,7 @@ export interface PGN_65021 extends PGN {
 export interface PGN_65022Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -579,7 +579,7 @@ export interface PGN_65024 extends PGN {
 export interface PGN_65025Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -622,7 +622,7 @@ export interface PGN_65027 extends PGN {
 export interface PGN_65028Fields extends PGNFields {
   reactivePower?: number
   powerFactor?: number
-  powerFactorLagging?: enums.PowerFactor
+  powerFactorLagging?: enums.PowerFactor|number
   reserved?: number
 }
 
@@ -665,14 +665,14 @@ export interface PGN_65030 extends PGN {
 */
 export interface PGN_65240Fields extends PGNFields {
   uniqueNumber?: number
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   deviceInstanceLower?: number
   deviceInstanceUpper?: number
-  deviceFunction?: enums.DeviceFunction
+  deviceFunction?: enums.DeviceFunction|number
   reserved?: number
-  deviceClass?: enums.DeviceClass
+  deviceClass?: enums.DeviceClass|number
   systemInstance?: number
-  industryCode?: enums.IndustryCode
+  industryCode?: enums.IndustryCode|number
   reserved10?: number
   newSourceAddress?: number
 }
@@ -686,9 +686,9 @@ export interface PGN_65240 extends PGN {
   Description: Furuno: Heave
 */
 export interface PGN_65280Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   heave?: number
   reserved5?: number
 }
@@ -702,9 +702,9 @@ export interface PGN_65280 extends PGN {
   Description: Maretron: Proprietary DC Breaker Current
 */
 export interface PGN_65284Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   bankInstance: number
   indicatorNumber?: number
   breakerCurrent?: number
@@ -722,10 +722,10 @@ export interface PGN_65284 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65285_AirmarFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  bootState?: enums.BootState
+  industryCode: enums.IndustryCode|number
+  bootState?: enums.BootState|number
   reserved5?: number
 }
 
@@ -740,10 +740,10 @@ export interface PGN_65285_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65285_LowranceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  temperatureSource?: enums.TemperatureSource
+  industryCode: enums.IndustryCode|number
+  temperatureSource?: enums.TemperatureSource|number
   actualTemperature?: number
   reserved6?: number
 }
@@ -759,9 +759,9 @@ export interface PGN_65285_Lowrance extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65286_ChetcoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   instance: number
   dimmer1?: number
   dimmer2?: number
@@ -781,9 +781,9 @@ export interface PGN_65286_Chetco extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65286_AirmarFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -798,11 +798,11 @@ export interface PGN_65286_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65287_AirmarFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   formatCode?: number
-  accessLevel?: enums.AccessLevel
+  accessLevel?: enums.AccessLevel|number
   reserved6?: number
   accessSeedKey?: number
 }
@@ -818,9 +818,9 @@ export interface PGN_65287_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65287_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -833,13 +833,13 @@ export interface PGN_65287_Simrad extends PGN {
   Description: Seatalk: Alarm
 */
 export interface PGN_65288Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
-  alarmStatus?: enums.SeatalkAlarmStatus
-  alarmId?: enums.SeatalkAlarmId
-  alarmGroup?: enums.SeatalkAlarmGroup
+  alarmStatus?: enums.SeatalkAlarmStatus|number
+  alarmId?: enums.SeatalkAlarmId|number
+  alarmGroup?: enums.SeatalkAlarmGroup|number
   alarmPriority?: number
 }
 
@@ -852,9 +852,9 @@ export interface PGN_65288 extends PGN {
   Description: Simnet: Trim Tab Sensor Calibration
 */
 export interface PGN_65289Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -867,9 +867,9 @@ export interface PGN_65289 extends PGN {
   Description: Simnet: Paddle Wheel Speed Configuration
 */
 export interface PGN_65290Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -882,9 +882,9 @@ export interface PGN_65290 extends PGN {
   Description: Simnet: Clear Fluid Level Warnings
 */
 export interface PGN_65292Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -899,9 +899,9 @@ export interface PGN_65292 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65293_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -916,9 +916,9 @@ export interface PGN_65293_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_65293_DiverseYachtServicesFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   instance: number
   reserved5?: number
   loadCell?: number
@@ -934,9 +934,9 @@ export interface PGN_65293_DiverseYachtServices extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65302Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -957,12 +957,12 @@ export interface PGN_65302 extends PGN {
   Match: Report == Status
 */
 export interface PGN_65305_Simrad_StatusFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  model?: enums.SimnetDeviceModel
-  report?: enums.SimnetDeviceReport
-  status?: enums.SimnetApStatus
+  industryCode: enums.IndustryCode|number
+  model?: enums.SimnetDeviceModel|number
+  report?: enums.SimnetDeviceReport|number
+  status?: enums.SimnetApStatus|number
   spare7?: string
 }
 
@@ -979,11 +979,11 @@ export interface PGN_65305_Simrad_Status extends PGN {
   Match: Report == Send Status
 */
 export interface PGN_65305_Simrad_SendStatusFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  model?: enums.SimnetDeviceModel
-  report?: enums.SimnetDeviceReport
+  industryCode: enums.IndustryCode|number
+  model?: enums.SimnetDeviceModel|number
+  report?: enums.SimnetDeviceReport|number
   spare6?: string
 }
 
@@ -1000,11 +1000,11 @@ export interface PGN_65305_Simrad_SendStatus extends PGN {
   Match: Report == Mode
 */
 export interface PGN_65305_Simrad_ModeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  model?: enums.SimnetDeviceModel
-  report?: enums.SimnetDeviceReport
+  industryCode: enums.IndustryCode|number
+  model?: enums.SimnetDeviceModel|number
+  report?: enums.SimnetDeviceReport|number
   mode?: enums.SimnetApModeBitfield[]
   spare7?: string
 }
@@ -1022,11 +1022,11 @@ export interface PGN_65305_Simrad_Mode extends PGN {
   Match: Report == Send Mode
 */
 export interface PGN_65305_Simrad_SendModeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  model?: enums.SimnetDeviceModel
-  report?: enums.SimnetDeviceReport
+  industryCode: enums.IndustryCode|number
+  model?: enums.SimnetDeviceModel|number
+  report?: enums.SimnetDeviceReport|number
   spare6?: string
 }
 
@@ -1043,11 +1043,11 @@ export interface PGN_65305_Simrad_SendMode extends PGN {
   Match: Report == Sailing Processor Status
 */
 export interface PGN_65305_Simrad_SailingProcessorStatusFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  model?: enums.SimnetDeviceModel
-  report?: enums.SimnetDeviceReport
+  industryCode: enums.IndustryCode|number
+  model?: enums.SimnetDeviceModel|number
+  report?: enums.SimnetDeviceReport|number
   data?: number
 }
 
@@ -1060,9 +1060,9 @@ export interface PGN_65305_Simrad_SailingProcessorStatus extends PGN {
   Description: Navico: Wireless Battery Status
 */
 export interface PGN_65309Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   status?: number
   batteryStatus?: number
   batteryChargeStatus?: number
@@ -1078,9 +1078,9 @@ export interface PGN_65309 extends PGN {
   Description: Navico: Wireless Signal Status
 */
 export interface PGN_65312Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   unknown?: number
   signalStrength?: number
   reserved6?: number
@@ -1096,9 +1096,9 @@ export interface PGN_65312 extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65340Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -1116,11 +1116,11 @@ export interface PGN_65340 extends PGN {
   Description: Simnet: Autopilot Angle
 */
 export interface PGN_65341Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  mode?: enums.SimnetApMode
+  mode?: enums.SimnetApMode|number
   reserved6?: number
   angle?: number
 }
@@ -1134,9 +1134,9 @@ export interface PGN_65341 extends PGN {
   Description: Seatalk: Pilot Wind Datum
 */
 export interface PGN_65345Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   windDatum?: number
   rollingAverageWindAngle?: number
   reserved6?: number
@@ -1167,9 +1167,9 @@ export interface PGN_65350 extends PGN {
   Description: Seatalk: Pilot Heading
 */
 export interface PGN_65359Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   headingTrue?: number
   headingMagnetic?: number
@@ -1185,9 +1185,9 @@ export interface PGN_65359 extends PGN {
   Description: Seatalk: Pilot Locked Heading
 */
 export interface PGN_65360Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   targetHeadingTrue?: number
   targetHeadingMagnetic?: number
@@ -1203,11 +1203,11 @@ export interface PGN_65360 extends PGN {
   Description: Seatalk: Silence Alarm
 */
 export interface PGN_65361Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  alarmId?: enums.SeatalkAlarmId
-  alarmGroup?: enums.SeatalkAlarmGroup
+  industryCode: enums.IndustryCode|number
+  alarmId?: enums.SeatalkAlarmId|number
+  alarmGroup?: enums.SeatalkAlarmGroup|number
   reserved6?: number
 }
 
@@ -1220,9 +1220,9 @@ export interface PGN_65361 extends PGN {
   Description: Seatalk: Keypad Message
 */
 export interface PGN_65371Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   firstKey?: number
   secondKey?: number
@@ -1242,9 +1242,9 @@ export interface PGN_65371 extends PGN {
   Description: SeaTalk: Keypad Heartbeat
 */
 export interface PGN_65374Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   variant?: number
   status?: number
@@ -1260,10 +1260,10 @@ export interface PGN_65374 extends PGN {
   Description: Seatalk: Pilot Mode
 */
 export interface PGN_65379Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  pilotMode?: enums.SeatalkPilotMode16
+  industryCode: enums.IndustryCode|number
+  pilotMode?: enums.SeatalkPilotMode16|number
   subMode?: number
   pilotModeData?: number
   reserved7?: number
@@ -1278,11 +1278,11 @@ export interface PGN_65379 extends PGN {
   Description: Airmar: Depth Quality Factor
 */
 export interface PGN_65408Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
-  depthQualityFactor?: enums.AirmarDepthQualityFactor
+  depthQualityFactor?: enums.AirmarDepthQualityFactor|number
   reserved6?: number
 }
 
@@ -1295,9 +1295,9 @@ export interface PGN_65408 extends PGN {
   Description: Airmar: Speed Pulse Count
 */
 export interface PGN_65409Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   durationOfInterval?: string
   numberOfPulsesReceived?: number
@@ -1313,9 +1313,9 @@ export interface PGN_65409 extends PGN {
   Description: Airmar: Device Information
 */
 export interface PGN_65410Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   internalDeviceTemperature?: number
   supplyVoltage?: number
@@ -1332,9 +1332,9 @@ export interface PGN_65410 extends PGN {
   Explanation: Seen as sent by AC-42 only so far.
 */
 export interface PGN_65420Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -1352,9 +1352,9 @@ export interface PGN_65420 extends PGN {
   Description: Simnet: Autopilot Mode
 */
 export interface PGN_65480Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
 }
 
@@ -1368,7 +1368,7 @@ export interface PGN_65480 extends PGN {
   Explanation: This is the Request variation of this group function PGN. The receiver shall respond by sending the requested PGN, at the desired transmission interval.
 */
 export interface PGN_126208Fields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
   transmissionInterval?: string
   transmissionIntervalOffset?: string
@@ -1388,9 +1388,9 @@ export interface PGN_126208 extends PGN {
   Match: Function Code == Command
 */
 export interface PGN_126208_CommandFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  priority?: enums.Priority
+  priority?: enums.Priority|number
   reserved?: number
   numberOfParameters?: number
   parameter?: string
@@ -1408,12 +1408,12 @@ export interface PGN_126208_Command extends PGN {
   Match: Function Code == Acknowledge
 */
 export interface PGN_126208_AcknowledgeFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  pgnErrorCode?: enums.PgnErrorCode
-  transmissionIntervalPriorityErrorCode?: enums.TransmissionInterval
+  pgnErrorCode?: enums.PgnErrorCode|number
+  transmissionIntervalPriorityErrorCode?: enums.TransmissionInterval|number
   numberOfParameters?: number
-  parameter?: enums.ParameterField
+  parameter?: enums.ParameterField|number
 }
 
 export interface PGN_126208_Acknowledge extends PGN {
@@ -1427,11 +1427,11 @@ export interface PGN_126208_Acknowledge extends PGN {
   Match: Function Code == Read Fields
 */
 export interface PGN_126208_ReadFieldsFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
-  industryCode?: enums.IndustryCode
+  industryCode?: enums.IndustryCode|number
   uniqueId?: number
   numberOfSelectionPairs?: number
   numberOfParameters?: number
@@ -1451,11 +1451,11 @@ export interface PGN_126208_ReadFields extends PGN {
   Match: Function Code == Read Fields Reply
 */
 export interface PGN_126208_ReadFieldsReplyFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
-  industryCode?: enums.IndustryCode
+  industryCode?: enums.IndustryCode|number
   uniqueId?: number
   numberOfSelectionPairs?: number
   numberOfParameters?: number
@@ -1476,11 +1476,11 @@ export interface PGN_126208_ReadFieldsReply extends PGN {
   Match: Function Code == Write Fields
 */
 export interface PGN_126208_WriteFieldsFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
-  industryCode?: enums.IndustryCode
+  industryCode?: enums.IndustryCode|number
   uniqueId?: number
   numberOfSelectionPairs?: number
   numberOfParameters?: number
@@ -1501,11 +1501,11 @@ export interface PGN_126208_WriteFields extends PGN {
   Match: Function Code == Write Fields Reply
 */
 export interface PGN_126208_WriteFieldsReplyFields extends PGNFields {
-  functionCode?: enums.GroupFunction
+  functionCode?: enums.GroupFunction|number
   pgn?: string
-  manufacturerCode?: enums.ManufacturerCode
+  manufacturerCode?: enums.ManufacturerCode|number
   reserved?: number
-  industryCode?: enums.IndustryCode
+  industryCode?: enums.IndustryCode|number
   uniqueId?: number
   numberOfSelectionPairs?: number
   numberOfParameters?: number
@@ -1524,7 +1524,7 @@ export interface PGN_126208_WriteFieldsReply extends PGN {
   Description: PGN List (Transmit and Receive)
 */
 export interface PGN_126464Fields extends PGNFields {
-  functionCode?: enums.PgnListFunction
+  functionCode?: enums.PgnListFunction|number
   pgn?: string
 }
 
@@ -1541,13 +1541,13 @@ export interface PGN_126464 extends PGN {
   Match: command == 0x84
 */
 export interface PGN_126720_Raymarine__0X81F0__0X84Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   command?: number
   unknown1?: number
-  pilotMode?: enums.SeatalkPilotMode
+  pilotMode?: enums.SeatalkPilotMode|number
   subMode?: number
   pilotModeData?: number
   unknown2?: number
@@ -1565,13 +1565,13 @@ export interface PGN_126720_Raymarine__0X81F0__0X84 extends PGN {
   Match: Proprietary ID == Media Control
 */
 export interface PGN_126720_FusionElectronics_MediaControlFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   unknown?: number
   sourceId?: number
-  command?: enums.FusionCommand
+  command?: enums.FusionCommand|number
 }
 
 export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
@@ -1586,13 +1586,13 @@ export interface PGN_126720_FusionElectronics_MediaControl extends PGN {
   Match: Proprietary ID == Sirius Control
 */
 export interface PGN_126720_FusionElectronics_SiriusControlFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   unknown?: number
   sourceId?: number
-  command?: enums.FusionSiriusCommand
+  command?: enums.FusionSiriusCommand|number
 }
 
 export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
@@ -1607,10 +1607,10 @@ export interface PGN_126720_FusionElectronics_SiriusControl extends PGN {
   Match: Proprietary ID == Request Status
 */
 export interface PGN_126720_FusionElectronics_RequestStatusFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.FusionMessageId
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.FusionMessageId|number
   unknown?: number
 }
 
@@ -1626,10 +1626,10 @@ export interface PGN_126720_FusionElectronics_RequestStatus extends PGN {
   Match: Proprietary ID == Source
 */
 export interface PGN_126720_FusionElectronics_SourceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.FusionMessageId
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.FusionMessageId|number
   unknown?: number
   sourceId?: number
 }
@@ -1646,11 +1646,11 @@ export interface PGN_126720_FusionElectronics_Source extends PGN {
   Match: Proprietary ID == 23
 */
 export interface PGN_126720_FusionElectronics_23Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.FusionMessageId
-  command?: enums.FusionMuteCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.FusionMessageId|number
+  command?: enums.FusionMuteCommand|number
 }
 
 export interface PGN_126720_FusionElectronics_23 extends PGN {
@@ -1665,10 +1665,10 @@ export interface PGN_126720_FusionElectronics_23 extends PGN {
   Match: Proprietary ID == Set Zone Volume
 */
 export interface PGN_126720_FusionElectronics_SetZoneVolumeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.FusionMessageId
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.FusionMessageId|number
   unknown?: number
   zone?: number
   volume?: number
@@ -1686,10 +1686,10 @@ export interface PGN_126720_FusionElectronics_SetZoneVolume extends PGN {
   Match: Proprietary ID == Set All Volumes
 */
 export interface PGN_126720_FusionElectronics_SetAllVolumesFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.FusionMessageId
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.FusionMessageId|number
   unknown?: number
   zone1?: number
   zone2?: number
@@ -1710,13 +1710,13 @@ export interface PGN_126720_FusionElectronics_SetAllVolumes extends PGN {
   Match: command == 0x86
 */
 export interface PGN_126720_Raymarine__0X81F0__0X86Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   command?: number
   device?: number
-  key?: enums.SeatalkKeystroke
+  key?: enums.SeatalkKeystroke|number
   keyinverted?: number
   unknownData?: number
 }
@@ -1734,13 +1734,13 @@ export interface PGN_126720_Raymarine__0X81F0__0X86 extends PGN {
   Match: command == 0x90
 */
 export interface PGN_126720_Raymarine__0X81F0__0X90Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
   command?: number
   reserved6?: number
-  device?: enums.SeatalkDeviceId
+  device?: enums.SeatalkDeviceId|number
 }
 
 export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
@@ -1755,11 +1755,11 @@ export interface PGN_126720_Raymarine__0X81F0__0X90 extends PGN {
   Match: Proprietary ID == 0x0c8c
 */
 export interface PGN_126720_Raymarine__0X0C8CFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
-  group?: enums.SeatalkNetworkGroup
+  group?: enums.SeatalkNetworkGroup|number
   unknown1?: number
   command?: number
   brightness?: number
@@ -1779,14 +1779,14 @@ export interface PGN_126720_Raymarine__0X0C8C extends PGN {
   Match: Command == Color
 */
 export interface PGN_126720_Raymarine__0X0C8C_ColorFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
-  group?: enums.SeatalkNetworkGroup
+  group?: enums.SeatalkNetworkGroup|number
   unknown1?: number
   command?: number
-  color?: enums.SeatalkDisplayColor
+  color?: enums.SeatalkDisplayColor|number
   unknown2?: number
 }
 
@@ -1802,10 +1802,10 @@ export interface PGN_126720_Raymarine__0X0C8C_Color extends PGN {
   Match: Proprietary ID == Attitude Offsets
 */
 export interface PGN_126720_Airmar_AttitudeOffsetsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   azimuthOffset?: number
   pitchOffset?: number
   rollOffset?: number
@@ -1823,12 +1823,12 @@ export interface PGN_126720_Airmar_AttitudeOffsets extends PGN {
   Match: Proprietary ID == Calibrate Compass
 */
 export interface PGN_126720_Airmar_CalibrateCompassFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
-  calibrateFunction?: enums.AirmarCalibrateFunction
-  calibrationStatus?: enums.AirmarCalibrateStatus
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
+  calibrateFunction?: enums.AirmarCalibrateFunction|number
+  calibrationStatus?: enums.AirmarCalibrateStatus|number
   verifyScore?: number
   xAxisGainValue?: number
   yAxisGainValue?: number
@@ -1853,11 +1853,11 @@ export interface PGN_126720_Airmar_CalibrateCompass extends PGN {
   Match: Proprietary ID == True Wind Options
 */
 export interface PGN_126720_Airmar_TrueWindOptionsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
-  cogSubstitutionForHdg?: boolean
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
+  cogSubstitutionForHdg?: enums.YesNo|number
   reserved6?: number
 }
 
@@ -1873,11 +1873,11 @@ export interface PGN_126720_Airmar_TrueWindOptions extends PGN {
   Match: Proprietary ID == Simulate Mode
 */
 export interface PGN_126720_Airmar_SimulateModeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
-  simulateMode?: enums.OffOn
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
+  simulateMode?: enums.OffOn|number
   reserved6?: number
 }
 
@@ -1893,10 +1893,10 @@ export interface PGN_126720_Airmar_SimulateMode extends PGN {
   Match: Proprietary ID == Calibrate Depth
 */
 export interface PGN_126720_Airmar_CalibrateDepthFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   speedOfSoundMode?: number
   reserved6?: number
 }
@@ -1913,10 +1913,10 @@ export interface PGN_126720_Airmar_CalibrateDepth extends PGN {
   Match: Proprietary ID == Calibrate Speed
 */
 export interface PGN_126720_Airmar_CalibrateSpeedFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   numberOfPairsOfDataPoints?: number
   inputFrequency?: number
   outputSpeed?: number
@@ -1934,11 +1934,11 @@ export interface PGN_126720_Airmar_CalibrateSpeed extends PGN {
   Match: Proprietary ID == Calibrate Temperature
 */
 export interface PGN_126720_Airmar_CalibrateTemperatureFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
-  temperatureInstance: enums.AirmarTemperatureInstance
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
+  temperatureInstance: enums.AirmarTemperatureInstance|number
   reserved6?: number
   temperatureOffset?: number
 }
@@ -1955,10 +1955,10 @@ export interface PGN_126720_Airmar_CalibrateTemperature extends PGN {
   Match: Proprietary ID == Speed Filter
 */
 export interface PGN_126720_Airmar_SpeedFilterFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   filterType?: number
   reserved6?: number
   sampleInterval?: string
@@ -1977,10 +1977,10 @@ export interface PGN_126720_Airmar_SpeedFilter extends PGN {
   Match: Filter type == IIR filter
 */
 export interface PGN_126720_Airmar_SpeedFilter_IirFilterFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   filterType?: number
   reserved6?: number
   sampleInterval?: string
@@ -1999,10 +1999,10 @@ export interface PGN_126720_Airmar_SpeedFilter_IirFilter extends PGN {
   Match: Proprietary ID == Temperature Filter
 */
 export interface PGN_126720_Airmar_TemperatureFilterFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   filterType?: number
   reserved6?: number
   sampleInterval?: string
@@ -2021,10 +2021,10 @@ export interface PGN_126720_Airmar_TemperatureFilter extends PGN {
   Match: Filter type == IIR filter
 */
 export interface PGN_126720_Airmar_TemperatureFilter_IirFilterFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
   filterType?: number
   reserved6?: number
   sampleInterval?: string
@@ -2043,11 +2043,11 @@ export interface PGN_126720_Airmar_TemperatureFilter_IirFilter extends PGN {
   Match: Proprietary ID == NMEA 2000 options
 */
 export interface PGN_126720_Airmar_Nmea2000OptionsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.AirmarCommand
-  transmissionInterval?: enums.AirmarTransmissionInterval
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.AirmarCommand|number
+  transmissionInterval?: enums.AirmarTransmissionInterval|number
   reserved6?: number
 }
 
@@ -2062,9 +2062,9 @@ export interface PGN_126720_Airmar_Nmea2000Options extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_126720_AirmarFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   proprietaryId: number
 }
 
@@ -2079,9 +2079,9 @@ export interface PGN_126720_Airmar extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_126720_MaretronFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   productCode?: number
   softwareCode?: number
   command?: number
@@ -2103,17 +2103,17 @@ export interface PGN_126720_Maretron extends PGN {
   Match: Unknown ID 4 == Always 5
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   unknownId1?: number
   unknownId2?: number
   unknownId3?: number
   unknownId4?: number
   spare8?: string
-  mode?: enums.GarminColorMode
+  mode?: enums.GarminColorMode|number
   spare10?: string
-  backlight?: enums.GarminBacklightLevel
+  backlight?: enums.GarminBacklightLevel|number
 }
 
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN {
@@ -2132,17 +2132,17 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5 extends PGN
   Match: Mode == Night
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_NightFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   unknownId1?: number
   unknownId2?: number
   unknownId3?: number
   unknownId4?: number
   spare8?: string
-  mode?: enums.GarminColorMode
+  mode?: enums.GarminColorMode|number
   spare10?: string
-  backlight?: enums.GarminBacklightLevel
+  backlight?: enums.GarminBacklightLevel|number
 }
 
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night extends PGN {
@@ -2161,17 +2161,17 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Night exten
   Match: Mode == Color
 */
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_ColorFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   unknownId1?: number
   unknownId2?: number
   unknownId3?: number
   unknownId4?: number
   spare8?: string
-  mode?: enums.GarminColorMode
+  mode?: enums.GarminColorMode|number
   spare10?: string
-  color?: enums.GarminColor
+  color?: enums.GarminColor|number
 }
 
 export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color extends PGN {
@@ -2183,8 +2183,8 @@ export interface PGN_126720_Garmin_Always222_Always5_Always5_Always5_Color exten
   Description: Alert
 */
 export interface PGN_126983Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2192,18 +2192,18 @@ export interface PGN_126983Fields extends PGNFields {
   dataSourceInstance: number
   dataSourceIndexSource?: number
   alertOccurrenceNumber?: number
-  temporarySilenceStatus?: boolean
-  acknowledgeStatus?: boolean
-  escalationStatus?: boolean
-  temporarySilenceSupport?: boolean
-  acknowledgeSupport?: boolean
-  escalationSupport?: boolean
+  temporarySilenceStatus?: enums.YesNo|number
+  acknowledgeStatus?: enums.YesNo|number
+  escalationStatus?: enums.YesNo|number
+  temporarySilenceSupport?: enums.YesNo|number
+  acknowledgeSupport?: enums.YesNo|number
+  escalationSupport?: enums.YesNo|number
   reserved?: number
   acknowledgeSourceNetworkIdName?: string
-  triggerCondition?: enums.AlertTriggerCondition
-  thresholdStatus?: enums.AlertThresholdStatus
+  triggerCondition?: enums.AlertTriggerCondition|number
+  thresholdStatus?: enums.AlertThresholdStatus|number
   alertPriority?: number
-  alertState?: enums.AlertState
+  alertState?: enums.AlertState|number
 }
 
 export interface PGN_126983 extends PGN {
@@ -2215,8 +2215,8 @@ export interface PGN_126983 extends PGN {
   Description: Alert Response
 */
 export interface PGN_126984Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2225,7 +2225,7 @@ export interface PGN_126984Fields extends PGNFields {
   dataSourceIndexSource?: number
   alertOccurrenceNumber?: number
   acknowledgeSourceNetworkIdName?: string
-  responseCommand?: enums.AlertResponseCommand
+  responseCommand?: enums.AlertResponseCommand|number
   reserved?: number
 }
 
@@ -2238,8 +2238,8 @@ export interface PGN_126984 extends PGN {
   Description: Alert Text
 */
 export interface PGN_126985Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2247,7 +2247,7 @@ export interface PGN_126985Fields extends PGNFields {
   dataSourceInstance: number
   dataSourceIndexSource?: number
   alertOccurrenceNumber?: number
-  languageId?: enums.AlertLanguageId
+  languageId?: enums.AlertLanguageId|number
   alertTextDescription?: string
   alertLocationTextDescription?: string
 }
@@ -2261,8 +2261,8 @@ export interface PGN_126985 extends PGN {
   Description: Alert Configuration
 */
 export interface PGN_126986Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2287,8 +2287,8 @@ export interface PGN_126986 extends PGN {
   Description: Alert Threshold
 */
 export interface PGN_126987Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2312,8 +2312,8 @@ export interface PGN_126987 extends PGN {
   Description: Alert Value
 */
 export interface PGN_126988Fields extends PGNFields {
-  alertType?: enums.AlertType
-  alertCategory?: enums.AlertCategory
+  alertType?: enums.AlertType|number
+  alertCategory?: enums.AlertCategory|number
   alertSystem?: number
   alertSubSystem?: number
   alertId?: number
@@ -2338,7 +2338,7 @@ export interface PGN_126988 extends PGN {
 */
 export interface PGN_126992Fields extends PGNFields {
   sid?: number
-  source: enums.SystemTime
+  source: enums.SystemTime|number
   reserved?: number
   date?: string
   time?: string
@@ -2356,9 +2356,9 @@ export interface PGN_126992 extends PGN {
 export interface PGN_126993Fields extends PGNFields {
   dataTransmitOffset?: string
   sequenceCounter?: number
-  controller1State?: enums.ControllerState
-  controller2State?: enums.ControllerState
-  equipmentStatus?: enums.EquipmentStatus
+  controller1State?: enums.ControllerState|number
+  controller2State?: enums.ControllerState|number
+  equipmentStatus?: enums.EquipmentStatus|number
   reserved?: number
 }
 
@@ -2378,7 +2378,7 @@ export interface PGN_126996Fields extends PGNFields {
   softwareVersionCode?: string
   modelVersion?: string
   modelSerialCode?: string
-  certificationLevel?: enums.CertificationLevel
+  certificationLevel?: enums.CertificationLevel|number
   loadEquivalency?: number
 }
 
@@ -2418,21 +2418,21 @@ The Default update rate of this PGN is autonomous, as it is dependant upon notif
 export interface PGN_127233Fields extends PGNFields {
   sid?: number
   mobEmitterId?: number
-  manOverboardStatus?: enums.MobStatus
+  manOverboardStatus?: enums.MobStatus|number
   reserved?: number
   activationTime?: string
-  positionSource?: enums.MobPositionSource
+  positionSource?: enums.MobPositionSource|number
   reserved7?: number
   positionDate?: string
   positionTime?: string
   latitude?: number
   longitude?: number
-  cogReference?: enums.DirectionReference
+  cogReference?: enums.DirectionReference|number
   reserved13?: number
   cog?: number
   sog?: number
   mmsiOfVesselOfOrigin: string
-  mobEmitterBatteryLowStatus?: enums.LowBattery
+  mobEmitterBatteryLowStatus?: enums.LowBattery|number
   reserved18?: number
 }
 
@@ -2445,15 +2445,15 @@ export interface PGN_127233 extends PGN {
   Description: Heading/Track control
 */
 export interface PGN_127237Fields extends PGNFields {
-  rudderLimitExceeded?: boolean
-  offHeadingLimitExceeded?: boolean
-  offTrackLimitExceeded?: boolean
-  override?: boolean
-  steeringMode?: enums.SteeringMode
-  turnMode?: enums.TurnMode
-  headingReference?: enums.DirectionReference
+  rudderLimitExceeded?: enums.YesNo|number
+  offHeadingLimitExceeded?: enums.YesNo|number
+  offTrackLimitExceeded?: enums.YesNo|number
+  override?: enums.YesNo|number
+  steeringMode?: enums.SteeringMode|number
+  turnMode?: enums.TurnMode|number
+  headingReference?: enums.DirectionReference|number
   reserved?: number
-  commandedRudderDirection?: enums.DirectionRudder
+  commandedRudderDirection?: enums.DirectionRudder|number
   commandedRudderAngle?: number
   headingToSteerCourse?: number
   track?: number
@@ -2475,7 +2475,7 @@ export interface PGN_127237 extends PGN {
 */
 export interface PGN_127245Fields extends PGNFields {
   instance: number
-  directionOrder?: enums.DirectionRudder
+  directionOrder?: enums.DirectionRudder|number
   reserved?: number
   angleOrder?: number
   position?: number
@@ -2495,7 +2495,7 @@ export interface PGN_127250Fields extends PGNFields {
   heading?: number
   deviation?: number
   variation?: number
-  reference?: enums.DirectionReference
+  reference?: enums.DirectionReference|number
   reserved?: number
 }
 
@@ -2553,7 +2553,7 @@ export interface PGN_127257 extends PGN {
 */
 export interface PGN_127258Fields extends PGNFields {
   sid?: number
-  source?: enums.MagneticVariation
+  source?: enums.MagneticVariation|number
   reserved?: number
   ageOfService?: string
   variation?: number
@@ -2569,7 +2569,7 @@ export interface PGN_127258 extends PGN {
   Description: Engine Parameters, Rapid Update
 */
 export interface PGN_127488Fields extends PGNFields {
-  instance: enums.EngineInstance
+  instance: enums.EngineInstance|number
   speed?: number
   boostPressure?: number
   tiltTrim?: number
@@ -2585,7 +2585,7 @@ export interface PGN_127488 extends PGN {
   Description: Engine Parameters, Dynamic
 */
 export interface PGN_127489Fields extends PGNFields {
-  instance: enums.EngineInstance
+  instance: enums.EngineInstance|number
   oilPressure?: number
   oilTemperature?: number
   temperature?: number
@@ -2652,8 +2652,8 @@ export interface PGN_127491 extends PGN {
   Description: Transmission Parameters, Dynamic
 */
 export interface PGN_127493Fields extends PGNFields {
-  instance: enums.EngineInstance
-  transmissionGear?: enums.GearStatus
+  instance: enums.EngineInstance|number
+  transmissionGear?: enums.GearStatus|number
   reserved?: number
   oilPressure?: number
   oilTemperature?: number
@@ -2738,7 +2738,7 @@ export interface PGN_127496 extends PGN {
   Description: Trip Parameters, Engine
 */
 export interface PGN_127497Fields extends PGNFields {
-  instance: enums.EngineInstance
+  instance: enums.EngineInstance|number
   tripFuelUsed?: number
   fuelRateAverage?: number
   fuelRateEconomy?: number
@@ -2754,7 +2754,7 @@ export interface PGN_127497 extends PGN {
   Description: Engine Parameters, Static
 */
 export interface PGN_127498Fields extends PGNFields {
-  instance: enums.EngineInstance
+  instance: enums.EngineInstance|number
   ratedEngineSpeed?: number
   vin?: string
   softwareId?: string
@@ -2789,34 +2789,34 @@ export interface PGN_127500 extends PGN {
 */
 export interface PGN_127501Fields extends PGNFields {
   instance: number
-  indicator1?: enums.OffOn
-  indicator2?: enums.OffOn
-  indicator3?: enums.OffOn
-  indicator4?: enums.OffOn
-  indicator5?: enums.OffOn
-  indicator6?: enums.OffOn
-  indicator7?: enums.OffOn
-  indicator8?: enums.OffOn
-  indicator9?: enums.OffOn
-  indicator10?: enums.OffOn
-  indicator11?: enums.OffOn
-  indicator12?: enums.OffOn
-  indicator13?: enums.OffOn
-  indicator14?: enums.OffOn
-  indicator15?: enums.OffOn
-  indicator16?: enums.OffOn
-  indicator17?: enums.OffOn
-  indicator18?: enums.OffOn
-  indicator19?: enums.OffOn
-  indicator20?: enums.OffOn
-  indicator21?: enums.OffOn
-  indicator22?: enums.OffOn
-  indicator23?: enums.OffOn
-  indicator24?: enums.OffOn
-  indicator25?: enums.OffOn
-  indicator26?: enums.OffOn
-  indicator27?: enums.OffOn
-  indicator28?: enums.OffOn
+  indicator1?: enums.OffOn|number
+  indicator2?: enums.OffOn|number
+  indicator3?: enums.OffOn|number
+  indicator4?: enums.OffOn|number
+  indicator5?: enums.OffOn|number
+  indicator6?: enums.OffOn|number
+  indicator7?: enums.OffOn|number
+  indicator8?: enums.OffOn|number
+  indicator9?: enums.OffOn|number
+  indicator10?: enums.OffOn|number
+  indicator11?: enums.OffOn|number
+  indicator12?: enums.OffOn|number
+  indicator13?: enums.OffOn|number
+  indicator14?: enums.OffOn|number
+  indicator15?: enums.OffOn|number
+  indicator16?: enums.OffOn|number
+  indicator17?: enums.OffOn|number
+  indicator18?: enums.OffOn|number
+  indicator19?: enums.OffOn|number
+  indicator20?: enums.OffOn|number
+  indicator21?: enums.OffOn|number
+  indicator22?: enums.OffOn|number
+  indicator23?: enums.OffOn|number
+  indicator24?: enums.OffOn|number
+  indicator25?: enums.OffOn|number
+  indicator26?: enums.OffOn|number
+  indicator27?: enums.OffOn|number
+  indicator28?: enums.OffOn|number
 }
 
 export interface PGN_127501 extends PGN {
@@ -2829,34 +2829,34 @@ export interface PGN_127501 extends PGN {
 */
 export interface PGN_127502Fields extends PGNFields {
   instance: number
-  switch1?: enums.OffOnControl
-  switch2?: enums.OffOnControl
-  switch3?: enums.OffOnControl
-  switch4?: enums.OffOnControl
-  switch5?: enums.OffOnControl
-  switch6?: enums.OffOnControl
-  switch7?: enums.OffOnControl
-  switch8?: enums.OffOnControl
-  switch9?: enums.OffOnControl
-  switch10?: enums.OffOnControl
-  switch11?: enums.OffOnControl
-  switch12?: enums.OffOnControl
-  switch13?: enums.OffOnControl
-  switch14?: enums.OffOnControl
-  switch15?: enums.OffOnControl
-  switch16?: enums.OffOnControl
-  switch17?: enums.OffOnControl
-  switch18?: enums.OffOnControl
-  switch19?: enums.OffOnControl
-  switch20?: enums.OffOnControl
-  switch21?: enums.OffOnControl
-  switch22?: enums.OffOnControl
-  switch23?: enums.OffOnControl
-  switch24?: enums.OffOnControl
-  switch25?: enums.OffOnControl
-  switch26?: enums.OffOnControl
-  switch27?: enums.OffOnControl
-  switch28?: enums.OffOnControl
+  switch1?: enums.OffOnControl|number
+  switch2?: enums.OffOnControl|number
+  switch3?: enums.OffOnControl|number
+  switch4?: enums.OffOnControl|number
+  switch5?: enums.OffOnControl|number
+  switch6?: enums.OffOnControl|number
+  switch7?: enums.OffOnControl|number
+  switch8?: enums.OffOnControl|number
+  switch9?: enums.OffOnControl|number
+  switch10?: enums.OffOnControl|number
+  switch11?: enums.OffOnControl|number
+  switch12?: enums.OffOnControl|number
+  switch13?: enums.OffOnControl|number
+  switch14?: enums.OffOnControl|number
+  switch15?: enums.OffOnControl|number
+  switch16?: enums.OffOnControl|number
+  switch17?: enums.OffOnControl|number
+  switch18?: enums.OffOnControl|number
+  switch19?: enums.OffOnControl|number
+  switch20?: enums.OffOnControl|number
+  switch21?: enums.OffOnControl|number
+  switch22?: enums.OffOnControl|number
+  switch23?: enums.OffOnControl|number
+  switch24?: enums.OffOnControl|number
+  switch25?: enums.OffOnControl|number
+  switch26?: enums.OffOnControl|number
+  switch27?: enums.OffOnControl|number
+  switch28?: enums.OffOnControl|number
 }
 
 export interface PGN_127502 extends PGN {
@@ -2870,8 +2870,8 @@ export interface PGN_127502 extends PGN {
 export interface PGN_127503Fields extends PGNFields {
   instance: number
   numberOfLines?: number
-  line?: enums.AcLine
-  acceptability?: enums.Acceptability
+  line?: enums.AcLine|number
+  acceptability?: enums.Acceptability|number
   reserved?: number
   voltage?: number
   current?: number
@@ -2893,8 +2893,8 @@ export interface PGN_127503 extends PGN {
 export interface PGN_127504Fields extends PGNFields {
   instance: number
   numberOfLines?: number
-  line?: enums.Line
-  waveform?: enums.Waveform
+  line?: enums.Line|number
+  waveform?: enums.Waveform|number
   reserved?: number
   voltage?: number
   current?: number
@@ -2915,7 +2915,7 @@ export interface PGN_127504 extends PGN {
 */
 export interface PGN_127505Fields extends PGNFields {
   instance: number
-  type?: enums.TankType
+  type?: enums.TankType|number
   level?: number
   capacity?: number
   reserved?: number
@@ -2932,7 +2932,7 @@ export interface PGN_127505 extends PGN {
 export interface PGN_127506Fields extends PGNFields {
   sid?: number
   instance: number
-  dcType: enums.DcSource
+  dcType: enums.DcSource|number
   stateOfCharge?: number
   stateOfHealth?: number
   timeRemaining?: string
@@ -2951,10 +2951,10 @@ export interface PGN_127506 extends PGN {
 export interface PGN_127507Fields extends PGNFields {
   instance: number
   batteryInstance: number
-  operatingState?: enums.ChargerState
-  chargeMode?: enums.ChargerMode
-  enabled?: enums.OffOn
-  equalizationPending?: enums.OffOn
+  operatingState?: enums.ChargerState|number
+  chargeMode?: enums.ChargerMode|number
+  enabled?: enums.OffOn|number
+  equalizationPending?: enums.OffOn|number
   reserved?: number
   equalizationTimeRemaining?: string
 }
@@ -2988,8 +2988,8 @@ export interface PGN_127509Fields extends PGNFields {
   instance: number
   acInstance: number
   dcInstance: number
-  operatingState?: enums.InverterState
-  inverterEnable?: enums.OffOn
+  operatingState?: enums.InverterState|number
+  inverterEnable?: enums.OffOn|number
   reserved?: number
 }
 
@@ -3004,14 +3004,14 @@ export interface PGN_127509 extends PGN {
 export interface PGN_127510Fields extends PGNFields {
   instance: number
   batteryInstance: number
-  chargerEnableDisable?: enums.OffOn
+  chargerEnableDisable?: enums.OffOn|number
   reserved?: number
   chargeCurrentLimit?: number
-  chargingAlgorithm?: enums.ChargingAlgorithm
-  chargerMode?: enums.ChargerMode
-  estimatedTemperature?: enums.DeviceTempState
-  equalizeOneTimeEnableDisable?: enums.OffOn
-  overChargeEnableDisable?: enums.OffOn
+  chargingAlgorithm?: enums.ChargingAlgorithm|number
+  chargerMode?: enums.ChargerMode|number
+  estimatedTemperature?: enums.DeviceTempState|number
+  equalizeOneTimeEnableDisable?: enums.OffOn|number
+  overChargeEnableDisable?: enums.OffOn|number
   equalizeTime?: string
 }
 
@@ -3027,9 +3027,9 @@ export interface PGN_127511Fields extends PGNFields {
   instance: number
   acInstance: number
   dcInstance: number
-  inverterEnableDisable?: enums.OffOn
-  inverterMode?: enums.InverterMode
-  loadSenseEnableDisable?: enums.OffOn
+  inverterEnableDisable?: enums.OffOn|number
+  inverterMode?: enums.InverterMode|number
+  loadSenseEnableDisable?: enums.OffOn|number
   loadSensePowerThreshold?: number
   loadSenseInterval?: string
 }
@@ -3045,7 +3045,7 @@ export interface PGN_127511 extends PGN {
 export interface PGN_127512Fields extends PGNFields {
   instance: number
   generatorInstance: number
-  agsMode?: enums.AgsMode
+  agsMode?: enums.AgsMode|number
   reserved?: number
 }
 
@@ -3059,11 +3059,11 @@ export interface PGN_127512 extends PGN {
 */
 export interface PGN_127513Fields extends PGNFields {
   instance: number
-  batteryType?: enums.BatteryType
-  supportsEqualization?: boolean
+  batteryType?: enums.BatteryType|number
+  supportsEqualization?: enums.YesNo|number
   reserved?: number
-  nominalVoltage?: enums.BatteryVoltage
-  chemistry?: enums.BatteryChemistry
+  nominalVoltage?: enums.BatteryVoltage|number
+  chemistry?: enums.BatteryChemistry|number
   capacity?: number
   temperatureCoefficient?: number
   peukertExponent?: number
@@ -3081,10 +3081,10 @@ export interface PGN_127513 extends PGN {
 export interface PGN_127514Fields extends PGNFields {
   instance: number
   generatorInstance: number
-  agsOperatingState?: enums.AgsOperatingState
-  generatorState?: enums.AgsGeneratingState
-  generatorOnReason?: enums.AgsOnReason
-  generatorOffReason?: enums.AgsOffReason
+  agsOperatingState?: enums.AgsOperatingState|number
+  generatorState?: enums.AgsGeneratingState|number
+  generatorOnReason?: enums.AgsOnReason|number
+  generatorOffReason?: enums.AgsOffReason|number
 }
 
 export interface PGN_127514 extends PGN {
@@ -3191,11 +3191,11 @@ export interface PGN_127749 extends PGN {
 export interface PGN_127750Fields extends PGNFields {
   sid?: number
   connectionNumber?: number
-  operatingState?: enums.ConverterState
-  temperatureState?: enums.GoodWarningError
-  overloadState?: enums.GoodWarningError
-  lowDcVoltageState?: enums.GoodWarningError
-  rippleState?: enums.GoodWarningError
+  operatingState?: enums.ConverterState|number
+  temperatureState?: enums.GoodWarningError|number
+  overloadState?: enums.GoodWarningError|number
+  lowDcVoltageState?: enums.GoodWarningError|number
+  rippleState?: enums.GoodWarningError|number
   reserved?: number
 }
 
@@ -3296,9 +3296,9 @@ export interface PGN_128003 extends PGN {
 export interface PGN_128006Fields extends PGNFields {
   sid?: number
   identifier?: number
-  directionControl?: enums.ThrusterDirectionControl
-  powerEnabled?: enums.OffOn
-  retractControl?: enums.ThrusterRetractControl
+  directionControl?: enums.ThrusterDirectionControl|number
+  powerEnabled?: enums.OffOn|number
+  retractControl?: enums.ThrusterRetractControl|number
   speedControl?: number
   controlEvents?: enums.ThrusterControlEvents[]
   commandTimeout?: string
@@ -3315,7 +3315,7 @@ export interface PGN_128006 extends PGN {
 */
 export interface PGN_128007Fields extends PGNFields {
   identifier?: number
-  motorType?: enums.ThrusterMotorType
+  motorType?: enums.ThrusterMotorType|number
   reserved?: number
   powerRating?: number
   maximumTemperatureRating?: number
@@ -3351,7 +3351,7 @@ export interface PGN_128259Fields extends PGNFields {
   sid?: number
   speedWaterReferenced?: number
   speedGroundReferenced?: number
-  speedWaterReferencedType?: enums.WaterReference
+  speedWaterReferencedType?: enums.WaterReference|number
   speedDirection?: number
   reserved?: number
 }
@@ -3398,9 +3398,9 @@ export interface PGN_128520Fields extends PGNFields {
   sid?: number
   targetId?: number
   trackStatus?: enums.Tracking[]
-  reportedTarget?: boolean
-  targetAcquisition?: enums.TargetAcquisition
-  bearingReference?: enums.DirectionReference
+  reportedTarget?: enums.YesNo|number
+  targetAcquisition?: enums.TargetAcquisition|number
+  bearingReference?: enums.DirectionReference|number
   reserved?: number
   bearing?: number
   distance?: number
@@ -3410,7 +3410,7 @@ export interface PGN_128520Fields extends PGNFields {
   tcpa?: string
   utcOfFix?: string
   name?: string
-  referenceTarget?: boolean
+  referenceTarget?: enums.YesNo|number
   reserved17?: number
 }
 
@@ -3505,15 +3505,15 @@ export interface PGN_128769 extends PGN {
 export interface PGN_128776Fields extends PGNFields {
   sid?: number
   windlassId?: number
-  windlassDirectionControl?: enums.WindlassDirection
-  anchorDockingControl?: enums.OffOn
-  speedControlType?: enums.SpeedType
+  windlassDirectionControl?: enums.WindlassDirection|number
+  anchorDockingControl?: enums.OffOn|number
+  speedControlType?: enums.SpeedType|number
   reserved?: number
   speedControl?: number
-  powerEnable?: enums.OffOn
-  mechanicalLock?: enums.OffOn
-  deckAndAnchorWash?: enums.OffOn
-  anchorLight?: enums.OffOn
+  powerEnable?: enums.OffOn|number
+  mechanicalLock?: enums.OffOn|number
+  deckAndAnchorWash?: enums.OffOn|number
+  anchorLight?: enums.OffOn|number
   commandTimeout?: string
   windlassControlEvents?: enums.WindlassControl[]
   reserved14?: number
@@ -3530,13 +3530,13 @@ export interface PGN_128776 extends PGN {
 export interface PGN_128777Fields extends PGNFields {
   sid?: number
   windlassId?: number
-  windlassDirectionControl?: enums.WindlassDirection
-  windlassMotionStatus?: enums.WindlassMotion
-  rodeTypeStatus?: enums.RodeType
+  windlassDirectionControl?: enums.WindlassDirection|number
+  windlassMotionStatus?: enums.WindlassMotion|number
+  rodeTypeStatus?: enums.RodeType|number
   reserved?: number
   rodeCounterValue?: number
   windlassLineSpeed?: number
-  anchorDockingStatus?: enums.DockingStatus
+  anchorDockingStatus?: enums.DockingStatus|number
   windlassOperatingEvents?: enums.WindlassOperation[]
 }
 
@@ -3599,7 +3599,7 @@ export interface PGN_129025 extends PGN {
 */
 export interface PGN_129026Fields extends PGNFields {
   sid?: number
-  cogReference?: enums.DirectionReference
+  cogReference?: enums.DirectionReference|number
   reserved?: number
   cog?: number
   sog?: number
@@ -3632,8 +3632,8 @@ export interface PGN_129027 extends PGN {
 export interface PGN_129028Fields extends PGNFields {
   sid?: number
   timeDelta?: string
-  gnssQuality?: enums.GnsMethod
-  direction?: enums.DirectionReference
+  gnssQuality?: enums.GnsMethod|number
+  direction?: enums.DirectionReference|number
   reserved?: number
   cog?: number
   altitudeDelta?: number
@@ -3654,16 +3654,16 @@ export interface PGN_129029Fields extends PGNFields {
   latitude?: number
   longitude?: number
   altitude?: number
-  gnssType?: enums.Gns
-  method?: enums.GnsMethod
-  integrity?: enums.GnsIntegrity
+  gnssType?: enums.Gns|number
+  method?: enums.GnsMethod|number
+  integrity?: enums.GnsIntegrity|number
   reserved?: number
   numberOfSvs?: number
   hdop?: number
   pdop?: number
   geoidalSeparation?: number
   referenceStations?: number
-  referenceStationType?: enums.Gns
+  referenceStationType?: enums.Gns|number
   referenceStationId?: number
   ageOfDgnssCorrections?: string
 }
@@ -3691,22 +3691,22 @@ export interface PGN_129033 extends PGN {
   Description: AIS Class A Position Report
 */
 export interface PGN_129038Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
-  timeStamp?: enums.TimeStamp
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
+  timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
   communicationState?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   heading?: number
   rateOfTurn?: number
-  navStatus?: enums.NavStatus
-  specialManeuverIndicator?: enums.AisSpecialManeuver
+  navStatus?: enums.NavStatus|number
+  specialManeuverIndicator?: enums.AisSpecialManeuver|number
   reserved?: number
   spare18?: string
   reserved19?: number
@@ -3722,28 +3722,28 @@ export interface PGN_129038 extends PGN {
   Description: AIS Class B Position Report
 */
 export interface PGN_129039Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
-  timeStamp?: enums.TimeStamp
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
+  timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
   communicationState?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   heading?: number
   regionalApplication?: string
   regionalApplicationB?: string
-  unitType?: enums.AisType
-  integratedDisplay?: boolean
-  dsc?: boolean
-  band?: enums.AisBand
-  canHandleMsg22?: boolean
-  aisMode?: enums.AisMode
-  aisCommunicationState?: enums.AisCommunicationState
+  unitType?: enums.AisType|number
+  integratedDisplay?: enums.YesNo|number
+  dsc?: enums.YesNo|number
+  band?: enums.AisBand|number
+  canHandleMsg22?: enums.YesNo|number
+  aisMode?: enums.AisMode|number
+  aisCommunicationState?: enums.AisCommunicationState|number
   reserved?: number
 }
 
@@ -3756,32 +3756,32 @@ export interface PGN_129039 extends PGN {
   Description: AIS Class B Extended Position Report
 */
 export interface PGN_129040Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
-  timeStamp?: enums.TimeStamp
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
+  timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
   regionalApplication?: string
   regionalApplicationB?: string
   reserved?: number
-  typeOfShip?: enums.ShipType
+  typeOfShip?: enums.ShipType|number
   trueHeading?: number
   reserved16?: number
-  gnssType?: enums.PositionFixDevice
+  gnssType?: enums.PositionFixDevice|number
   length?: number
   beam?: number
   positionReferenceFromStarboard?: number
   positionReferenceFromBow?: number
   name?: string
-  dte?: enums.Available
-  aisMode?: enums.AisMode
+  dte?: enums.Available|number
+  aisMode?: enums.AisMode|number
   spare25?: string
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   reserved27?: number
 }
 
@@ -3794,27 +3794,27 @@ export interface PGN_129040 extends PGN {
   Description: AIS Aids to Navigation (AtoN) Report
 */
 export interface PGN_129041Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
-  timeStamp?: enums.TimeStamp
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
+  timeStamp?: enums.TimeStamp|number
   lengthDiameter?: number
   beamDiameter?: number
   positionReferenceFromStarboardEdge?: number
   positionReferenceFromTrueNorthFacingEdge?: number
-  atonType?: enums.AtonType
-  offPositionIndicator?: boolean
-  virtualAtonFlag?: boolean
-  assignedModeFlag?: enums.AisAssignedMode
+  atonType?: enums.AtonType|number
+  offPositionIndicator?: enums.YesNo|number
+  virtualAtonFlag?: enums.YesNo|number
+  assignedModeFlag?: enums.AisAssignedMode|number
   spare?: string
-  positionFixingDeviceType?: enums.PositionFixDevice
+  positionFixingDeviceType?: enums.PositionFixDevice|number
   reserved19?: number
   atonStatus?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   reserved22?: number
   atonName?: string
 }
@@ -3866,9 +3866,9 @@ export interface PGN_129045 extends PGN {
 */
 export interface PGN_129283Fields extends PGNFields {
   sid?: number
-  xteMode?: enums.ResidualMode
+  xteMode?: enums.ResidualMode|number
   reserved?: number
-  navigationTerminated?: boolean
+  navigationTerminated?: enums.YesNo|number
   xte?: number
   reserved6?: number
 }
@@ -3884,10 +3884,10 @@ export interface PGN_129283 extends PGN {
 export interface PGN_129284Fields extends PGNFields {
   sid?: number
   distanceToWaypoint?: number
-  courseBearingReference?: enums.DirectionReference
-  perpendicularCrossed?: boolean
-  arrivalCircleEntered?: boolean
-  calculationType?: enums.BearingMode
+  courseBearingReference?: enums.DirectionReference|number
+  perpendicularCrossed?: enums.YesNo|number
+  arrivalCircleEntered?: enums.YesNo|number
+  calculationType?: enums.BearingMode|number
   etaTime?: string
   etaDate?: string
   bearingOriginToDestinationWaypoint?: number
@@ -3912,8 +3912,8 @@ export interface PGN_129285Fields extends PGNFields {
   nitems?: number
   databaseId?: number
   routeId?: number
-  navigationDirectionInRoute?: enums.Direction
-  supplementaryRouteWpDataAvailable?: enums.OffOn
+  navigationDirectionInRoute?: enums.Direction|number
+  supplementaryRouteWpDataAvailable?: enums.OffOn|number
   reserved?: number
   routeName?: string
   reserved9?: number
@@ -3933,7 +3933,7 @@ export interface PGN_129285 extends PGN {
 */
 export interface PGN_129291Fields extends PGNFields {
   sid?: number
-  setReference?: enums.DirectionReference
+  setReference?: enums.DirectionReference|number
   reserved?: number
   set?: number
   drift?: number
@@ -3951,7 +3951,7 @@ export interface PGN_129291 extends PGN {
 export interface PGN_129301Fields extends PGNFields {
   sid?: number
   timeToMark?: string
-  markType?: enums.MarkType
+  markType?: enums.MarkType|number
   reserved?: number
   markId?: number
 }
@@ -3966,13 +3966,13 @@ export interface PGN_129301 extends PGN {
 */
 export interface PGN_129302Fields extends PGNFields {
   sid?: number
-  bearingReference?: enums.DirectionReference
-  calculationType?: enums.BearingMode
+  bearingReference?: enums.DirectionReference|number
+  calculationType?: enums.BearingMode|number
   reserved?: number
   bearingOriginToDestination?: number
   distance?: number
-  originMarkType?: enums.MarkType
-  destinationMarkType?: enums.MarkType
+  originMarkType?: enums.MarkType|number
+  destinationMarkType?: enums.MarkType|number
   originMarkId?: number
   destinationMarkId?: number
 }
@@ -3990,12 +3990,12 @@ export interface PGN_129538Fields extends PGNFields {
   pdopMask?: number
   pdopSwitch?: number
   snrMask?: number
-  gnssModeDesired?: enums.GnssMode
-  dgnssModeDesired?: enums.DgnssMode
-  positionVelocityFilter?: boolean
+  gnssModeDesired?: enums.GnssMode|number
+  dgnssModeDesired?: enums.DgnssMode|number
+  positionVelocityFilter?: enums.YesNo|number
   maxCorrectionAge?: string
   antennaAltitudeFor2dMode?: number
-  useAntennaAltitudeFor2dMode?: boolean
+  useAntennaAltitudeFor2dMode?: enums.YesNo|number
   reserved?: number
 }
 
@@ -4009,8 +4009,8 @@ export interface PGN_129538 extends PGN {
 */
 export interface PGN_129539Fields extends PGNFields {
   sid?: number
-  desiredMode?: enums.GnssMode
-  actualMode?: enums.GnssMode
+  desiredMode?: enums.GnssMode|number
+  actualMode?: enums.GnssMode|number
   reserved?: number
   hdop?: number
   vdop?: number
@@ -4027,7 +4027,7 @@ export interface PGN_129539 extends PGN {
 */
 export interface PGN_129540Fields extends PGNFields {
   sid?: number
-  rangeResidualMode?: enums.RangeResidualMode
+  rangeResidualMode?: enums.RangeResidualMode|number
   reserved?: number
   satsInView?: number
   prn?: number
@@ -4035,7 +4035,7 @@ export interface PGN_129540Fields extends PGNFields {
   azimuth?: number
   snr?: number
   rangeResiduals?: number
-  status?: enums.SatelliteStatus
+  status?: enums.SatelliteStatus|number
   reserved11?: number
 }
 
@@ -4093,7 +4093,7 @@ export interface PGN_129542 extends PGN {
 */
 export interface PGN_129545Fields extends PGNFields {
   sid?: number
-  integrityFlag?: enums.GnsIntegrity
+  integrityFlag?: enums.GnsIntegrity|number
   reserved?: number
   latitudeExpectedError?: number
   longitudeExpectedError?: number
@@ -4150,9 +4150,9 @@ export interface PGN_129547 extends PGN {
 export interface PGN_129549Fields extends PGNFields {
   sid?: number
   referenceStationId?: number
-  referenceStationType?: enums.Gns
+  referenceStationType?: enums.Gns|number
   timeOfCorrections?: string
-  stationHealth?: enums.StationHealth
+  stationHealth?: enums.StationHealth|number
   reserved?: number
   satelliteId?: number
   prc?: number
@@ -4172,10 +4172,10 @@ export interface PGN_129549 extends PGN {
 export interface PGN_129550Fields extends PGNFields {
   channel?: number
   frequency?: number
-  serialInterfaceBitRate?: enums.SerialBitRate
-  serialInterfaceDetectionMode?: enums.SerialDetectionMode
-  differentialSource?: enums.DifferentialSource
-  differentialOperationMode?: enums.DifferentialMode
+  serialInterfaceBitRate?: enums.SerialBitRate|number
+  serialInterfaceDetectionMode?: enums.SerialDetectionMode|number
+  differentialSource?: enums.DifferentialSource|number
+  differentialOperationMode?: enums.DifferentialMode|number
   reserved?: number
 }
 
@@ -4193,13 +4193,13 @@ export interface PGN_129551Fields extends PGNFields {
   signalStrength?: number
   signalSnr?: number
   frequency?: number
-  stationType?: enums.Gns
+  stationType?: enums.Gns|number
   referenceStationId?: number
-  differentialSignalBitRate?: enums.SerialBitRate
-  differentialSignalDetectionMode?: enums.SerialDetectionMode
-  usedAsCorrectionSource?: boolean
+  differentialSignalBitRate?: enums.SerialBitRate|number
+  differentialSignalDetectionMode?: enums.SerialDetectionMode|number
+  usedAsCorrectionSource?: enums.YesNo|number
   reserved?: number
-  differentialSource?: enums.DifferentialSource
+  differentialSource?: enums.DifferentialSource|number
   timeSinceLastSatDifferentialSync?: string
   satelliteServiceIdNo?: number
 }
@@ -4239,11 +4239,11 @@ export interface PGN_129556 extends PGN {
   Description: AIS DGNSS Broadcast Binary Message
 */
 export interface PGN_129792Fields extends PGNFields {
-  messageId?: enums.AisMessageId
+  messageId?: enums.AisMessageId|number
   repeatIndicator?: number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   longitude?: number
   latitude?: number
@@ -4262,20 +4262,20 @@ export interface PGN_129792 extends PGN {
   Description: AIS UTC and Date Report
 */
 export interface PGN_129793Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
   reserved?: number
   positionTime?: string
   communicationState?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   positionDate?: string
   reserved13?: number
-  gnssType?: enums.PositionFixDevice
+  gnssType?: enums.PositionFixDevice|number
 }
 
 export interface PGN_129793 extends PGN {
@@ -4287,13 +4287,13 @@ export interface PGN_129793 extends PGN {
   Description: AIS Class A Static and Voyage Related Data
 */
 export interface PGN_129794Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   imoNumber?: number
   callsign?: string
   name?: string
-  typeOfShip?: enums.ShipType
+  typeOfShip?: enums.ShipType|number
   length?: number
   beam?: number
   positionReferenceFromStarboard?: number
@@ -4302,11 +4302,11 @@ export interface PGN_129794Fields extends PGNFields {
   etaTime?: string
   draft?: number
   destination?: string
-  aisVersionIndicator?: enums.AisVersion
-  gnssType?: enums.PositionFixDevice
-  dte?: enums.Available
+  aisVersionIndicator?: enums.AisVersion|number
+  gnssType?: enums.PositionFixDevice|number
+  dte?: enums.Available|number
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   reserved21?: number
 }
 
@@ -4319,15 +4319,15 @@ export interface PGN_129794 extends PGN {
   Description: AIS Addressed Binary Message
 */
 export interface PGN_129795Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   sequenceNumber?: number
   destinationId: string
   reserved8?: number
-  retransmitFlag?: boolean
+  retransmitFlag?: enums.YesNo|number
   reserved10?: number
   numberOfBitsInBinaryDataField?: number
   binaryData?: number
@@ -4342,11 +4342,11 @@ export interface PGN_129795 extends PGN {
   Description: AIS Acknowledge
 */
 export interface PGN_129796Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId: string
   sequenceNumber?: number
@@ -4362,11 +4362,11 @@ export interface PGN_129796 extends PGN {
   Description: AIS Binary Broadcast Message
 */
 export interface PGN_129797Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId?: number
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   numberOfBitsInBinaryDataField?: number
   binaryData?: number
@@ -4381,21 +4381,21 @@ export interface PGN_129797 extends PGN {
   Description: AIS SAR Aircraft Position Report
 */
 export interface PGN_129798Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy
-  raim?: enums.RaimFlag
-  timeStamp?: enums.TimeStamp
+  positionAccuracy?: enums.PositionAccuracy|number
+  raim?: enums.RaimFlag|number
+  timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
   communicationState?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   altitude?: number
   reservedForRegionalApplications?: number
-  dte?: enums.Available
+  dte?: enums.Available|number
   spare?: string
   reserved17?: number
 }
@@ -4414,7 +4414,7 @@ export interface PGN_129799Fields extends PGNFields {
   txFrequency?: number
   radioChannel?: string
   txPower?: number
-  mode?: enums.TelephoneMode
+  mode?: enums.TelephoneMode|number
   channelBandwidth?: number
 }
 
@@ -4427,11 +4427,11 @@ export interface PGN_129799 extends PGN {
   Description: AIS UTC/Date Inquiry
 */
 export interface PGN_129800Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId: string
 }
@@ -4445,15 +4445,15 @@ export interface PGN_129800 extends PGN {
   Description: AIS Addressed Safety Related Message
 */
 export interface PGN_129801Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   sequenceNumber?: number
   destinationId: string
   reserved8?: number
-  retransmitFlag?: boolean
+  retransmitFlag?: enums.YesNo|number
   spare10?: string
   safetyRelatedText?: string
 }
@@ -4467,11 +4467,11 @@ export interface PGN_129801 extends PGN {
   Description: AIS Safety Related Broadcast Message
 */
 export interface PGN_129802Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   safetyRelatedText?: string
 }
@@ -4485,24 +4485,24 @@ export interface PGN_129802 extends PGN {
   Description: AIS Interrogation
 */
 export interface PGN_129803Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId1: string
   reserved8?: number
-  messageId11?: enums.AisMessageId
+  messageId11?: enums.AisMessageId|number
   slotOffset11?: number
   spare11?: string
-  messageId12?: enums.AisMessageId
+  messageId12?: enums.AisMessageId|number
   slotOffset12?: number
   reserved14?: number
   reserved15?: number
   destinationId2: string
   reserved17?: number
-  messageId21?: enums.AisMessageId
+  messageId21?: enums.AisMessageId|number
   slotOffset21?: number
   spare20?: string
   reserved21?: number
@@ -4518,11 +4518,11 @@ export interface PGN_129803 extends PGN {
   Description: AIS Assignment Mode Command
 */
 export interface PGN_129804Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationIdA: string
   offsetA?: number
@@ -4543,11 +4543,11 @@ export interface PGN_129804 extends PGN {
   Description: AIS Data Link Management Message
 */
 export interface PGN_129805Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   offset?: number
   numberOfSlots?: number
@@ -4564,27 +4564,27 @@ export interface PGN_129805 extends PGN {
   Description: AIS Channel Management
 */
 export interface PGN_129806Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   reserved?: number
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   channelA?: number
   channelB?: number
   reserved9?: number
-  power?: enums.PowerMode
-  txRxMode?: enums.TxRxMode
+  power?: enums.PowerMode|number
+  txRxMode?: enums.TxRxMode|number
   northEastLongitudeCorner1?: number
   northEastLatitudeCorner1?: number
   southWestLongitudeCorner2?: number
   southWestLatitudeCorner2?: number
   reserved16?: number
-  addressedOrBroadcastMessageIndicator?: enums.BroadcastIndicator
-  channelABandwidth?: enums.Bandwidth
-  channelBBandwidth?: enums.Bandwidth
+  addressedOrBroadcastMessageIndicator?: enums.BroadcastIndicator|number
+  channelABandwidth?: enums.Bandwidth|number
+  channelBBandwidth?: enums.Bandwidth|number
   reserved20?: number
-  transitionalZoneSize?: enums.ZoneSize
+  transitionalZoneSize?: enums.ZoneSize|number
   spare22?: string
   reserved23?: number
 }
@@ -4598,22 +4598,22 @@ export interface PGN_129806 extends PGN {
   Description: AIS Class B Group Assignment
 */
 export interface PGN_129807Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
   spare?: string
-  txRxMode?: enums.TxRxMode
+  txRxMode?: enums.TxRxMode|number
   reserved6?: number
   northEastLongitudeCorner1?: number
   northEastLatitudeCorner1?: number
   southWestLongitudeCorner2?: number
   southWestLatitudeCorner2?: number
-  stationType?: enums.StationType
+  stationType?: enums.StationType|number
   reserved12?: number
-  shipAndCargoFilter?: enums.ShipType
+  shipAndCargoFilter?: enums.ShipType|number
   spare14?: string
   reserved15?: number
-  reportingInterval?: enums.ReportingInterval
+  reportingInterval?: enums.ReportingInterval|number
   quietTime?: string
   spare18?: string
   reserved19?: number
@@ -4629,11 +4629,11 @@ export interface PGN_129807 extends PGN {
   Match: DSC Category == Distress
 */
 export interface PGN_129808_DistressFields extends PGNFields {
-  dscFormat?: enums.DscFormat
-  dscCategory?: enums.DscCategory
+  dscFormat?: enums.DscFormat|number
+  dscCategory?: enums.DscCategory|number
   dscMessageAddress?: string
-  natureOfDistress?: enums.DscNature
-  subsequentCommunicationModeOr2ndTelecommand?: enums.DscSecondTelecommand
+  natureOfDistress?: enums.DscNature|number
+  subsequentCommunicationModeOr2ndTelecommand?: enums.DscSecondTelecommand|number
   proposedRxFrequencyChannel?: string
   proposedTxFrequencyChannel?: string
   telephoneNumber?: string
@@ -4642,14 +4642,14 @@ export interface PGN_129808_DistressFields extends PGNFields {
   timeOfPosition?: string
   mmsiOfShipInDistress?: string
   dscEosSymbol?: number
-  expansionEnabled?: boolean
+  expansionEnabled?: enums.YesNo|number
   reserved?: number
   callingRxFrequencyChannel?: string
   callingTxFrequencyChannel?: string
   timeOfReceipt?: string
   dateOfReceipt?: string
   dscEquipmentAssignedMessageId?: number
-  dscExpansionFieldSymbol?: enums.DscExpansionData
+  dscExpansionFieldSymbol?: enums.DscExpansionData|number
   dscExpansionFieldData?: string
 }
 
@@ -4662,11 +4662,11 @@ export interface PGN_129808_Distress extends PGN {
   Description: DSC Call Information
 */
 export interface PGN_129808Fields extends PGNFields {
-  dscFormatSymbol?: enums.DscFormat
-  dscCategorySymbol?: enums.DscCategory
+  dscFormatSymbol?: enums.DscFormat|number
+  dscCategorySymbol?: enums.DscCategory|number
   dscMessageAddress?: string
-  _1stTelecommand?: enums.DscFirstTelecommand
-  subsequentCommunicationModeOr2ndTelecommand?: enums.DscSecondTelecommand
+  _1stTelecommand?: enums.DscFirstTelecommand|number
+  subsequentCommunicationModeOr2ndTelecommand?: enums.DscSecondTelecommand|number
   proposedRxFrequencyChannel?: string
   proposedTxFrequencyChannel?: string
   telephoneNumber?: string
@@ -4675,14 +4675,14 @@ export interface PGN_129808Fields extends PGNFields {
   timeOfPosition?: string
   mmsiOfShipInDistress?: string
   dscEosSymbol?: number
-  expansionEnabled?: boolean
+  expansionEnabled?: enums.YesNo|number
   reserved?: number
   callingRxFrequencyChannel?: string
   callingTxFrequencyChannel?: string
   timeOfReceipt?: string
   dateOfReceipt?: string
   dscEquipmentAssignedMessageId?: number
-  dscExpansionFieldSymbol?: enums.DscExpansionData
+  dscExpansionFieldSymbol?: enums.DscExpansionData|number
   dscExpansionFieldData?: string
 }
 
@@ -4695,11 +4695,11 @@ export interface PGN_129808 extends PGN {
   Description: AIS Class B static data (msg 24 Part A)
 */
 export interface PGN_129809Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
   name?: string
-  aisTransceiverInformation?: enums.AisTransceiver
+  aisTransceiverInformation?: enums.AisTransceiver|number
   reserved?: number
   sequenceId?: number
 }
@@ -4713,10 +4713,10 @@ export interface PGN_129809 extends PGN {
   Description: AIS Class B static data (msg 24 Part B)
 */
 export interface PGN_129810Fields extends PGNFields {
-  messageId?: enums.AisMessageId
-  repeatIndicator?: enums.RepeatIndicator
+  messageId?: enums.AisMessageId|number
+  repeatIndicator?: enums.RepeatIndicator|number
   userId: string
-  typeOfShip?: enums.ShipType
+  typeOfShip?: enums.ShipType|number
   vendorId?: string
   callsign?: string
   length?: number
@@ -4726,8 +4726,8 @@ export interface PGN_129810Fields extends PGNFields {
   mothershipUserId: string
   reserved?: number
   spare13?: string
-  gnssType?: enums.PositionFixDevice
-  aisTransceiverInformation?: enums.AisTransceiver
+  gnssType?: enums.PositionFixDevice|number
+  aisTransceiverInformation?: enums.AisTransceiver|number
   reserved16?: number
   sequenceId?: number
 }
@@ -4754,7 +4754,7 @@ export interface PGN_130052Fields extends PGNFields {
   stationStatusX?: enums.StationStatus[]
   stationStatusY?: enums.StationStatus[]
   stationStatusZ?: enums.StationStatus[]
-  mode?: enums.ResidualMode
+  mode?: enums.ResidualMode|number
   reserved?: number
 }
 
@@ -4780,7 +4780,7 @@ export interface PGN_130053Fields extends PGNFields {
   stationStatusX?: enums.StationStatus[]
   stationStatusY?: enums.StationStatus[]
   stationStatusZ?: enums.StationStatus[]
-  mode?: enums.ResidualMode
+  mode?: enums.ResidualMode|number
   reserved?: number
 }
 
@@ -4857,7 +4857,7 @@ export interface PGN_130064Fields extends PGNFields {
   databaseName?: string
   databaseTimestamp?: string
   databaseDatestamp?: string
-  wpPositionResolution?: enums.WpPositionResolution
+  wpPositionResolution?: enums.WpPositionResolution|number
   reserved?: number
   numberOfRoutesInDatabase?: number
   numberOfWpsInDatabase?: number
@@ -4880,8 +4880,8 @@ export interface PGN_130065Fields extends PGNFields {
   routeId?: number
   routeName?: string
   reserved?: number
-  wpIdentificationMethod?: enums.WpIdentificationMethod
-  routeStatus?: enums.WpRouteStatus
+  wpIdentificationMethod?: enums.WpIdentificationMethod|number
+  routeStatus?: enums.WpRouteStatus|number
 }
 
 export interface PGN_130065 extends PGN {
@@ -4901,9 +4901,9 @@ export interface PGN_130066Fields extends PGNFields {
   changeAtLastTimestamp?: enums.WpChange[]
   numberOfWpsInTheRouteWpList?: number
   criticalSupplementaryParameters?: enums.WpCriticalParameters[]
-  navigationMethod?: enums.WpNavigationMethod
-  wpIdentificationMethod?: enums.WpIdentificationMethod
-  routeStatus?: enums.WpRouteStatus
+  navigationMethod?: enums.WpNavigationMethod|number
+  wpIdentificationMethod?: enums.WpIdentificationMethod|number
+  routeStatus?: enums.WpRouteStatus|number
   xteLimitForTheRoute?: number
 }
 
@@ -4961,7 +4961,7 @@ export interface PGN_130069Fields extends PGNFields {
   routeId?: number
   rps?: number
   xteLimitInTheLegAfterWp?: number
-  navMethodInTheLegAfterWp?: enums.WpNavigationMethod
+  navMethodInTheLegAfterWp?: enums.WpNavigationMethod|number
   reserved?: number
 }
 
@@ -5066,7 +5066,7 @@ export interface PGN_130306Fields extends PGNFields {
   sid?: number
   windSpeed?: number
   windAngle?: number
-  reference: enums.WindReference
+  reference: enums.WindReference|number
   reserved?: number
 }
 
@@ -5098,8 +5098,8 @@ export interface PGN_130310 extends PGN {
 */
 export interface PGN_130311Fields extends PGNFields {
   sid?: number
-  temperatureSource: enums.TemperatureSource
-  humiditySource?: enums.HumiditySource
+  temperatureSource: enums.TemperatureSource|number
+  humiditySource?: enums.HumiditySource|number
   temperature?: number
   humidity?: number
   atmosphericPressure?: number
@@ -5116,7 +5116,7 @@ export interface PGN_130311 extends PGN {
 export interface PGN_130312Fields extends PGNFields {
   sid?: number
   instance: number
-  source: enums.TemperatureSource
+  source: enums.TemperatureSource|number
   actualTemperature?: number
   setTemperature?: number
   reserved?: number
@@ -5133,7 +5133,7 @@ export interface PGN_130312 extends PGN {
 export interface PGN_130313Fields extends PGNFields {
   sid?: number
   instance: number
-  source: enums.HumiditySource
+  source: enums.HumiditySource|number
   actualHumidity?: number
   setHumidity?: number
   reserved?: number
@@ -5150,7 +5150,7 @@ export interface PGN_130313 extends PGN {
 export interface PGN_130314Fields extends PGNFields {
   sid?: number
   instance: number
-  source: enums.PressureSource
+  source: enums.PressureSource|number
   pressure?: number
   reserved?: number
 }
@@ -5166,7 +5166,7 @@ export interface PGN_130314 extends PGN {
 export interface PGN_130315Fields extends PGNFields {
   sid?: number
   instance: number
-  source: enums.PressureSource
+  source: enums.PressureSource|number
   pressure?: number
   reserved?: number
 }
@@ -5182,7 +5182,7 @@ export interface PGN_130315 extends PGN {
 export interface PGN_130316Fields extends PGNFields {
   sid?: number
   instance: number
-  source: enums.TemperatureSource
+  source: enums.TemperatureSource|number
   temperature?: number
   setTemperature?: number
 }
@@ -5196,8 +5196,8 @@ export interface PGN_130316 extends PGN {
   Description: Tide Station Data
 */
 export interface PGN_130320Fields extends PGNFields {
-  mode?: enums.ResidualMode
-  tideTendency?: enums.Tide
+  mode?: enums.ResidualMode|number
+  tideTendency?: enums.Tide|number
   reserved?: number
   measurementDate?: string
   measurementTime?: string
@@ -5218,7 +5218,7 @@ export interface PGN_130320 extends PGN {
   Description: Salinity Station Data
 */
 export interface PGN_130321Fields extends PGNFields {
-  mode?: enums.ResidualMode
+  mode?: enums.ResidualMode|number
   reserved?: number
   measurementDate?: string
   measurementTime?: string
@@ -5239,8 +5239,8 @@ export interface PGN_130321 extends PGN {
   Description: Current Station Data
 */
 export interface PGN_130322Fields extends PGNFields {
-  mode?: enums.ResidualMode
-  state?: enums.FloodState
+  mode?: enums.ResidualMode|number
+  state?: enums.FloodState|number
   reserved?: number
   measurementDate?: string
   measurementTime?: string
@@ -5263,7 +5263,7 @@ export interface PGN_130322 extends PGN {
   Description: Meteorological Station Data
 */
 export interface PGN_130323Fields extends PGNFields {
-  mode?: enums.ResidualMode
+  mode?: enums.ResidualMode|number
   reserved?: number
   measurementDate?: string
   measurementTime?: string
@@ -5271,7 +5271,7 @@ export interface PGN_130323Fields extends PGNFields {
   stationLongitude?: number
   windSpeed?: number
   windDirection?: number
-  windReference?: enums.WindReference
+  windReference?: enums.WindReference|number
   reserved10?: number
   windGusts?: number
   atmosphericPressure?: number
@@ -5289,7 +5289,7 @@ export interface PGN_130323 extends PGN {
   Description: Moored Buoy Station Data
 */
 export interface PGN_130324Fields extends PGNFields {
-  mode?: enums.ResidualMode
+  mode?: enums.ResidualMode|number
   reserved?: number
   measurementDate?: string
   measurementTime?: string
@@ -5297,7 +5297,7 @@ export interface PGN_130324Fields extends PGNFields {
   stationLongitude?: number
   windSpeed?: number
   windDirection?: number
-  windReference?: enums.WindReference
+  windReference?: enums.WindReference|number
   reserved10?: number
   windGusts?: number
   waveHeight?: number
@@ -5320,7 +5320,7 @@ export interface PGN_130324 extends PGN {
 */
 export interface PGN_130330Fields extends PGNFields {
   globalEnable?: number
-  defaultSettingsCommand?: enums.LightingCommand
+  defaultSettingsCommand?: enums.LightingCommand|number
   reserved?: number
   nameOfTheLightingController?: string
   maxScenes?: number
@@ -5372,7 +5372,7 @@ export interface PGN_130561Fields extends PGNFields {
   programIntensity?: number
   programRate?: number
   programColorSequence?: number
-  zoneEnabled?: enums.OffOn
+  zoneEnabled?: enums.OffOn|number
   reserved?: number
 }
 
@@ -5426,7 +5426,7 @@ export interface PGN_130563Fields extends PGNFields {
   programIntensity?: number
   programRate?: number
   programColorSequenceRate?: number
-  enabled?: enums.OffOn
+  enabled?: enums.OffOn|number
   reserved?: number
 }
 
@@ -5493,19 +5493,19 @@ export interface PGN_130566 extends PGN {
   Description: Watermaker Input Setting and Status
 */
 export interface PGN_130567Fields extends PGNFields {
-  watermakerOperatingState?: enums.WatermakerState
-  productionStartStop?: boolean
-  rinseStartStop?: boolean
-  lowPressurePumpStatus?: boolean
-  highPressurePumpStatus?: boolean
-  emergencyStop?: boolean
-  productSolenoidValveStatus?: enums.OkWarning
-  flushModeStatus?: boolean
-  salinityStatus?: enums.OkWarning
-  sensorStatus?: enums.OkWarning
-  oilChangeIndicatorStatus?: enums.OkWarning
-  filterStatus?: enums.OkWarning
-  systemStatus?: enums.OkWarning
+  watermakerOperatingState?: enums.WatermakerState|number
+  productionStartStop?: enums.YesNo|number
+  rinseStartStop?: enums.YesNo|number
+  lowPressurePumpStatus?: enums.YesNo|number
+  highPressurePumpStatus?: enums.YesNo|number
+  emergencyStop?: enums.YesNo|number
+  productSolenoidValveStatus?: enums.OkWarning|number
+  flushModeStatus?: enums.YesNo|number
+  salinityStatus?: enums.OkWarning|number
+  sensorStatus?: enums.OkWarning|number
+  oilChangeIndicatorStatus?: enums.OkWarning|number
+  filterStatus?: enums.OkWarning|number
+  systemStatus?: enums.OkWarning|number
   reserved?: number
   salinity?: number
   productWaterTemperature?: number
@@ -5527,18 +5527,18 @@ export interface PGN_130567 extends PGN {
   Description: Current Status and File
 */
 export interface PGN_130569Fields extends PGNFields {
-  zone?: enums.EntertainmentZone
-  source?: enums.EntertainmentSource
+  zone?: enums.EntertainmentZone|number
+  source?: enums.EntertainmentSource|number
   number?: number
   id?: number
-  playStatus?: enums.EntertainmentPlayStatus
+  playStatus?: enums.EntertainmentPlayStatus|number
   elapsedTrackTime?: string
   trackTime?: string
-  repeatStatus?: enums.EntertainmentRepeatStatus
-  shuffleStatus?: enums.EntertainmentShuffleStatus
+  repeatStatus?: enums.EntertainmentRepeatStatus|number
+  shuffleStatus?: enums.EntertainmentShuffleStatus|number
   saveFavoriteNumber?: number
   playFavoriteNumber?: number
-  thumbsUpDown?: enums.EntertainmentLikeStatus
+  thumbsUpDown?: enums.EntertainmentLikeStatus|number
   signalStrength?: number
   radioFrequency?: number
   hdFrequencyMulticast?: number
@@ -5555,19 +5555,19 @@ export interface PGN_130569 extends PGN {
   Description: Library Data File
 */
 export interface PGN_130570Fields extends PGNFields {
-  source?: enums.EntertainmentSource
+  source?: enums.EntertainmentSource|number
   number?: number
   id?: number
-  type?: enums.EntertainmentType
+  type?: enums.EntertainmentType|number
   name?: string
   track?: number
   station?: number
   favorite?: number
   radioFrequency?: number
   hdFrequency?: number
-  zone?: enums.EntertainmentZone
-  inPlayQueue?: boolean
-  locked?: boolean
+  zone?: enums.EntertainmentZone|number
+  inPlayQueue?: enums.YesNo|number
+  locked?: enums.YesNo|number
   reserved?: number
   artistName?: string
   albumName?: string
@@ -5583,15 +5583,15 @@ export interface PGN_130570 extends PGN {
   Description: Library Data Group
 */
 export interface PGN_130571Fields extends PGNFields {
-  source?: enums.EntertainmentSource
+  source?: enums.EntertainmentSource|number
   number?: number
-  type?: enums.EntertainmentType
-  zone?: enums.EntertainmentZone
+  type?: enums.EntertainmentType|number
+  zone?: enums.EntertainmentZone|number
   groupId?: number
   idOffset?: number
   idCount?: number
   totalIdCount?: number
-  idType?: enums.EntertainmentIdType
+  idType?: enums.EntertainmentIdType|number
   id?: number
   name?: string
   artist?: string
@@ -5606,14 +5606,14 @@ export interface PGN_130571 extends PGN {
   Description: Library Data Search
 */
 export interface PGN_130572Fields extends PGNFields {
-  source?: enums.EntertainmentSource
+  source?: enums.EntertainmentSource|number
   number?: number
   groupId?: number
-  groupType1?: enums.EntertainmentGroup
+  groupType1?: enums.EntertainmentGroup|number
   groupName1?: string
-  groupType2?: enums.EntertainmentGroup
+  groupType2?: enums.EntertainmentGroup|number
   groupName2?: string
-  groupType3?: enums.EntertainmentGroup
+  groupType3?: enums.EntertainmentGroup|number
   groupName3?: string
 }
 
@@ -5630,13 +5630,13 @@ export interface PGN_130573Fields extends PGNFields {
   idCount?: number
   totalIdCount?: number
   id?: number
-  source?: enums.EntertainmentSource
+  source?: enums.EntertainmentSource|number
   number?: number
   name?: string
   playSupport?: enums.EntertainmentPlayStatusBitfield[]
   browseSupport?: enums.EntertainmentGroupBitfield[]
-  thumbsSupport?: boolean
-  connected?: boolean
+  thumbsSupport?: enums.YesNo|number
+  connected?: enums.YesNo|number
   repeatSupport?: enums.EntertainmentRepeatBitfield[]
   shuffleSupport?: enums.EntertainmentShuffleBitfield[]
 }
@@ -5653,7 +5653,7 @@ export interface PGN_130574Fields extends PGNFields {
   firstZoneId?: number
   zoneCount?: number
   totalZoneCount?: number
-  zoneId?: enums.EntertainmentZone
+  zoneId?: enums.EntertainmentZone|number
   name?: string
 }
 
@@ -5680,8 +5680,8 @@ export interface PGN_130576 extends PGN {
   Description: Direction Data
 */
 export interface PGN_130577Fields extends PGNFields {
-  dataMode?: enums.ResidualMode
-  cogReference?: enums.DirectionReference
+  dataMode?: enums.ResidualMode|number
+  cogReference?: enums.DirectionReference|number
   reserved?: number
   sid?: number
   cog?: number
@@ -5718,11 +5718,11 @@ export interface PGN_130578 extends PGN {
   Description: System Configuration
 */
 export interface PGN_130579Fields extends PGNFields {
-  power?: boolean
-  defaultSettings?: enums.EntertainmentDefaultSettings
-  tunerRegions?: enums.EntertainmentRegions
+  power?: enums.YesNo|number
+  defaultSettings?: enums.EntertainmentDefaultSettings|number
+  tunerRegions?: enums.EntertainmentRegions|number
   maxFavorites?: number
-  videoProtocols?: enums.VideoProtocols
+  videoProtocols?: enums.VideoProtocols|number
   reserved?: number
 }
 
@@ -5735,9 +5735,9 @@ export interface PGN_130579 extends PGN {
   Description: System Configuration (deprecated)
 */
 export interface PGN_130580Fields extends PGNFields {
-  power?: boolean
-  defaultSettings?: enums.EntertainmentDefaultSettings
-  tunerRegions?: enums.EntertainmentRegions
+  power?: enums.YesNo|number
+  defaultSettings?: enums.EntertainmentDefaultSettings|number
+  tunerRegions?: enums.EntertainmentRegions|number
   maxFavorites?: number
 }
 
@@ -5753,7 +5753,7 @@ export interface PGN_130581Fields extends PGNFields {
   firstZoneId?: number
   zoneCount?: number
   totalZoneCount?: number
-  zoneId?: enums.EntertainmentZone
+  zoneId?: enums.EntertainmentZone|number
   zoneName?: string
 }
 
@@ -5766,12 +5766,12 @@ export interface PGN_130581 extends PGN {
   Description: Zone Volume
 */
 export interface PGN_130582Fields extends PGNFields {
-  zoneId?: enums.EntertainmentZone
+  zoneId?: enums.EntertainmentZone|number
   volume?: number
-  volumeChange?: enums.EntertainmentVolumeControl
-  mute?: boolean
+  volumeChange?: enums.EntertainmentVolumeControl|number
+  mute?: enums.YesNo|number
   reserved?: number
-  channel?: enums.EntertainmentChannel
+  channel?: enums.EntertainmentChannel|number
   reserved7?: number
 }
 
@@ -5787,7 +5787,7 @@ export interface PGN_130583Fields extends PGNFields {
   firstPreset?: number
   presetCount?: number
   totalPresetCount?: number
-  presetType?: enums.EntertainmentEq
+  presetType?: enums.EntertainmentEq|number
   presetName?: string
 }
 
@@ -5804,7 +5804,7 @@ export interface PGN_130584Fields extends PGNFields {
   addressCount?: number
   totalAddressCount?: number
   bluetoothAddress?: number
-  status?: enums.BluetoothStatus
+  status?: enums.BluetoothStatus|number
   deviceName?: string
   signalStrength?: number
 }
@@ -5819,9 +5819,9 @@ export interface PGN_130584 extends PGN {
 */
 export interface PGN_130585Fields extends PGNFields {
   sourceNumber?: number
-  status?: enums.BluetoothSourceStatus
-  forgetDevice?: boolean
-  discovering?: boolean
+  status?: enums.BluetoothSourceStatus|number
+  forgetDevice?: enums.YesNo|number
+  discovering?: enums.YesNo|number
   bluetoothAddress?: number
 }
 
@@ -5834,7 +5834,7 @@ export interface PGN_130585 extends PGN {
   Description: Zone Configuration
 */
 export interface PGN_130586Fields extends PGNFields {
-  zoneId?: enums.EntertainmentZone
+  zoneId?: enums.EntertainmentZone|number
   volumeLimit?: number
   fade?: number
   balance?: number
@@ -5842,11 +5842,11 @@ export interface PGN_130586Fields extends PGNFields {
   eqTreble?: number
   eqMidRange?: number
   eqBass?: number
-  presetType?: enums.EntertainmentEq
-  audioFilter?: enums.EntertainmentFilter
+  presetType?: enums.EntertainmentEq|number
+  audioFilter?: enums.EntertainmentFilter|number
   highPassFilterFrequency?: number
   lowPassFilterFrequency?: number
-  channel?: enums.EntertainmentChannel
+  channel?: enums.EntertainmentChannel|number
 }
 
 export interface PGN_130586 extends PGN {
@@ -5861,12 +5861,12 @@ export interface PGN_130586 extends PGN {
   Match: Proprietary ID == Init #2
 */
 export interface PGN_130816_Navico_Init2Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   a?: number
   b?: number
 }
@@ -5883,13 +5883,13 @@ export interface PGN_130816_Navico_Init2 extends PGN {
   Match: Proprietary ID == AM Radio
 */
 export interface PGN_130816_Navico_AmRadioFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
-  item?: enums.SonichubTuning
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
+  item?: enums.SonichubTuning|number
   frequency?: number
   noiseLevel?: number
   signalLevel?: number
@@ -5909,12 +5909,12 @@ export interface PGN_130816_Navico_AmRadio extends PGN {
   Match: Proprietary ID == Zone Info
 */
 export interface PGN_130816_Navico_ZoneInfoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   zone?: number
 }
 
@@ -5930,13 +5930,13 @@ export interface PGN_130816_Navico_ZoneInfo extends PGN {
   Match: Proprietary ID == Source
 */
 export interface PGN_130816_Navico_SourceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
-  source?: enums.SonichubSource
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
+  source?: enums.SonichubSource|number
 }
 
 export interface PGN_130816_Navico_Source extends PGN {
@@ -5951,12 +5951,12 @@ export interface PGN_130816_Navico_Source extends PGN {
   Match: Proprietary ID == Source List
 */
 export interface PGN_130816_Navico_SourceListFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   sourceId?: number
   a?: number
   text?: string
@@ -5974,13 +5974,13 @@ export interface PGN_130816_Navico_SourceList extends PGN {
   Match: Proprietary ID == Control
 */
 export interface PGN_130816_Navico_ControlFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
-  item?: enums.FusionMuteCommand
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
+  item?: enums.FusionMuteCommand|number
 }
 
 export interface PGN_130816_Navico_Control extends PGN {
@@ -5995,13 +5995,13 @@ export interface PGN_130816_Navico_Control extends PGN {
   Match: Proprietary ID == FM Radio
 */
 export interface PGN_130816_Navico_FmRadioFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
-  item?: enums.SonichubTuning
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
+  item?: enums.SonichubTuning|number
   frequency?: number
   noiseLevel?: number
   signalLevel?: number
@@ -6021,13 +6021,13 @@ export interface PGN_130816_Navico_FmRadio extends PGN {
   Match: Proprietary ID == Playlist
 */
 export interface PGN_130816_Navico_PlaylistFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
-  item?: enums.SonichubPlaylist
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
+  item?: enums.SonichubPlaylist|number
   a?: number
   currentTrack?: number
   tracks?: number
@@ -6047,12 +6047,12 @@ export interface PGN_130816_Navico_Playlist extends PGN {
   Match: Proprietary ID == Track
 */
 export interface PGN_130816_Navico_TrackFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   item?: number
   text?: string
 }
@@ -6069,12 +6069,12 @@ export interface PGN_130816_Navico_Track extends PGN {
   Match: Proprietary ID == Artist
 */
 export interface PGN_130816_Navico_ArtistFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   item?: number
   text?: string
 }
@@ -6091,12 +6091,12 @@ export interface PGN_130816_Navico_Artist extends PGN {
   Match: Proprietary ID == Album
 */
 export interface PGN_130816_Navico_AlbumFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   item?: number
   text?: string
 }
@@ -6113,12 +6113,12 @@ export interface PGN_130816_Navico_Album extends PGN {
   Match: Proprietary ID == Menu Item
 */
 export interface PGN_130816_Navico_MenuItemFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   item?: number
   c?: number
   d?: number
@@ -6138,12 +6138,12 @@ export interface PGN_130816_Navico_MenuItem extends PGN {
   Match: Proprietary ID == Zones
 */
 export interface PGN_130816_Navico_ZonesFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   zones?: number
 }
 
@@ -6159,12 +6159,12 @@ export interface PGN_130816_Navico_Zones extends PGN {
   Match: Proprietary ID == Max Volume
 */
 export interface PGN_130816_Navico_MaxVolumeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   zone?: number
   level?: number
 }
@@ -6181,12 +6181,12 @@ export interface PGN_130816_Navico_MaxVolume extends PGN {
   Match: Proprietary ID == Volume
 */
 export interface PGN_130816_Navico_VolumeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   zone?: number
   level?: number
 }
@@ -6203,12 +6203,12 @@ export interface PGN_130816_Navico_Volume extends PGN {
   Match: Proprietary ID == Init #1
 */
 export interface PGN_130816_Navico_Init1Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
 }
 
 export interface PGN_130816_Navico_Init1 extends PGN {
@@ -6223,12 +6223,12 @@ export interface PGN_130816_Navico_Init1 extends PGN {
   Match: Proprietary ID == Position
 */
 export interface PGN_130816_Navico_PositionFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   position?: string
 }
 
@@ -6244,12 +6244,12 @@ export interface PGN_130816_Navico_Position extends PGN {
   Match: Proprietary ID == Init #3
 */
 export interface PGN_130816_Navico_Init3Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SonichubCommand
-  control?: enums.SonichubControl
+  proprietaryId: enums.SonichubCommand|number
+  control?: enums.SonichubControl|number
   a?: number
   b?: number
 }
@@ -6266,11 +6266,11 @@ export interface PGN_130816_Navico_Init3 extends PGN {
   Match: Proprietary ID == Text
 */
 export interface PGN_130816_Simrad_TextFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
-  proprietaryId: enums.SimnetCommand
+  proprietaryId: enums.SimnetCommand|number
   a?: number
   b?: number
   c?: number
@@ -6290,9 +6290,9 @@ export interface PGN_130816_Simrad_Text extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130817_NavicoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -6311,9 +6311,9 @@ export interface PGN_130817_Navico extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130817_LowranceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   productCode?: number
   model?: string
   a?: number
@@ -6333,9 +6333,9 @@ export interface PGN_130817_Lowrance extends PGN {
   Description: Simnet: Reprogram Data
 */
 export interface PGN_130818Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   version?: number
   sequence?: number
   data?: number
@@ -6350,9 +6350,9 @@ export interface PGN_130818 extends PGN {
   Description: Simnet: Request Reprogram
 */
 export interface PGN_130819Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130819 extends PGN {
@@ -6366,9 +6366,9 @@ export interface PGN_130819 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130820_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   reserved4?: number
   status?: number
   reserved6?: number
@@ -6385,9 +6385,9 @@ export interface PGN_130820_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130820_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -6407,10 +6407,10 @@ export interface PGN_130820_Furuno extends PGN {
   Match: Message ID == API Version
 */
 export interface PGN_130820_FusionElectronics_ApiVersionFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId?: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId?: enums.FusionStatusMessageId|number
   hwVersionMajor?: number
   hwVersionMinor?: number
   swVersionMajor?: number
@@ -6430,13 +6430,13 @@ export interface PGN_130820_FusionElectronics_ApiVersion extends PGN {
   Match: Message ID == Source
 */
 export interface PGN_130820_FusionElectronics_SourceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId?: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId?: enums.FusionStatusMessageId|number
   sourceId?: number
   currentSourceId?: number
-  sourceType?: enums.FusionSourceType
+  sourceType?: enums.FusionSourceType|number
   flags?: number
   source?: string
 }
@@ -6453,10 +6453,10 @@ export interface PGN_130820_FusionElectronics_Source extends PGN {
   Match: Message ID == Source Count
 */
 export interface PGN_130820_FusionElectronics_SourceCountFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId?: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId?: enums.FusionStatusMessageId|number
   sourceCount?: number
 }
 
@@ -6472,12 +6472,12 @@ export interface PGN_130820_FusionElectronics_SourceCount extends PGN {
   Match: Message ID == Track Info
 */
 export interface PGN_130820_FusionElectronics_TrackInfoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
-  flags?: enums.FusionPlayStatus
+  flags?: enums.FusionPlayStatus|number
   track?: number
   trackCount?: number
   length?: string
@@ -6496,10 +6496,10 @@ export interface PGN_130820_FusionElectronics_TrackInfo extends PGN {
   Match: Message ID == Track Title
 */
 export interface PGN_130820_FusionElectronics_TrackTitleFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   index?: number
   track?: string
@@ -6517,10 +6517,10 @@ export interface PGN_130820_FusionElectronics_TrackTitle extends PGN {
   Match: Message ID == Track Artist
 */
 export interface PGN_130820_FusionElectronics_TrackArtistFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   index?: number
   artist?: string
@@ -6538,10 +6538,10 @@ export interface PGN_130820_FusionElectronics_TrackArtist extends PGN {
   Match: Message ID == Track Album
 */
 export interface PGN_130820_FusionElectronics_TrackAlbumFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   index?: number
   album?: string
@@ -6559,10 +6559,10 @@ export interface PGN_130820_FusionElectronics_TrackAlbum extends PGN {
   Match: Message ID == Unit Name
 */
 export interface PGN_130820_FusionElectronics_UnitNameFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   name?: string
 }
 
@@ -6578,10 +6578,10 @@ export interface PGN_130820_FusionElectronics_UnitName extends PGN {
   Match: Message ID == Zone Name
 */
 export interface PGN_130820_FusionElectronics_ZoneNameFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   number: number
   name?: string
 }
@@ -6598,10 +6598,10 @@ export interface PGN_130820_FusionElectronics_ZoneName extends PGN {
   Match: Message ID == Track Progress
 */
 export interface PGN_130820_FusionElectronics_TrackProgressFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   progress?: string
 }
@@ -6618,11 +6618,11 @@ export interface PGN_130820_FusionElectronics_TrackProgress extends PGN {
   Match: Message ID == Tuner
 */
 export interface PGN_130820_FusionElectronics_TunerFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
-  sourceId: enums.FusionRadioSource
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
+  sourceId: enums.FusionRadioSource|number
   scanning?: number
   frequency?: number
   signalStrength?: number
@@ -6641,10 +6641,10 @@ export interface PGN_130820_FusionElectronics_Tuner extends PGN {
   Match: Message ID == Marine Tuner
 */
 export interface PGN_130820_FusionElectronics_MarineTunerFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channel?: number
   signalStrength?: number
@@ -6663,10 +6663,10 @@ export interface PGN_130820_FusionElectronics_MarineTuner extends PGN {
   Match: Message ID == Marine Squelch
 */
 export interface PGN_130820_FusionElectronics_MarineSquelchFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   squelch?: number
 }
@@ -6683,12 +6683,12 @@ export interface PGN_130820_FusionElectronics_MarineSquelch extends PGN {
   Match: Message ID == Marine Scan Mode
 */
 export interface PGN_130820_FusionElectronics_MarineScanModeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
-  scan?: boolean
+  scan?: enums.YesNo|number
 }
 
 export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
@@ -6703,10 +6703,10 @@ export interface PGN_130820_FusionElectronics_MarineScanMode extends PGN {
   Match: Message ID == Menu Item
 */
 export interface PGN_130820_FusionElectronics_MenuItemFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   itemIndex?: number
   flags?: number
@@ -6726,10 +6726,10 @@ export interface PGN_130820_FusionElectronics_MenuItem extends PGN {
   Match: Message ID == Aux Gain
 */
 export interface PGN_130820_FusionElectronics_AuxGainFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   gain?: number
 }
@@ -6747,12 +6747,12 @@ export interface PGN_130820_FusionElectronics_AuxGain extends PGN {
   Match: ID == USB repeat
 */
 export interface PGN_130820_FusionElectronics_Setting_UsbRepeatFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
-  id?: enums.FusionSetting
-  status?: enums.FusionRepeatStatus
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
+  id?: enums.FusionSetting|number
+  status?: enums.FusionRepeatStatus|number
 }
 
 export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
@@ -6767,11 +6767,11 @@ export interface PGN_130820_FusionElectronics_Setting_UsbRepeat extends PGN {
   Match: Message ID == Setting
 */
 export interface PGN_130820_FusionElectronics_SettingFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
-  id?: enums.FusionSetting
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
+  id?: enums.FusionSetting|number
   value?: number
 }
 
@@ -6787,12 +6787,12 @@ export interface PGN_130820_FusionElectronics_Setting extends PGN {
   Match: Message ID == Settings
 */
 export interface PGN_130820_FusionElectronics_SettingsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   count?: number
-  id?: enums.FusionSetting
+  id?: enums.FusionSetting|number
   value?: number
 }
 
@@ -6808,11 +6808,11 @@ export interface PGN_130820_FusionElectronics_Settings extends PGN {
   Match: Message ID == Mute
 */
 export interface PGN_130820_FusionElectronics_MuteFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
-  mute?: enums.FusionMuteCommand
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
+  mute?: enums.FusionMuteCommand|number
 }
 
 export interface PGN_130820_FusionElectronics_Mute extends PGN {
@@ -6827,10 +6827,10 @@ export interface PGN_130820_FusionElectronics_Mute extends PGN {
   Match: Message ID == Balance
 */
 export interface PGN_130820_FusionElectronics_BalanceFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone: number
   value?: number
 }
@@ -6847,10 +6847,10 @@ export interface PGN_130820_FusionElectronics_Balance extends PGN {
   Match: Message ID == Low Pass Filter
 */
 export interface PGN_130820_FusionElectronics_LowPassFilterFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone: number
   filter?: number
 }
@@ -6867,10 +6867,10 @@ export interface PGN_130820_FusionElectronics_LowPassFilter extends PGN {
   Match: Message ID == Sublevels
 */
 export interface PGN_130820_FusionElectronics_SublevelsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone1?: number
   zone2?: number
   zone3?: number
@@ -6889,10 +6889,10 @@ export interface PGN_130820_FusionElectronics_Sublevels extends PGN {
   Match: Message ID == Tone
 */
 export interface PGN_130820_FusionElectronics_ToneFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone: number
   bass?: number
   mid?: number
@@ -6911,10 +6911,10 @@ export interface PGN_130820_FusionElectronics_Tone extends PGN {
   Match: Message ID == Volume Limits
 */
 export interface PGN_130820_FusionElectronics_VolumeLimitsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone1VolumeLimit?: number
   zone2VolumeLimit?: number
   zone3VolumeLimit?: number
@@ -6933,10 +6933,10 @@ export interface PGN_130820_FusionElectronics_VolumeLimits extends PGN {
   Match: Message ID == Volume
 */
 export interface PGN_130820_FusionElectronics_VolumeFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone1?: number
   zone2?: number
   zone3?: number
@@ -6955,10 +6955,10 @@ export interface PGN_130820_FusionElectronics_Volume extends PGN {
   Match: Message ID == Capabilities
 */
 export interface PGN_130820_FusionElectronics_CapabilitiesFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone1?: number
   zone2?: number
   zone3?: number
@@ -6978,10 +6978,10 @@ export interface PGN_130820_FusionElectronics_Capabilities extends PGN {
   Match: Message ID == Line Level Control
 */
 export interface PGN_130820_FusionElectronics_LineLevelControlFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   zone: number
   control?: number
 }
@@ -6998,11 +6998,11 @@ export interface PGN_130820_FusionElectronics_LineLevelControl extends PGN {
   Match: Message ID == Power
 */
 export interface PGN_130820_FusionElectronics_PowerFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
-  state?: enums.FusionPowerState
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
+  state?: enums.FusionPowerState|number
 }
 
 export interface PGN_130820_FusionElectronics_Power extends PGN {
@@ -7017,15 +7017,15 @@ export interface PGN_130820_FusionElectronics_Power extends PGN {
   Match: Message ID == Sirius
 */
 export interface PGN_130820_FusionElectronics_SiriusFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
-  comState?: enums.FusionSiriusComState
-  alert?: enums.FusionSiriusComState
+  comState?: enums.FusionSiriusComState|number
+  alert?: enums.FusionSiriusComState|number
   advisoryChannel?: number
-  tuningMode?: enums.FusionSiriusTuningMode
+  tuningMode?: enums.FusionSiriusTuningMode|number
 }
 
 export interface PGN_130820_FusionElectronics_Sirius extends PGN {
@@ -7040,10 +7040,10 @@ export interface PGN_130820_FusionElectronics_Sirius extends PGN {
   Match: Message ID == SiriusXM Channel
 */
 export interface PGN_130820_FusionElectronics_SiriusXmChannelFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channelNumber?: number
   channel?: string
@@ -7061,10 +7061,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmChannel extends PGN {
   Match: Message ID == SiriusXM Title
 */
 export interface PGN_130820_FusionElectronics_SiriusXmTitleFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channel?: number
   title?: string
@@ -7082,10 +7082,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmTitle extends PGN {
   Match: Message ID == SiriusXM Artist
 */
 export interface PGN_130820_FusionElectronics_SiriusXmArtistFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channel?: number
   artist?: string
@@ -7103,10 +7103,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmArtist extends PGN {
   Match: Message ID == SiriusXM Genre
 */
 export interface PGN_130820_FusionElectronics_SiriusXmGenreFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channel?: number
   genre?: string
@@ -7124,10 +7124,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmGenre extends PGN {
   Match: Message ID == SiriusXM Category
 */
 export interface PGN_130820_FusionElectronics_SiriusXmCategoryFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   channel?: number
   name?: string
@@ -7145,10 +7145,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmCategory extends PGN {
   Match: Message ID == SiriusXm Signal
 */
 export interface PGN_130820_FusionElectronics_SiriusXmSignalFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   signal?: number
 }
@@ -7165,10 +7165,10 @@ export interface PGN_130820_FusionElectronics_SiriusXmSignal extends PGN {
   Match: Message ID == SiriusXM Presets
 */
 export interface PGN_130820_FusionElectronics_SiriusXmPresetsFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  messageId: enums.FusionStatusMessageId
+  industryCode: enums.IndustryCode|number
+  messageId: enums.FusionStatusMessageId|number
   sourceId: number
   count?: number
   values?: number
@@ -7185,9 +7185,9 @@ export interface PGN_130820_FusionElectronics_SiriusXmPresets extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130821_NavicoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   message?: string
 }
@@ -7203,9 +7203,9 @@ export interface PGN_130821_Navico extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130821_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   a?: number
   b?: number
@@ -7227,9 +7227,9 @@ export interface PGN_130821_Furuno extends PGN {
   Description: Navico: Unknown 1
 */
 export interface PGN_130822Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   data?: number
 }
 
@@ -7242,12 +7242,12 @@ export interface PGN_130822 extends PGN {
   Description: Maretron: Proprietary Temperature High Range
 */
 export interface PGN_130823Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   instance: number
-  source?: enums.TemperatureSource
+  source?: enums.TemperatureSource|number
   actualTemperature?: number
   setTemperature?: number
 }
@@ -7264,9 +7264,9 @@ export interface PGN_130823 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130824_BGFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   key?: string
   length?: string
   value?: string
@@ -7283,9 +7283,9 @@ export interface PGN_130824_BG extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130824_MaretronFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   field4?: number
   field5?: number
   field6?: number
@@ -7302,9 +7302,9 @@ export interface PGN_130824_Maretron extends PGN {
   Description: Navico: Unknown 2
 */
 export interface PGN_130825Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   data?: number
 }
 
@@ -7317,9 +7317,9 @@ export interface PGN_130825 extends PGN {
   Description: Lowrance: unknown
 */
 export interface PGN_130827Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -7337,9 +7337,9 @@ export interface PGN_130827 extends PGN {
   Description: Simnet: Set Serial Number
 */
 export interface PGN_130828Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130828 extends PGN {
@@ -7351,9 +7351,9 @@ export interface PGN_130828 extends PGN {
   Description: Suzuki: Engine and Storage Device Config
 */
 export interface PGN_130831Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130831 extends PGN {
@@ -7365,9 +7365,9 @@ export interface PGN_130831 extends PGN {
   Description: Simnet: Fuel Used - High Resolution
 */
 export interface PGN_130832Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130832 extends PGN {
@@ -7379,13 +7379,13 @@ export interface PGN_130832 extends PGN {
   Description: B&G: User and Remote rename
 */
 export interface PGN_130833Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   dataType?: string
   length?: number
   reserved6?: number
-  decimals?: enums.BandgDecimals
+  decimals?: enums.BandgDecimals|number
   shortName?: string
   longName?: string
 }
@@ -7399,9 +7399,9 @@ export interface PGN_130833 extends PGN {
   Description: Simnet: Engine and Tank Configuration
 */
 export interface PGN_130834Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130834 extends PGN {
@@ -7413,9 +7413,9 @@ export interface PGN_130834 extends PGN {
   Description: Simnet: Set Engine and Tank Configuration
 */
 export interface PGN_130835Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130835 extends PGN {
@@ -7429,14 +7429,14 @@ export interface PGN_130835 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130836_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   c?: number
   device: number
   instance: number
   f?: number
-  tankType?: enums.TankType
+  tankType?: enums.TankType|number
   capacity?: number
   g?: number
   h?: number
@@ -7454,9 +7454,9 @@ export interface PGN_130836_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130836_MaretronFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   instance: number
   indicatorNumber?: number
   startDate?: string
@@ -7464,7 +7464,7 @@ export interface PGN_130836_MaretronFields extends PGNFields {
   offCounter?: number
   onCounter?: number
   errorCounter?: number
-  switchStatus?: enums.OffOn
+  switchStatus?: enums.OffOn|number
   reserved12?: number
 }
 
@@ -7479,9 +7479,9 @@ export interface PGN_130836_Maretron extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130837_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130837_Simrad extends PGN {
@@ -7495,9 +7495,9 @@ export interface PGN_130837_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130837_MaretronFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   instance: number
   indicatorNumber?: number
   startDate?: string
@@ -7505,7 +7505,7 @@ export interface PGN_130837_MaretronFields extends PGNFields {
   accumulatedOffPeriod?: string
   accumulatedOnPeriod?: string
   accumulatedErrorPeriod?: string
-  switchStatus?: enums.OffOn
+  switchStatus?: enums.OffOn|number
   reserved12?: number
 }
 
@@ -7518,9 +7518,9 @@ export interface PGN_130837_Maretron extends PGN {
   Description: Simnet: Fluid Level Warning
 */
 export interface PGN_130838Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130838 extends PGN {
@@ -7532,9 +7532,9 @@ export interface PGN_130838 extends PGN {
   Description: Simnet: Pressure Sensor Configuration
 */
 export interface PGN_130839Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130839 extends PGN {
@@ -7546,9 +7546,9 @@ export interface PGN_130839 extends PGN {
   Description: Simnet: Data User Group Configuration
 */
 export interface PGN_130840Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130840 extends PGN {
@@ -7562,11 +7562,11 @@ export interface PGN_130840 extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130842_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   messageId: number
-  repeatIndicator?: enums.RepeatIndicator
+  repeatIndicator?: enums.RepeatIndicator|number
   d?: number
   e?: number
   userId: string
@@ -7584,9 +7584,9 @@ export interface PGN_130842_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130842_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -7610,15 +7610,15 @@ export interface PGN_130842_Furuno extends PGN {
   Match: Message ID == Msg 24 Part B
 */
 export interface PGN_130842_Simrad_Msg24PartBFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   messageId: number
-  repeatIndicator?: enums.RepeatIndicator
+  repeatIndicator?: enums.RepeatIndicator|number
   d?: number
   e?: number
   userId: string
-  typeOfShip?: enums.ShipType
+  typeOfShip?: enums.ShipType|number
   vendorId?: string
   callsign?: string
   length?: number
@@ -7641,9 +7641,9 @@ export interface PGN_130842_Simrad_Msg24PartB extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130843_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   yaw?: number
@@ -7662,9 +7662,9 @@ export interface PGN_130843_Furuno extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130843_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130843_Simrad extends PGN {
@@ -7678,9 +7678,9 @@ export interface PGN_130843_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130845_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130845_Furuno extends PGN {
@@ -7694,12 +7694,12 @@ export interface PGN_130845_Furuno extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130845_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   address?: number
-  repeatIndicator?: enums.RepeatIndicator
-  displayGroup?: enums.SimnetDisplayGroup
+  repeatIndicator?: enums.RepeatIndicator|number
+  displayGroup?: enums.SimnetDisplayGroup|number
   reserved7?: number
   key?: string
   spare9?: string
@@ -7718,12 +7718,12 @@ export interface PGN_130845_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130846_SimradFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   address?: number
   b?: number
-  displayGroup?: enums.SimnetDisplayGroup
+  displayGroup?: enums.SimnetDisplayGroup|number
   d?: number
   key?: string
   spare9?: string
@@ -7742,9 +7742,9 @@ export interface PGN_130846_Simrad extends PGN {
   Match: Industry Code == Marine Industry
 */
 export interface PGN_130846_FurunoFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
 }
 
 export interface PGN_130846_Furuno extends PGN {
@@ -7756,9 +7756,9 @@ export interface PGN_130846_Furuno extends PGN {
   Description: SeaTalk: Node Statistics
 */
 export interface PGN_130847Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   productCode?: number
   year?: number
   month?: number
@@ -7775,9 +7775,9 @@ export interface PGN_130847 extends PGN {
   Description: SeaTalk: Waypoint Information
 */
 export interface PGN_130848Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   sid?: number
   waypointName?: string
   waypointSequence?: string
@@ -7798,16 +7798,16 @@ export interface PGN_130848 extends PGN {
   Match: Proprietary ID == Autopilot
 */
 export interface PGN_130850_Simrad_AutopilotFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   address?: number
   reserved5?: number
-  proprietaryId: enums.SimnetEventCommand
-  apStatus?: enums.SimnetApStatus
-  apCommand?: enums.SimnetApEvents
+  proprietaryId: enums.SimnetEventCommand|number
+  apStatus?: enums.SimnetApStatus|number
+  apCommand?: enums.SimnetApEvents|number
   spare9?: string
-  direction?: enums.SimnetDirection
+  direction?: enums.SimnetDirection|number
   angle?: number
 }
 
@@ -7823,15 +7823,15 @@ export interface PGN_130850_Simrad_Autopilot extends PGN {
   Match: Proprietary ID == AP command
 */
 export interface PGN_130850_Simrad_ApCommandFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.SimnetEventCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.SimnetEventCommand|number
   unusedA?: number
   controllingDevice?: number
-  event?: enums.SimnetApEvents
+  event?: enums.SimnetApEvents|number
   unusedB?: number
-  direction?: enums.SimnetDirection
+  direction?: enums.SimnetDirection|number
   angle?: number
   unusedC?: number
 }
@@ -7849,14 +7849,14 @@ export interface PGN_130850_Simrad_ApCommand extends PGN {
   Match: Proprietary ID == Alarm
 */
 export interface PGN_130850_Simrad_AlarmFields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   address?: number
   reserved5?: number
-  proprietaryId: enums.SimnetEventCommand
+  proprietaryId: enums.SimnetEventCommand|number
   reserved7?: number
-  alarm?: enums.SimnetAlarm
+  alarm?: enums.SimnetAlarm|number
   messageId?: number
   f?: number
   g?: number
@@ -7871,15 +7871,15 @@ export interface PGN_130850_Simrad_Alarm extends PGN {
   Description: Simnet: Event Reply: AP command
 */
 export interface PGN_130851Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  proprietaryId: enums.SimnetEventCommand
+  industryCode: enums.IndustryCode|number
+  proprietaryId: enums.SimnetEventCommand|number
   b?: number
   address?: number
-  event?: enums.SimnetApEvents
+  event?: enums.SimnetApEvents|number
   c?: number
-  direction?: enums.SimnetDirection
+  direction?: enums.SimnetDirection|number
   angle?: number
   g?: number
 }
@@ -7894,9 +7894,9 @@ export interface PGN_130851 extends PGN {
   Explanation: Usually accompanied by a PGN 130850 'Simnet: Alarm' message with the same information in binary form.
 */
 export interface PGN_130856Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   messageId?: number
   b?: number
   c?: number
@@ -7913,9 +7913,9 @@ export interface PGN_130856 extends PGN {
   Explanation: Seen as sent by AC-42 and H5000 AP only so far.
 */
 export interface PGN_130860Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   a?: number
   b?: number
   c?: number
@@ -7933,9 +7933,9 @@ export interface PGN_130860 extends PGN {
   Description: Airmar: Additional Weather Data
 */
 export interface PGN_130880Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   c?: number
   apparentWindchillTemperature?: number
   trueWindchillTemperature?: number
@@ -7951,9 +7951,9 @@ export interface PGN_130880 extends PGN {
   Description: Airmar: Heater Control
 */
 export interface PGN_130881Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   c?: number
   plateTemperature?: number
   airTemperature?: number
@@ -7969,9 +7969,9 @@ export interface PGN_130881 extends PGN {
   Description: SeaTalk: Route Information
 */
 export interface PGN_130918Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
+  industryCode: enums.IndustryCode|number
   currentWaypointSequence?: number
   currentWaypointName?: string
   nextWaypointSequence?: number
@@ -7991,13 +7991,13 @@ export interface PGN_130918 extends PGN {
   Description: Airmar: POST
 */
 export interface PGN_130944Fields extends PGNFields {
-  manufacturerCode: enums.ManufacturerCode
+  manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
-  industryCode: enums.IndustryCode
-  control?: enums.AirmarPostControl
+  industryCode: enums.IndustryCode|number
+  control?: enums.AirmarPostControl|number
   reserved5?: number
   numberOfIdTestResultPairsToFollow?: number
-  testId?: enums.AirmarPostId
+  testId?: enums.AirmarPostId|number
   testResult?: number
 }
 

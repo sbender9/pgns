@@ -2,6 +2,7 @@
 
 import {
   PGN,
+  PGN_127257,
   PGN_65305_Simrad_SendMode,
   SimnetDeviceModel,
   SimnetDeviceReport,

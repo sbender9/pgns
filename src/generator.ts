@@ -48,19 +48,17 @@ organizePGNs()
 
 if (argv.enums) {
   pgns.LookupEnumerations.forEach((en: any) => {
-    if (en.Name !== 'YES_NO') {
-      const done: { [key: string]: number } = {}
-      console.log(`export enum ${enumName(en.Name)} {`)
-      en.EnumValues.forEach((v: any) => {
-        const name = enumName(v.Name)
-        const found = done[name]
-        if (!found) {
-          done[name] = 1
-          console.log(`  ${name} = '${v.Name}',`)
-        }
-      })
-      console.log('}\n')
-    }
+    const done: { [key: string]: number } = {}
+    console.log(`export enum ${enumName(en.Name)} {`)
+    en.EnumValues.forEach((v: any) => {
+      const name = enumName(v.Name)
+      const found = done[name]
+      if (!found) {
+        done[name] = 1
+        console.log(`  ${name} = '${v.Name}',`)
+      }
+    })
+    console.log('}\n')
   })
 
   pgns.LookupIndirectEnumerations.forEach((en: any) => {
@@ -200,16 +198,16 @@ if (argv.pgns) {
           break
 
         case 'LOOKUP':
-          if (field.LookupEnumeration === 'YES_NO') {
-            type = 'boolean'
-          } else if (field.LookupEnumeration) {
-            type = `enums.${enumName(field.LookupEnumeration)}`
+          if (field.LookupEnumeration) {
+            type = `enums.${enumName(field.LookupEnumeration)}|number`
+          } else {
+            //FIXME! error
           }
           break
 
         case 'INDIRECT_LOOKUP':
           if (field.LookupIndirectEnumeration) {
-            type = `enums.${enumName(field.LookupIndirectEnumeration)}`
+            type = `enums.${enumName(field.LookupIndirectEnumeration)}|number`
           }
           break
 
