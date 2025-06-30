@@ -94,6 +94,9 @@ if ( argv.enums ) {
 
 if ( argv.pgns ) {
   console.log('import * as enums from \'./enums\'\n')
+
+  console.log('export interface PGNFields {')
+  console.log('}\n')
   
   console.log('export interface PGN {')
   console.log('  pgn: number')
@@ -103,7 +106,7 @@ if ( argv.pgns ) {
   console.log('  timestamp?: string')
   console.log('  input?: string[]')
   console.log('  description?: string')
-  console.log('  fields?: any')
+  console.log('  fields: PGNFields')
   console.log('}\n')
 
   /*
@@ -186,8 +189,7 @@ if ( argv.pgns ) {
       })
     }
 
-    console.log(`export interface ${typeName} extends PGN {`)
-    console.log("  fields: {")
+    console.log(`export interface ${typeName}Fields extends PGNFields {`)
     pgn.Fields.forEach((field: Field) => {
       let type = 'string'
       switch (field.FieldType) {
@@ -218,9 +220,12 @@ if ( argv.pgns ) {
         break
       }
 
-      console.log(`    ${fixIdentifier(field.Id, '_')}: ${type}`)
+      console.log(`  ${fixIdentifier(field.Id, '_')}: ${type}`)
     })
-    console.log('  }')
+    console.log('}\n')
+
+    console.log(`export interface ${typeName} extends PGN {`)
+    console.log(` fields: ${typeName}Fields`)
     console.log('}\n')
   }
 
