@@ -66,7 +66,7 @@ export enum PhysicalQuantity {
 }
 
 export type EnumValue = {
-  Name: string,
+  Name: string
   Value: number
 }
 
@@ -75,31 +75,31 @@ export interface EnumBase {
 }
 
 export interface Enumeration extends EnumBase {
-  MaxValue: number,
+  MaxValue: number
   EnumValues: EnumValue[]
 }
 
 export type EnumBitValue = {
-  Name: string,
+  Name: string
   Bit: number
 }
 
 export interface BitEnumeration extends EnumBase {
-  MaxValue: number,
+  MaxValue: number
   EnumBitValues: EnumBitValue[]
 }
 
 export type EnumFieldTypeValue = {
-  name: string,
-  value: number,
-  FieldType: string,
-  Resolution?: number,
-  Unit?: string,
+  name: string
+  value: number
+  FieldType: string
+  Resolution?: number
+  Unit?: string
   Bits: string
 }
 
 export interface FieldTypeEnumeration extends EnumBase {
-  MaxValue: number,
+  MaxValue: number
   EnumFieldTypeValues: EnumFieldTypeValue[]
 }
 
@@ -126,7 +126,7 @@ export type Field = {
   LookupEnumeration?: string
   LookupIndirectEnumeration?: string
   LookupIndirectEnumerationFieldOrder?: number
-  LookupBitEnumeration?: string,
+  LookupBitEnumeration?: string
   LookupFieldTypeEnumeration: string
 }
 

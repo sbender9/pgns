@@ -46,7 +46,7 @@ function organizePGNs() {
 
 organizePGNs()
 
-if ( argv.enums ) {
+if (argv.enums) {
   pgns.LookupEnumerations.forEach((en: any) => {
     if (en.Name !== 'YES_NO') {
       const done: { [key: string]: number } = {}
@@ -92,12 +92,12 @@ if ( argv.enums ) {
   })
 }
 
-if ( argv.pgns ) {
-  console.log('import * as enums from \'./enums\'\n')
+if (argv.pgns) {
+  console.log("import * as enums from './enums'\n")
 
   console.log('export interface PGNFields {')
   console.log('}\n')
-  
+
   console.log('export interface PGN {')
   console.log('  pgn: number')
   console.log('  prio?: number')
@@ -182,8 +182,8 @@ if ( argv.pgns ) {
       pgn.Fields.forEach((field: Field) => {
         if (field.Match && field.LookupEnumeration !== 'INDUSTRY_CODE') {
           const desc = field.Description
-                ? enumName(field.Description)
-                : field.Match
+            ? enumName(field.Description)
+            : field.Match
           typeName = typeName + `_${desc}`
         }
       })
@@ -193,31 +193,31 @@ if ( argv.pgns ) {
     pgn.Fields.forEach((field: Field) => {
       let type = 'string'
       switch (field.FieldType) {
-      case 'NUMBER':
-      case 'RESERVED':
-      case 'BINARY':
-        type = 'number'
-        break
+        case 'NUMBER':
+        case 'RESERVED':
+        case 'BINARY':
+          type = 'number'
+          break
 
-      case 'LOOKUP':
-        if (field.LookupEnumeration === 'YES_NO') {
-          type = 'boolean'
-        } else if (field.LookupEnumeration) {
-          type = `enums.${enumName(field.LookupEnumeration)}`
-        }
-        break
+        case 'LOOKUP':
+          if (field.LookupEnumeration === 'YES_NO') {
+            type = 'boolean'
+          } else if (field.LookupEnumeration) {
+            type = `enums.${enumName(field.LookupEnumeration)}`
+          }
+          break
 
-      case 'INDIRECT_LOOKUP':
-        if (field.LookupIndirectEnumeration) {
-          type = `enums.${enumName(field.LookupIndirectEnumeration)}`
-        }
-        break
+        case 'INDIRECT_LOOKUP':
+          if (field.LookupIndirectEnumeration) {
+            type = `enums.${enumName(field.LookupIndirectEnumeration)}`
+          }
+          break
 
-      case 'BITLOOKUP':
-        if (field.LookupBitEnumeration) {
-          type = `enums.${enumName(field.LookupBitEnumeration)}[]`
-        }
-        break
+        case 'BITLOOKUP':
+          if (field.LookupBitEnumeration) {
+            type = `enums.${enumName(field.LookupBitEnumeration)}[]`
+          }
+          break
       }
 
       const required = field.PartOfPrimaryKey == true ? '' : '?'
@@ -230,7 +230,6 @@ if ( argv.pgns ) {
     console.log(` fields: ${typeName}Fields`)
     console.log('}\n')
   }
-
 }
 
 function fixIdentifier(str: string, prefix: string) {
@@ -240,12 +239,12 @@ function fixIdentifier(str: string, prefix: string) {
   if (
     !(
       (firstChar >= 'a' && firstChar <= 'z') ||
-        (firstChar >= 'A' && firstChar <= 'Z') ||
-        firstChar === '_' ||
-        firstChar === '$'
+      (firstChar >= 'A' && firstChar <= 'Z') ||
+      firstChar === '_' ||
+      firstChar === '$'
     ) &&
-      firstChar !== '+' &&
-      firstChar !== '-'
+    firstChar !== '+' &&
+    firstChar !== '-'
   ) {
     res = `${prefix}` + str
   }
@@ -260,10 +259,10 @@ function fixIdentifier(str: string, prefix: string) {
       newS = newS + 'Plus'
     } else if (
       (char >= 'a' && char <= 'z') ||
-        (char >= 'A' && char <= 'Z') ||
-        (char >= '0' && char <= '9') ||
-        char === '_' ||
-        char === '$'
+      (char >= 'A' && char <= 'Z') ||
+      (char >= '0' && char <= '9') ||
+      char === '_' ||
+      char === '$'
     ) {
       newS = newS + char
     }
