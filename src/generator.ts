@@ -218,7 +218,7 @@ if (argv.pgns) {
           break
       }
 
-      const required = field.PartOfPrimaryKey == true ? '' : '?'
+      const required = field.PartOfPrimaryKey == true || field.BitLength === 1 ? '' : '?'
 
       console.log(`  ${fixIdentifier(field.Id, '_')}${required}: ${type}`)
     })

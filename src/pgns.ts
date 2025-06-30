@@ -157,11 +157,11 @@ export interface PGN_60928Fields extends PGNFields {
   deviceInstanceLower?: number
   deviceInstanceUpper?: number
   deviceFunction?: enums.DeviceFunction|number
-  spare?: string
+  spare: string
   deviceClass?: enums.DeviceClass|number
   systemInstance?: number
   industryGroup?: enums.IndustryCode|number
-  arbitraryAddressCapable?: enums.YesNo|number
+  arbitraryAddressCapable: enums.YesNo|number
 }
 
 export interface PGN_60928 extends PGN {
@@ -669,11 +669,11 @@ export interface PGN_65240Fields extends PGNFields {
   deviceInstanceLower?: number
   deviceInstanceUpper?: number
   deviceFunction?: enums.DeviceFunction|number
-  reserved?: number
+  reserved: number
   deviceClass?: enums.DeviceClass|number
   systemInstance?: number
   industryCode?: enums.IndustryCode|number
-  reserved10?: number
+  reserved10: number
   newSourceAddress?: number
 }
 
@@ -2192,12 +2192,12 @@ export interface PGN_126983Fields extends PGNFields {
   dataSourceInstance: number
   dataSourceIndexSource?: number
   alertOccurrenceNumber?: number
-  temporarySilenceStatus?: enums.YesNo|number
-  acknowledgeStatus?: enums.YesNo|number
-  escalationStatus?: enums.YesNo|number
-  temporarySilenceSupport?: enums.YesNo|number
-  acknowledgeSupport?: enums.YesNo|number
-  escalationSupport?: enums.YesNo|number
+  temporarySilenceStatus: enums.YesNo|number
+  acknowledgeStatus: enums.YesNo|number
+  escalationStatus: enums.YesNo|number
+  temporarySilenceSupport: enums.YesNo|number
+  acknowledgeSupport: enums.YesNo|number
+  escalationSupport: enums.YesNo|number
   reserved?: number
   acknowledgeSourceNetworkIdName?: string
   triggerCondition?: enums.AlertTriggerCondition|number
@@ -3398,8 +3398,8 @@ export interface PGN_128520Fields extends PGNFields {
   sid?: number
   targetId?: number
   trackStatus?: enums.Tracking[]
-  reportedTarget?: enums.YesNo|number
-  targetAcquisition?: enums.TargetAcquisition|number
+  reportedTarget: enums.YesNo|number
+  targetAcquisition: enums.TargetAcquisition|number
   bearingReference?: enums.DirectionReference|number
   reserved?: number
   bearing?: number
@@ -3696,8 +3696,8 @@ export interface PGN_129038Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
@@ -3727,8 +3727,8 @@ export interface PGN_129039Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
@@ -3737,13 +3737,13 @@ export interface PGN_129039Fields extends PGNFields {
   heading?: number
   regionalApplication?: string
   regionalApplicationB?: string
-  unitType?: enums.AisType|number
-  integratedDisplay?: enums.YesNo|number
-  dsc?: enums.YesNo|number
-  band?: enums.AisBand|number
-  canHandleMsg22?: enums.YesNo|number
-  aisMode?: enums.AisMode|number
-  aisCommunicationState?: enums.AisCommunicationState|number
+  unitType: enums.AisType|number
+  integratedDisplay: enums.YesNo|number
+  dsc: enums.YesNo|number
+  band: enums.AisBand|number
+  canHandleMsg22: enums.YesNo|number
+  aisMode: enums.AisMode|number
+  aisCommunicationState: enums.AisCommunicationState|number
   reserved?: number
 }
 
@@ -3761,8 +3761,8 @@ export interface PGN_129040Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
@@ -3778,8 +3778,8 @@ export interface PGN_129040Fields extends PGNFields {
   positionReferenceFromStarboard?: number
   positionReferenceFromBow?: number
   name?: string
-  dte?: enums.Available|number
-  aisMode?: enums.AisMode|number
+  dte: enums.Available|number
+  aisMode: enums.AisMode|number
   spare25?: string
   aisTransceiverInformation?: enums.AisTransceiver|number
   reserved27?: number
@@ -3799,18 +3799,18 @@ export interface PGN_129041Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   timeStamp?: enums.TimeStamp|number
   lengthDiameter?: number
   beamDiameter?: number
   positionReferenceFromStarboardEdge?: number
   positionReferenceFromTrueNorthFacingEdge?: number
   atonType?: enums.AtonType|number
-  offPositionIndicator?: enums.YesNo|number
-  virtualAtonFlag?: enums.YesNo|number
-  assignedModeFlag?: enums.AisAssignedMode|number
-  spare?: string
+  offPositionIndicator: enums.YesNo|number
+  virtualAtonFlag: enums.YesNo|number
+  assignedModeFlag: enums.AisAssignedMode|number
+  spare: string
   positionFixingDeviceType?: enums.PositionFixDevice|number
   reserved19?: number
   atonStatus?: number
@@ -4217,7 +4217,7 @@ export interface PGN_129556Fields extends PGNFields {
   prn?: number
   na?: number
   reserved?: number
-  cna?: number
+  cna: number
   hna?: number
   EpsilonNa?: number
   DeltatnaDot?: number
@@ -4242,7 +4242,7 @@ export interface PGN_129792Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   longitude?: number
@@ -4267,8 +4267,8 @@ export interface PGN_129793Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   reserved?: number
   positionTime?: string
   communicationState?: number
@@ -4304,8 +4304,8 @@ export interface PGN_129794Fields extends PGNFields {
   destination?: string
   aisVersionIndicator?: enums.AisVersion|number
   gnssType?: enums.PositionFixDevice|number
-  dte?: enums.Available|number
-  reserved?: number
+  dte: enums.Available|number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   reserved21?: number
 }
@@ -4322,13 +4322,13 @@ export interface PGN_129795Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   sequenceNumber?: number
   destinationId: string
   reserved8?: number
-  retransmitFlag?: enums.YesNo|number
-  reserved10?: number
+  retransmitFlag: enums.YesNo|number
+  reserved10: number
   numberOfBitsInBinaryDataField?: number
   binaryData?: number
 }
@@ -4345,7 +4345,7 @@ export interface PGN_129796Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId: string
@@ -4365,7 +4365,7 @@ export interface PGN_129797Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId?: number
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   numberOfBitsInBinaryDataField?: number
@@ -4386,8 +4386,8 @@ export interface PGN_129798Fields extends PGNFields {
   userId: string
   longitude?: number
   latitude?: number
-  positionAccuracy?: enums.PositionAccuracy|number
-  raim?: enums.RaimFlag|number
+  positionAccuracy: enums.PositionAccuracy|number
+  raim: enums.RaimFlag|number
   timeStamp?: enums.TimeStamp|number
   cog?: number
   sog?: number
@@ -4395,7 +4395,7 @@ export interface PGN_129798Fields extends PGNFields {
   aisTransceiverInformation?: enums.AisTransceiver|number
   altitude?: number
   reservedForRegionalApplications?: number
-  dte?: enums.Available|number
+  dte: enums.Available|number
   spare?: string
   reserved17?: number
 }
@@ -4430,7 +4430,7 @@ export interface PGN_129800Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId: string
@@ -4448,13 +4448,13 @@ export interface PGN_129801Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   sequenceNumber?: number
   destinationId: string
   reserved8?: number
-  retransmitFlag?: enums.YesNo|number
-  spare10?: string
+  retransmitFlag: enums.YesNo|number
+  spare10: string
   safetyRelatedText?: string
 }
 
@@ -4470,7 +4470,7 @@ export interface PGN_129802Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   safetyRelatedText?: string
@@ -4488,7 +4488,7 @@ export interface PGN_129803Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationId1: string
@@ -4521,7 +4521,7 @@ export interface PGN_129804Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   destinationIdA: string
@@ -4546,7 +4546,7 @@ export interface PGN_129805Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   offset?: number
@@ -4567,26 +4567,26 @@ export interface PGN_129806Fields extends PGNFields {
   messageId?: enums.AisMessageId|number
   repeatIndicator?: enums.RepeatIndicator|number
   sourceId: string
-  reserved?: number
+  reserved: number
   aisTransceiverInformation?: enums.AisTransceiver|number
   spare6?: string
   channelA?: number
   channelB?: number
   reserved9?: number
-  power?: enums.PowerMode|number
+  power: enums.PowerMode|number
   txRxMode?: enums.TxRxMode|number
   northEastLongitudeCorner1?: number
   northEastLatitudeCorner1?: number
   southWestLongitudeCorner2?: number
   southWestLatitudeCorner2?: number
-  reserved16?: number
-  addressedOrBroadcastMessageIndicator?: enums.BroadcastIndicator|number
-  channelABandwidth?: enums.Bandwidth|number
-  channelBBandwidth?: enums.Bandwidth|number
-  reserved20?: number
+  reserved16: number
+  addressedOrBroadcastMessageIndicator: enums.BroadcastIndicator|number
+  channelABandwidth: enums.Bandwidth|number
+  channelBBandwidth: enums.Bandwidth|number
+  reserved20: number
   transitionalZoneSize?: enums.ZoneSize|number
   spare22?: string
-  reserved23?: number
+  reserved23: number
 }
 
 export interface PGN_129806 extends PGN {
@@ -5241,7 +5241,7 @@ export interface PGN_130321 extends PGN {
 export interface PGN_130322Fields extends PGNFields {
   mode?: enums.ResidualMode|number
   state?: enums.FloodState|number
-  reserved?: number
+  reserved: number
   measurementDate?: string
   measurementTime?: string
   stationLatitude?: number
@@ -7994,7 +7994,7 @@ export interface PGN_130944Fields extends PGNFields {
   manufacturerCode: enums.ManufacturerCode|number
   reserved?: number
   industryCode: enums.IndustryCode|number
-  control?: enums.AirmarPostControl|number
+  control: enums.AirmarPostControl|number
   reserved5?: number
   numberOfIdTestResultPairsToFollow?: number
   testId?: enums.AirmarPostId|number
