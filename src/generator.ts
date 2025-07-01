@@ -93,35 +93,37 @@ if (argv.enums) {
 if (argv.pgns) {
   console.log("import * as enums from './enums'\n")
 
-  pgns.FieldTypes.forEach((ft:any) => {
+  pgns.FieldTypes.forEach((ft: any) => {
     let type = 'number'
     switch (ft.Name) {
-    case 'LOOKUP':
-    case 'INDIRECT_LOOKUP':
-    case 'BITLOOKUP':
-      return
+      case 'LOOKUP':
+      case 'INDIRECT_LOOKUP':
+      case 'BITLOOKUP':
+        return
 
-    case 'DATE':
-    case 'TIME':
-    case 'DYNAMIC_FIELD_KEY':
-    case 'STRING_FIX':
-    case 'STRING_LZ':
-    case 'STRING_LAU':
-    case 'MMSI':
-      type = 'string'
-      break
+      case 'DATE':
+      case 'TIME':
+      case 'DYNAMIC_FIELD_KEY':
+      case 'STRING_FIX':
+      case 'STRING_LZ':
+      case 'STRING_LAU':
+      case 'MMSI':
+        type = 'string'
+        break
 
-    case 'DYNAMIC_FIELD_VALUE':
-    case 'VARIABLE':
-      type = 'any'
-      break
+      case 'DYNAMIC_FIELD_VALUE':
+      case 'VARIABLE':
+        type = 'any'
+        break
     }
 
-    console.log(`export type N2K_${camelCase(ft.Name, {pascalCase: true})} = ${type}`)
+    console.log(
+      `export type N2K_${camelCase(ft.Name, { pascalCase: true })} = ${type}`
+    )
   })
-  
+
   console.log('')
-  
+
   console.log('export interface PGNFields {')
   console.log('}\n')
 
@@ -238,21 +240,22 @@ if (argv.pgns) {
           if (field.LookupBitEnumeration) {
             type = `enums.${enumName(field.LookupBitEnumeration)}[]`
           }
-        break
+          break
 
-      default:
-        type = `N2K_${camelCase(field.FieldType, {pascalCase: true})}`
-        break
+        default:
+          type = `N2K_${camelCase(field.FieldType, { pascalCase: true })}`
+          break
       }
 
-      const required = field.PartOfPrimaryKey == true || field.BitLength === 1 ? '' : '?'
+      const required =
+        field.PartOfPrimaryKey == true || field.BitLength === 1 ? '' : '?'
 
       console.log(`  ${fixIdentifier(field.Id, '_')}${required}: ${type}`)
     })
-    if ( pgn.RepeatingFieldSet1Size !== undefined ) {
+    if (pgn.RepeatingFieldSet1Size !== undefined) {
       console.log(`  list: any[]`)
     }
-    if ( pgn.RepeatingFieldSet2Size !== undefined ) {
+    if (pgn.RepeatingFieldSet2Size !== undefined) {
       console.log(`  list2: any[]`)
     }
     console.log('}\n')

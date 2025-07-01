@@ -24,7 +24,7 @@ const obj: any = {
     industryCode: 'Marine',
     'Industry Code': 'Marine',
     model: 'AC',
-    report: 'Status',
+    report: 'Status'
     //spare6: 1
   }
 }
@@ -36,7 +36,7 @@ const obj2: PGN_65305_Simrad_SendMode = {
     manufacturerCode: ManufacturerCode.BepMarine,
     industryCode: IndustryCode.Marine,
     model: SimnetDeviceModel.Ac,
-    report: SimnetDeviceReport.Status,
+    report: SimnetDeviceReport.Status
     //spare6: 1
   }
 }
