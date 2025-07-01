@@ -3,7 +3,7 @@ export enum LightingCommand {
   DetectDevices = 'Detect Devices',
   Reboot = 'Reboot',
   FactoryReset = 'Factory Reset',
-  PoweringUp = 'Powering Up'
+  PoweringUp = 'Powering Up',
 }
 
 export enum IndustryCode {
@@ -12,7 +12,7 @@ export enum IndustryCode {
   Agriculture = 'Agriculture',
   Construction = 'Construction',
   Marine = 'Marine',
-  Industrial = 'Industrial'
+  Industrial = 'Industrial',
 }
 
 export enum ManufacturerCode {
@@ -298,7 +298,7 @@ export enum ManufacturerCode {
   Mmp = 'MMP',
   VectorCantech = 'Vector Cantech',
   YamahaMarine = 'Yamaha Marine',
-  FariaInstruments = 'Faria Instruments'
+  FariaInstruments = 'Faria Instruments',
 }
 
 export enum AisMessageId {
@@ -328,7 +328,7 @@ export enum AisMessageId {
   StaticDataReport = 'Static data report',
   SingleSlotBinaryMessage = 'Single slot binary message',
   MultipleSlotBinaryMessage = 'Multiple slot binary message',
-  PositionReportForLongRangeApplications = 'Position report for long range applications'
+  PositionReportForLongRangeApplications = 'Position report for long range applications',
 }
 
 export enum ShipType {
@@ -386,7 +386,7 @@ export enum ShipType {
   OtherhazardCatY = 'Other (hazard cat Y)',
   OtherhazardCatZ = 'Other (hazard cat Z)',
   OtherhazardCatOs = 'Other (hazard cat OS)',
-  OthernoAdditionalInformation = 'Other (no additional information)'
+  OthernoAdditionalInformation = 'Other (no additional information)',
 }
 
 export enum DeviceClass {
@@ -407,20 +407,20 @@ export enum DeviceClass {
   DeckPlusCargoPlusFishingEquipmentSystems = 'Deck + cargo + fishing equipment systems',
   HumanInterface = 'Human Interface',
   Display = 'Display',
-  Entertainment = 'Entertainment'
+  Entertainment = 'Entertainment',
 }
 
 export enum RepeatIndicator {
   Initial = 'Initial',
   FirstRetransmission = 'First retransmission',
   SecondRetransmission = 'Second retransmission',
-  FinalRetransmission = 'Final retransmission'
+  FinalRetransmission = 'Final retransmission',
 }
 
 export enum TxRxMode {
   TxAtxBRxArxB = 'Tx A/Tx B, Rx A/Rx B',
   TxARxArxB = 'Tx A, Rx A/Rx B',
-  TxBRxArxB = 'Tx B, Rx A/Rx B'
+  TxBRxArxB = 'Tx B, Rx A/Rx B',
 }
 
 export enum StationType {
@@ -432,7 +432,7 @@ export enum StationType {
   InlandWaterways = 'Inland waterways',
   RegionalUse7 = 'Regional use 7',
   RegionalUse8 = 'Regional use 8',
-  RegionalUse9 = 'Regional use 9'
+  RegionalUse9 = 'Regional use 9',
 }
 
 export enum ReportingInterval {
@@ -447,7 +447,7 @@ export enum ReportingInterval {
   _5Sec = '5 sec',
   _2SecnotApplicableToClassBCs = '2 sec (not applicable to Class B CS)',
   NextShorterReportingInterval = 'Next shorter reporting interval',
-  NextLongerReportingInterval = 'Next longer reporting interval'
+  NextLongerReportingInterval = 'Next longer reporting interval',
 }
 
 export enum AisTransceiver {
@@ -456,12 +456,12 @@ export enum AisTransceiver {
   ChannelAVdlTransmission = 'Channel A VDL transmission',
   ChannelBVdlTransmission = 'Channel B VDL transmission',
   OwnInformationNotBroadcast = 'Own information not broadcast',
-  Reserved = 'Reserved'
+  Reserved = 'Reserved',
 }
 
 export enum AisAssignedMode {
   AutonomousAndContinuous = 'Autonomous and continuous',
-  AssignedMode = 'Assigned mode'
+  AssignedMode = 'Assigned mode',
 }
 
 export enum AtonType {
@@ -496,14 +496,14 @@ export enum AtonType {
   FloatingAtoNIsolatedDanger = 'Floating AtoN: isolated danger',
   FloatingAtoNSafeWater = 'Floating AtoN: safe water',
   FloatingAtoNSpecialMark = 'Floating AtoN: special mark',
-  FloatingAtoNLightVessellanbyrigs = 'Floating AtoN: light vessel/LANBY/rigs'
+  FloatingAtoNLightVessellanbyrigs = 'Floating AtoN: light vessel/LANBY/rigs',
 }
 
 export enum AisSpecialManeuver {
   NotAvailable = 'Not available',
   NotEngagedInSpecialManeuver = 'Not engaged in special maneuver',
   EngagedInSpecialManeuver = 'Engaged in special maneuver',
-  Reserved = 'Reserved'
+  Reserved = 'Reserved',
 }
 
 export enum PositionFixDevice {
@@ -515,7 +515,7 @@ export enum PositionFixDevice {
   Chayka = 'Chayka',
   IntegratedNavigationSystem = 'Integrated navigation system',
   Surveyed = 'Surveyed',
-  Galileo = 'Galileo'
+  Galileo = 'Galileo',
 }
 
 export enum Gns {
@@ -527,40 +527,40 @@ export enum Gns {
   Chayka = 'Chayka',
   Integrated = 'integrated',
   Surveyed = 'surveyed',
-  Galileo = 'Galileo'
+  Galileo = 'Galileo',
 }
 
 export enum EngineInstance {
   SingleEngineOrDualEnginePort = 'Single Engine or Dual Engine Port',
-  DualEngineStarboard = 'Dual Engine Starboard'
+  DualEngineStarboard = 'Dual Engine Starboard',
 }
 
 export enum GearStatus {
   Forward = 'Forward',
   Neutral = 'Neutral',
-  Reverse = 'Reverse'
+  Reverse = 'Reverse',
 }
 
 export enum Direction {
   Forward = 'Forward',
-  Reverse = 'Reverse'
+  Reverse = 'Reverse',
 }
 
 export enum PositionAccuracy {
   Low = 'Low',
-  High = 'High'
+  High = 'High',
 }
 
 export enum RaimFlag {
   NotInUse = 'not in use',
-  InUse = 'in use'
+  InUse = 'in use',
 }
 
 export enum TimeStamp {
   NotAvailable = 'Not available',
   ManualInputMode = 'Manual input mode',
   DeadReckoningMode = 'Dead reckoning mode',
-  PositioningSystemIsInoperative = 'Positioning system is inoperative'
+  PositioningSystemIsInoperative = 'Positioning system is inoperative',
 }
 
 export enum GnsMethod {
@@ -572,14 +572,14 @@ export enum GnsMethod {
   RtkFloat = 'RTK float',
   EstimateddrMode = 'Estimated (DR) mode',
   ManualInput = 'Manual Input',
-  SimulateMode = 'Simulate mode'
+  SimulateMode = 'Simulate mode',
 }
 
 export enum GnsIntegrity {
   NoIntegrityChecking = 'No integrity checking',
   Safe = 'Safe',
   Caution = 'Caution',
-  Unsafe = 'Unsafe'
+  Unsafe = 'Unsafe',
 }
 
 export enum SystemTime {
@@ -588,7 +588,7 @@ export enum SystemTime {
   RadioStation = 'Radio Station',
   LocalCesiumClock = 'Local Cesium clock',
   LocalRubidiumClock = 'Local Rubidium clock',
-  LocalCrystalClock = 'Local Crystal clock'
+  LocalCrystalClock = 'Local Crystal clock',
 }
 
 export enum MagneticVariation {
@@ -600,7 +600,7 @@ export enum MagneticVariation {
   Wmm2005 = 'WMM 2005',
   Wmm2010 = 'WMM 2010',
   Wmm2015 = 'WMM 2015',
-  Wmm2020 = 'WMM 2020'
+  Wmm2020 = 'WMM 2020',
 }
 
 export enum ResidualMode {
@@ -608,7 +608,7 @@ export enum ResidualMode {
   DifferentialEnhanced = 'Differential enhanced',
   Estimated = 'Estimated',
   Simulator = 'Simulator',
-  Manual = 'Manual'
+  Manual = 'Manual',
 }
 
 export enum WindReference {
@@ -616,7 +616,7 @@ export enum WindReference {
   MagneticgroundReferencedToMagneticNorth = 'Magnetic (ground referenced to Magnetic North)',
   Apparent = 'Apparent',
   TrueboatReferenced = 'True (boat referenced)',
-  TruewaterReferenced = 'True (water referenced)'
+  TruewaterReferenced = 'True (water referenced)',
 }
 
 export enum WaterReference {
@@ -624,41 +624,41 @@ export enum WaterReference {
   PitotTube = 'Pitot tube',
   Doppler = 'Doppler',
   CorrelationultraSound = 'Correlation (ultra sound)',
-  ElectroMagnetic = 'Electro Magnetic'
+  ElectroMagnetic = 'Electro Magnetic',
 }
 
 export enum YesNo {
   No = 'No',
-  Yes = 'Yes'
+  Yes = 'Yes',
 }
 
 export enum OkWarning {
   Ok = 'OK',
-  Warning = 'Warning'
+  Warning = 'Warning',
 }
 
 export enum OffOn {
   Off = 'Off',
-  On = 'On'
+  On = 'On',
 }
 
 export enum OffOnControl {
   Off = 'Off',
   On = 'On',
   Reserved = 'Reserved',
-  TakeNoActionnoChange = 'Take no action (no change)'
+  TakeNoActionnoChange = 'Take no action (no change)',
 }
 
 export enum DirectionReference {
   True = 'True',
   Magnetic = 'Magnetic',
-  Error = 'Error'
+  Error = 'Error',
 }
 
 export enum DirectionRudder {
   NoOrder = 'No Order',
   MoveToStarboard = 'Move to starboard',
-  MoveToPort = 'Move to port'
+  MoveToPort = 'Move to port',
 }
 
 export enum NavStatus {
@@ -675,13 +675,13 @@ export enum NavStatus {
   HazardousMaterialWingInGround = 'Hazardous material - Wing in Ground',
   PowerDrivenVesselTowingAstern = 'Power-driven vessel towing astern',
   PowerDrivenVesselPushingAheadOrTowingAlongside = 'Power-driven vessel pushing ahead or towing alongside',
-  AisSart = 'AIS-SART'
+  AisSart = 'AIS-SART',
 }
 
 export enum PowerFactor {
   Leading = 'Leading',
   Lagging = 'Lagging',
-  Error = 'Error'
+  Error = 'Error',
 }
 
 export enum TemperatureSource {
@@ -700,12 +700,12 @@ export enum TemperatureSource {
   HeatIndexTemperature = 'Heat Index Temperature',
   FreezerTemperature = 'Freezer Temperature',
   ExhaustGasTemperature = 'Exhaust Gas Temperature',
-  ShaftSealTemperature = 'Shaft Seal Temperature'
+  ShaftSealTemperature = 'Shaft Seal Temperature',
 }
 
 export enum HumiditySource {
   Inside = 'Inside',
-  Outside = 'Outside'
+  Outside = 'Outside',
 }
 
 export enum PressureSource {
@@ -717,7 +717,7 @@ export enum PressureSource {
   Filter = 'Filter',
   AltimeterSetting = 'AltimeterSetting',
   Oil = 'Oil',
-  Fuel = 'Fuel'
+  Fuel = 'Fuel',
 }
 
 export enum DscFormat {
@@ -727,14 +727,14 @@ export enum DscFormat {
   AllShips = 'All ships',
   IndividualStations = 'Individual stations',
   NonCallingPurpose = 'Non-calling purpose',
-  IndividualStationAutomatic = 'Individual station automatic'
+  IndividualStationAutomatic = 'Individual station automatic',
 }
 
 export enum DscCategory {
   Routine = 'Routine',
   Safety = 'Safety',
   Urgency = 'Urgency',
-  Distress = 'Distress'
+  Distress = 'Distress',
 }
 
 export enum DscNature {
@@ -749,7 +749,7 @@ export enum DscNature {
   AbandoningShip = 'Abandoning ship',
   Piracy = 'Piracy',
   ManOverboard = 'Man overboard',
-  EpirbEmission = 'EPIRB emission'
+  EpirbEmission = 'EPIRB emission',
 }
 
 export enum DscFirstTelecommand {
@@ -766,7 +766,7 @@ export enum DscFirstTelecommand {
   F1Bj2BTtyArq = 'F1B/J2B TTY-ARQ',
   Test = 'Test',
   ShipPositionOrLocationRegistrationUpdating = 'Ship position or location registration updating',
-  NoInformation = 'No information'
+  NoInformation = 'No information',
 }
 
 export enum DscSecondTelecommand {
@@ -784,7 +784,7 @@ export enum DscSecondTelecommand {
   MedicalTransports = 'Medical transports',
   PayPhonepublicCallOffice = 'Pay phone/public call office',
   Faxdata = 'Fax/data',
-  NoInformation = 'No information'
+  NoInformation = 'No information',
 }
 
 export enum DscExpansionData {
@@ -794,13 +794,13 @@ export enum DscExpansionData {
   Cog = 'COG',
   AdditionalStationIdentification = 'Additional station identification',
   EnhancedGeographicArea = 'Enhanced geographic area',
-  NumberOfPersonsOnBoard = 'Number of persons on board'
+  NumberOfPersonsOnBoard = 'Number of persons on board',
 }
 
 export enum SeatalkAlarmStatus {
   AlarmConditionNotMet = 'Alarm condition not met',
   AlarmConditionMetAndNotSilenced = 'Alarm condition met and not silenced',
-  AlarmConditionMetAndSilenced = 'Alarm condition met and silenced'
+  AlarmConditionMetAndSilenced = 'Alarm condition met and silenced',
 }
 
 export enum SeatalkAlarmId {
@@ -909,7 +909,7 @@ export enum SeatalkAlarmId {
   AisLostTarget = 'AIS Lost Target',
   AisSafetyRelatedMessageusedToSilence = 'AIS Safety Related Message (used to silence)',
   AisConnectionLost = 'AIS Connection Lost',
-  NoFix = 'No Fix'
+  NoFix = 'No Fix',
 }
 
 export enum SeatalkAlarmGroup {
@@ -917,14 +917,14 @@ export enum SeatalkAlarmGroup {
   Autopilot = 'Autopilot',
   Radar = 'Radar',
   ChartPlotter = 'Chart Plotter',
-  Ais = 'AIS'
+  Ais = 'AIS',
 }
 
 export enum SeatalkPilotMode {
   Standby = 'Standby',
   Auto = 'Auto',
   Wind = 'Wind',
-  Track = 'Track'
+  Track = 'Track',
 }
 
 export enum EntertainmentZone {
@@ -932,7 +932,7 @@ export enum EntertainmentZone {
   Zone1 = 'Zone 1',
   Zone2 = 'Zone 2',
   Zone3 = 'Zone 3',
-  Zone4 = 'Zone 4'
+  Zone4 = 'Zone 4',
 }
 
 export enum EntertainmentSource {
@@ -960,7 +960,7 @@ export enum EntertainmentSource {
   VideoDvd = 'Video DVD',
   VideoBluRay = 'Video BluRay',
   Hdmi = 'HDMI',
-  Video = 'Video'
+  Video = 'Video',
 }
 
 export enum EntertainmentPlayStatus {
@@ -988,25 +988,25 @@ export enum EntertainmentPlayStatus {
   SlowMotion75X = 'Slow motion .75x',
   SlowMotion5X = 'Slow motion .5x',
   SlowMotion25X = 'Slow motion .25x',
-  SlowMotion125X = 'Slow motion .125x'
+  SlowMotion125X = 'Slow motion .125x',
 }
 
 export enum EntertainmentRepeatStatus {
   Off = 'Off',
   One = 'One',
-  All = 'All'
+  All = 'All',
 }
 
 export enum EntertainmentShuffleStatus {
   Off = 'Off',
   PlayQueue = 'Play queue',
-  All = 'All'
+  All = 'All',
 }
 
 export enum EntertainmentLikeStatus {
   None = 'None',
   ThumbsUp = 'Thumbs up',
-  ThumbsDown = 'Thumbs down'
+  ThumbsDown = 'Thumbs down',
 }
 
 export enum EntertainmentType {
@@ -1020,7 +1020,7 @@ export enum EntertainmentType {
   StationNumber = 'Station Number',
   FavouriteNumber = 'Favourite Number',
   PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info'
+  ContentInfo = 'Content Info',
 }
 
 export enum EntertainmentGroup {
@@ -1034,7 +1034,7 @@ export enum EntertainmentGroup {
   StationNumber = 'Station Number',
   FavouriteNumber = 'Favourite Number',
   PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info'
+  ContentInfo = 'Content Info',
 }
 
 export enum EntertainmentChannel {
@@ -1050,7 +1050,7 @@ export enum EntertainmentChannel {
   BackLeft = 'Back left',
   BackRight = 'Back right',
   SurroundLeft = 'Surround left',
-  SurroundRight = 'Surround right'
+  SurroundRight = 'Surround right',
 }
 
 export enum EntertainmentEq {
@@ -1064,7 +1064,7 @@ export enum EntertainmentEq {
   Vocal = 'Vocal',
   Arena = 'Arena',
   Cinema = 'Cinema',
-  Custom = 'Custom'
+  Custom = 'Custom',
 }
 
 export enum EntertainmentFilter {
@@ -1072,26 +1072,26 @@ export enum EntertainmentFilter {
   HighPass = 'High pass',
   LowPass = 'Low pass',
   BandPass = 'Band pass',
-  NotchFilter = 'Notch filter'
+  NotchFilter = 'Notch filter',
 }
 
 export enum AlertType {
   EmergencyAlarm = 'Emergency Alarm',
   Alarm = 'Alarm',
   Warning = 'Warning',
-  Caution = 'Caution'
+  Caution = 'Caution',
 }
 
 export enum AlertCategory {
   Navigational = 'Navigational',
-  Technical = 'Technical'
+  Technical = 'Technical',
 }
 
 export enum AlertTriggerCondition {
   Manual = 'Manual',
   Auto = 'Auto',
   Test = 'Test',
-  Disabled = 'Disabled'
+  Disabled = 'Disabled',
 }
 
 export enum AlertThresholdStatus {
@@ -1100,7 +1100,7 @@ export enum AlertThresholdStatus {
   ExtremeThresholdExceeded = 'Extreme Threshold Exceeded',
   LowThresholdExceeded = 'Low Threshold Exceeded',
   Acknowledged = 'Acknowledged',
-  AwaitingAcknowledge = 'Awaiting Acknowledge'
+  AwaitingAcknowledge = 'Awaiting Acknowledge',
 }
 
 export enum AlertState {
@@ -1109,7 +1109,7 @@ export enum AlertState {
   Active = 'Active',
   Silenced = 'Silenced',
   Acknowledged = 'Acknowledged',
-  AwaitingAcknowledge = 'Awaiting Acknowledge'
+  AwaitingAcknowledge = 'Awaiting Acknowledge',
 }
 
 export enum AlertLanguageId {
@@ -1132,14 +1132,14 @@ export enum AlertLanguageId {
   Portuguese = 'Portuguese',
   Russian = 'Russian',
   Spanish = 'Spanish',
-  Swedish = 'Swedish'
+  Swedish = 'Swedish',
 }
 
 export enum AlertResponseCommand {
   Acknowledge = 'Acknowledge',
   TemporarySilence = 'Temporary Silence',
   TestCommandOff = 'Test Command off',
-  TestCommandOn = 'Test Command on'
+  TestCommandOn = 'Test Command on',
 }
 
 export enum ConverterState {
@@ -1153,20 +1153,20 @@ export enum ConverterState {
   Equalize = 'Equalize',
   PassThru = 'Pass thru',
   Inverting = 'Inverting',
-  Assisting = 'Assisting'
+  Assisting = 'Assisting',
 }
 
 export enum ThrusterDirectionControl {
   Off = 'Off',
   Ready = 'Ready',
   ToPort = 'To Port',
-  ToStarboard = 'To Starboard'
+  ToStarboard = 'To Starboard',
 }
 
 export enum ThrusterRetractControl {
   Off = 'Off',
   Extend = 'Extend',
-  Retract = 'Retract'
+  Retract = 'Retract',
 }
 
 export enum ThrusterMotorType {
@@ -1174,19 +1174,19 @@ export enum ThrusterMotorType {
   _24Vdc = '24VDC',
   _48Vdc = '48VDC',
   _24Vac = '24VAC',
-  Hydraulic = 'Hydraulic'
+  Hydraulic = 'Hydraulic',
 }
 
 export enum BootState {
   InStartupMonitor = 'in Startup Monitor',
   RunningBootloader = 'running Bootloader',
-  RunningApplication = 'running Application'
+  RunningApplication = 'running Application',
 }
 
 export enum AccessLevel {
   Locked = 'Locked',
   UnlockedLevel1 = 'unlocked level 1',
-  UnlockedLevel2 = 'unlocked level 2'
+  UnlockedLevel2 = 'unlocked level 2',
 }
 
 export enum TransmissionInterval {
@@ -1194,7 +1194,7 @@ export enum TransmissionInterval {
   TransmitIntervalpriorityNotSupported = 'Transmit Interval/Priority not supported',
   TransmitIntervalTooLow = 'Transmit Interval too low',
   AccessDenied = 'Access denied',
-  NotSupported = 'Not supported'
+  NotSupported = 'Not supported',
 }
 
 export enum ParameterField {
@@ -1204,29 +1204,29 @@ export enum ParameterField {
   ParameterOutOfRange = 'Parameter out of range',
   AccessDenied = 'Access denied',
   NotSupported = 'Not supported',
-  ReadOrWriteNotSupported = 'Read or Write not supported'
+  ReadOrWriteNotSupported = 'Read or Write not supported',
 }
 
 export enum PgnListFunction {
   TransmitPgnList = 'Transmit PGN list',
-  ReceivePgnList = 'Receive PGN list'
+  ReceivePgnList = 'Receive PGN list',
 }
 
 export enum FusionCommand {
   Play = 'Play',
   Pause = 'Pause',
   Next = 'Next',
-  Prev = 'Prev'
+  Prev = 'Prev',
 }
 
 export enum FusionSiriusCommand {
   Next = 'Next',
-  Prev = 'Prev'
+  Prev = 'Prev',
 }
 
 export enum FusionMuteCommand {
   MuteOn = 'Mute On',
-  MuteOff = 'Mute Off'
+  MuteOff = 'Mute Off',
 }
 
 export enum SeatalkKeystroke {
@@ -1239,12 +1239,12 @@ export enum SeatalkKeystroke {
   Plus10 = '+10',
   _1And10 = '-1 and -10',
   Plus1AndPlus10 = '+1 and +10',
-  Track = 'Track'
+  Track = 'Track',
 }
 
 export enum SeatalkDeviceId {
   S100 = 'S100',
-  CourseComputer = 'Course Computer'
+  CourseComputer = 'Course Computer',
 }
 
 export enum SeatalkNetworkGroup {
@@ -1258,14 +1258,14 @@ export enum SeatalkNetworkGroup {
   Group2 = 'Group 2',
   Group3 = 'Group 3',
   Group4 = 'Group 4',
-  Group5 = 'Group 5'
+  Group5 = 'Group 5',
 }
 
 export enum SeatalkDisplayColor {
   Day1 = 'Day 1',
   Day2 = 'Day 2',
   Redblack = 'Red/Black',
-  Inverse = 'Inverse'
+  Inverse = 'Inverse',
 }
 
 export enum AirmarCalibrateFunction {
@@ -1274,7 +1274,7 @@ export enum AirmarCalibrateFunction {
   ResetCalibrationTo0 = 'Reset calibration to 0',
   Verify = 'Verify',
   ResetCompassToDefaults = 'Reset compass to defaults',
-  ResetDampingToDefaults = 'Reset damping to defaults'
+  ResetDampingToDefaults = 'Reset damping to defaults',
 }
 
 export enum AirmarCalibrateStatus {
@@ -1283,64 +1283,64 @@ export enum AirmarCalibrateStatus {
   FailedTimeout = 'Failed - timeout',
   FailedTiltError = 'Failed - tilt error',
   FailedOther = 'Failed - other',
-  InProgress = 'In progress'
+  InProgress = 'In progress',
 }
 
 export enum AirmarTemperatureInstance {
   DeviceSensor = 'Device Sensor',
   OnboardWaterSensor = 'Onboard Water Sensor',
-  OptionalWaterSensor = 'Optional Water Sensor'
+  OptionalWaterSensor = 'Optional Water Sensor',
 }
 
 export enum AirmarFilter {
   NoFilter = 'No filter',
-  BasicIirFilter = 'Basic IIR filter'
+  BasicIirFilter = 'Basic IIR filter',
 }
 
 export enum ControllerState {
   ErrorActive = 'Error Active',
   ErrorPassive = 'Error Passive',
-  BusOff = 'Bus Off'
+  BusOff = 'Bus Off',
 }
 
 export enum EquipmentStatus {
   Operational = 'Operational',
-  Fault = 'Fault'
+  Fault = 'Fault',
 }
 
 export enum MobStatus {
   MobEmitterActivated = 'MOB Emitter Activated',
   ManualOnBoardMobButtonActivation = 'Manual on-board MOB Button Activation',
-  TestMode = 'Test mode'
+  TestMode = 'Test mode',
 }
 
 export enum LowBattery {
   Good = 'Good',
-  Low = 'Low'
+  Low = 'Low',
 }
 
 export enum TurnMode {
   RudderLimitControlled = 'Rudder limit controlled',
   TurnRateControlled = 'Turn rate controlled',
-  RadiusControlled = 'Radius controlled'
+  RadiusControlled = 'Radius controlled',
 }
 
 export enum Acceptability {
   BadLevel = 'Bad level',
   BadFrequency = 'Bad frequency',
   BeingQualified = 'Being qualified',
-  Good = 'Good'
+  Good = 'Good',
 }
 
 export enum Line {
   Line1 = 'Line 1',
   Line2 = 'Line 2',
-  Line3 = 'Line 3'
+  Line3 = 'Line 3',
 }
 
 export enum Waveform {
   SineWave = 'Sine wave',
-  ModifiedSineWave = 'Modified sine wave'
+  ModifiedSineWave = 'Modified sine wave',
 }
 
 export enum TankType {
@@ -1349,7 +1349,7 @@ export enum TankType {
   GrayWater = 'Gray water',
   LiveWell = 'Live well',
   Oil = 'Oil',
-  BlackWater = 'Black water'
+  BlackWater = 'Black water',
 }
 
 export enum DcSource {
@@ -1357,7 +1357,7 @@ export enum DcSource {
   Alternator = 'Alternator',
   Convertor = 'Convertor',
   SolarCell = 'Solar cell',
-  WindGenerator = 'Wind generator'
+  WindGenerator = 'Wind generator',
 }
 
 export enum ChargerState {
@@ -1370,21 +1370,21 @@ export enum ChargerState {
   NoFloat = 'No float',
   ConstantVi = 'Constant VI',
   Disabled = 'Disabled',
-  Fault = 'Fault'
+  Fault = 'Fault',
 }
 
 export enum ChargingAlgorithm {
   Trickle = 'Trickle',
   ConstantVoltageConstantCurrent = 'Constant voltage / Constant current',
   _2StagenoFloat = '2 stage (no float)',
-  _3Stage = '3 stage'
+  _3Stage = '3 stage',
 }
 
 export enum ChargerMode {
   Standalone = 'Standalone',
   Primary = 'Primary',
   Secondary = 'Secondary',
-  Echo = 'Echo'
+  Echo = 'Echo',
 }
 
 export enum InverterState {
@@ -1392,13 +1392,13 @@ export enum InverterState {
   AcPassthru = 'AC passthru',
   LoadSense = 'Load sense',
   Fault = 'Fault',
-  Disabled = 'Disabled'
+  Disabled = 'Disabled',
 }
 
 export enum BatteryType {
   Flooded = 'Flooded',
   Gel = 'Gel',
-  Agm = 'AGM'
+  Agm = 'AGM',
 }
 
 export enum BatteryVoltage {
@@ -1408,7 +1408,7 @@ export enum BatteryVoltage {
   _32V = '32V',
   _36V = '36V',
   _42V = '42V',
-  _48V = '48V'
+  _48V = '48V',
 }
 
 export enum BatteryChemistry {
@@ -1416,83 +1416,83 @@ export enum BatteryChemistry {
   Li = 'Li',
   NiCd = 'NiCd',
   ZnO = 'ZnO',
-  NiMh = 'NiMH'
+  NiMh = 'NiMH',
 }
 
 export enum GoodWarningError {
   Good = 'Good',
   Warning = 'Warning',
-  Error = 'Error'
+  Error = 'Error',
 }
 
 export enum Tracking {
   Cancelled = 'Cancelled',
   Acquiring = 'Acquiring',
   Tracking = 'Tracking',
-  Lost = 'Lost'
+  Lost = 'Lost',
 }
 
 export enum TargetAcquisition {
   Manual = 'Manual',
-  Automatic = 'Automatic'
+  Automatic = 'Automatic',
 }
 
 export enum WindlassDirection {
   Off = 'Off',
   Down = 'Down',
-  Up = 'Up'
+  Up = 'Up',
 }
 
 export enum SpeedType {
   SingleSpeed = 'Single speed',
   DualSpeed = 'Dual speed',
-  ProportionalSpeed = 'Proportional speed'
+  ProportionalSpeed = 'Proportional speed',
 }
 
 export enum WindlassMotion {
   WindlassStopped = 'Windlass stopped',
   DeploymentOccurring = 'Deployment occurring',
-  RetrievalOccurring = 'Retrieval occurring'
+  RetrievalOccurring = 'Retrieval occurring',
 }
 
 export enum RodeType {
   ChainPresentlyDetected = 'Chain presently detected',
-  RopePresentlyDetected = 'Rope presently detected'
+  RopePresentlyDetected = 'Rope presently detected',
 }
 
 export enum DockingStatus {
   NotDocked = 'Not docked',
-  FullyDocked = 'Fully docked'
+  FullyDocked = 'Fully docked',
 }
 
 export enum AisType {
   Sotdma = 'SOTDMA',
-  Cs = 'CS'
+  Cs = 'CS',
 }
 
 export enum AisBand {
   Top525KHzOfMarineBand = 'Top 525 kHz of marine band',
-  EntireMarineBand = 'Entire marine band'
+  EntireMarineBand = 'Entire marine band',
 }
 
 export enum AisMode {
   Autonomous = 'Autonomous',
-  Assigned = 'Assigned'
+  Assigned = 'Assigned',
 }
 
 export enum AisCommunicationState {
   Sotdma = 'SOTDMA',
-  Itdma = 'ITDMA'
+  Itdma = 'ITDMA',
 }
 
 export enum Available {
   Available = 'Available',
-  NotAvailable = 'Not available'
+  NotAvailable = 'Not available',
 }
 
 export enum BearingMode {
   GreatCircle = 'Great Circle',
-  Rhumbline = 'Rhumbline'
+  Rhumbline = 'Rhumbline',
 }
 
 export enum MarkType {
@@ -1500,25 +1500,25 @@ export enum MarkType {
   TurningPoint = 'Turning point',
   Reference = 'Reference',
   Wheelover = 'Wheelover',
-  Waypoint = 'Waypoint'
+  Waypoint = 'Waypoint',
 }
 
 export enum GnssMode {
   _1D = '1D',
   _2D = '2D',
   _3D = '3D',
-  Auto = 'Auto'
+  Auto = 'Auto',
 }
 
 export enum RangeResidualMode {
   RangeResidualsWereUsedToCalculateData = 'Range residuals were used to calculate data',
-  RangeResidualsWereCalculatedAfterThePosition = 'Range residuals were calculated after the position'
+  RangeResidualsWereCalculatedAfterThePosition = 'Range residuals were calculated after the position',
 }
 
 export enum DgnssMode {
   None = 'None',
   SbasIfAvailable = 'SBAS if available',
-  Sbas = 'SBAS'
+  Sbas = 'SBAS',
 }
 
 export enum SatelliteStatus {
@@ -1527,19 +1527,19 @@ export enum SatelliteStatus {
   Used = 'Used',
   NotTrackedPlusdiff = 'Not tracked+Diff',
   TrackedPlusdiff = 'Tracked+Diff',
-  UsedPlusdiff = 'Used+Diff'
+  UsedPlusdiff = 'Used+Diff',
 }
 
 export enum AisVersion {
   ItuRM13711 = 'ITU-R M.1371-1',
   ItuRM13713 = 'ITU-R M.1371-3',
   ItuRM13715 = 'ITU-R M.1371-5',
-  ItuRM1371FutureEdition = 'ITU-R M.1371 future edition'
+  ItuRM1371FutureEdition = 'ITU-R M.1371 future edition',
 }
 
 export enum Tide {
   Falling = 'Falling',
-  Rising = 'Rising'
+  Rising = 'Rising',
 }
 
 export enum WatermakerState {
@@ -1550,20 +1550,20 @@ export enum WatermakerState {
   Flushing = 'Flushing',
   Rinsing = 'Rinsing',
   Initiating = 'Initiating',
-  Manual = 'Manual'
+  Manual = 'Manual',
 }
 
 export enum EntertainmentIdType {
   Group = 'Group',
   File = 'File',
   EncryptedGroup = 'Encrypted group',
-  EncryptedFile = 'Encrypted file'
+  EncryptedFile = 'Encrypted file',
 }
 
 export enum EntertainmentDefaultSettings {
   SaveCurrentSettingsAsUserDefault = 'Save current settings as user default',
   LoadUserDefault = 'Load user default',
-  LoadManufacturerDefault = 'Load manufacturer default'
+  LoadManufacturerDefault = 'Load manufacturer default',
 }
 
 export enum EntertainmentRegions {
@@ -1574,30 +1574,30 @@ export enum EntertainmentRegions {
   LatinAmerica = 'Latin America',
   Australia = 'Australia',
   Russia = 'Russia',
-  Japan = 'Japan'
+  Japan = 'Japan',
 }
 
 export enum VideoProtocols {
   Pal = 'PAL',
-  Ntsc = 'NTSC'
+  Ntsc = 'NTSC',
 }
 
 export enum EntertainmentVolumeControl {
   Up = 'Up',
-  Down = 'Down'
+  Down = 'Down',
 }
 
 export enum BluetoothStatus {
   Connected = 'Connected',
   NotConnected = 'Not connected',
-  NotPaired = 'Not paired'
+  NotPaired = 'Not paired',
 }
 
 export enum BluetoothSourceStatus {
   Reserved = 'Reserved',
   Connected = 'Connected',
   Connecting = 'Connecting',
-  NotConnected = 'Not connected'
+  NotConnected = 'Not connected',
 }
 
 export enum SonichubCommand {
@@ -1618,20 +1618,20 @@ export enum SonichubCommand {
   Volume = 'Volume',
   Init1 = 'Init #1',
   Position = 'Position',
-  Init3 = 'Init #3'
+  Init3 = 'Init #3',
 }
 
 export enum SimnetApMode {
   Heading = 'Heading',
   Wind = 'Wind',
   Nav = 'Nav',
-  NoDrift = 'No Drift'
+  NoDrift = 'No Drift',
 }
 
 export enum SimnetDeviceModel {
   Ac = 'AC',
   OtherDevice = 'Other device',
-  Nac = 'NAC'
+  Nac = 'NAC',
 }
 
 export enum SimnetDeviceReport {
@@ -1639,34 +1639,34 @@ export enum SimnetDeviceReport {
   SendStatus = 'Send Status',
   Mode = 'Mode',
   SendMode = 'Send Mode',
-  SailingProcessorStatus = 'Sailing Processor Status'
+  SailingProcessorStatus = 'Sailing Processor Status',
 }
 
 export enum SimnetApStatus {
   Manual = 'Manual',
-  Automatic = 'Automatic'
+  Automatic = 'Automatic',
 }
 
 export enum SimnetCommand {
-  Text = 'Text'
+  Text = 'Text',
 }
 
 export enum SimnetEventCommand {
   Alarm = 'Alarm',
   ApCommand = 'AP command',
-  Autopilot = 'Autopilot'
+  Autopilot = 'Autopilot',
 }
 
 export enum SimnetNightMode {
   Day = 'Day',
-  Night = 'Night'
+  Night = 'Night',
 }
 
 export enum SimnetNightModeColor {
   Red = 'Red',
   Green = 'Green',
   Blue = 'Blue',
-  White = 'White'
+  White = 'White',
 }
 
 export enum SimnetDisplayGroup {
@@ -1676,17 +1676,17 @@ export enum SimnetDisplayGroup {
   Group3 = 'Group 3',
   Group4 = 'Group 4',
   Group5 = 'Group 5',
-  Group6 = 'Group 6'
+  Group6 = 'Group 6',
 }
 
 export enum SimnetHourDisplay {
   _24Hour = '24 hour',
-  _12Hour = '12 hour'
+  _12Hour = '12 hour',
 }
 
 export enum SimnetTimeFormat {
   Mmddyyyy = 'MM/dd/yyyy',
-  Ddmmyyyy = 'dd/MM/yyyy'
+  Ddmmyyyy = 'dd/MM/yyyy',
 }
 
 export enum SimnetBacklightLevel {
@@ -1701,7 +1701,7 @@ export enum SimnetBacklightLevel {
   _70 = '70%',
   _80 = '80%',
   _90 = '90%',
-  _100max = '100% (Max)'
+  _100max = '100% (Max)',
 }
 
 export enum SimnetApEvents {
@@ -1721,19 +1721,19 @@ export enum SimnetApEvents {
   ChangeCourse = 'Change course',
   TimerSync = 'Timer sync',
   PingPortEnd = 'Ping port end',
-  PingStarboardEnd = 'Ping starboard end'
+  PingStarboardEnd = 'Ping starboard end',
 }
 
 export enum SimnetDirection {
   Port = 'Port',
   Starboard = 'Starboard',
   LeftRudderport = 'Left rudder (port)',
-  RightRudderstarboard = 'Right rudder (starboard)'
+  RightRudderstarboard = 'Right rudder (starboard)',
 }
 
 export enum SimnetAlarm {
   LowBoatSpeed = 'Low boat speed',
-  WindDataMissing = 'Wind data missing'
+  WindDataMissing = 'Wind data missing',
 }
 
 export enum FusionMessageId {
@@ -1761,7 +1761,7 @@ export enum FusionMessageId {
   SiriusXmTitle = 'SiriusXM Title',
   SiriusXmArtist = 'SiriusXM Artist',
   SiriusXmGenre = 'SiriusXM Genre',
-  ZoneName = 'Zone Name'
+  ZoneName = 'Zone Name',
 }
 
 export enum FusionPlayStatus {
@@ -1770,7 +1770,7 @@ export enum FusionPlayStatus {
   Paused = 'Paused',
   Stopped = 'Stopped',
   SkipForward = 'Skip Forward',
-  SkipRewind = 'Skip Rewind'
+  SkipRewind = 'Skip Rewind',
 }
 
 export enum FusionSourceType {
@@ -1791,14 +1791,14 @@ export enum FusionSourceType {
   Dab = 'DAB',
   AirPlay = 'AirPlay',
   Upnp = 'UPNP',
-  Unknown = 'Unknown'
+  Unknown = 'Unknown',
 }
 
 export enum FusionSiriusComState {
   Unknown = 'Unknown',
   Off = 'Off',
   Initialising = 'Initialising',
-  On = 'On'
+  On = 'On',
 }
 
 export enum FusionSiriusAlert {
@@ -1806,13 +1806,13 @@ export enum FusionSiriusAlert {
   None = 'None',
   Antenna = 'Antenna',
   NoSignal = 'NoSignal',
-  SubscriptionUpdate = 'Subscription Update'
+  SubscriptionUpdate = 'Subscription Update',
 }
 
 export enum FusionSiriusTuningMode {
   Normal = 'Normal',
   Category = 'Category',
-  Preset = 'Preset'
+  Preset = 'Preset',
 }
 
 export enum FusionStatusMessageId {
@@ -1861,12 +1861,12 @@ export enum FusionStatusMessageId {
   SiriusXmParentalRequest = 'SiriusXM Parental Request',
   SiriusXmDiagnostics = 'SiriusXM Diagnostics',
   SiriusXmPresets = 'SiriusXM Presets',
-  ZoneName = 'Zone Name'
+  ZoneName = 'Zone Name',
 }
 
 export enum SonichubControl {
   Set = 'Set',
-  Ack = 'Ack'
+  Ack = 'Ack',
 }
 
 export enum SonichubSource {
@@ -1876,14 +1876,14 @@ export enum SonichubSource {
   Usb = 'USB',
   Aux = 'AUX',
   Aux2 = 'AUX 2',
-  Mic = 'Mic'
+  Mic = 'Mic',
 }
 
 export enum IsoControl {
   Ack = 'ACK',
   Nak = 'NAK',
   AccessDenied = 'Access Denied',
-  AddressBusy = 'Address Busy'
+  AddressBusy = 'Address Busy',
 }
 
 export enum IsoCommand {
@@ -1892,7 +1892,7 @@ export enum IsoCommand {
   Cts = 'CTS',
   Eom = 'EOM',
   Bam = 'BAM',
-  Abort = 'Abort'
+  Abort = 'Abort',
 }
 
 export enum GroupFunction {
@@ -1902,7 +1902,7 @@ export enum GroupFunction {
   ReadFields = 'Read Fields',
   ReadFieldsReply = 'Read Fields Reply',
   WriteFields = 'Write Fields',
-  WriteFieldsReply = 'Write Fields Reply'
+  WriteFieldsReply = 'Write Fields Reply',
 }
 
 export enum AirmarCommand {
@@ -1915,7 +1915,7 @@ export enum AirmarCommand {
   CalibrateTemperature = 'Calibrate Temperature',
   SpeedFilter = 'Speed Filter',
   TemperatureFilter = 'Temperature Filter',
-  Nmea2000Options = 'NMEA 2000 options'
+  Nmea2000Options = 'NMEA 2000 options',
 }
 
 export enum AirmarDepthQualityFactor {
@@ -1929,7 +1929,7 @@ export enum AirmarDepthQualityFactor {
   Quality70 = 'Quality 70%',
   Quality80 = 'Quality 80%',
   Quality90 = 'Quality 90%',
-  Quality100 = 'Quality 100%'
+  Quality100 = 'Quality 100%',
 }
 
 export enum PgnErrorCode {
@@ -1939,17 +1939,17 @@ export enum PgnErrorCode {
   AccessDenied = 'Access denied',
   NotSupported = 'Not supported',
   TagNotSupported = 'Tag not supported',
-  ReadOrWriteNotSupported = 'Read or Write not supported'
+  ReadOrWriteNotSupported = 'Read or Write not supported',
 }
 
 export enum AirmarTransmissionInterval {
   MeasureInterval = 'Measure interval',
-  RequestedByUser = 'Requested by user'
+  RequestedByUser = 'Requested by user',
 }
 
 export enum MobPositionSource {
   PositionEstimatedByTheVessel = 'Position estimated by the vessel',
-  PositionReportedByMobEmitter = 'Position reported by MOB emitter'
+  PositionReportedByMobEmitter = 'Position reported by MOB emitter',
 }
 
 export enum SteeringMode {
@@ -1958,12 +1958,12 @@ export enum SteeringMode {
   FollowUpDevice = 'Follow-Up Device',
   HeadingControlStandalone = 'Heading Control Standalone',
   HeadingControl = 'Heading Control',
-  TrackControl = 'Track Control'
+  TrackControl = 'Track Control',
 }
 
 export enum FusionRadioSource {
   Am = 'AM',
-  Fm = 'FM'
+  Fm = 'FM',
 }
 
 export enum FusionSetting {
@@ -2044,18 +2044,18 @@ export enum FusionSetting {
   VolumeZoneSync = 'Volume Zone Sync',
   MaxVolumeStart = 'Max Volume Start',
   BtAutoConnect = 'BT Auto Connect',
-  NullSetting = 'Null Setting'
+  NullSetting = 'Null Setting',
 }
 
 export enum FusionRepeatStatus {
   Off = 'Off',
   Onetrack = 'One/track',
-  Allalbum = 'All/album'
+  Allalbum = 'All/album',
 }
 
 export enum AirmarPostControl {
   ReportPreviousValues = 'Report previous values',
-  GenerateNewValues = 'Generate new values'
+  GenerateNewValues = 'Generate new values',
 }
 
 export enum AirmarPostId {
@@ -2066,24 +2066,24 @@ export enum AirmarPostId {
   SonarTransceiver = 'Sonar Transceiver',
   SpeedSensor = 'Speed sensor',
   InternalTemperatureSensor = 'Internal temperature sensor',
-  BatteryVoltageSensor = 'Battery voltage sensor'
+  BatteryVoltageSensor = 'Battery voltage sensor',
 }
 
 export enum SonichubTuning {
   SeekingUp = 'Seeking up',
   Tuned = 'Tuned',
-  SeekingDown = 'Seeking down'
+  SeekingDown = 'Seeking down',
 }
 
 export enum SonichubPlaylist {
   Report = 'Report',
   NextSong = 'Next song',
-  PreviousSong = 'Previous song'
+  PreviousSong = 'Previous song',
 }
 
 export enum FusionPowerState {
   On = 'On',
-  Off = 'Off'
+  Off = 'Off',
 }
 
 export enum Priority {
@@ -2096,13 +2096,13 @@ export enum Priority {
   _6 = '6',
   _7 = '7',
   LeaveUnchanged = 'Leave unchanged',
-  ResetToDefault = 'Reset to default'
+  ResetToDefault = 'Reset to default',
 }
 
 export enum DeviceTempState {
   Cold = 'Cold',
   Warm = 'Warm',
-  Hot = 'Hot'
+  Hot = 'Hot',
 }
 
 export enum BandgDecimals {
@@ -2111,13 +2111,13 @@ export enum BandgDecimals {
   _2 = '2',
   _3 = '3',
   _4 = '4',
-  Auto = 'Auto'
+  Auto = 'Auto',
 }
 
 export enum GarminColorMode {
   Day = 'Day',
   Night = 'Night',
-  Color = 'Color'
+  Color = 'Color',
 }
 
 export enum GarminColor {
@@ -2125,7 +2125,7 @@ export enum GarminColor {
   DayHighContrast = 'Day high contrast',
   NightFullColor = 'Night full color',
   NightRedblack = 'Night red/black',
-  NightGreenblack = 'Night green/black'
+  NightGreenblack = 'Night green/black',
 }
 
 export enum GarminBacklightLevel {
@@ -2149,7 +2149,7 @@ export enum GarminBacklightLevel {
   _85 = '85%',
   _90 = '90%',
   _95 = '95%',
-  _100 = '100%'
+  _100 = '100%',
 }
 
 export enum SeatalkPilotMode16 {
@@ -2157,7 +2157,7 @@ export enum SeatalkPilotMode16 {
   AutoCompassCommanded = 'Auto, compass commanded',
   VaneWindMode = 'Vane, Wind Mode',
   TrackMode = 'Track Mode',
-  NoDriftCogReferencedinTrackCourseChanges = 'No Drift, COG referenced (In track, course changes)'
+  NoDriftCogReferencedinTrackCourseChanges = 'No Drift, COG referenced (In track, course changes)',
 }
 
 export enum StationHealth {
@@ -2165,7 +2165,7 @@ export enum StationHealth {
   Unmonitored = 'Unmonitored',
   HealthyOperational = 'Healthy Operational',
   HealthyTestMode = 'Healthy Test Mode',
-  TestMode = 'Test Mode'
+  TestMode = 'Test Mode',
 }
 
 export enum SerialBitRate {
@@ -2181,12 +2181,12 @@ export enum SerialBitRate {
   _9600 = '9600',
   _19200 = '19200',
   _38400 = '38400',
-  _57600 = '57600'
+  _57600 = '57600',
 }
 
 export enum SerialDetectionMode {
   AutoBitRate = 'Auto bit rate',
-  ManualBitRate = 'Manual bit rate'
+  ManualBitRate = 'Manual bit rate',
 }
 
 export enum DifferentialSource {
@@ -2197,13 +2197,13 @@ export enum DifferentialSource {
   Ais = 'AIS',
   GroundBasedRadio = 'Ground based radio',
   Sbas = 'SBAS',
-  Satellite = 'Satellite'
+  Satellite = 'Satellite',
 }
 
 export enum DifferentialMode {
   Manual = 'Manual',
   AutoPower = 'Auto Power',
-  AutoRange = 'Auto Range'
+  AutoRange = 'Auto Range',
 }
 
 export enum WpPositionResolution {
@@ -2211,23 +2211,23 @@ export enum WpPositionResolution {
   _00101Min = '<0.01 .. 0.1] min',
   _0001001Min = '<0.001 .. 0.01] min',
   _000010001Min = '<0.0001 .. 0.001] min',
-  _000001Min = '<0 .. 0.0001] min'
+  _000001Min = '<0 .. 0.0001] min',
 }
 
 export enum WpIdentificationMethod {
   WaypointsInWpList = 'Waypoints in WP list',
-  WaypointsEmbeddedInRoute = 'Waypoints embedded in route'
+  WaypointsEmbeddedInRoute = 'Waypoints embedded in route',
 }
 
 export enum WpRouteStatus {
   Active = 'Active',
   Inactive = 'Inactive',
-  Deleted = 'Deleted'
+  Deleted = 'Deleted',
 }
 
 export enum WpNavigationMethod {
   GreatCircle = 'Great Circle',
-  RhumbLine = 'Rhumb Line'
+  RhumbLine = 'Rhumb Line',
 }
 
 export enum InverterMode {
@@ -2235,18 +2235,18 @@ export enum InverterMode {
   SeriesMaster = 'Series Master',
   SeriesSlave = 'Series Slave',
   ParallelMaster = 'Parallel Master',
-  ParallelSlave = 'Parallel Slave'
+  ParallelSlave = 'Parallel Slave',
 }
 
 export enum CertificationLevel {
   LevelA = 'Level A',
-  LevelB = 'Level B'
+  LevelB = 'Level B',
 }
 
 export enum AgsMode {
   Off = 'Off',
   On = 'On',
-  Automatic = 'Automatic'
+  Automatic = 'Automatic',
 }
 
 export enum AgsOperatingState {
@@ -2259,7 +2259,7 @@ export enum AgsOperatingState {
   ExternalShutdown = 'External shutdown',
   Fault = 'Fault',
   Suspend = 'Suspend',
-  NotOperating = 'Not operating'
+  NotOperating = 'Not operating',
 }
 
 export enum AgsGeneratingState {
@@ -2274,7 +2274,7 @@ export enum AgsGeneratingState {
   Stopping = 'Stopping',
   Running = 'Running',
   Stopped = 'Stopped',
-  CrankDelaty = 'Crank delaty'
+  CrankDelaty = 'Crank delaty',
 }
 
 export enum AgsOnReason {
@@ -2288,7 +2288,7 @@ export enum AgsOnReason {
   NonQuietTime = 'Non Quiet time',
   ExternalOnViaAgs = 'External on via AGS',
   ExternalOnViaGenerator = 'External on via generator',
-  UnableToStop = 'Unable to stop'
+  UnableToStop = 'Unable to stop',
 }
 
 export enum AgsOffReason {
@@ -2310,7 +2310,7 @@ export enum AgsOffReason {
   ExternalShutdown = 'External shutdown',
   AutoOff = 'Auto off',
   Fault = 'Fault',
-  UnableToStart = 'Unable to start'
+  UnableToStart = 'Unable to start',
 }
 
 export enum TelephoneMode {
@@ -2324,34 +2324,34 @@ export enum TelephoneMode {
   F1Bj2BTeleprinterdsc = 'F1B/J2B, teleprinter/DSC',
   A1AMorseTapeRecorder = 'A1A Morse, tape recorder',
   A1AMorseMorseKeyheadSet = 'A1A Morse, Morse key/head set',
-  F1Cf2Cf3CFaxMachine = 'F1C/F2C/F3C, FAX machine'
+  F1Cf2Cf3CFaxMachine = 'F1C/F2C/F3C, FAX machine',
 }
 
 export enum PowerMode {
   High = 'High',
-  Low = 'Low'
+  Low = 'Low',
 }
 
 export enum BroadcastIndicator {
   BroadcastGeoAreaMessage = 'Broadcast geo area message',
-  AddressedMessage = 'Addressed message'
+  AddressedMessage = 'Addressed message',
 }
 
 export enum Bandwidth {
   Default = 'Default',
-  _125KHz = '12.5 kHz'
+  _125KHz = '12.5 kHz',
 }
 
 export enum FloodState {
   Flood = 'Flood',
   Slack = 'Slack',
-  Ebb = 'Ebb'
+  Ebb = 'Ebb',
 }
 
 export enum AcLine {
   Line1 = 'Line 1',
   Line2 = 'Line 2',
-  Line3 = 'Line 3'
+  Line3 = 'Line 3',
 }
 
 export enum ZoneSize {
@@ -2360,7 +2360,7 @@ export enum ZoneSize {
   _3Nm = '3 nm',
   _4Nm = '4 nm',
   _5Nm = '5 nm',
-  _6Nm = '6 nm'
+  _6Nm = '6 nm',
 }
 
 export enum DeviceFunction {
@@ -2464,14 +2464,14 @@ export enum DeviceFunction {
   AnalogInterface = 'Analog Interface',
   Display = 'Display',
   MultimediaPlayer = 'Multimedia Player',
-  MultimediaController = 'Multimedia Controller'
+  MultimediaController = 'Multimedia Controller',
 }
 
 export enum StationStatus {
   StationInUse = 'Station in use',
   LowSnr = 'Low SNR',
   CycleError = 'Cycle Error',
-  Blink = 'Blink'
+  Blink = 'Blink',
 }
 
 export enum EngineStatus1 {
@@ -2490,7 +2490,7 @@ export enum EngineStatus1 {
   RevLimitExceeded = 'Rev Limit Exceeded',
   EgrSystem = 'EGR System',
   ThrottlePositionSensor = 'Throttle Position Sensor',
-  EmergencyStop = 'Emergency Stop'
+  EmergencyStop = 'Emergency Stop',
 }
 
 export enum EngineStatus2 {
@@ -2501,7 +2501,7 @@ export enum EngineStatus2 {
   EngineCommError = 'Engine Comm Error',
   SubOrSecondaryThrottle = 'Sub or Secondary Throttle',
   NeutralStartProtect = 'Neutral Start Protect',
-  EngineShuttingDown = 'Engine Shutting Down'
+  EngineShuttingDown = 'Engine Shutting Down',
 }
 
 export enum EntertainmentPlayStatusBitfield {
@@ -2530,7 +2530,7 @@ export enum EntertainmentPlayStatusBitfield {
   SlowMotion5X = 'Slow motion .5x',
   SlowMotion25X = 'Slow motion .25x',
   SlowMotion125X = 'Slow motion .125x',
-  SourceRenaming = 'Source renaming'
+  SourceRenaming = 'Source renaming',
 }
 
 export enum EntertainmentGroupBitfield {
@@ -2544,12 +2544,12 @@ export enum EntertainmentGroupBitfield {
   StationNumber = 'Station Number',
   FavouriteNumber = 'Favourite Number',
   PlayQueue = 'Play Queue',
-  ContentInfo = 'Content Info'
+  ContentInfo = 'Content Info',
 }
 
 export enum ThrusterControlEvents {
   AnotherDeviceControllingThruster = 'Another device controlling thruster',
-  BoatSpeedTooFastToSafelyUseThruster = 'Boat speed too fast to safely use thruster'
+  BoatSpeedTooFastToSafelyUseThruster = 'Boat speed too fast to safely use thruster',
 }
 
 export enum ThrusterMotorEvents {
@@ -2558,11 +2558,11 @@ export enum ThrusterMotorEvents {
   LowOilLevelWarning = 'Low oil level warning',
   OilOverTemperatureWarning = 'Oil over temperature warning',
   ControllerUnderVoltageCutout = 'Controller under voltage cutout',
-  ManufacturerDefined = 'Manufacturer defined'
+  ManufacturerDefined = 'Manufacturer defined',
 }
 
 export enum WindlassControl {
-  AnotherDeviceControllingWindlass = 'Another device controlling windlass'
+  AnotherDeviceControllingWindlass = 'Another device controlling windlass',
 }
 
 export enum WindlassOperation {
@@ -2570,14 +2570,14 @@ export enum WindlassOperation {
   SensorError = 'Sensor error',
   NoWindlassMotionDetected = 'No windlass motion detected',
   RetrievalDockingDistanceReached = 'Retrieval docking distance reached',
-  EndOfRodeReached = 'End of rode reached'
+  EndOfRodeReached = 'End of rode reached',
 }
 
 export enum WindlassMonitoring {
   ControllerUnderVoltageCutOut = 'Controller under voltage cut-out',
   ControllerOverCurrentCutOut = 'Controller over current cut-out',
   ControllerOverTemperatureCutOut = 'Controller over temperature cut-out',
-  ManufacturerDefined = 'Manufacturer defined'
+  ManufacturerDefined = 'Manufacturer defined',
 }
 
 export enum SimnetApModeBitfield {
@@ -2585,7 +2585,7 @@ export enum SimnetApModeBitfield {
   Heading = 'Heading',
   Nav = 'Nav',
   NoDrift = 'No Drift',
-  Wind = 'Wind'
+  Wind = 'Wind',
 }
 
 export enum SimnetAlertBitfield {
@@ -2617,17 +2617,17 @@ export enum SimnetAlertBitfield {
   EvcOverride = 'EVC override',
   LowCanBusVoltage = 'Low CAN bus voltage',
   CanBusSupplyOverload = 'CAN bus supply overload',
-  WindSensorBatteryLow = 'Wind sensor battery low'
+  WindSensorBatteryLow = 'Wind sensor battery low',
 }
 
 export enum EntertainmentRepeatBitfield {
   Song = 'Song',
-  PlayQueue = 'Play queue'
+  PlayQueue = 'Play queue',
 }
 
 export enum EntertainmentShuffleBitfield {
   PlayQueue = 'Play queue',
-  All = 'All'
+  All = 'All',
 }
 
 export enum WpChange {
@@ -2635,10 +2635,11 @@ export enum WpChange {
   ChangeInSupplementaryParametersorNewAdded = 'Change in supplementary parameters (or new added)',
   ChangedNumberOfWPsInRoutewpListAndorNameChangedadded = 'Changed number of WPs in Route/WP-List, and/or name changed/added',
   RouteChangeSupplementaryParametersorNewAdded = 'Route: Change supplementary parameters (or new added)',
-  OtherNotSpecifiedChanged = 'Other not specified changed'
+  OtherNotSpecifiedChanged = 'Other not specified changed',
 }
 
 export enum WpCriticalParameters {
   NavigationMethod = 'Navigation Method',
-  XteLimit = 'XTE Limit'
+  XteLimit = 'XTE Limit',
 }
+

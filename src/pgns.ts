@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as enums from './enums'
 
 export type N2K_Number = number

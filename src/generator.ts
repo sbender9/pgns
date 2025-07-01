@@ -91,6 +91,7 @@ if (argv.enums) {
 }
 
 if (argv.pgns) {
+  console.log('/* eslint-disable @typescript-eslint/no-explicit-any */')
   console.log("import * as enums from './enums'\n")
 
   pgns.FieldTypes.forEach((ft: any) => {
