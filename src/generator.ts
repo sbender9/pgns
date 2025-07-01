@@ -93,6 +93,35 @@ if (argv.enums) {
 if (argv.pgns) {
   console.log("import * as enums from './enums'\n")
 
+  pgns.FieldTypes.forEach((ft:any) => {
+    let type = 'number'
+    switch (ft.Name) {
+    case 'LOOKUP':
+    case 'INDIRECT_LOOKUP':
+    case 'BITLOOKUP':
+      return
+
+    case 'DATE':
+    case 'TIME':
+    case 'DYNAMIC_FIELD_KEY':
+    case 'STRING_FIX':
+    case 'STRING_LZ':
+    case 'STRING_LAU':
+    case 'MMSI':
+      type = 'string'
+      break
+
+    case 'DYNAMIC_FIELD_VALUE':
+    case 'VARIABLE':
+      type = 'any'
+      break
+    }
+
+    console.log(`export type N2K_${camelCase(ft.Name, {pascalCase: true})} = ${type}`)
+  })
+  
+  console.log('')
+  
   console.log('export interface PGNFields {')
   console.log('}\n')
 
@@ -189,14 +218,8 @@ if (argv.pgns) {
 
     console.log(`export interface ${typeName}Fields extends PGNFields {`)
     pgn.Fields.forEach((field: Field) => {
-      let type = 'string'
+      let type = 'number'
       switch (field.FieldType) {
-        case 'NUMBER':
-        case 'RESERVED':
-        case 'BINARY':
-          type = 'number'
-          break
-
         case 'LOOKUP':
           if (field.LookupEnumeration) {
             type = `enums.${enumName(field.LookupEnumeration)}|number`
@@ -217,8 +240,8 @@ if (argv.pgns) {
           }
         break
 
-      case 'PGN':
-        type = 'number'
+      default:
+        type = `N2K_${camelCase(field.FieldType, {pascalCase: true})}`
         break
       }
 

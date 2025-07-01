@@ -12,6 +12,12 @@ import {
 
 import { getPGN } from './index'
 
+export type MyType = number
+
+export interface XYZ {
+  type?: MyType
+}
+
 const obj: any = {
   fields: {
     manufacturerCode: 'BEP Marine',
@@ -19,7 +25,7 @@ const obj: any = {
     'Industry Code': 'Marine',
     model: 'AC',
     report: 'Status',
-    spare6: 'dfksdsd'
+    //spare6: 1
   }
 }
 
@@ -31,7 +37,7 @@ const obj2: PGN_65305_Simrad_SendMode = {
     industryCode: IndustryCode.Marine,
     model: SimnetDeviceModel.Ac,
     report: SimnetDeviceReport.Status,
-    spare6: 'dfksdsd'
+    //spare6: 1
   }
 }
 
